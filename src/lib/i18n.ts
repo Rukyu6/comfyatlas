@@ -16,6 +16,7 @@ export const ui = {
     'nav.home': 'Home',
     'nav.guides': 'Guides',
     'nav.about': 'About',
+    'nav.search': 'Search',
     'home.hero.title': 'Master ComfyUI, one node at a time.',
     'home.hero.sub':
       'Clear, hands-on guides for installing ComfyUI, understanding nodes, and building real workflows. No fluff.',
@@ -42,6 +43,7 @@ export const ui = {
     'nav.home': '首页',
     'nav.guides': '教程',
     'nav.about': '关于',
+    'nav.search': '搜索',
     'home.hero.title': '一节点一节点,精通 ComfyUI。',
     'home.hero.sub':
       '清晰、可上手的 ComfyUI 教程:安装、节点解析、完整工作流。不灌水。',
