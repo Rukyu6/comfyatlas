@@ -27,6 +27,10 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport',
+  },
   build: {
     format: 'directory',
   },
