@@ -4,6 +4,7 @@ description: "ControlNet 怎么把 Stable Diffusion 引向特定姿势、深度�
 pubDate: 2026-05-20
 lang: zh
 category: workflow-extensions
+heroImage: ../_assets/cover-controlnet.png
 tags: ["controlnet", "构图", "工作流", "stable-diffusion", "教程"]
 ---
 

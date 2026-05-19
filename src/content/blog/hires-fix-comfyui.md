@@ -4,6 +4,7 @@ description: "How to generate at low resolution, then upscale and refine to a hi
 pubDate: 2026-05-21
 lang: en
 category: workflow-extensions
+heroImage: ./_assets/cover-hires-fix.png
 tags: ["hires-fix", "upscaling", "workflow", "stable-diffusion", "tutorial"]
 ---
 

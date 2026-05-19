@@ -4,6 +4,7 @@ description: "从空白画布开始,在 ComfyUI 里搭一个完整的文生图�
 pubDate: 2026-05-19
 lang: zh
 category: getting-started
+heroImage: ../_assets/cover-first-workflow.png
 tags: ["工作流", "教程", "文生图", "入门", "stable-diffusion"]
 ---
 

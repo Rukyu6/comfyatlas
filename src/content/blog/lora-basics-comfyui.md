@@ -4,6 +4,7 @@ description: "What a LoRA is, where it lives in your ComfyUI folder, and how to 
 pubDate: 2026-05-20
 lang: en
 category: workflow-extensions
+heroImage: ./_assets/cover-lora.png
 tags: ["lora", "fine-tuning", "workflow", "stable-diffusion", "tutorial"]
 ---
 

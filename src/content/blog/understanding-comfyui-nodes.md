@@ -4,6 +4,7 @@ description: "What ComfyUI nodes actually are, how data flows between them, and 
 pubDate: 2026-05-19
 lang: en
 category: getting-started
+heroImage: ./_assets/cover-nodes.png
 tags: ["nodes", "getting-started", "fundamentals", "stable-diffusion"]
 ---
 

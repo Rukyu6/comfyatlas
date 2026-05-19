@@ -4,6 +4,7 @@ description: "用真实图片当起始 latent 而不是纯噪声。ComfyUI 里�
 pubDate: 2026-05-21
 lang: zh
 category: workflow-extensions
+heroImage: ../_assets/cover-img2img.png
 tags: ["img2img", "图生图", "工作流", "stable-diffusion", "教程"]
 ---
 

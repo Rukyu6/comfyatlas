@@ -4,6 +4,7 @@ description: "怎么先在低分辨率生成,然后放大并精修到高分辨�
 pubDate: 2026-05-21
 lang: zh
 category: workflow-extensions
+heroImage: ../_assets/cover-hires-fix.png
 tags: ["hires-fix", "放大", "工作流", "stable-diffusion", "教程"]
 ---
 

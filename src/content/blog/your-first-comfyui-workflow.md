@@ -4,6 +4,7 @@ description: "Build a complete text-to-image workflow in ComfyUI from an empty c
 pubDate: 2026-05-19
 lang: en
 category: getting-started
+heroImage: ./_assets/cover-first-workflow.png
 tags: ["workflow", "tutorial", "text-to-image", "getting-started", "stable-diffusion"]
 ---
 

@@ -4,6 +4,7 @@ description: "什么是 LoRA、文件放哪里、怎么把它接进文生图工�
 pubDate: 2026-05-20
 lang: zh
 category: workflow-extensions
+heroImage: ../_assets/cover-lora.png
 tags: ["lora", "微调", "工作流", "stable-diffusion", "教程"]
 ---
 

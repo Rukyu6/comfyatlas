@@ -4,6 +4,7 @@ description: "干净准确的 ComfyUI 安装走读,涵盖 Windows 便携版、�
 pubDate: 2026-05-19
 lang: zh
 category: getting-started
+heroImage: ../_assets/cover-installation.png
 tags: ["安装", "入门", "windows", "macos", "linux"]
 ---
 

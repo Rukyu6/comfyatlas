@@ -6,6 +6,7 @@ import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import RelatedPosts from '../../../components/RelatedPosts.astro';
 import { SITE, t, localizedPath } from '../../../lib/i18n';
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data, id }) => !data.draft && data.lang === 'zh' && id.startsWith('zh/'));
@@ -21,6 +22,10 @@ const locale = 'zh';
 const slug = post.id.replace(/^zh\//, '');
 const pathname = `/blog/${slug}/`;
 const allZh = await getCollection('blog', ({ data, id }) => !data.draft && data.lang === 'zh' && id.startsWith('zh/'));
+
+const ogImage = post.data.heroImage
+  ? new URL(post.data.heroImage.src, SITE.url).toString()
+  : undefined;
 
 const schema = {
   '@context': 'https://schema.org',
@@ -43,6 +48,7 @@ const schema = {
   type="article"
   publishedTime={post.data.pubDate.toISOString()}
   modifiedTime={(post.data.updatedDate ?? post.data.pubDate).toISOString()}
+  ogImage={ogImage}
   schema={schema}
 >
   <Header locale={locale} pathname={pathname} />
@@ -60,6 +66,17 @@ const schema = {
       </p>
       <h1>{post.data.title}</h1>
       <p class="text-lg text-ink-600 not-prose mb-8">{post.data.description}</p>
+
+      {post.data.heroImage && (
+        <Image
+          src={post.data.heroImage}
+          alt={post.data.title}
+          class="not-prose w-full rounded-lg mb-10 border border-ink-100"
+          loading="eager"
+          widths={[640, 1024, 1280]}
+          sizes="(min-width: 768px) 768px, 100vw"
+        />
+      )}
 
       {headings.length > 2 && (
         <nav class="not-prose my-8 p-4 bg-ink-50 rounded-lg text-sm">

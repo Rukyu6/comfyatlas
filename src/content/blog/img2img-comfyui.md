@@ -4,6 +4,7 @@ description: "Use a real image as the starting latent instead of pure noise. The
 pubDate: 2026-05-21
 lang: en
 category: workflow-extensions
+heroImage: ./_assets/cover-img2img.png
 tags: ["img2img", "image-to-image", "workflow", "stable-diffusion", "tutorial"]
 ---
 

@@ -4,6 +4,7 @@ description: "A clean, accurate walkthrough for installing ComfyUI on Windows, m
 pubDate: 2026-05-19
 lang: en
 category: getting-started
+heroImage: ./_assets/cover-installation.png
 tags: ["installation", "getting-started", "windows", "macos", "linux"]
 ---
 

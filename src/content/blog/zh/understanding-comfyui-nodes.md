@@ -4,6 +4,7 @@ description: "ComfyUI 节点到底是什么、数据怎么在节点之间流动�
 pubDate: 2026-05-19
 lang: zh
 category: getting-started
+heroImage: ../_assets/cover-nodes.png
 tags: ["节点", "入门", "基础", "stable-diffusion"]
 ---
 
