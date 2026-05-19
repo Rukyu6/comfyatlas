@@ -33,6 +33,31 @@ const workflows = all.map((post) => ({
       All <strong>CC0 public domain</strong> — modify, share, use commercially.
     </p>
 
+    <h2 class="text-sm font-semibold tracking-wide uppercase text-accent mb-4">Featured</h2>
+    <ul class="space-y-3 mb-12">
+      <li class="p-5 rounded-lg border-2 border-accent/30 bg-accent/5">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+          <div class="flex-1 min-w-0">
+            <h3 class="font-semibold text-ink-900">Portrait Studio (FaceID + OpenPose + Hires Fix)</h3>
+            <p class="mt-1 text-sm text-ink-600">Drop one face reference + one pose reference, get a photorealistic studio portrait. SDXL recommended.</p>
+            <p class="mt-2 text-xs text-ink-500">Requires: ComfyUI_IPAdapter_plus, comfyui_controlnet_aux, FaceID Plus V2 model, SDXL OpenPose ControlNet.</p>
+          </div>
+          <a href="/workflows/portrait-studio.json" download class="shrink-0 inline-flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg font-medium hover:bg-accent-dark transition text-sm">Download portrait-studio.json</a>
+        </div>
+      </li>
+      <li class="p-5 rounded-lg border-2 border-accent/30 bg-accent/5">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+          <div class="flex-1 min-w-0">
+            <h3 class="font-semibold text-ink-900">Photo to Anime (img2img + LoRA + Sharpen)</h3>
+            <p class="mt-1 text-sm text-ink-600">Drop any photo, get an anime version. Tweak denoise (0.45–0.7) for stylization strength.</p>
+            <p class="mt-2 text-xs text-ink-500">Requires: an anime checkpoint (MeinaMix, AnythingV5, etc.) and optionally a style LoRA.</p>
+          </div>
+          <a href="/workflows/photo-to-anime.json" download class="shrink-0 inline-flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg font-medium hover:bg-accent-dark transition text-sm">Download photo-to-anime.json</a>
+        </div>
+      </li>
+    </ul>
+
+    <h2 class="text-sm font-semibold tracking-wide uppercase text-ink-500 mb-4">Tutorials with workflows</h2>
     <ul class="space-y-3">
       {workflows.map((w) => (
         <li class="p-5 rounded-lg border border-ink-100 hover:border-accent/40 transition">

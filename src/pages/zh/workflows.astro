@@ -32,6 +32,31 @@ const workflows = all.map((post) => ({
       拖到 ComfyUI 画布上即可加载。全部 <strong>CC0 公共领域</strong> — 随便改、随便传、商用都行。
     </p>
 
+    <h2 class="text-sm font-semibold tracking-wide uppercase text-accent mb-4">精选</h2>
+    <ul class="space-y-3 mb-12">
+      <li class="p-5 rounded-lg border-2 border-accent/30 bg-accent/5">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+          <div class="flex-1 min-w-0">
+            <h3 class="font-semibold text-ink-900">Portrait Studio(FaceID + OpenPose + Hires Fix)</h3>
+            <p class="mt-1 text-sm text-ink-600">丢一张人脸参考 + 一张姿势参考,直出影楼级肖像。推荐 SDXL。</p>
+            <p class="mt-2 text-xs text-ink-500">需要:ComfyUI_IPAdapter_plus、comfyui_controlnet_aux、FaceID Plus V2 模型、SDXL OpenPose ControlNet。</p>
+          </div>
+          <a href="/workflows/portrait-studio.json" download class="shrink-0 inline-flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg font-medium hover:bg-accent-dark transition text-sm">下载 portrait-studio.json</a>
+        </div>
+      </li>
+      <li class="p-5 rounded-lg border-2 border-accent/30 bg-accent/5">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+          <div class="flex-1 min-w-0">
+            <h3 class="font-semibold text-ink-900">Photo to Anime(img2img + LoRA + 锐化)</h3>
+            <p class="mt-1 text-sm text-ink-600">丢任意照片,出动漫版。denoise(0.45-0.7)调风格化强度。</p>
+            <p class="mt-2 text-xs text-ink-500">需要:动漫 checkpoint(MeinaMix、AnythingV5 等),可选风格 LoRA。</p>
+          </div>
+          <a href="/workflows/photo-to-anime.json" download class="shrink-0 inline-flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg font-medium hover:bg-accent-dark transition text-sm">下载 photo-to-anime.json</a>
+        </div>
+      </li>
+    </ul>
+
+    <h2 class="text-sm font-semibold tracking-wide uppercase text-ink-500 mb-4">教程对应工作流</h2>
     <ul class="space-y-3">
       {workflows.map((w) => (
         <li class="p-5 rounded-lg border border-ink-100 hover:border-accent/40 transition">

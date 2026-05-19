@@ -1,0 +1,187 @@
+{
+  "last_node_id": 15,
+  "last_link_id": 18,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [50, 200],
+      "size": [315, 98],
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [1], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [2, 3], "slot_index": 1},
+        {"name": "VAE", "type": "VAE", "links": [4, 5], "slot_index": 2}
+      ],
+      "title": "Load Anime Checkpoint",
+      "properties": {"Node name for S&R": "CheckpointLoaderSimple"},
+      "widgets_values": ["meinaMix_v11.safetensors"]
+    },
+    {
+      "id": 2,
+      "type": "LoraLoader",
+      "pos": [400, 200],
+      "size": [315, 126],
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 1},
+        {"name": "clip", "type": "CLIP", "link": 2}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [6], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [7], "slot_index": 1}
+      ],
+      "title": "Style LoRA (optional, weight 0.7)",
+      "properties": {"Node name for S&R": "LoraLoader"},
+      "widgets_values": ["studio_ghibli_style.safetensors", 0.7, 0.7]
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [50, 350],
+      "size": [315, 314],
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [8], "slot_index": 0},
+        {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1}
+      ],
+      "title": "Load Photo",
+      "properties": {"Node name for S&R": "LoadImage"},
+      "widgets_values": ["input_photo.jpg", "image"]
+    },
+    {
+      "id": 4,
+      "type": "VAEEncode",
+      "pos": [400, 500],
+      "size": [210, 46],
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {"name": "pixels", "type": "IMAGE", "link": 8},
+        {"name": "vae", "type": "VAE", "link": 5}
+      ],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [9], "slot_index": 0}],
+      "properties": {"Node name for S&R": "VAEEncode"},
+      "widgets_values": []
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [750, 100],
+      "size": [400, 200],
+      "order": 4,
+      "mode": 0,
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 7}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [10], "slot_index": 0}],
+      "title": "Positive (anime style description)",
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["anime style, beautiful detailed eyes, soft cel shading, vibrant colors, masterpiece, best quality"]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [750, 350],
+      "size": [400, 150],
+      "order": 5,
+      "mode": 0,
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 3}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [11], "slot_index": 0}],
+      "title": "Negative",
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["photorealistic, photograph, 3d, blurry, low quality, deformed, watermark, text, signature"]
+    },
+    {
+      "id": 7,
+      "type": "KSampler",
+      "pos": [1200, 200],
+      "size": [315, 262],
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 6},
+        {"name": "positive", "type": "CONDITIONING", "link": 10},
+        {"name": "negative", "type": "CONDITIONING", "link": 11},
+        {"name": "latent_image", "type": "LATENT", "link": 9}
+      ],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [12], "slot_index": 0}],
+      "title": "KSampler (denoise 0.55 = balanced photo->anime)",
+      "properties": {"Node name for S&R": "KSampler"},
+      "widgets_values": [42, "randomize", 22, 7.5, "dpmpp_2m", "karras", 0.55]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [1550, 200],
+      "size": [210, 46],
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 12},
+        {"name": "vae", "type": "VAE", "link": 4}
+      ],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [13], "slot_index": 0}],
+      "properties": {"Node name for S&R": "VAEDecode"},
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "ImageSharpen",
+      "pos": [1800, 200],
+      "size": [315, 130],
+      "order": 8,
+      "mode": 0,
+      "inputs": [{"name": "image", "type": "IMAGE", "link": 13}],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [14], "slot_index": 0}],
+      "title": "Sharpen (lines pop)",
+      "properties": {"Node name for S&R": "ImageSharpen"},
+      "widgets_values": [1, 0.5, 0.4]
+    },
+    {
+      "id": 10,
+      "type": "SaveImage",
+      "pos": [2150, 200],
+      "size": [315, 270],
+      "order": 9,
+      "mode": 0,
+      "inputs": [{"name": "images", "type": "IMAGE", "link": 14}],
+      "properties": {},
+      "widgets_values": ["ComfyAtlas/photo-to-anime"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "MODEL"],
+    [2, 1, 1, 2, 1, "CLIP"],
+    [3, 1, 1, 6, 0, "CLIP"],
+    [4, 1, 2, 8, 1, "VAE"],
+    [5, 1, 2, 4, 1, "VAE"],
+    [6, 2, 0, 7, 0, "MODEL"],
+    [7, 2, 1, 5, 0, "CLIP"],
+    [8, 3, 0, 4, 0, "IMAGE"],
+    [9, 4, 0, 7, 3, "LATENT"],
+    [10, 5, 0, 7, 1, "CONDITIONING"],
+    [11, 6, 0, 7, 2, "CONDITIONING"],
+    [12, 7, 0, 8, 0, "LATENT"],
+    [13, 8, 0, 9, 0, "IMAGE"],
+    [14, 9, 0, 10, 0, "IMAGE"]
+  ],
+  "groups": [
+    {"title": "1. INPUT", "bounding": [30, 150, 360, 540], "color": "#3f789e"},
+    {"title": "2. STYLE (Anime checkpoint + optional LoRA)", "bounding": [30, 150, 720, 200], "color": "#a1309b"},
+    {"title": "3. RENDER", "bounding": [730, 70, 1080, 460], "color": "#8a8"},
+    {"title": "4. POLISH (sharpen)", "bounding": [1780, 150, 720, 380], "color": "#88a"}
+  ],
+  "config": {},
+  "extra": {
+    "ComfyAtlas": {
+      "description": "Photo-to-Anime: turn any photo into anime-style art in one click. Drop your photo into Load Image, queue. Uses an anime checkpoint (e.g. MeinaMix, AnythingV5) plus an optional style LoRA. Tweak denoise (0.45-0.7) for amount of stylization.",
+      "source": "https://comfyatlas.com/workflows/",
+      "license": "CC0",
+      "requires": "An anime checkpoint (MeinaMix, AnythingV5, etc.) — optional Studio Ghibli or other style LoRA",
+      "tags": ["anime", "img2img", "style-transfer", "lora"]
+    }
+  },
+  "version": 0.4
+}
