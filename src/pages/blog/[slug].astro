@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
 import { SITE, t, localizedPath } from '../../lib/i18n';
 import { getCollection, render } from 'astro:content';
 
@@ -17,6 +18,7 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 const locale = 'en';
 const pathname = `/blog/${post.id}/`;
+const allEn = await getCollection('blog', ({ data, id }) => !data.draft && data.lang === 'en' && !id.startsWith('zh/'));
 
 const schema = {
   '@context': 'https://schema.org',
@@ -65,6 +67,8 @@ const schema = {
       )}
 
       <Content />
+
+      <RelatedPosts current={post} all={allEn} locale={locale} />
 
       {post.data.tags.length > 0 && (
         <div class="not-prose mt-12 pt-6 border-t border-ink-100 flex flex-wrap gap-2">
