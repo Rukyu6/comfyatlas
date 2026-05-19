@@ -5,6 +5,10 @@ pubDate: 2026-05-19
 lang: zh
 category: getting-started
 heroImage: ../_assets/cover-first-workflow.png
+workflow:
+  file: first-workflow.json
+  title: 基础文生图工作流
+  note: SD 1.5 / SDXL 通用。在 Load Checkpoint 节点里选你的模型。
 tags: ["工作流", "教程", "文生图", "入门", "stable-diffusion"]
 ---
 

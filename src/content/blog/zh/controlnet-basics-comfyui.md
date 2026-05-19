@@ -5,6 +5,10 @@ pubDate: 2026-05-20
 lang: zh
 category: workflow-extensions
 heroImage: ../_assets/cover-controlnet.png
+workflow:
+  file: controlnet-openpose.json
+  title: ControlNet OpenPose 工作流
+  note: 需要 comfyui_controlnet_aux 自定义节点包 + OpenPose ControlNet 模型。把姿势参考图丢进 Load Image。
 tags: ["controlnet", "构图", "工作流", "stable-diffusion", "教程"]
 ---
 

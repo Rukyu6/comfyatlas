@@ -5,6 +5,10 @@ pubDate: 2026-05-21
 lang: zh
 category: workflow-extensions
 heroImage: ../_assets/cover-img2img.png
+workflow:
+  file: img2img.json
+  title: 图生图(img2img)风格迁移工作流
+  note: 输入图丢进 Load Image。denoise(0.4-0.7)调风格化强度。
 tags: ["img2img", "图生图", "工作流", "stable-diffusion", "教程"]
 ---
 

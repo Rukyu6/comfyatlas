@@ -5,6 +5,10 @@ pubDate: 2026-05-22
 lang: en
 category: workflow-extensions
 heroImage: ./_assets/cover-ip-adapter.png
+workflow:
+  file: ip-adapter.json
+  title: IP-Adapter style reference workflow
+  note: Requires ComfyUI_IPAdapter_plus by cubiq + CLIP Vision + IP-Adapter model files. Drop your reference image into Load Image.
 tags: ["ip-adapter", "reference-image", "workflow", "stable-diffusion", "tutorial"]
 ---
 

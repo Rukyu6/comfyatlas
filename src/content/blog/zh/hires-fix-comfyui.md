@@ -5,6 +5,10 @@ pubDate: 2026-05-21
 lang: zh
 category: workflow-extensions
 heroImage: ../_assets/cover-hires-fix.png
+workflow:
+  file: hires-fix.json
+  title: 双阶段 Hires Fix 工作流
+  note: 第一遍 512×512,Latent Upscale 1.5x,第二遍高分辨率 denoise 0.5。同种子锁构图。
 tags: ["hires-fix", "放大", "工作流", "stable-diffusion", "教程"]
 ---
 

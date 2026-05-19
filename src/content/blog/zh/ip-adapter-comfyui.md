@@ -5,6 +5,10 @@ pubDate: 2026-05-22
 lang: zh
 category: workflow-extensions
 heroImage: ../_assets/cover-ip-adapter.png
+workflow:
+  file: ip-adapter.json
+  title: IP-Adapter 风格参考工作流
+  note: 需要 cubiq 的 ComfyUI_IPAdapter_plus + CLIP Vision + IP-Adapter 模型文件。参考图丢进 Load Image。
 tags: ["ip-adapter", "参考图", "工作流", "stable-diffusion", "教程"]
 ---
 

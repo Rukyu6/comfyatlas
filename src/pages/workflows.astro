@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { localizedPath, t } from '../lib/i18n';
+import { getCollection } from 'astro:content';
+
+const locale = 'en';
+const all = await getCollection('blog', ({ data, id }) => !data.draft && data.lang === 'en' && !id.startsWith('zh/') && !!data.workflow);
+
+const workflows = all.map((post) => ({
+  file: post.data.workflow!.file,
+  title: post.data.workflow!.title ?? post.data.title,
+  note: post.data.workflow!.note,
+  postSlug: post.id,
+  postTitle: post.data.title,
+}));
+---
+<BaseLayout
+  title="Free ComfyUI Workflows"
+  description="Drop-in ComfyUI workflow JSON files for text-to-image, LoRA, ControlNet, Hires Fix, img2img, Inpainting, IP-Adapter. CC0 public domain. Drag onto canvas to load."
+  locale={locale}
+  pathname="/workflows/"
+>
+  <Header locale={locale} pathname="/workflows/" />
+  <main class="flex-1 max-w-3xl mx-auto px-4 py-12 w-full">
+    <Breadcrumbs locale={locale} trail={[{ label: 'Workflows' }]} />
+    <h1 class="text-3xl font-semibold text-ink-900 mb-3">Free ComfyUI Workflows</h1>
+    <p class="text-ink-600 mb-8">
+      Drop-in <code class="bg-ink-50 px-1.5 py-0.5 rounded text-sm">.json</code> files
+      for the most common ComfyUI patterns. Drag onto your ComfyUI canvas to load.
+      All <strong>CC0 public domain</strong> — modify, share, use commercially.
+    </p>
+
+    <ul class="space-y-3">
+      {workflows.map((w) => (
+        <li class="p-5 rounded-lg border border-ink-100 hover:border-accent/40 transition">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <h2 class="font-semibold text-ink-900">{w.title}</h2>
+              {w.note && <p class="mt-1 text-sm text-ink-600">{w.note}</p>}
+              <p class="mt-2 text-xs text-ink-500">
+                Tutorial:
+                <a href={localizedPath(locale, `/blog/${w.postSlug}/`)} class="text-accent hover:underline ml-1">
+                  {w.postTitle}
+                </a>
+              </p>
+            </div>
+            <a
+              href={`/workflows/${w.file}`}
+              download
+              class="shrink-0 inline-flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg font-medium hover:bg-accent-dark transition text-sm"
+            >
+              Download {w.file}
+            </a>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-12 p-5 rounded-lg bg-ink-50 text-sm text-ink-700">
+      <p class="font-semibold text-ink-900 mb-2">How to use</p>
+      <ol class="list-decimal pl-5 space-y-1">
+        <li>Click Download — it saves a <code class="bg-white px-1 rounded">.json</code> file.</li>
+        <li>Open ComfyUI in your browser.</li>
+        <li>Drag the <code class="bg-white px-1 rounded">.json</code> file onto the canvas.</li>
+        <li>Pick your checkpoint in the Load Checkpoint node, install any required custom nodes (Manager will prompt), and click Queue Prompt.</li>
+      </ol>
+    </div>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

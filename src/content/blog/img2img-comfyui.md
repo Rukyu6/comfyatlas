@@ -5,6 +5,10 @@ pubDate: 2026-05-21
 lang: en
 category: workflow-extensions
 heroImage: ./_assets/cover-img2img.png
+workflow:
+  file: img2img.json
+  title: Image-to-image style transfer workflow
+  note: Drop your input image into Load Image. Tune denoise (0.4–0.7) for the amount of stylization.
 tags: ["img2img", "image-to-image", "workflow", "stable-diffusion", "tutorial"]
 ---
 

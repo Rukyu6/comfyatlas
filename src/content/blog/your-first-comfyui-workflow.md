@@ -5,6 +5,10 @@ pubDate: 2026-05-19
 lang: en
 category: getting-started
 heroImage: ./_assets/cover-first-workflow.png
+workflow:
+  file: first-workflow.json
+  title: Basic text-to-image workflow
+  note: SD 1.5 / SDXL compatible. Pick your checkpoint in the Load Checkpoint node.
 tags: ["workflow", "tutorial", "text-to-image", "getting-started", "stable-diffusion"]
 ---
 

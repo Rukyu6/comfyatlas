@@ -5,6 +5,10 @@ pubDate: 2026-05-20
 lang: zh
 category: workflow-extensions
 heroImage: ../_assets/cover-lora.png
+workflow:
+  file: lora-basics.json
+  title: 带一个 LoRA 的文生图工作流
+  note: 把示例 LoRA 文件名和 TRIGGER_WORD 占位符替换成你 LoRA 实际的值。
 tags: ["lora", "微调", "工作流", "stable-diffusion", "教程"]
 ---
 

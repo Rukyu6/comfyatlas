@@ -5,6 +5,10 @@ pubDate: 2026-05-21
 lang: en
 category: workflow-extensions
 heroImage: ./_assets/cover-hires-fix.png
+workflow:
+  file: hires-fix.json
+  title: Two-pass Hires Fix workflow
+  note: Pass 1 at 512×512, Latent Upscale 1.5×, Pass 2 with denoise 0.5 at higher resolution. Same seed locks composition.
 tags: ["hires-fix", "upscaling", "workflow", "stable-diffusion", "tutorial"]
 ---
 

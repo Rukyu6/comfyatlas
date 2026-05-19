@@ -13,6 +13,13 @@ const blog = defineCollection({
       tags: z.array(z.string()).default([]),
       lang: z.enum(['en', 'zh']).default('en'),
       category: z.enum(['getting-started', 'workflow-extensions', 'models', 'troubleshooting']).default('getting-started'),
+      workflow: z
+        .object({
+          file: z.string(),
+          title: z.string().optional(),
+          note: z.string().optional(),
+        })
+        .optional(),
       draft: z.boolean().default(false),
     }),
 });

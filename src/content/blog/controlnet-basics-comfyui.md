@@ -5,6 +5,10 @@ pubDate: 2026-05-20
 lang: en
 category: workflow-extensions
 heroImage: ./_assets/cover-controlnet.png
+workflow:
+  file: controlnet-openpose.json
+  title: ControlNet OpenPose workflow
+  note: Requires comfyui_controlnet_aux custom nodes + the OpenPose ControlNet model. Drop your pose reference image into the Load Image node.
 tags: ["controlnet", "composition", "workflow", "stable-diffusion", "tutorial"]
 ---
 

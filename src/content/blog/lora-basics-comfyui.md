@@ -5,6 +5,10 @@ pubDate: 2026-05-20
 lang: en
 category: workflow-extensions
 heroImage: ./_assets/cover-lora.png
+workflow:
+  file: lora-basics.json
+  title: Text-to-image with one LoRA
+  note: Replace the example LoRA filename and the TRIGGER_WORD placeholder with your LoRA's actual values.
 tags: ["lora", "fine-tuning", "workflow", "stable-diffusion", "tutorial"]
 ---
 

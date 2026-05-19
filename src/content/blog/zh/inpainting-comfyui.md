@@ -5,6 +5,10 @@ pubDate: 2026-05-22
 lang: zh
 category: workflow-extensions
 heroImage: ../_assets/cover-inpainting.png
+workflow:
+  file: inpainting.json
+  title: 局部重绘(Inpainting)工作流
+  note: 右键 Load Image → Open in MaskEditor → 涂要重画的区域。用 -inpainting 后缀的 checkpoint 边缘最干净。
 tags: ["inpainting", "蒙版", "工作流", "stable-diffusion", "教程"]
 ---
 

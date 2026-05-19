@@ -5,6 +5,10 @@ pubDate: 2026-05-22
 lang: en
 category: workflow-extensions
 heroImage: ./_assets/cover-inpainting.png
+workflow:
+  file: inpainting.json
+  title: Inpainting workflow
+  note: Right-click Load Image → Open in MaskEditor → paint over the area to regenerate. Use a -inpainting suffixed checkpoint for cleanest edges.
 tags: ["inpainting", "mask", "workflow", "stable-diffusion", "tutorial"]
 ---
 
