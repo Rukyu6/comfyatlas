@@ -3,6 +3,7 @@ title: "你的第一个 ComfyUI 工作流:文生图分步搭建"
 description: "从空白画布开始,在 ComfyUI 里搭一个完整的文生图工作流。逐个加节点、连线、生成第一张图。包含确切的参数设置和出问题时怎么办。"
 pubDate: 2026-05-19
 lang: zh
+category: getting-started
 tags: ["工作流", "教程", "文生图", "入门", "stable-diffusion"]
 ---
 

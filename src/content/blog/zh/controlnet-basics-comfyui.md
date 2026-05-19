@@ -3,6 +3,7 @@ title: "ComfyUI 里的 ControlNet 基础:用姿势、深度、边缘控制构图
 description: "ControlNet 怎么把 Stable Diffusion 引向特定姿势、深度布局或线稿。涵盖预处理器、Apply ControlNet 节点、模型选择,以及怎么和 LoRA 一起用。"
 pubDate: 2026-05-20
 lang: zh
+category: workflow-extensions
 tags: ["controlnet", "构图", "工作流", "stable-diffusion", "教程"]
 ---
 

@@ -3,6 +3,7 @@ title: "理解 ComfyUI 节点:写给新手的可视化指南"
 description: "ComfyUI 节点到底是什么、数据怎么在节点之间流动、组成默认文生图工作流的七个核心节点。写给第一次打开 ComfyUI 的人。"
 pubDate: 2026-05-19
 lang: zh
+category: getting-started
 tags: ["节点", "入门", "基础", "stable-diffusion"]
 ---
 

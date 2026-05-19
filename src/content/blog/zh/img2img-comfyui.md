@@ -3,6 +3,7 @@ title: "ComfyUI 里的图生图(img2img):风格迁移、照片编辑、草图变
 description: "用真实图片当起始 latent 而不是纯噪声。ComfyUI 里完整的 img2img 工作流,denoise 调节、常见用法、和 LoRA / ControlNet 怎么搭。"
 pubDate: 2026-05-21
 lang: zh
+category: workflow-extensions
 tags: ["img2img", "图生图", "工作流", "stable-diffusion", "教程"]
 ---
 

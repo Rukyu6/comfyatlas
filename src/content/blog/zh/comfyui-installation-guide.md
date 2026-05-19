@@ -3,6 +3,7 @@ title: "ComfyUI 安装教程:Windows、macOS 和 Linux 完整指南"
 description: "干净准确的 ComfyUI 安装走读,涵盖 Windows 便携版、手动安装、系统要求、以及如何验证安装是否成功。已对照 ComfyUI 最新版本核对。"
 pubDate: 2026-05-19
 lang: zh
+category: getting-started
 tags: ["安装", "入门", "windows", "macos", "linux"]
 ---
 

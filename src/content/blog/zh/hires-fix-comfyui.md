@@ -3,6 +3,7 @@ title: "ComfyUI 里的 Hires Fix:低分辨率出图 + 高分辨率精修"
 description: "怎么先在低分辨率生成,然后放大并精修到高分辨率最终图,还不烧显存。ComfyUI 里替代 A1111 那个一键 Hires Fix 的双阶段工作流。"
 pubDate: 2026-05-21
 lang: zh
+category: workflow-extensions
 tags: ["hires-fix", "放大", "工作流", "stable-diffusion", "教程"]
 ---
 

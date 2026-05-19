@@ -3,6 +3,7 @@ title: "Your First ComfyUI Workflow: Text-to-Image Step by Step"
 description: "Build a complete text-to-image workflow in ComfyUI from an empty canvas. Add each node, wire it up, and generate your first image. Includes the exact settings to use and what to do when something goes wrong."
 pubDate: 2026-05-19
 lang: en
+category: getting-started
 tags: ["workflow", "tutorial", "text-to-image", "getting-started", "stable-diffusion"]
 ---
 

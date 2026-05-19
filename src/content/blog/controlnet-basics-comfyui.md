@@ -3,6 +3,7 @@ title: "ControlNet Basics in ComfyUI: Composition Control with Pose, Depth, and 
 description: "How ControlNet steers a Stable Diffusion generation toward a specific pose, depth layout, or line drawing. Covers preprocessors, the Apply ControlNet node, model selection, and how to combine ControlNet with LoRAs."
 pubDate: 2026-05-20
 lang: en
+category: workflow-extensions
 tags: ["controlnet", "composition", "workflow", "stable-diffusion", "tutorial"]
 ---
 

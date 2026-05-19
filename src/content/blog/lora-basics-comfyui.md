@@ -3,6 +3,7 @@ title: "LoRA Basics in ComfyUI: How to Apply Style and Character Models"
 description: "What a LoRA is, where it lives in your ComfyUI folder, and how to wire one into a text-to-image workflow. Includes the strength dial, stacking multiple LoRAs, and the trigger-word habit that catches most beginners off guard."
 pubDate: 2026-05-20
 lang: en
+category: workflow-extensions
 tags: ["lora", "fine-tuning", "workflow", "stable-diffusion", "tutorial"]
 ---
 

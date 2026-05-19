@@ -12,6 +12,7 @@ const blog = defineCollection({
       heroImage: image().optional(),
       tags: z.array(z.string()).default([]),
       lang: z.enum(['en', 'zh']).default('en'),
+      category: z.enum(['getting-started', 'workflow-extensions', 'models', 'troubleshooting']).default('getting-started'),
       draft: z.boolean().default(false),
     }),
 });

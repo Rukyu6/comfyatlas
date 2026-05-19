@@ -3,6 +3,7 @@ title: "ComfyUI 里的 LoRA 入门:风格和角色模型怎么用"
 description: "什么是 LoRA、文件放哪里、怎么把它接进文生图工作流。包含强度调节、多个 LoRA 叠加、还有最容易让新手踩坑的触发词习惯。"
 pubDate: 2026-05-20
 lang: zh
+category: workflow-extensions
 tags: ["lora", "微调", "工作流", "stable-diffusion", "教程"]
 ---
 

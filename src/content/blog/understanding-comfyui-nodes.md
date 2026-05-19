@@ -3,6 +3,7 @@ title: "Understanding ComfyUI Nodes: A Visual Guide for Beginners"
 description: "What ComfyUI nodes actually are, how data flows between them, and the seven core nodes that make up the default text-to-image workflow. Written for people who just opened ComfyUI for the first time."
 pubDate: 2026-05-19
 lang: en
+category: getting-started
 tags: ["nodes", "getting-started", "fundamentals", "stable-diffusion"]
 ---
 

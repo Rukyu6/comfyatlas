@@ -3,6 +3,7 @@ title: "ComfyUI Installation Guide for Windows, macOS, and Linux"
 description: "A clean, accurate walkthrough for installing ComfyUI on Windows, macOS, and Linux — including the portable build, manual install, system requirements, and how to verify the install works."
 pubDate: 2026-05-19
 lang: en
+category: getting-started
 tags: ["installation", "getting-started", "windows", "macos", "linux"]
 ---
 

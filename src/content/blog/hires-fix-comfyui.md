@@ -3,6 +3,7 @@ title: "Hires Fix in ComfyUI: Render Low, Refine High for Sharper Detail"
 description: "How to generate at low resolution, then upscale and refine to a high-resolution final image without burning VRAM. The two-stage workflow that replaces A1111's one-click Hires fix in ComfyUI."
 pubDate: 2026-05-21
 lang: en
+category: workflow-extensions
 tags: ["hires-fix", "upscaling", "workflow", "stable-diffusion", "tutorial"]
 ---
 

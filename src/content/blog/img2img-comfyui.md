@@ -3,6 +3,7 @@ title: "Image-to-Image in ComfyUI: Style Transfer, Photo Edits, and Sketch-to-Fi
 description: "Use a real image as the starting latent instead of pure noise. The full img2img workflow in ComfyUI, with denoise tuning, common use cases, and how it interacts with LoRAs and ControlNet."
 pubDate: 2026-05-21
 lang: en
+category: workflow-extensions
 tags: ["img2img", "image-to-image", "workflow", "stable-diffusion", "tutorial"]
 ---
 
