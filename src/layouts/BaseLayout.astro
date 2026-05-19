@@ -72,6 +72,15 @@ const alternates = SITE.locales.map((l) => ({
     {schema && (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     )}
+
+    <!-- Google Analytics 4 -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-4RBFJ76E2B"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4RBFJ76E2B');
+    </script>
   </head>
   <body class="min-h-screen flex flex-col">
     <slot />
