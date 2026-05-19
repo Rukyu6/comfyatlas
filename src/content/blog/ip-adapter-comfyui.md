@@ -4,6 +4,7 @@ description: "How IP-Adapter feeds a reference image directly into the model's c
 pubDate: 2026-05-22
 lang: en
 category: workflow-extensions
+heroImage: ./_assets/cover-ip-adapter.png
 tags: ["ip-adapter", "reference-image", "workflow", "stable-diffusion", "tutorial"]
 ---
 

@@ -4,6 +4,7 @@ description: "IP-Adapter 怎么把参考图直接喂进模型条件,复制风格
 pubDate: 2026-05-22
 lang: zh
 category: workflow-extensions
+heroImage: ../_assets/cover-ip-adapter.png
 tags: ["ip-adapter", "参考图", "工作流", "stable-diffusion", "教程"]
 ---
 

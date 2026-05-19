@@ -4,6 +4,7 @@ description: "Mask a region of an image and let the model regenerate just that r
 pubDate: 2026-05-22
 lang: en
 category: workflow-extensions
+heroImage: ./_assets/cover-inpainting.png
 tags: ["inpainting", "mask", "workflow", "stable-diffusion", "tutorial"]
 ---
 

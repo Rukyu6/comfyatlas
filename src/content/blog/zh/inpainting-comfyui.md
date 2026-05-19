@@ -4,6 +4,7 @@ description: "给图像的某个区域画蒙版,让模型只重新生成那个�
 pubDate: 2026-05-22
 lang: zh
 category: workflow-extensions
+heroImage: ../_assets/cover-inpainting.png
 tags: ["inpainting", "蒙版", "工作流", "stable-diffusion", "教程"]
 ---
 
