@@ -1,0 +1,19 @@
+---
+import { SITE, t, type Locale } from '../lib/i18n';
+
+export interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-ink-100 mt-16 py-8 text-sm text-ink-500">
+  <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+    <p>{t(locale, 'footer.copy').replace('{year}', String(year))}</p>
+    <p>
+      <a href="/rss.xml" class="hover:text-ink-800">RSS</a>
+      <span class="mx-2">·</span>
+      <a href="/sitemap-index.xml" class="hover:text-ink-800">Sitemap</a>
+    </p>
+  </div>
+</footer>

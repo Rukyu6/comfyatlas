@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://comfyatlas.com/sitemap-index.xml

@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../lib/i18n';
+const locale = 'en';
+---
+<BaseLayout title="About" description={`What ${SITE.name} is and isn't.`} locale={locale} pathname="/about/">
+  <Header locale={locale} pathname="/about/" />
+  <main class="flex-1 max-w-3xl mx-auto px-4 py-12 w-full prose-article">
+    <h1>About {SITE.name}</h1>
+    <p>
+      {SITE.name} is an independent knowledge base focused on <strong>ComfyUI</strong>, the node-based interface for Stable Diffusion and other diffusion models.
+    </p>
+    <p>
+      The project exists for one reason: official ComfyUI documentation is sparse, and most third-party tutorials are scattered, outdated, or surface-level. This site collects step-by-step guides, node references, and end-to-end workflows in one place.
+    </p>
+    <h2>Editorial principles</h2>
+    <ul>
+      <li><strong>Accuracy first.</strong> Every guide is verified against the current ComfyUI release before publishing.</li>
+      <li><strong>Real workflows.</strong> No screenshots of empty graphs. We ship workflow JSON files where it makes sense.</li>
+      <li><strong>No fluff.</strong> Short paragraphs, no padding, no fake "ultimate guide" framing.</li>
+    </ul>
+    <h2>Not affiliated with ComfyUI</h2>
+    <p>
+      {SITE.name} is an independent project. It is not affiliated with, endorsed by, or maintained by the ComfyUI team or Comfy Org. ComfyUI is open-source software released under the GPL-3.0 license.
+    </p>
+    <h2>Contact</h2>
+    <p>For corrections, suggestions, or workflow contributions, open an issue on the project repository (link to be added).</p>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
