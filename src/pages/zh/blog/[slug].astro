@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import RelatedPosts from '../../../components/RelatedPosts.astro';
 import { SITE, t, localizedPath } from '../../../lib/i18n';
 import { getCollection, render } from 'astro:content';
@@ -46,6 +47,10 @@ const schema = {
 >
   <Header locale={locale} pathname={pathname} />
   <main class="flex-1 max-w-3xl mx-auto px-4 py-10 w-full">
+    <Breadcrumbs locale={locale} trail={[
+      { label: t(locale, 'nav.guides'), href: localizedPath(locale, '/blog/') },
+      { label: post.data.title },
+    ]} />
     <article class="prose-article" data-pagefind-body>
       <p class="text-xs uppercase tracking-wide text-ink-500 mb-2">
         {t(locale, 'post.published')} {post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
