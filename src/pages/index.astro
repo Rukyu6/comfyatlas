@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCard from '../components/ProductCard.astro';
 
-// Hardcoded products for the boutique
+// Hardcoded physical apparel products
 const physicalProducts = [
   {
     id: 'prod_hoodie_01',
@@ -23,51 +23,8 @@ const physicalProducts = [
     sizes: ['M', 'L', 'XL']
   }
 ];
-
-const digitalProducts = [
-  {
-    id: 'prod_chatgpt_basic',
-    name: '🔥 ChatGPT Basic Account (Exclusive / Pass Changeable)',
-    price: 1.50,
-    image: '/images/book.png',
-    type: 'digital' as const,
-    description: 'Lifetime exclusive basic ChatGPT account. Supports password changes, fully customized, 100% personal usage only.',
-  },
-  {
-    id: 'prod_chatgpt_plus_card',
-    name: 'ChatGPT Plus 1-Month Top-Up Gift Card (Key)',
-    price: 24.90,
-    image: '/images/book.png',
-    type: 'digital' as const,
-    description: '1-Month ChatGPT Plus activation gift card. Automated code delivery. Fully valid iOS region card with warranty.',
-  },
-  {
-    id: 'prod_chatgpt_plus_sub',
-    name: 'ChatGPT Plus Premium 1-Month Account / Direct Top-Up',
-    price: 31.90,
-    image: '/images/book.png',
-    type: 'digital' as const,
-    description: 'Exclusive 1-Month Plus subscription account. No ban risk. Pre-activated or top-up on your own account. Supports o1 / GPT-5 models.',
-  },
-  {
-    id: 'prod_chatgpt_pro_5x',
-    name: 'ChatGPT Pro (5X Capacity) 1-Month Subscription',
-    price: 125.00,
-    image: '/images/book.png',
-    type: 'digital' as const,
-    description: '1-Month Pro membership (Egypt region billing). Features 5X active capacity. 24/7 automated delivery & full warranty.',
-  },
-  {
-    id: 'prod_chatgpt_pro_20x',
-    name: 'ChatGPT Pro (20X Capacity) 1-Month Subscription',
-    price: 215.00,
-    image: '/images/book.png',
-    type: 'digital' as const,
-    description: 'Highest Pro tier 1-Month membership (Philippines region billing). Features 20X generation capacity. Fully active, guaranteed warranty.',
-  }
-];
 ---
-<BaseLayout title="ComfyAtlas Store — Luxury Digital Goods & Apparel">
+<BaseLayout title="ComfyAtlas Store — Premium Apparel & Digital Account Vault">
   
   <!-- Navigation Header -->
   <header class="glass-nav fixed top-0 left-0 w-full z-40 transition-all duration-300">
@@ -118,7 +75,7 @@ const digitalProducts = [
         <span class="text-gradient-gold">Physical Wardrobe</span>
       </h1>
       <p class="max-w-2xl mx-auto text-lg text-zinc-400 font-light mb-12 leading-relaxed">
-        High-grade tactical apparel designed for the modern creator, coupled with next-generation digital assets and subscriptions. Fully automated digital delivery, global shipping, zero middleman fees.
+        High-grade tactical apparel designed for the modern creator, coupled with a massive instant digital accounts and service vault. Fully automated digital delivery, global shipping, zero middleman fees.
       </p>
       
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -132,7 +89,7 @@ const digitalProducts = [
           href="#digital" 
           class="w-full sm:w-auto px-8 py-4 bg-zinc-900 text-white hover:border-emerald-500/40 hover:bg-emerald-500/5 border border-zinc-800 font-bold uppercase tracking-wider rounded-full shadow-lg transition-all duration-300 text-sm font-outfit hover:scale-105"
         >
-          Explore Digital
+          Explore Digital Vault
         </a>
       </div>
     </div>
@@ -167,24 +124,58 @@ const digitalProducts = [
     </div>
   </section>
 
-  <!-- Digital Goods Section -->
-  <section id="digital" class="py-24 border-t border-white/5 relative">
+  <!-- Digital Vault Section (Crawled from chuhai91.cc) -->
+  <section id="digital" class="py-24 border-t border-white/5 relative min-h-[800px]">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
         <div>
-          <span class="text-emerald-400 uppercase tracking-widest text-xs font-bold font-outfit block mb-2">Instant Delivery</span>
-          <h2 class="text-3xl md:text-5xl font-bold font-outfit text-white">Digital Vault</h2>
+          <span class="text-emerald-400 uppercase tracking-widest text-xs font-bold font-outfit block mb-2">Automated Dispatch</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-outfit text-white">Digital Account Vault</h2>
         </div>
-        <p class="text-zinc-500 text-sm max-w-xs mt-4 md:mt-0">
-          Instant download links and account login credentials delivered to your inbox upon transaction validation.
-        </p>
+        <!-- Search Input -->
+        <div class="mt-6 md:mt-0 w-full max-w-sm">
+          <div class="relative">
+            <input 
+              type="text" 
+              id="search-bar" 
+              placeholder="Search 700+ digital accounts..." 
+              class="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-400/50 transition-all duration-300"
+            />
+            <div class="absolute left-4 top-3.5 text-zinc-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        {digitalProducts.map(product => (
-          <ProductCard {...product} />
-        ))}
+      <!-- Categories Navigation for Mobile (Horizontal scroll) -->
+      <div class="flex md:hidden overflow-x-auto gap-2 pb-4 mb-8 -mx-6 px-6 no-scrollbar" id="mobile-categories-bar">
+        <!-- JS generates chips here -->
       </div>
+
+      <!-- Layout with Sidebar (Desktop) -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <!-- Sidebar Categories (Desktop) -->
+        <div class="hidden md:block col-span-1 space-y-2 max-h-[700px] overflow-y-auto pr-3 sticky top-28" id="desktop-categories-sidebar">
+          <!-- JS generates sidebar lists here -->
+        </div>
+
+        <!-- Product Grid (Desktop / Mobile combined) -->
+        <div class="md:col-span-3">
+          <div id="digital-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Loading state -->
+            <div class="col-span-full text-center py-20 text-zinc-500">
+              <div class="animate-spin inline-block w-8 h-8 border-4 border-[#C5A880] border-t-transparent rounded-full mb-4"></div>
+              <p>Decrypting Digital Vault...</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </section>
 
@@ -302,8 +293,12 @@ const digitalProducts = [
 </BaseLayout>
 
 <script>
-  // Shopping Cart JavaScript Logic
+  // Shopping Cart & Dynamic Digital Store Script
+  import database from '../data/products.json';
+
   let cart = [];
+  let activeCategoryId = '';
+  let searchQuery = '';
 
   // DOM Elements
   const cartTrigger = document.getElementById('cart-trigger');
@@ -315,8 +310,15 @@ const digitalProducts = [
   const cartTotal = document.getElementById('cart-total');
   const checkoutBtn = document.getElementById('checkout-btn');
 
+  // Vault DOM Elements
+  const desktopSidebar = document.getElementById('desktop-categories-sidebar');
+  const mobileBar = document.getElementById('mobile-categories-bar');
+  const productsGrid = document.getElementById('digital-products-grid');
+  const searchInput = document.getElementById('search-bar') as HTMLInputElement;
+
   // Initialize
-  function initCart() {
+  function init() {
+    // 1. Initialize Cart
     const savedCart = localStorage.getItem('boutique_cart');
     if (savedCart) {
       try {
@@ -326,9 +328,19 @@ const digitalProducts = [
       }
     }
     renderCart();
+
+    // 2. Initialize Digital Vault
+    if (database.categories && database.categories.length > 0) {
+      activeCategoryId = database.categories[0].cid;
+      renderCategories();
+      renderDigitalProducts();
+    }
+    
+    // Size button interactivity on index static cards
+    setupSizeSelectors();
   }
 
-  // Toggle Drawer
+  // Toggle Cart Drawer
   function toggleCart(isOpen) {
     if (isOpen) {
       cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
@@ -347,59 +359,12 @@ const digitalProducts = [
     if (e.target === cartOverlay) toggleCart(false);
   });
 
-  // Add Product to Cart
-  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const card = btn.closest('[data-product-id]');
-      if (!card) return;
-
-      const id = card.getAttribute('data-product-id');
-      const name = card.getAttribute('data-product-name');
-      const price = parseFloat(card.getAttribute('data-product-price') || '0');
-      const image = card.getAttribute('data-product-image');
-      const type = card.getAttribute('data-product-type');
-
-      // Size extraction
-      let size = '';
-      if (type === 'physical') {
-        const activeSizeBtn = card.querySelector('.size-btn.bg-white');
-        size = activeSizeBtn ? activeSizeBtn.getAttribute('data-size') || '' : '';
-      }
-
-      const cartItemId = type === 'physical' ? `${id}_${size}` : id;
-
-      const existingIndex = cart.findIndex(item => item.cartItemId === cartItemId);
-      if (existingIndex > -1) {
-        cart[existingIndex].quantity += 1;
-      } else {
-        cart.push({
-          cartItemId,
-          id,
-          name,
-          price,
-          image,
-          type,
-          size,
-          quantity: 1
-        });
-      }
-
-      saveCart();
-      renderCart();
-      toggleCart(true);
-
-      // Micro-animation bounce on cart badge trigger
-      cartTrigger?.classList.add('scale-110');
-      setTimeout(() => cartTrigger?.classList.remove('scale-110'), 200);
-    });
-  });
-
   // Save Cart to LocalStorage
   function saveCart() {
     localStorage.setItem('boutique_cart', JSON.stringify(cart));
   }
 
-  // Handle Cart Quantity Change or Removal
+  // Handle Cart Quantity Change
   function changeQuantity(cartItemId, amount) {
     const itemIndex = cart.findIndex(item => item.cartItemId === cartItemId);
     if (itemIndex > -1) {
@@ -412,7 +377,7 @@ const digitalProducts = [
     }
   }
 
-  // Render Cart DOM Elements
+  // Render Cart DOM
   function renderCart() {
     if (!cartItemsContainer || !cartBadge || !cartTotal || !checkoutBtn) return;
 
@@ -432,14 +397,13 @@ const digitalProducts = [
       return;
     }
 
-    // Render items
     cartItemsContainer.innerHTML = cart.map(item => `
       <div class="flex items-center gap-4 bg-zinc-900/50 border border-white/5 p-4 rounded-xl">
         <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg bg-black/20" />
         <div class="flex-grow min-w-0">
           <h4 class="text-sm font-bold text-white truncate font-outfit">${item.name}</h4>
           <p class="text-xs text-zinc-500 mt-0.5">
-            ${item.type === 'physical' ? `Size: <span class="text-white">${item.size}</span>` : 'Digital Drop'}
+            ${item.type === 'physical' ? `Size: <span class="text-white">${item.size}</span>` : 'Digital Account'}
           </p>
           <div class="flex items-center justify-between mt-2">
             <span class="text-sm font-bold text-[#C5A880]">$${(item.price * item.quantity).toFixed(2)}</span>
@@ -453,7 +417,7 @@ const digitalProducts = [
       </div>
     `).join('');
 
-    // Attach listeners
+    // Quantity click handlers
     cartItemsContainer.querySelectorAll('.qty-minus').forEach(btn => {
       btn.addEventListener('click', () => changeQuantity(btn.getAttribute('data-id') || '', -1));
     });
@@ -461,17 +425,16 @@ const digitalProducts = [
       btn.addEventListener('click', () => changeQuantity(btn.getAttribute('data-id') || '', 1));
     });
 
-    // Badge update
+    // Badge Update
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartBadge.classList.remove('opacity-0', 'scale-50');
     cartBadge.classList.add('opacity-100', 'scale-100');
     cartBadge.textContent = totalItems.toString();
 
-    // Total cost update
+    // Total Cost Update
     const totalCost = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cartTotal.textContent = `$${totalCost.toFixed(2)}`;
 
-    // Enable button
     checkoutBtn.removeAttribute('disabled');
   }
 
@@ -480,6 +443,239 @@ const digitalProducts = [
     window.location.href = '/checkout';
   });
 
+  // Size Button Switching for Apparel (static markup)
+  function setupSizeSelectors() {
+    const cards = document.querySelectorAll('[data-product-id]');
+    cards.forEach(card => {
+      const sizeButtons = card.querySelectorAll('.size-btn');
+      sizeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          sizeButtons.forEach(b => {
+            b.classList.remove('bg-white', 'text-black', 'border-white');
+            b.classList.add('bg-zinc-900', 'text-zinc-400', 'border-zinc-800');
+          });
+          btn.classList.remove('bg-zinc-900', 'text-zinc-400', 'border-zinc-800');
+          btn.classList.add('bg-white', 'text-black', 'border-white');
+        });
+      });
+    });
+
+    // Apparel加购点击事件
+    document.querySelectorAll('#apparel .add-to-cart-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('[data-product-id]');
+        if (!card) return;
+        addToCartFromAttributes(card);
+      });
+    });
+  }
+
+  // General add to cart logic using HTML attributes
+  function addToCartFromAttributes(element, size = '') {
+    const id = element.getAttribute('data-product-id');
+    const name = element.getAttribute('data-product-name');
+    const price = parseFloat(element.getAttribute('data-product-price') || '0');
+    const image = element.getAttribute('data-product-image');
+    const type = element.getAttribute('data-product-type');
+
+    if (!size && type === 'physical') {
+      const activeSizeBtn = element.querySelector('.size-btn.bg-white');
+      size = activeSizeBtn ? activeSizeBtn.getAttribute('data-size') || '' : '';
+    }
+
+    const cartItemId = type === 'physical' ? `${id}_${size}` : id;
+
+    const existingIndex = cart.findIndex(item => item.cartItemId === cartItemId);
+    if (existingIndex > -1) {
+      cart[existingIndex].quantity += 1;
+    } else {
+      cart.push({
+        cartItemId,
+        id,
+        name,
+        price,
+        image,
+        type,
+        size,
+        quantity: 1
+      });
+    }
+
+    saveCart();
+    renderCart();
+    toggleCart(true);
+
+    cartTrigger?.classList.add('scale-110');
+    setTimeout(() => cartTrigger?.classList.remove('scale-110'), 200);
+  }
+
+  // --- Dynamic Store Rendering ---
+  
+  // Render Categories in Sidebar & Mobile Scroller
+  function renderCategories() {
+    if (!desktopSidebar || !mobileBar) return;
+
+    // Build categories count mapping
+    const countMap = {};
+    database.products.forEach(p => {
+      countMap[p.cid] = (countMap[p.cid] || 0) + 1;
+    });
+
+    // 1. Render Desktop Sidebar
+    desktopSidebar.innerHTML = database.categories.map(cat => {
+      const count = countMap[cat.cid] || 0;
+      const isActive = cat.cid === activeCategoryId;
+      return `
+        <button 
+          type="button"
+          class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 font-outfit flex items-center justify-between group ${
+            isActive 
+              ? 'bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/30 glow-gold' 
+              : 'text-zinc-400 hover:text-white hover:bg-white/5 border border-transparent'
+          }"
+          data-category-id="${cat.cid}"
+        >
+          <span class="truncate pr-2">${cat.name}</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] bg-zinc-800 group-hover:bg-zinc-700 text-zinc-500 group-hover:text-zinc-300 font-mono transition">
+            ${count}
+          </span>
+        </button>
+      `;
+    }).join('');
+
+    // 2. Render Mobile Bar
+    mobileBar.innerHTML = database.categories.map(cat => {
+      const count = countMap[cat.cid] || 0;
+      const isActive = cat.cid === activeCategoryId;
+      return `
+        <button 
+          type="button"
+          class="shrink-0 px-4 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+            isActive 
+              ? 'bg-[#C5A880] text-black font-bold' 
+              : 'bg-zinc-900 text-zinc-400 border border-zinc-800'
+          }"
+          data-category-id="${cat.cid}"
+        >
+          ${cat.name} (${count})
+        </button>
+      `;
+    }).join('');
+
+    // Click listeners
+    const catButtons = document.querySelectorAll('[data-category-id]');
+    catButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCategoryId = btn.getAttribute('data-category-id') || '';
+        searchQuery = ''; // Clear search when switching categories
+        if (searchInput) searchInput.value = '';
+        renderCategories();
+        renderDigitalProducts();
+        
+        // Scroll grid into view on mobile
+        if (window.innerWidth < 768) {
+          productsGrid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+
+  // Render Digital Products Grid
+  function renderDigitalProducts() {
+    if (!productsGrid) return;
+
+    // Filter products
+    let filtered = database.products;
+    
+    if (searchQuery.trim() !== '') {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.name.toLowerCase().includes(q) || 
+        p.category.toLowerCase().includes(q)
+      );
+    } else {
+      filtered = filtered.filter(p => p.cid === activeCategoryId);
+    }
+
+    if (filtered.length === 0) {
+      productsGrid.innerHTML = `
+        <div class="col-span-full text-center py-24 text-zinc-500 font-light">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-zinc-700 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p>No products found matching your criteria.</p>
+        </div>
+      `;
+      return;
+    }
+
+    productsGrid.innerHTML = filtered.map(p => {
+      const isOutOfStock = p.stock === '0' || p.stock === '缺货';
+      const cleanStock = isOutOfStock ? 'OUT OF STOCK' : `STOCK: ${p.stock}`;
+      return `
+        <div 
+          class="glass-card hover-lift rounded-2xl p-6 flex flex-col justify-between border border-white/5 shadow-xl transition-all duration-300 group hover:border-[#C5A880]/30"
+          data-product-id="${p.id}"
+          data-product-name="${p.name}"
+          data-product-price="${p.price_usd}"
+          data-product-image="${p.image}"
+          data-product-type="digital"
+        >
+          <div>
+            <!-- Header Tag -->
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                Digital Account
+              </span>
+              <span class="text-[9px] font-bold uppercase tracking-wider text-zinc-500 ${isOutOfStock ? 'text-red-400 bg-red-400/10 px-2 py-0.5 rounded border border-red-400/20' : ''}">
+                ${cleanStock}
+              </span>
+            </div>
+            
+            <!-- Title -->
+            <h4 class="text-sm font-bold text-white mb-2 leading-snug font-outfit group-hover:text-[#C5A880] transition-colors line-clamp-3">
+              ${p.name}
+            </h4>
+            
+            <p class="text-[10px] text-zinc-500 mt-1 leading-relaxed">
+              Category: ${p.category}
+            </p>
+          </div>
+
+          <!-- Bottom Actions -->
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+            <div class="font-outfit flex flex-col">
+              <span class="text-lg font-black text-white">$${p.price_usd.toFixed(2)}</span>
+              <span class="text-[10px] text-zinc-500">¥${p.price_cny} CNY</span>
+            </div>
+            <button 
+              type="button" 
+              ${isOutOfStock ? 'disabled' : ''}
+              class="add-digital-btn px-4 py-2 rounded-lg bg-white hover:bg-[#C5A880] hover:text-black text-black font-bold text-xs uppercase tracking-wider transition-all duration-300 active:scale-95 disabled:opacity-20 disabled:pointer-events-none"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Attach click listeners to Add buttons in the dynamic grid
+    productsGrid.querySelectorAll('.add-digital-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('[data-product-id]');
+        if (!card) return;
+        addToCartFromAttributes(card);
+      });
+    });
+  }
+
+  // Hook Search Bar
+  searchInput?.addEventListener('input', (e) => {
+    searchQuery = (e.target as HTMLInputElement).value;
+    renderDigitalProducts();
+  });
+
   // Run initial loads
-  initCart();
+  init();
 </script>
