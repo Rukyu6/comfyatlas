@@ -12,15 +12,73 @@
       <a href="/#how-it-works" class="hover:text-white transition-colors">How It Works</a>
     </nav>
 
-    <!-- Header Actions (Auth + Cart) -->
+    <!-- Header Actions (Auth + i18n + Cart) -->
     <div class="flex items-center gap-4">
       
+      <!-- Language Switcher Dropdown -->
+      <div class="relative inline-block text-left" id="lang-switcher-root">
+        <button 
+          id="lang-switcher-btn" 
+          type="button" 
+          class="px-3.5 py-2 bg-zinc-900 border border-zinc-800 hover:border-white/20 text-white text-xs font-bold font-outfit uppercase tracking-wider rounded-xl transition flex items-center gap-2 active:scale-95"
+        >
+          <span id="active-lang-flag">🇺🇸</span>
+          <span id="active-lang-label" class="hidden sm:inline">English</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-zinc-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div 
+          id="lang-switcher-dropdown" 
+          class="hidden absolute right-0 mt-2 w-48 rounded-2xl bg-zinc-950 border border-white/5 shadow-2xl p-2 z-50 text-left max-h-[320px] overflow-y-auto scrollbar"
+        >
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="en" data-flag="🇺🇸">
+            <span class="text-sm">🇺🇸</span> English
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="zh-CN" data-flag="🇨🇳">
+            <span class="text-sm">🇨🇳</span> 中文
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="fr" data-flag="🇫🇷">
+            <span class="text-sm">🇫🇷</span> Français
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="de" data-flag="🇩🇪">
+            <span class="text-sm">🇩🇪</span> Deutsch
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="es" data-flag="🇪🇸">
+            <span class="text-sm">🇪🇸</span> Español
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="zh-TW" data-flag="🇹🇼">
+            <span class="text-sm">🇹🇼</span> 中文 (繁体)
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="ja" data-flag="🇯🇵">
+            <span class="text-sm">🇯🇵</span> 日本語
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="ru" data-flag="🇷🇺">
+            <span class="text-sm">🇷🇺</span> Русский
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="ko" data-flag="🇰🇷">
+            <span class="text-sm">🇰🇷</span> 한국어
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="it" data-flag="🇮🇹">
+            <span class="text-sm">🇮🇹</span> Italiano
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="hi" data-flag="🇮🇳">
+            <span class="text-sm">🇮🇳</span> हिन्दी
+          </button>
+          <button type="button" class="lang-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs text-zinc-300 hover:text-white hover:bg-white/5 transition text-left" data-lang="pt" data-flag="🇧🇷">
+            <span class="text-sm">🇧🇷</span> Português
+          </button>
+        </div>
+      </div>
+
       <!-- User Profile Dropdown Container -->
       <div id="header-auth-container" class="relative">
         <!-- Rendered client-side -->
         <a 
           href="/login" 
-          class="px-4 py-2 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#C5A880]/30 text-white text-xs font-bold font-outfit uppercase tracking-wider rounded-xl transition active:scale-95 inline-block"
+          class="px-4 py-2 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#C5A880]/30 text-white text-xs font-bold font-outfit uppercase tracking-wider rounded-xl transition active:scale-95 inline-block decoration-none"
         >
           Sign In
         </a>
@@ -47,9 +105,35 @@
   </div>
 </header>
 
+<style is:global>
+  /* Custom overrides for Google Translate widgets to keep the layout clean */
+  .skiptranslate {
+    display: none !important;
+  }
+  body {
+    top: 0px !important;
+  }
+  .goog-logo-link, .goog-te-gadget span, .goog-te-banner-frame {
+    display: none !important;
+  }
+  .goog-te-gadget {
+    color: transparent !important;
+    font-size: 0px !important;
+  }
+  #goog-gt-tt, .goog-te-balloon-frame {
+    display: none !important;
+  }
+  .goog-text-highlight {
+    background: transparent !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+  }
+</style>
+
 <script>
   import { authInstance, onAuthStateChanged, signOut } from '../lib/firebase.js';
 
+  // --- Auth logic ---
   const authContainer = document.getElementById('header-auth-container');
   const adminEmail = import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com';
 
@@ -146,4 +230,112 @@
       window.location.reload();
     });
   });
+
+  // --- Google Translate / i18n Switcher ---
+  const langSwitcherBtn = document.getElementById('lang-switcher-btn');
+  const langDropdown = document.getElementById('lang-switcher-dropdown');
+  const activeFlag = document.getElementById('active-lang-flag');
+  const activeLabel = document.getElementById('active-lang-label');
+
+  const langMap = {
+    'en': { flag: '🇺🇸', label: 'English' },
+    'zh-CN': { flag: '🇨🇳', label: '中文' },
+    'fr': { flag: '🇫🇷', label: 'Français' },
+    'de': { flag: '🇩🇪', label: 'Deutsch' },
+    'es': { flag: '🇪🇸', label: 'Español' },
+    'zh-TW': { flag: '🇹🇼', label: '中文 (繁体)' },
+    'ja': { flag: '🇯🇵', label: '日本語' },
+    'ru': { flag: '🇷🇺', label: 'Русский' },
+    'ko': { flag: '🇰🇷', label: '한국어' },
+    'it': { flag: '🇮🇹', label: 'Italiano' },
+    'hi': { flag: '🇮🇳', label: 'हिन्दी' },
+    'pt': { flag: '🇧🇷', label: 'Português' }
+  };
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
+  function setLanguageCookie(langCode) {
+    if (langCode === 'en') {
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
+    } else {
+      document.cookie = "googtrans=/en/" + langCode + "; path=/;";
+      document.cookie = "googtrans=/en/" + langCode + "; path=/; domain=" + window.location.hostname;
+    }
+  }
+
+  // Load state from cookie
+  const googtrans = getCookie('googtrans');
+  let currentLang = 'en';
+  if (googtrans) {
+    const code = googtrans.split('/').pop();
+    if (code && langMap[code]) {
+      currentLang = code;
+    }
+  }
+
+  // Update button visual on load
+  if (activeFlag && activeLabel && langMap[currentLang]) {
+    activeFlag.textContent = langMap[currentLang].flag;
+    activeLabel.textContent = langMap[currentLang].label;
+  }
+
+  // Dropdown toggle
+  langSwitcherBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langDropdown?.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', () => {
+    langDropdown?.classList.add('hidden');
+  });
+
+  // Bind clicks
+  document.querySelectorAll('.lang-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const lang = item.getAttribute('data-lang');
+      const flag = item.getAttribute('data-flag');
+      const label = item.textContent.trim().replace(flag, '').trim();
+
+      if (!lang) return;
+
+      setLanguageCookie(lang);
+
+      const selectEl = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+      if (selectEl) {
+        selectEl.value = lang;
+        selectEl.dispatchEvent(new Event('change'));
+        if (activeFlag) activeFlag.textContent = flag;
+        if (activeLabel) activeLabel.textContent = label;
+      } else {
+        window.location.reload();
+      }
+    });
+  });
+
+  // Inject Google Translate script dynamically in background
+  if (!document.getElementById('google_translate_script') && typeof window !== 'undefined') {
+    const trDiv = document.createElement('div');
+    trDiv.id = 'google_translate_element';
+    trDiv.style.display = 'none';
+    document.body.appendChild(trDiv);
+
+    (window as any).googleTranslateElementInit = function() {
+      new (window as any).google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    };
+
+    const script = document.createElement('script');
+    script.id = 'google_translate_script';
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(script);
+  }
 </script>
