@@ -252,34 +252,48 @@
     'pt': { flag: '🇧🇷', label: 'Português' }
   };
 
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return null;
-  }
-
   function setLanguageCookie(langCode) {
-    if (langCode === 'en') {
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
-    } else {
+    const domain = window.location.hostname;
+    const domainParts = domain.split('.');
+    
+    // 1. Thoroughly wipe any existing googtrans cookies on root and subdomains to prevent duplicates
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + domain;
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + domain;
+    if (domainParts.length > 2) {
+      const rootDomain = domainParts.slice(-2).join('.');
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + rootDomain;
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + rootDomain;
+    }
+    
+    // 2. Set the fresh translation cookie at path root /
+    if (langCode !== 'en') {
       document.cookie = "googtrans=/en/" + langCode + "; path=/;";
-      document.cookie = "googtrans=/en/" + langCode + "; path=/; domain=" + window.location.hostname;
     }
   }
 
-  // Load state from cookie
-  const googtrans = getCookie('googtrans');
+  // Determine current language visual from LocalStorage (Primary) or Cookie (Fallback)
   let currentLang = 'en';
-  if (googtrans) {
-    const code = googtrans.split('/').pop();
-    if (code && langMap[code]) {
-      currentLang = code;
+  const localSavedLang = localStorage.getItem('active_language');
+  
+  if (localSavedLang && langMap[localSavedLang]) {
+    currentLang = localSavedLang;
+  } else {
+    // Read from cookie as fallback
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; googtrans=`);
+    if (parts.length === 2) {
+      const cookieVal = parts.pop().split(';').shift();
+      if (cookieVal) {
+        const cleanCode = cookieVal.replace(/"/g, '').split('/').pop();
+        if (cleanCode && langMap[cleanCode]) {
+          currentLang = cleanCode;
+        }
+      }
     }
   }
 
-  // Update button visual on load
+  // Update button visual state immediately on page load
   if (activeFlag && activeLabel && langMap[currentLang]) {
     activeFlag.textContent = langMap[currentLang].flag;
     activeLabel.textContent = langMap[currentLang].label;
@@ -302,18 +316,26 @@
       const flag = item.getAttribute('data-flag');
       const label = item.textContent.trim().replace(flag, '').trim();
 
-      if (!lang) return;
+      if (!lang || !flag) return;
 
+      // 1. Instantly update the visual labels in the header
+      if (activeFlag) activeFlag.textContent = flag;
+      if (activeLabel) activeLabel.textContent = label;
+
+      // 2. Persist in local storage and cookies
+      localStorage.setItem('active_language', lang);
       setLanguageCookie(lang);
 
+      // 3. Trigger Google translation
       const selectEl = document.querySelector('.goog-te-combo') as HTMLSelectElement;
       if (selectEl) {
         selectEl.value = lang;
         selectEl.dispatchEvent(new Event('change'));
-        if (activeFlag) activeFlag.textContent = flag;
-        if (activeLabel) activeLabel.textContent = label;
       } else {
-        window.location.reload();
+        // Fallback: If Google Translate script is still loading, force a reload to apply the cookie translation
+        setTimeout(() => {
+          window.location.reload();
+        }, 120);
       }
     });
   });
