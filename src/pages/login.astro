@@ -1,0 +1,255 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Sign In — Puppy Shop">
+  <Header />
+
+  <main class="flex-grow flex items-center justify-center pt-32 pb-20 px-6 relative overflow-hidden">
+    <!-- Ambient backgrounds -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C5A880]/5 rounded-full filter blur-[120px] pointer-events-none"></div>
+    
+    <div class="w-full max-w-md relative z-10">
+      
+      <!-- Glass Card container -->
+      <div class="glass-card rounded-3xl border border-white/5 shadow-2xl p-8 relative overflow-hidden">
+        
+        <!-- Top border glow -->
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A880]/40 to-transparent"></div>
+
+        <!-- Auth Header -->
+        <div class="text-center mb-8">
+          <h1 class="text-2xl font-extrabold font-outfit text-white tracking-tight" id="auth-title">Welcome Back</h1>
+          <p class="text-xs text-zinc-500 mt-1" id="auth-subtitle">Sign in to manage your digital vault and tracking</p>
+        </div>
+
+        <!-- Tabs toggle -->
+        <div class="grid grid-cols-2 gap-1 bg-black/40 p-1 rounded-xl border border-white/5 mb-6">
+          <button 
+            id="tab-signin" 
+            type="button" 
+            class="py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 bg-[#C5A880] text-black font-outfit"
+          >
+            Sign In
+          </button>
+          <button 
+            id="tab-register" 
+            type="button" 
+            class="py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 text-zinc-400 hover:text-white font-outfit"
+          >
+            Register
+          </button>
+        </div>
+
+        <!-- Status/Error Banner -->
+        <div id="auth-error-banner" class="hidden px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs mb-6 text-left animate-pulse">
+          <!-- Dynamically inserted error -->
+        </div>
+
+        <!-- Main Auth Form -->
+        <form id="auth-form" class="space-y-4">
+          <!-- Email Field -->
+          <div class="space-y-1 text-left">
+            <label for="email" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Email Address</label>
+            <input 
+              type="email" 
+              id="email" 
+              required
+              placeholder="name@example.com"
+              class="w-full bg-zinc-950 border border-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880]/50 transition-all duration-300"
+            />
+          </div>
+
+          <!-- Password Field -->
+          <div class="space-y-1 text-left">
+            <label for="password" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              required
+              placeholder="••••••••"
+              class="w-full bg-zinc-950 border border-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880]/50 transition-all duration-300"
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <button 
+            type="submit" 
+            id="submit-btn"
+            class="w-full py-4 bg-white text-black hover:bg-[#C5A880] hover:text-black font-bold uppercase tracking-wider rounded-xl shadow-lg transition-all duration-300 text-xs font-outfit active:scale-[0.98] flex items-center justify-center gap-2"
+          >
+            <span id="btn-text">Access Secure Account</span>
+            <div id="btn-spinner" class="hidden w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="flex items-center my-6">
+          <div class="flex-grow border-t border-white/5"></div>
+          <span class="px-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Or Continue With</span>
+          <div class="flex-grow border-t border-white/5"></div>
+        </div>
+
+        <!-- Google OAuth Button -->
+        <button 
+          id="google-btn" 
+          type="button" 
+          class="w-full py-3.5 bg-zinc-900 border border-zinc-800 text-white hover:border-zinc-700 hover:bg-zinc-800 font-bold rounded-xl transition-all duration-300 text-xs font-outfit flex items-center justify-center gap-3 group active:scale-[0.98]"
+        >
+          <!-- Custom G Logo -->
+          <svg class="h-4 w-4" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+            <g transform="matrix(1, 0, 0, 1, 0, 0)">
+              <path d="M21.35,11.1H12v2.7h5.38C16.88,16.27,14.68,18,12,18c-3.31,0-6-2.69-6-6s2.69-6,6-6c1.66,0,3.14,0.67,4.24,1.76 L18.14,5.9C16.5,4.26,14.37,3.3,12,3.3c-4.8,0-8.7,3.9-8.7,8.7s3.9,8.7,8.7,8.7c4.6,0,8.3-3.3,8.7-7.7v-2H21.35z" fill="#FFF"/>
+              <path d="M21.35,11.1H12v2.7h5.38C16.88,16.27,14.68,18,12,18c-3.31,0-6-2.69-6-6s2.69-6,6-6c1.66,0,3.14,0.67,4.24,1.76 L18.14,5.9C16.5,4.26,14.37,3.3,12,3.3c-4.8,0-8.7,3.9-8.7,8.7s3.9,8.7,8.7,8.7c4.6,0,8.3-3.3,8.7-7.7v-2H21.35z" fill="url(#google-gradient)" />
+            </g>
+            <defs>
+              <linearGradient id="google-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#EA4335" />
+                <stop offset="30%" stop-color="#FBBC05" />
+                <stop offset="70%" stop-color="#34A853" />
+                <stop offset="100%" stop-color="#4285F4" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="group-hover:text-[#C5A880] transition-colors">Sign In with Google</span>
+        </button>
+
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { 
+    authInstance, 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
+    signInWithPopup, 
+    GoogleAuthProvider 
+  } from '../lib/firebase.js';
+
+  let currentTab = 'signin'; // 'signin' or 'register'
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectPath = urlParams.get('redirect') || '/';
+
+  // DOM Elements
+  const tabSignin = document.getElementById('tab-signin');
+  const tabRegister = document.getElementById('tab-register');
+  const authTitle = document.getElementById('auth-title');
+  const authSubtitle = document.getElementById('auth-subtitle');
+  const authForm = document.getElementById('auth-form');
+  const emailInput = document.getElementById('email') as HTMLInputElement;
+  const passwordInput = document.getElementById('password') as HTMLInputElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text');
+  const btnSpinner = document.getElementById('btn-spinner');
+  const googleBtn = document.getElementById('google-btn');
+  const errorBanner = document.getElementById('auth-error-banner');
+
+  function toggleTab(tab) {
+    currentTab = tab;
+    if (tab === 'signin') {
+      tabSignin?.classList.add('bg-[#C5A880]', 'text-black');
+      tabSignin?.classList.remove('text-zinc-400', 'hover:text-white');
+      tabRegister?.classList.remove('bg-[#C5A880]', 'text-black');
+      tabRegister?.classList.add('text-zinc-400', 'hover:text-white');
+      
+      if (authTitle) authTitle.textContent = "Welcome Back";
+      if (authSubtitle) authSubtitle.textContent = "Sign in to manage your digital vault and tracking";
+      if (btnText) btnText.textContent = "Access Secure Account";
+    } else {
+      tabRegister?.classList.add('bg-[#C5A880]', 'text-black');
+      tabRegister?.classList.remove('text-zinc-400', 'hover:text-white');
+      tabSignin?.classList.remove('bg-[#C5A880]', 'text-black');
+      tabSignin?.classList.add('text-zinc-400', 'hover:text-white');
+      
+      if (authTitle) authTitle.textContent = "Create Account";
+      if (authSubtitle) authSubtitle.textContent = "Register to unlock automated vault dispatches and tracking";
+      if (btnText) btnText.textContent = "Register & Get Access";
+    }
+    hideError();
+  }
+
+  function showError(msg) {
+    if (errorBanner) {
+      errorBanner.textContent = msg;
+      errorBanner.classList.remove('hidden');
+    }
+  }
+
+  function hideError() {
+    errorBanner?.classList.add('hidden');
+  }
+
+  function setSubmitting(isSubmitting) {
+    if (submitBtn) submitBtn.disabled = isSubmitting;
+    if (isSubmitting) {
+      btnSpinner?.classList.remove('hidden');
+      if (btnText) btnText.textContent = currentTab === 'signin' ? "Verifying..." : "Creating...";
+    } else {
+      btnSpinner?.classList.add('hidden');
+      if (btnText) btnText.textContent = currentTab === 'signin' ? "Access Secure Account" : "Register & Get Access";
+    }
+  }
+
+  // Bind Switch Tab clicks
+  tabSignin?.addEventListener('click', () => toggleTab('signin'));
+  tabRegister?.addEventListener('click', () => toggleTab('register'));
+
+  // Form Submit Handler
+  authForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideError();
+    setSubmitting(true);
+
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
+    try {
+      if (currentTab === 'signin') {
+        await signInWithEmailAndPassword(authInstance, email, password);
+      } else {
+        await createUserWithEmailAndPassword(authInstance, email, password);
+      }
+      // Successful Auth redirect
+      window.location.href = redirectPath;
+    } catch (err: any) {
+      console.error(err);
+      let errorMsg = err.message || "Authentication process failed.";
+      
+      // Clean up Firebase standard errors
+      if (errorMsg.includes('auth/invalid-credential') || errorMsg.includes('auth/user-not-found') || errorMsg.includes('auth/wrong-password')) {
+        errorMsg = "Access Denied: Invalid email or password credentials.";
+      } else if (errorMsg.includes('auth/email-already-in-use')) {
+        errorMsg = "Access Denied: This email address is already registered.";
+      } else if (errorMsg.includes('auth/weak-password')) {
+        errorMsg = "Access Denied: Password is too weak (min 6 characters required).";
+      } else if (errorMsg.includes('auth/invalid-email')) {
+        errorMsg = "Access Denied: Please enter a valid email address.";
+      }
+      
+      showError(errorMsg);
+      setSubmitting(false);
+    }
+  });
+
+  // Google OAuth click
+  googleBtn?.addEventListener('click', async () => {
+    hideError();
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(authInstance, provider);
+      window.location.href = redirectPath;
+    } catch (err: any) {
+      console.error(err);
+      if (err.message && !err.message.includes('auth/popup-closed-by-user')) {
+        showError("Google authentication failed. Please try again.");
+      }
+    }
+  });
+</script>
