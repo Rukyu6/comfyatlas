@@ -87,4 +87,33 @@
   .hover-lift:hover {
     transform: translateY(-4px);
   }
+
+  /* Rich Product Descriptions Render styles */
+  .prose-dark p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #D4D4D8; /* gray-300 */
+    line-height: 1.6;
+  }
+  .prose-dark b, .prose-dark strong {
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+  .prose-dark h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #F4F4F5;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid #C5A880;
+    padding-left: 0.5rem;
+  }
+  .prose-dark a {
+    color: #C5A880;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+  .prose-dark a:hover {
+    color: #FFFFFF;
+  }
 }

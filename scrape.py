@@ -2,6 +2,8 @@ import urllib.request
 import re
 import json
 import html
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Target base URL
 base_url = "https://chuhai91.cc"
@@ -12,11 +14,87 @@ def fetch_url(url):
     }
     req = urllib.request.Request(url, headers=headers)
     try:
-        with urllib.request.urlopen(req, timeout=15) as response:
+        with urllib.request.urlopen(req, timeout=10) as response:
             return response.read().decode('utf-8', errors='ignore')
     except Exception as e:
-        print(f"Error fetching {url}: {e}")
+        # Silently fail or log minimally
         return ""
+
+def parse_embedded_json(html_content):
+    """
+    Locates and parses the setVar("item", {...}) object from HTML
+    """
+    marker = 'setVar("item",'
+    start_idx = html_content.find(marker)
+    if start_idx == -1:
+        return None
+    
+    # Find the opening brace of the JSON object
+    brace_start = html_content.find('{', start_idx)
+    if brace_start == -1:
+        return None
+    
+    # Scan characters to find the matching closing brace
+    brace_count = 0
+    chars = []
+    for i in range(brace_start, len(html_content)):
+        char = html_content[i]
+        chars.append(char)
+        if char == '{':
+            brace_count += 1
+        elif char == '}':
+            brace_count -= 1
+            if brace_count == 0:
+                break
+                
+    json_str = "".join(chars)
+    try:
+        return json.loads(json_str)
+    except Exception as e:
+        print(f"JSON load error: {e}")
+        return None
+
+def scrape_single_product_details(p):
+    pid = p['id'].replace('pid_', '')
+    item_url = f"{base_url}/item?id={pid}"
+    item_html = fetch_url(item_url)
+    if not item_html:
+        return p
+    
+    item_data = parse_embedded_json(item_html)
+    if not item_data:
+        return p
+    
+    # Extract Description (introduce)
+    # introduce can be in source or root
+    introduce = ""
+    if 'source' in item_data and isinstance(item_data['source'], dict):
+        introduce = item_data['source'].get('introduce', '')
+    if not introduce:
+        introduce = item_data.get('introduce', '')
+        
+    # Clean up the introduce HTML slightly
+    if introduce:
+        # Remove empty paragraphs or useless styles if needed, but keeping HTML structure
+        introduce = introduce.strip()
+    
+    # Extract SKUs
+    skus_raw = item_data.get('sku', [])
+    skus = []
+    for sku in skus_raw:
+        s_price = float(sku.get('price', '0'))
+        skus.append({
+            'id': f"sku_{sku.get('id', '')}",
+            'name': sku.get('name', 'Default Option'),
+            'price_cny': s_price,
+            'price_usd': round(s_price / 6.8, 2),
+            'stock': sku.get('stock', '0'),
+            'picture': sku.get('picture_url') or p['image']
+        })
+        
+    p['introduce'] = introduce
+    p['skus'] = skus
+    return p
 
 def scrape_products():
     print("Fetching homepage to find categories...")
@@ -25,8 +103,6 @@ def scrape_products():
         print("Failed to load homepage.")
         return
 
-    # Regex to find categories: href="/?cid=XX" and category name
-    # e.g., <a class="nav-main-link" href="/?cid=67"> ... <span class="nav-main-link-name">Apple苹果ID【<font color="#f9963b">带密保</font>】
     category_pattern = r'href="/\?cid=(\d+)"[^>]*>.*?<span class="nav-main-link-name">(.*?)</span>'
     categories_raw = re.findall(category_pattern, home_html, re.DOTALL)
     
@@ -36,36 +112,25 @@ def scrape_products():
         if cid in seen_cids:
             continue
         seen_cids.add(cid)
-        # Clean HTML tags from name
         clean_name = re.sub(r'<[^>]+>', '', name).strip()
-        # Clean double spaces or linebreaks
         clean_name = re.sub(r'\s+', ' ', clean_name)
         categories.append({'cid': cid, 'name': clean_name})
 
     print(f"Found {len(categories)} categories.")
     
-    all_products = []
+    initial_products = []
     
     for cat in categories:
         cid = cat['cid']
         cat_name = cat['name']
-        print(f"Scraping category {cid}: {cat_name}...")
         
         cat_url = f"{base_url}/?cid={cid}"
         cat_html = fetch_url(cat_url)
         if not cat_html:
             continue
             
-        # Regex to find product rows
-        # E.g. <a class="home-row-link" href="/item?id=6188"> ...
-        product_row_pattern = r'<a class="home-row-link" href="/item\?id=(\d+)">.*?<div class="home-list-row-title">(.*?)</div>.*?<div class="home-list-td-price">([^<]+)</div>'
-        products_raw = re.findall(product_row_pattern, cat_html, re.DOTALL)
-        
-        # We also need images for products, let's extract them
-        # We can extract the entire block and parse it carefully
         blocks = re.findall(r'<a class="home-row-link" href="/item\?id=\d+">.*?</a>', cat_html, re.DOTALL)
         
-        cat_products_count = 0
         for block in blocks:
             try:
                 id_match = re.search(r'href="/item\?id=(\d+)"', block)
@@ -86,41 +151,64 @@ def scrape_products():
                     if img_url.startswith("/"):
                         img_url = base_url + img_url
                         
-                    # Extract price float
                     price_num = 0.0
                     price_match_num = re.search(r'[\d\.]+', price_str)
                     if price_match_num:
                         price_num = float(price_match_num.group(0))
                         
-                    all_products.append({
+                    initial_products.append({
                         'id': f"pid_{pid}",
                         'name': title,
                         'price_cny': price_num,
-                        'price_usd': round(price_num / 6.8, 2), # Exchange rate 6.8 roughly
+                        'price_usd': round(price_num / 6.8, 2),
                         'image': img_url,
                         'stock': stock,
                         'cid': cid,
                         'category': cat_name,
-                        'type': 'digital'
+                        'type': 'digital',
+                        'introduce': '',
+                        'skus': []
                     })
-                    cat_products_count += 1
             except Exception as ex:
-                print(f"Error parsing product block: {ex}")
+                pass
                 
-        print(f"  Found {cat_products_count} products.")
-        
-    print(f"Scraping complete. Total products: {len(all_products)}")
+    total_to_scrape = len(initial_products)
+    print(f"Found {total_to_scrape} products in catalog. Scraping details concurrently...")
     
-    # Save to data directory
+    detailed_products = []
+    
+    # Run requests concurrently using ThreadPoolExecutor
+    # 20 workers to get fast results without rate-limiting
+    start_time = time.time()
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        futures = {executor.submit(scrape_single_product_details, p): p for p in initial_products}
+        
+        completed_count = 0
+        for future in as_completed(futures):
+            try:
+                res = future.result()
+                detailed_products.append(res)
+            except Exception as e:
+                orig = futures[future]
+                detailed_products.append(orig)
+                
+            completed_count += 1
+            if completed_count % 50 == 0 or completed_count == total_to_scrape:
+                print(f"  Progress: {completed_count}/{total_to_scrape} details crawled...")
+                
+    end_time = time.time()
+    print(f"Details crawled in {end_time - start_time:.2f} seconds.")
+    print(f"Scraping complete. Total detailed products: {len(detailed_products)}")
+    
     output_data = {
         'categories': categories,
-        'products': all_products
+        'products': detailed_products
     }
     
     with open('/home/crono/projects/comfyatlas/src/data/products.json', 'w', encoding='utf-8') as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
         
-    print("Successfully wrote data to src/data/products.json")
+    print("Successfully wrote detailed data to src/data/products.json")
 
 if __name__ == "__main__":
     scrape_products()

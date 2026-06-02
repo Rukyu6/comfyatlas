@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCard from '../components/ProductCard.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CartDrawer from '../components/CartDrawer.astro';
 
 // Hardcoded physical apparel products
 const physicalProducts = [
@@ -26,39 +29,7 @@ const physicalProducts = [
 ---
 <BaseLayout title="ComfyAtlas Store — Premium Apparel & Digital Account Vault">
   
-  <!-- Navigation Header -->
-  <header class="glass-nav fixed top-0 left-0 w-full z-40 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="#" class="font-outfit text-2xl font-black tracking-widest text-white hover:text-[#C5A880] transition-colors">
-        COMFYATLAS<span class="text-[#C5A880]">.</span>
-      </a>
-
-      <!-- Menu Links -->
-      <nav class="hidden md:flex items-center gap-8 font-outfit text-sm uppercase tracking-wider font-semibold text-zinc-400">
-        <a href="#apparel" class="hover:text-white transition-colors">Apparel</a>
-        <a href="#digital" class="hover:text-white transition-colors">Digital Vault</a>
-        <a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a>
-      </nav>
-
-      <!-- Cart Trigger -->
-      <button 
-        id="cart-trigger" 
-        type="button" 
-        class="relative p-2.5 rounded-full border border-white/10 hover:border-[#C5A880]/30 hover:bg-[#C5A880]/5 text-white transition-all duration-300"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-        </svg>
-        <span 
-          id="cart-badge" 
-          class="absolute -top-1 -right-1 w-5 h-5 bg-[#C5A880] text-black font-bold font-outfit text-xs rounded-full flex items-center justify-center opacity-0 scale-50 transition-all duration-300"
-        >
-          0
-        </span>
-      </button>
-    </div>
-  </header>
+  <Header />
 
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
@@ -159,7 +130,7 @@ const physicalProducts = [
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         
         <!-- Sidebar Categories (Desktop) -->
-        <div class="hidden md:block col-span-1 space-y-2 max-h-[700px] overflow-y-auto pr-3 sticky top-28" id="desktop-categories-sidebar">
+        <div class="hidden md:block col-span-1 space-y-2 max-h-[700px] overflow-y-auto pr-3 scrollbar sticky top-28" id="desktop-categories-sidebar">
           <!-- JS generates sidebar lists here -->
         </div>
 
@@ -227,88 +198,16 @@ const physicalProducts = [
     </div>
   </section>
 
-  <!-- Footer Section -->
-  <footer class="py-16 border-t border-white/5 bg-[#0B0B0C]">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-zinc-500 text-xs">
-      <div>
-        &copy; {new Date().getFullYear()} ComfyAtlas Boutique. All rights reserved.
-      </div>
-      <div class="flex gap-8">
-        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-        <a href="#" class="hover:text-white transition-colors">Terms of Protocol</a>
-        <a href="mailto:rukyucrono@gmail.com" class="hover:text-white transition-colors">Support (rukyucrono@gmail.com)</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Shopping Cart Drawer Overlay -->
-  <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div 
-      id="cart-drawer" 
-      class="absolute right-0 top-0 h-full w-full max-w-md bg-[#121214] border-l border-white/5 shadow-2xl p-8 flex flex-col translate-x-full transition-transform duration-300 ease-out"
-    >
-      <!-- Header -->
-      <div class="flex items-center justify-between pb-6 border-b border-white/5 mb-6">
-        <h3 class="font-outfit text-2xl font-bold text-white">Your Bag</h3>
-        <button 
-          id="cart-close" 
-          type="button" 
-          class="p-1 rounded-full border border-white/10 hover:border-white/30 text-zinc-400 hover:text-white transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Scrollable Products List -->
-      <div id="cart-items-container" class="flex-grow overflow-y-auto space-y-4 pr-2">
-        <!-- JS inserts items here -->
-        <p class="text-zinc-500 text-center py-12 font-light">Your bag is currently empty.</p>
-      </div>
-
-      <!-- Checkout / Pricing Footer -->
-      <div class="pt-6 border-t border-white/5 mt-6">
-        <div class="flex items-center justify-between text-zinc-400 text-sm mb-2">
-          <span>Shipping</span>
-          <span class="text-emerald-400 font-bold uppercase tracking-wider text-xs">FREE</span>
-        </div>
-        <div class="flex items-center justify-between text-white text-lg font-bold font-outfit mb-8">
-          <span>Est. Total</span>
-          <span id="cart-total">$0.00</span>
-        </div>
-        
-        <button 
-          id="checkout-btn" 
-          type="button" 
-          disabled
-          class="w-full py-4 rounded-xl bg-white hover:bg-[#C5A880] text-black font-bold uppercase tracking-wider text-sm font-outfit transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none hover:scale-[1.01] active:scale-[0.99] text-center block"
-        >
-          Proceed to Verification
-        </button>
-      </div>
-    </div>
-  </div>
+  <Footer />
 
 </BaseLayout>
 
 <script>
-  // Shopping Cart & Dynamic Digital Store Script
+  // Dynamic Digital Store Script with search & filter functionality
   import database from '../data/products.json';
 
-  let cart = [];
   let activeCategoryId = '';
   let searchQuery = '';
-
-  // DOM Elements
-  const cartTrigger = document.getElementById('cart-trigger');
-  const cartClose = document.getElementById('cart-close');
-  const cartOverlay = document.getElementById('cart-overlay');
-  const cartDrawer = document.getElementById('cart-drawer');
-  const cartBadge = document.getElementById('cart-badge');
-  const cartItemsContainer = document.getElementById('cart-items-container');
-  const cartTotal = document.getElementById('cart-total');
-  const checkoutBtn = document.getElementById('checkout-btn');
 
   // Vault DOM Elements
   const desktopSidebar = document.getElementById('desktop-categories-sidebar');
@@ -318,130 +217,15 @@ const physicalProducts = [
 
   // Initialize
   function init() {
-    // 1. Initialize Cart
-    const savedCart = localStorage.getItem('boutique_cart');
-    if (savedCart) {
-      try {
-        cart = JSON.parse(savedCart);
-      } catch (e) {
-        cart = [];
-      }
-    }
-    renderCart();
-
-    // 2. Initialize Digital Vault
     if (database.categories && database.categories.length > 0) {
       activeCategoryId = database.categories[0].cid;
       renderCategories();
       renderDigitalProducts();
     }
     
-    // Size button interactivity on index static cards
+    // Size button interactivity on index static cards (physical apparel)
     setupSizeSelectors();
   }
-
-  // Toggle Cart Drawer
-  function toggleCart(isOpen) {
-    if (isOpen) {
-      cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
-      cartDrawer.classList.remove('translate-x-full');
-      document.body.style.overflow = 'hidden';
-    } else {
-      cartOverlay.classList.add('opacity-0', 'pointer-events-none');
-      cartDrawer.classList.add('translate-x-full');
-      document.body.style.overflow = '';
-    }
-  }
-
-  cartTrigger?.addEventListener('click', () => toggleCart(true));
-  cartClose?.addEventListener('click', () => toggleCart(false));
-  cartOverlay?.addEventListener('click', (e) => {
-    if (e.target === cartOverlay) toggleCart(false);
-  });
-
-  // Save Cart to LocalStorage
-  function saveCart() {
-    localStorage.setItem('boutique_cart', JSON.stringify(cart));
-  }
-
-  // Handle Cart Quantity Change
-  function changeQuantity(cartItemId, amount) {
-    const itemIndex = cart.findIndex(item => item.cartItemId === cartItemId);
-    if (itemIndex > -1) {
-      cart[itemIndex].quantity += amount;
-      if (cart[itemIndex].quantity <= 0) {
-        cart.splice(itemIndex, 1);
-      }
-      saveCart();
-      renderCart();
-    }
-  }
-
-  // Render Cart DOM
-  function renderCart() {
-    if (!cartItemsContainer || !cartBadge || !cartTotal || !checkoutBtn) return;
-
-    if (cart.length === 0) {
-      cartItemsContainer.innerHTML = `
-        <div class="flex flex-col items-center justify-center py-16 text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-zinc-700 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          <p class="text-zinc-500 font-light text-sm">Your bag is currently empty.</p>
-        </div>
-      `;
-      cartBadge.classList.add('opacity-0', 'scale-50');
-      cartBadge.textContent = '0';
-      cartTotal.textContent = '$0.00';
-      checkoutBtn.setAttribute('disabled', 'true');
-      return;
-    }
-
-    cartItemsContainer.innerHTML = cart.map(item => `
-      <div class="flex items-center gap-4 bg-zinc-900/50 border border-white/5 p-4 rounded-xl">
-        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg bg-black/20" />
-        <div class="flex-grow min-w-0">
-          <h4 class="text-sm font-bold text-white truncate font-outfit">${item.name}</h4>
-          <p class="text-xs text-zinc-500 mt-0.5">
-            ${item.type === 'physical' ? `Size: <span class="text-white">${item.size}</span>` : 'Digital Account'}
-          </p>
-          <div class="flex items-center justify-between mt-2">
-            <span class="text-sm font-bold text-[#C5A880]">$${(item.price * item.quantity).toFixed(2)}</span>
-            <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-black/20 text-xs">
-              <button type="button" class="qty-minus px-2 py-1 hover:bg-white/5 text-zinc-400 hover:text-white" data-id="${item.cartItemId}">-</button>
-              <span class="px-2 text-white font-outfit">${item.quantity}</span>
-              <button type="button" class="qty-plus px-2 py-1 hover:bg-white/5 text-zinc-400 hover:text-white" data-id="${item.cartItemId}">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `).join('');
-
-    // Quantity click handlers
-    cartItemsContainer.querySelectorAll('.qty-minus').forEach(btn => {
-      btn.addEventListener('click', () => changeQuantity(btn.getAttribute('data-id') || '', -1));
-    });
-    cartItemsContainer.querySelectorAll('.qty-plus').forEach(btn => {
-      btn.addEventListener('click', () => changeQuantity(btn.getAttribute('data-id') || '', 1));
-    });
-
-    // Badge Update
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartBadge.classList.remove('opacity-0', 'scale-50');
-    cartBadge.classList.add('opacity-100', 'scale-100');
-    cartBadge.textContent = totalItems.toString();
-
-    // Total Cost Update
-    const totalCost = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotal.textContent = `$${totalCost.toFixed(2)}`;
-
-    checkoutBtn.removeAttribute('disabled');
-  }
-
-  // Redirect to Checkout
-  checkoutBtn?.addEventListener('click', () => {
-    window.location.href = '/checkout';
-  });
 
   // Size Button Switching for Apparel (static markup)
   function setupSizeSelectors() {
@@ -460,7 +244,7 @@ const physicalProducts = [
       });
     });
 
-    // Apparel加购点击事件
+    // Apparel Add to Cart Click
     document.querySelectorAll('#apparel .add-to-cart-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const card = btn.closest('[data-product-id]');
@@ -485,11 +269,8 @@ const physicalProducts = [
 
     const cartItemId = type === 'physical' ? `${id}_${size}` : id;
 
-    const existingIndex = cart.findIndex(item => item.cartItemId === cartItemId);
-    if (existingIndex > -1) {
-      cart[existingIndex].quantity += 1;
-    } else {
-      cart.push({
+    window.dispatchEvent(new CustomEvent('cart:add', {
+      detail: {
         cartItemId,
         id,
         name,
@@ -498,24 +279,14 @@ const physicalProducts = [
         type,
         size,
         quantity: 1
-      });
-    }
-
-    saveCart();
-    renderCart();
-    toggleCart(true);
-
-    cartTrigger?.classList.add('scale-110');
-    setTimeout(() => cartTrigger?.classList.remove('scale-110'), 200);
+      }
+    }));
   }
 
-  // --- Dynamic Store Rendering ---
-  
   // Render Categories in Sidebar & Mobile Scroller
   function renderCategories() {
     if (!desktopSidebar || !mobileBar) return;
 
-    // Build categories count mapping
     const countMap = {};
     database.products.forEach(p => {
       countMap[p.cid] = (countMap[p.cid] || 0) + 1;
@@ -562,17 +333,16 @@ const physicalProducts = [
       `;
     }).join('');
 
-    // Click listeners
+    // Category click triggers
     const catButtons = document.querySelectorAll('[data-category-id]');
     catButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         activeCategoryId = btn.getAttribute('data-category-id') || '';
-        searchQuery = ''; // Clear search when switching categories
+        searchQuery = '';
         if (searchInput) searchInput.value = '';
         renderCategories();
         renderDigitalProducts();
         
-        // Scroll grid into view on mobile
         if (window.innerWidth < 768) {
           productsGrid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -584,7 +354,6 @@ const physicalProducts = [
   function renderDigitalProducts() {
     if (!productsGrid) return;
 
-    // Filter products
     let filtered = database.products;
     
     if (searchQuery.trim() !== '') {
@@ -610,16 +379,25 @@ const physicalProducts = [
     }
 
     productsGrid.innerHTML = filtered.map(p => {
+      // Find lowest SKU price or default product price
+      let displayPriceUsd = p.price_usd;
+      let displayPriceCny = p.price_cny;
+      if (p.skus && p.skus.length > 0) {
+        const pricesUsd = p.skus.map(s => s.price_usd);
+        const pricesCny = p.skus.map(s => s.price_cny);
+        displayPriceUsd = Math.min(...pricesUsd);
+        displayPriceCny = Math.min(...pricesCny);
+      }
+
       const isOutOfStock = p.stock === '0' || p.stock === '缺货';
       const cleanStock = isOutOfStock ? 'OUT OF STOCK' : `STOCK: ${p.stock}`;
+      const isMultiOption = p.skus && p.skus.length > 1;
+      const cleanId = p.id.replace('pid_', '');
+
       return `
-        <div 
-          class="glass-card hover-lift rounded-2xl p-6 flex flex-col justify-between border border-white/5 shadow-xl transition-all duration-300 group hover:border-[#C5A880]/30"
-          data-product-id="${p.id}"
-          data-product-name="${p.name}"
-          data-product-price="${p.price_usd}"
-          data-product-image="${p.image}"
-          data-product-type="digital"
+        <a 
+          href="/item/${cleanId}/"
+          class="glass-card hover-lift rounded-2xl p-6 flex flex-col justify-between border border-white/5 shadow-xl transition-all duration-300 group hover:border-[#C5A880]/30 cursor-pointer block text-left decoration-none"
         >
           <div>
             <!-- Header Tag -->
@@ -645,32 +423,21 @@ const physicalProducts = [
           <!-- Bottom Actions -->
           <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
             <div class="font-outfit flex flex-col">
-              <span class="text-lg font-black text-white">$${p.price_usd.toFixed(2)}</span>
-              <span class="text-[10px] text-zinc-500">¥${p.price_cny} CNY</span>
+              <span class="text-lg font-black text-white">${isMultiOption ? 'From ' : ''}$${displayPriceUsd.toFixed(2)}</span>
+              <span class="text-[10px] text-zinc-500">¥${displayPriceCny} CNY</span>
             </div>
-            <button 
-              type="button" 
-              ${isOutOfStock ? 'disabled' : ''}
-              class="add-digital-btn px-4 py-2 rounded-lg bg-white hover:bg-[#C5A880] hover:text-black text-black font-bold text-xs uppercase tracking-wider transition-all duration-300 active:scale-95 disabled:opacity-20 disabled:pointer-events-none"
+            <span 
+              class="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 group-hover:border-[#C5A880]/30 group-hover:bg-white group-hover:text-black text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 inline-block text-center"
             >
-              Add
-            </button>
+              ${isMultiOption ? 'Select' : 'Buy'}
+            </span>
           </div>
-        </div>
+        </a>
       `;
     }).join('');
-
-    // Attach click listeners to Add buttons in the dynamic grid
-    productsGrid.querySelectorAll('.add-digital-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const card = btn.closest('[data-product-id]');
-        if (!card) return;
-        addToCartFromAttributes(card);
-      });
-    });
   }
 
-  // Hook Search Bar
+  // Hook Search Input
   searchInput?.addEventListener('input', (e) => {
     searchQuery = (e.target as HTMLInputElement).value;
     renderDigitalProducts();
