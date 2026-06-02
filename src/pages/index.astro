@@ -1,46 +1,485 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import CategorySection from '../components/CategorySection.astro';
-import { SITE, t, localizedPath } from '../lib/i18n';
-import { getCollection } from 'astro:content';
+import ProductCard from '../components/ProductCard.astro';
 
-const locale = 'en';
-const all = (await getCollection('blog', ({ data, id }) => !data.draft && data.lang === locale && !id.startsWith('zh/')))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+// Hardcoded products for the boutique
+const physicalProducts = [
+  {
+    id: 'prod_hoodie_01',
+    name: 'Metamorphic Hoodie',
+    price: 79.00,
+    image: '/images/hoodie.png',
+    type: 'physical' as const,
+    description: 'Ultra-heavyweight 450GSM organic cotton hoodie. Features an exclusive holographic geometric line emblem embroidered on the chest. Relaxed drop-shoulder fit.',
+    sizes: ['S', 'M', 'L', 'XL']
+  },
+  {
+    id: 'prod_tee_01',
+    name: 'Cyber-Luminescent Tee',
+    price: 39.00,
+    image: '/images/tshirt.png',
+    type: 'physical' as const,
+    description: 'Premium combed cotton tee in absolute matte black. Screen-printed with specialized photoluminescent neon-emerald ink that glows under blacklight.',
+    sizes: ['M', 'L', 'XL']
+  }
+];
 
-const byCategory = (cat: string) => all.filter((p) => p.data.category === cat);
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: SITE.name,
-  url: SITE.url,
-  description: t(locale, 'site.description'),
-  inLanguage: 'en-US',
-};
+const digitalProducts = [
+  {
+    id: 'prod_chatgpt_basic',
+    name: '🔥 ChatGPT Basic Account (Exclusive / Pass Changeable)',
+    price: 1.50,
+    image: '/images/book.png',
+    type: 'digital' as const,
+    description: 'Lifetime exclusive basic ChatGPT account. Supports password changes, fully customized, 100% personal usage only.',
+  },
+  {
+    id: 'prod_chatgpt_plus_card',
+    name: 'ChatGPT Plus 1-Month Top-Up Gift Card (Key)',
+    price: 24.90,
+    image: '/images/book.png',
+    type: 'digital' as const,
+    description: '1-Month ChatGPT Plus activation gift card. Automated code delivery. Fully valid iOS region card with warranty.',
+  },
+  {
+    id: 'prod_chatgpt_plus_sub',
+    name: 'ChatGPT Plus Premium 1-Month Account / Direct Top-Up',
+    price: 31.90,
+    image: '/images/book.png',
+    type: 'digital' as const,
+    description: 'Exclusive 1-Month Plus subscription account. No ban risk. Pre-activated or top-up on your own account. Supports o1 / GPT-5 models.',
+  },
+  {
+    id: 'prod_chatgpt_pro_5x',
+    name: 'ChatGPT Pro (5X Capacity) 1-Month Subscription',
+    price: 125.00,
+    image: '/images/book.png',
+    type: 'digital' as const,
+    description: '1-Month Pro membership (Egypt region billing). Features 5X active capacity. 24/7 automated delivery & full warranty.',
+  },
+  {
+    id: 'prod_chatgpt_pro_20x',
+    name: 'ChatGPT Pro (20X Capacity) 1-Month Subscription',
+    price: 215.00,
+    image: '/images/book.png',
+    type: 'digital' as const,
+    description: 'Highest Pro tier 1-Month membership (Philippines region billing). Features 20X generation capacity. Fully active, guaranteed warranty.',
+  }
+];
 ---
-<BaseLayout title={SITE.name} locale={locale} pathname="/" schema={schema}>
-  <Header locale={locale} pathname="/" />
-  <main class="flex-1">
-    <section class="max-w-5xl mx-auto px-4 pt-16 pb-12 sm:pt-24 sm:pb-16">
-      <h1 class="text-4xl sm:text-5xl font-semibold text-ink-900 leading-tight max-w-3xl">{t(locale, 'home.hero.title')}</h1>
-      <p class="mt-5 text-lg text-ink-600 max-w-2xl">{t(locale, 'home.hero.sub')}</p>
-      <div class="mt-8">
-        <a
-          href={localizedPath(locale, '/blog/comfyui-installation-guide/')}
-          class="inline-flex items-center gap-2 bg-accent text-white px-5 py-3 rounded-lg font-medium hover:bg-accent-dark transition"
+<BaseLayout title="ComfyAtlas Store — Luxury Digital Goods & Apparel">
+  
+  <!-- Navigation Header -->
+  <header class="glass-nav fixed top-0 left-0 w-full z-40 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="font-outfit text-2xl font-black tracking-widest text-white hover:text-[#C5A880] transition-colors">
+        COMFYATLAS<span class="text-[#C5A880]">.</span>
+      </a>
+
+      <!-- Menu Links -->
+      <nav class="hidden md:flex items-center gap-8 font-outfit text-sm uppercase tracking-wider font-semibold text-zinc-400">
+        <a href="#apparel" class="hover:text-white transition-colors">Apparel</a>
+        <a href="#digital" class="hover:text-white transition-colors">Digital Vault</a>
+        <a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a>
+      </nav>
+
+      <!-- Cart Trigger -->
+      <button 
+        id="cart-trigger" 
+        type="button" 
+        class="relative p-2.5 rounded-full border border-white/10 hover:border-[#C5A880]/30 hover:bg-[#C5A880]/5 text-white transition-all duration-300"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+        <span 
+          id="cart-badge" 
+          class="absolute -top-1 -right-1 w-5 h-5 bg-[#C5A880] text-black font-bold font-outfit text-xs rounded-full flex items-center justify-center opacity-0 scale-50 transition-all duration-300"
         >
-          {t(locale, 'home.hero.cta')} →
+          0
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
+    <!-- Ambient Background Glows -->
+    <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#C5A880]/5 rounded-full filter blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[400px] h-[400px] bg-emerald-500/5 rounded-full filter blur-[100px] pointer-events-none"></div>
+    
+    <div class="relative max-w-5xl mx-auto px-6 text-center z-10">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold uppercase tracking-widest text-[#C5A880] mb-6 animate-pulse">
+        New Cyber Drop 01
+      </span>
+      <h1 class="text-5xl md:text-7xl font-extrabold font-outfit text-white tracking-tight leading-tight mb-8">
+        Elevate Your Digital & <br />
+        <span class="text-gradient-gold">Physical Wardrobe</span>
+      </h1>
+      <p class="max-w-2xl mx-auto text-lg text-zinc-400 font-light mb-12 leading-relaxed">
+        High-grade tactical apparel designed for the modern creator, coupled with next-generation digital assets and subscriptions. Fully automated digital delivery, global shipping, zero middleman fees.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a 
+          href="#apparel" 
+          class="w-full sm:w-auto px-8 py-4 bg-white text-black hover:bg-[#C5A880] hover:text-black font-bold uppercase tracking-wider rounded-full shadow-lg transition-all duration-300 text-sm font-outfit hover:scale-105"
+        >
+          Shop Physical
+        </a>
+        <a 
+          href="#digital" 
+          class="w-full sm:w-auto px-8 py-4 bg-zinc-900 text-white hover:border-emerald-500/40 hover:bg-emerald-500/5 border border-zinc-800 font-bold uppercase tracking-wider rounded-full shadow-lg transition-all duration-300 text-sm font-outfit hover:scale-105"
+        >
+          Explore Digital
         </a>
       </div>
-    </section>
+    </div>
 
-    <CategorySection category="getting-started" posts={byCategory('getting-started')} locale={locale} />
-    <CategorySection category="workflow-extensions" posts={byCategory('workflow-extensions')} locale={locale} />
-    <CategorySection category="models" posts={byCategory('models')} locale={locale} />
-    <CategorySection category="troubleshooting" posts={byCategory('troubleshooting')} locale={locale} />
-  </main>
-  <Footer locale={locale} />
+    <!-- Subtle Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600 text-xs uppercase tracking-widest font-bold">
+      Scroll Down
+      <div class="w-1.5 h-6 bg-zinc-800 rounded-full overflow-hidden">
+        <div class="w-full h-1/2 bg-[#C5A880] animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Physical Apparel Section -->
+  <section id="apparel" class="py-24 border-t border-white/5 relative bg-[#0E0E10]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-[#C5A880] uppercase tracking-widest text-xs font-bold font-outfit block mb-2">Boutique Drops</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-outfit text-white">Physical Apparel</h2>
+        </div>
+        <p class="text-zinc-500 text-sm max-w-xs mt-4 md:mt-0">
+          Made-to-order premium streetwear using ethically sourced high-grade fibers. Worldwide tracking available.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {physicalProducts.map(product => (
+          <ProductCard {...product} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Digital Goods Section -->
+  <section id="digital" class="py-24 border-t border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-emerald-400 uppercase tracking-widest text-xs font-bold font-outfit block mb-2">Instant Delivery</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-outfit text-white">Digital Vault</h2>
+        </div>
+        <p class="text-zinc-500 text-sm max-w-xs mt-4 md:mt-0">
+          Instant download links and account login credentials delivered to your inbox upon transaction validation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {digitalProducts.map(product => (
+          <ProductCard {...product} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-24 border-t border-white/5 bg-[#0E0E10]">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-[#C5A880] uppercase tracking-widest text-xs font-bold block mb-2">Transaction Protocol</span>
+        <h2 class="text-3xl md:text-4xl font-bold font-outfit text-white">How Purchases Work</h2>
+        <p class="text-zinc-400 mt-4 text-sm">
+          We operate on a zero-middleman payment processing model to bypass high transaction fees.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="glass-card p-8 rounded-2xl border border-white/5 relative">
+          <div class="w-12 h-12 rounded-xl bg-[#C5A880]/10 flex items-center justify-center font-outfit font-black text-xl text-[#C5A880] mb-6">
+            01
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Assemble Your Bag</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">
+            Select physical gear sizes and load up your digital vault products in the active bag.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="glass-card p-8 rounded-2xl border border-white/5 relative">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center font-outfit font-black text-xl text-emerald-400 mb-6">
+            02
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Transfer Payment</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">
+            Send the exact total using Cryptocurrency (USDT / BTC / ETH) or Bank Wire Transfer using our provided instructions.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="glass-card p-8 rounded-2xl border border-white/5 relative">
+          <div class="w-12 h-12 rounded-xl bg-zinc-100/10 flex items-center justify-center font-outfit font-black text-xl text-white mb-6">
+            03
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Instant Validation</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed">
+            Submit your TxID or bank reference. We inspect the ledger, email your digital products, and ship physical items with active tracking.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="py-16 border-t border-white/5 bg-[#0B0B0C]">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-zinc-500 text-xs">
+      <div>
+        &copy; {new Date().getFullYear()} ComfyAtlas Boutique. All rights reserved.
+      </div>
+      <div class="flex gap-8">
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms of Protocol</a>
+        <a href="mailto:rukyucrono@gmail.com" class="hover:text-white transition-colors">Support (rukyucrono@gmail.com)</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shopping Cart Drawer Overlay -->
+  <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div 
+      id="cart-drawer" 
+      class="absolute right-0 top-0 h-full w-full max-w-md bg-[#121214] border-l border-white/5 shadow-2xl p-8 flex flex-col translate-x-full transition-transform duration-300 ease-out"
+    >
+      <!-- Header -->
+      <div class="flex items-center justify-between pb-6 border-b border-white/5 mb-6">
+        <h3 class="font-outfit text-2xl font-bold text-white">Your Bag</h3>
+        <button 
+          id="cart-close" 
+          type="button" 
+          class="p-1 rounded-full border border-white/10 hover:border-white/30 text-zinc-400 hover:text-white transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Scrollable Products List -->
+      <div id="cart-items-container" class="flex-grow overflow-y-auto space-y-4 pr-2">
+        <!-- JS inserts items here -->
+        <p class="text-zinc-500 text-center py-12 font-light">Your bag is currently empty.</p>
+      </div>
+
+      <!-- Checkout / Pricing Footer -->
+      <div class="pt-6 border-t border-white/5 mt-6">
+        <div class="flex items-center justify-between text-zinc-400 text-sm mb-2">
+          <span>Shipping</span>
+          <span class="text-emerald-400 font-bold uppercase tracking-wider text-xs">FREE</span>
+        </div>
+        <div class="flex items-center justify-between text-white text-lg font-bold font-outfit mb-8">
+          <span>Est. Total</span>
+          <span id="cart-total">$0.00</span>
+        </div>
+        
+        <button 
+          id="checkout-btn" 
+          type="button" 
+          disabled
+          class="w-full py-4 rounded-xl bg-white hover:bg-[#C5A880] text-black font-bold uppercase tracking-wider text-sm font-outfit transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none hover:scale-[1.01] active:scale-[0.99] text-center block"
+        >
+          Proceed to Verification
+        </button>
+      </div>
+    </div>
+  </div>
+
 </BaseLayout>
+
+<script>
+  // Shopping Cart JavaScript Logic
+  let cart = [];
+
+  // DOM Elements
+  const cartTrigger = document.getElementById('cart-trigger');
+  const cartClose = document.getElementById('cart-close');
+  const cartOverlay = document.getElementById('cart-overlay');
+  const cartDrawer = document.getElementById('cart-drawer');
+  const cartBadge = document.getElementById('cart-badge');
+  const cartItemsContainer = document.getElementById('cart-items-container');
+  const cartTotal = document.getElementById('cart-total');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
+  // Initialize
+  function initCart() {
+    const savedCart = localStorage.getItem('boutique_cart');
+    if (savedCart) {
+      try {
+        cart = JSON.parse(savedCart);
+      } catch (e) {
+        cart = [];
+      }
+    }
+    renderCart();
+  }
+
+  // Toggle Drawer
+  function toggleCart(isOpen) {
+    if (isOpen) {
+      cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+      cartDrawer.classList.remove('translate-x-full');
+      document.body.style.overflow = 'hidden';
+    } else {
+      cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+      cartDrawer.classList.add('translate-x-full');
+      document.body.style.overflow = '';
+    }
+  }
+
+  cartTrigger?.addEventListener('click', () => toggleCart(true));
+  cartClose?.addEventListener('click', () => toggleCart(false));
+  cartOverlay?.addEventListener('click', (e) => {
+    if (e.target === cartOverlay) toggleCart(false);
+  });
+
+  // Add Product to Cart
+  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const card = btn.closest('[data-product-id]');
+      if (!card) return;
+
+      const id = card.getAttribute('data-product-id');
+      const name = card.getAttribute('data-product-name');
+      const price = parseFloat(card.getAttribute('data-product-price') || '0');
+      const image = card.getAttribute('data-product-image');
+      const type = card.getAttribute('data-product-type');
+
+      // Size extraction
+      let size = '';
+      if (type === 'physical') {
+        const activeSizeBtn = card.querySelector('.size-btn.bg-white');
+        size = activeSizeBtn ? activeSizeBtn.getAttribute('data-size') || '' : '';
+      }
+
+      const cartItemId = type === 'physical' ? `${id}_${size}` : id;
+
+      const existingIndex = cart.findIndex(item => item.cartItemId === cartItemId);
+      if (existingIndex > -1) {
+        cart[existingIndex].quantity += 1;
+      } else {
+        cart.push({
+          cartItemId,
+          id,
+          name,
+          price,
+          image,
+          type,
+          size,
+          quantity: 1
+        });
+      }
+
+      saveCart();
+      renderCart();
+      toggleCart(true);
+
+      // Micro-animation bounce on cart badge trigger
+      cartTrigger?.classList.add('scale-110');
+      setTimeout(() => cartTrigger?.classList.remove('scale-110'), 200);
+    });
+  });
+
+  // Save Cart to LocalStorage
+  function saveCart() {
+    localStorage.setItem('boutique_cart', JSON.stringify(cart));
+  }
+
+  // Handle Cart Quantity Change or Removal
+  function changeQuantity(cartItemId, amount) {
+    const itemIndex = cart.findIndex(item => item.cartItemId === cartItemId);
+    if (itemIndex > -1) {
+      cart[itemIndex].quantity += amount;
+      if (cart[itemIndex].quantity <= 0) {
+        cart.splice(itemIndex, 1);
+      }
+      saveCart();
+      renderCart();
+    }
+  }
+
+  // Render Cart DOM Elements
+  function renderCart() {
+    if (!cartItemsContainer || !cartBadge || !cartTotal || !checkoutBtn) return;
+
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-16 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-zinc-700 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <p class="text-zinc-500 font-light text-sm">Your bag is currently empty.</p>
+        </div>
+      `;
+      cartBadge.classList.add('opacity-0', 'scale-50');
+      cartBadge.textContent = '0';
+      cartTotal.textContent = '$0.00';
+      checkoutBtn.setAttribute('disabled', 'true');
+      return;
+    }
+
+    // Render items
+    cartItemsContainer.innerHTML = cart.map(item => `
+      <div class="flex items-center gap-4 bg-zinc-900/50 border border-white/5 p-4 rounded-xl">
+        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg bg-black/20" />
+        <div class="flex-grow min-w-0">
+          <h4 class="text-sm font-bold text-white truncate font-outfit">${item.name}</h4>
+          <p class="text-xs text-zinc-500 mt-0.5">
+            ${item.type === 'physical' ? `Size: <span class="text-white">${item.size}</span>` : 'Digital Drop'}
+          </p>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-sm font-bold text-[#C5A880]">$${(item.price * item.quantity).toFixed(2)}</span>
+            <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-black/20 text-xs">
+              <button type="button" class="qty-minus px-2 py-1 hover:bg-white/5 text-zinc-400 hover:text-white" data-id="${item.cartItemId}">-</button>
+              <span class="px-2 text-white font-outfit">${item.quantity}</span>
+              <button type="button" class="qty-plus px-2 py-1 hover:bg-white/5 text-zinc-400 hover:text-white" data-id="${item.cartItemId}">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Attach listeners
+    cartItemsContainer.querySelectorAll('.qty-minus').forEach(btn => {
+      btn.addEventListener('click', () => changeQuantity(btn.getAttribute('data-id') || '', -1));
+    });
+    cartItemsContainer.querySelectorAll('.qty-plus').forEach(btn => {
+      btn.addEventListener('click', () => changeQuantity(btn.getAttribute('data-id') || '', 1));
+    });
+
+    // Badge update
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartBadge.classList.remove('opacity-0', 'scale-50');
+    cartBadge.classList.add('opacity-100', 'scale-100');
+    cartBadge.textContent = totalItems.toString();
+
+    // Total cost update
+    const totalCost = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cartTotal.textContent = `$${totalCost.toFixed(2)}`;
+
+    // Enable button
+    checkoutBtn.removeAttribute('disabled');
+  }
+
+  // Redirect to Checkout
+  checkoutBtn?.addEventListener('click', () => {
+    window.location.href = '/checkout';
+  });
+
+  // Run initial loads
+  initCart();
+</script>

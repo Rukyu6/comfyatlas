@@ -1,0 +1,109 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  type: 'physical' | 'digital';
+  description: string;
+  sizes?: string[];
+}
+
+const { id, name, price, image, type, description, sizes = [] } = Astro.props;
+---
+<div 
+  class="glass-card hover-lift rounded-2xl overflow-hidden flex flex-col h-full border border-white/5 shadow-xl transition-all duration-300 group hover:border-[#C5A880]/30"
+  data-product-id={id}
+  data-product-name={name}
+  data-product-price={price}
+  data-product-image={image}
+  data-product-type={type}
+>
+  <!-- Image Container -->
+  <div class="relative overflow-hidden aspect-[4/5] bg-black/40">
+    <img 
+      src={image} 
+      alt={name} 
+      class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+    />
+    
+    <!-- Tag (Digital/Physical) -->
+    <div class="absolute top-4 left-4">
+      <span class={`px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full backdrop-blur-md border ${
+        type === 'digital' 
+          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' 
+          : 'bg-[#C5A880]/10 text-[#C5A880] border-[#C5A880]/20'
+      }`}>
+        {type}
+      </span>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-6 flex flex-col flex-grow">
+    <h3 class="text-xl font-bold text-white mb-2 font-outfit group-hover:text-[#C5A880] transition-colors">
+      {name}
+    </h3>
+    <p class="text-sm text-zinc-400 line-clamp-2 mb-4 leading-relaxed flex-grow">
+      {description}
+    </p>
+
+    <!-- Interactive Size Selector (For Physical Apparel) -->
+    {type === 'physical' && sizes.length > 0 && (
+      <div class="mb-4">
+        <span class="text-xs uppercase text-zinc-500 tracking-wider font-semibold block mb-2">Select Size</span>
+        <div class="flex gap-2 flex-wrap">
+          {sizes.map((size, idx) => (
+            <button 
+              type="button"
+              class={`size-btn px-3 py-1 rounded text-xs font-bold transition border ${
+                idx === 0 
+                  ? 'bg-white text-black border-white' 
+                  : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:border-zinc-500'
+              }`}
+              data-size={size}
+            >
+              {size}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Footer / CTA -->
+    <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+      <div class="font-outfit text-2xl font-bold text-white">
+        ${price.toFixed(2)}
+      </div>
+      <button 
+        type="button" 
+        class="add-to-cart-btn px-5 py-2.5 rounded-xl bg-white hover:bg-[#C5A880] hover:text-black text-black font-bold text-sm transition-all duration-300 shadow-md font-outfit uppercase tracking-wider flex items-center gap-2 hover:scale-[1.03] active:scale-[0.98]"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+        Add to Bag
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple interactive logic for size button switching on card level
+  const cards = document.querySelectorAll('[data-product-id]');
+  cards.forEach(card => {
+    const sizeButtons = card.querySelectorAll('.size-btn');
+    sizeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active state from all sizes in this card
+        sizeButtons.forEach(b => {
+          b.classList.remove('bg-white', 'text-black', 'border-white');
+          b.classList.add('bg-zinc-900', 'text-zinc-400', 'border-zinc-800');
+        });
+        // Add active state to clicked button
+        btn.classList.remove('bg-zinc-900', 'text-zinc-400', 'border-zinc-800');
+        btn.classList.add('bg-white', 'text-black', 'border-white');
+      });
+    });
+  });
+</script>

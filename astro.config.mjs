@@ -9,24 +9,9 @@ export default defineConfig({
   site: 'https://comfyatlas.com',
   integrations: [
     mdx(),
-    sitemap({
-      i18n: {
-        defaultLocale: 'en',
-        locales: {
-          en: 'en-US',
-          zh: 'zh-CN',
-        },
-      },
-    }),
+    sitemap(),
     tailwind(),
   ],
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'zh'],
-    routing: {
-      prefixDefaultLocale: false,
-    },
-  },
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport',
