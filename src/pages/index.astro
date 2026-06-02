@@ -4,6 +4,8 @@ import ProductCard from '../components/ProductCard.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CartDrawer from '../components/CartDrawer.astro';
+import CRTPreloader from '../components/CRTPreloader.astro';
+import FilmStripSlider from '../components/FilmStripSlider.astro';
 
 // Hardcoded physical apparel products
 const physicalProducts = [
@@ -29,6 +31,9 @@ const physicalProducts = [
 ---
 <BaseLayout title="Puppy Shop — Premium Apparel & Digital Account Vault">
   
+  <!-- Retro TV monitor preloader -->
+  <CRTPreloader />
+
   <Header />
 
   <!-- Hero Section -->
@@ -110,6 +115,9 @@ const physicalProducts = [
       </div>
     </div>
   </section>
+
+  <!-- Film Strip Department Carousel Selector -->
+  <FilmStripSlider />
 
   <!-- Physical Apparel Section -->
   <section id="apparel" class="py-24 border-t border-white/5 relative bg-[#0E0E10]">

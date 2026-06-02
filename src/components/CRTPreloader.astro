@@ -1,0 +1,182 @@
+---
+---
+<!-- CRT TV Preloader Overlay Wrapper -->
+<div 
+  id="crt-preloader-wrapper" 
+  class="fixed inset-0 z-50 bg-[#020703] flex items-center justify-center font-mono select-none"
+>
+  <!-- CRT Monitor Container (collapses on power off) -->
+  <div 
+    id="crt-monitor" 
+    class="w-full h-full crt-screen crt-curve flex flex-col justify-between p-6 md:p-12 text-[#14fa14] border border-[#14fa14]/25 uppercase relative"
+  >
+    <!-- Screen Overlay Filters -->
+    <div class="crt-scanlines"></div>
+    <div class="crt-noise"></div>
+    <div class="crt-sweeper"></div>
+
+    <!-- Retro Bezel Screen Shadow -->
+    <div class="absolute inset-0 bg-radial-vignette pointer-events-none z-10"></div>
+
+    <!-- Header info -->
+    <div class="flex items-center justify-between text-xs opacity-75 relative z-10 glow-green-text border-b border-[#14fa14]/20 pb-3">
+      <span>MONITOR TYPE: CRT-88D</span>
+      <span class="animate-pulse">● ONLINE</span>
+    </div>
+
+    <!-- Main Terminal Area -->
+    <div class="flex-grow flex flex-col justify-center max-w-2xl mx-auto w-full space-y-6 relative z-10">
+      
+      <!-- Terminal Log Output -->
+      <div id="crt-terminal-log" class="text-xs md:text-sm leading-relaxed space-y-2.5 min-h-[160px]">
+        <!-- Typing text inserts here -->
+      </div>
+
+      <!-- Progress Section -->
+      <div class="space-y-3 pt-6 border-t border-[#14fa14]/15">
+        <div class="flex items-center justify-between text-xs font-bold tracking-wider">
+          <span class="glow-green-text">GATEWAY SYSTEM DECRYPTION</span>
+          <span id="crt-progress-percentage" class="glow-green-text">0%</span>
+        </div>
+        <!-- Progress Bar Container -->
+        <div class="w-full h-4 border border-[#14fa14]/30 bg-black/40 p-0.5 rounded overflow-hidden">
+          <div 
+            id="crt-progress-fill" 
+            class="h-full bg-[#14fa14] shadow-[0_0_10px_rgba(20,250,20,0.6)] w-0 transition-all duration-100 ease-out"
+          ></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Action -->
+    <div class="flex items-center justify-between text-[10px] md:text-xs relative z-10 border-t border-[#14fa14]/20 pt-4">
+      <span class="glow-green-text">SYSTEM CLOCK: OK</span>
+      <button 
+        id="crt-skip-btn" 
+        type="button" 
+        class="px-4 py-2 border border-[#14fa14]/40 bg-[#14fa14]/5 hover:bg-[#14fa14]/20 text-[#14fa14] hover:text-white rounded transition-all duration-200 active:scale-95 glow-green-text"
+      >
+        [ SKIP SYSTEM BOOT ]
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const logLines = [
+    "PUPPY SHOP OS v1.0.0-BETA LOADING...",
+    "HOST DOMAIN BOUND: COMFYATLAS.COM [SECURE]",
+    "SYSTEM MEMORY ALLOCATION: CHECK OK",
+    "FETCHING CATALOG: 716 ITEMS IN CACHE [DECRYPTING]",
+    "SKU OPTIONS MAPPED... OK",
+    "ESTABLISHING TRC-20 AND KRAKEN PROTOCOL GATEWAY... OK",
+    "INITIALIZATION COMPLETED SUCCESSFULLY."
+  ];
+
+  const wrapper = document.getElementById('crt-preloader-wrapper');
+  const monitor = document.getElementById('crt-monitor');
+  const terminalLog = document.getElementById('crt-terminal-log');
+  const progressPercent = document.getElementById('crt-progress-percentage');
+  const progressFill = document.getElementById('crt-progress-fill');
+  const skipBtn = document.getElementById('crt-skip-btn');
+
+  function initPreloader() {
+    // 1. Check if the preloader was already played during this browser session
+    const hasPlayed = sessionStorage.getItem('crt_loader_played');
+    if (hasPlayed === 'true') {
+      if (wrapper) wrapper.style.display = 'none';
+      return;
+    }
+
+    // 2. Play boot animation sequence
+    document.body.style.overflow = 'hidden';
+    startTerminalTyping();
+
+    // Skip handler
+    skipBtn?.addEventListener('click', () => {
+      triggerCRTCollapse();
+    });
+  }
+
+  async function startTerminalTyping() {
+    if (!terminalLog || !progressPercent || !progressFill) return;
+
+    let lineIndex = 0;
+    
+    // Type console logs line by line
+    for (const line of logLines) {
+      const lineDiv = document.createElement('div');
+      lineDiv.className = 'glow-green-text';
+      terminalLog.appendChild(lineDiv);
+      
+      // Type character by character
+      for (let i = 0; i < line.length; i++) {
+        lineDiv.textContent += line[i];
+        await delay(Math.random() * 15 + 10); // Random character typing speed
+      }
+      
+      // Add a slight break between lines
+      await delay(120);
+
+      // Increment progress bar proportionally
+      const targetProgress = Math.floor(((lineIndex + 1) / logLines.length) * 80);
+      await updateProgress(targetProgress);
+
+      lineIndex++;
+    }
+
+    // Finalize loading bar from 80% to 100%
+    await updateProgress(100);
+    await delay(350);
+
+    // Trigger monitor shutdown collapse animation
+    triggerCRTCollapse();
+  }
+
+  function updateProgress(percentage) {
+    return new Promise((resolve) => {
+      let currentWidth = parseFloat(progressFill?.style.width || '0');
+      const step = () => {
+        if (currentWidth < percentage) {
+          currentWidth += 1.5;
+          if (progressFill) progressFill.style.width = currentWidth + '%';
+          if (progressPercent) progressPercent.textContent = Math.floor(currentWidth) + '%';
+          requestAnimationFrame(step);
+        } else {
+          resolve(true);
+        }
+      };
+      step();
+    });
+  }
+
+  function triggerCRTCollapse() {
+    if (!monitor || !wrapper) return;
+    
+    // Add collapse class to play vintage television power-off squish
+    monitor.classList.add('crt-collapse');
+
+    // Wait for the animation to finish, then restore layout
+    setTimeout(() => {
+      wrapper.style.display = 'none';
+      document.body.style.overflow = '';
+      sessionStorage.setItem('crt_loader_played', 'true');
+    }, 550); // Matches .crt-collapse duration
+  }
+
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // Hook load
+  initPreloader();
+</script>
+
+<style>
+  /* Custom phosphor vignette overlay */
+  .bg-radial-vignette {
+    background: radial-gradient(circle, rgba(11,11,12,0) 50%, rgba(2, 10, 2, 0.4) 100%);
+  }
+</style>
