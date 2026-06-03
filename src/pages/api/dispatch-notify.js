@@ -1,4 +1,9 @@
+import { fetch, ProxyAgent } from 'undici';
+
 export const prerender = false; // Run on-demand as a serverless endpoint
+
+const proxyUrl = process.env.HTTPS_PROXY || process.env.https_proxy || process.env.HTTP_PROXY || process.env.http_proxy;
+const dispatcher = proxyUrl ? new ProxyAgent(proxyUrl) : undefined;
 
 export async function POST({ request }) {
   try {
@@ -62,7 +67,8 @@ export async function POST({ request }) {
         chat_id: chatId,
         text: message,
         parse_mode: 'Markdown'
-      })
+      }),
+      ...(dispatcher ? { dispatcher } : {})
     });
 
     const data = await res.json();
