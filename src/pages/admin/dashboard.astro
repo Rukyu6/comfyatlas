@@ -6,30 +6,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <!-- Security Error Overlay (Hidden initially) -->
   <div 
     id="admin-security-overlay" 
-    class="hidden fixed inset-0 z-50 bg-[#0B0B0C] flex flex-col items-center justify-center p-6 text-center select-none"
+    class="hidden fixed inset-0 z-50 bg-[#FFFDF9] flex flex-col items-center justify-center p-6 text-center select-none"
   >
-    <div class="glass-card rounded-3xl border border-red-500/20 bg-red-500/5 p-8 max-w-md w-full text-center space-y-6">
-      <div class="w-16 h-16 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto text-red-500">
+    <div class="glass-card p-8 max-w-md w-full text-center space-y-6">
+      <div class="w-16 h-16 rounded-full bg-rose-50 border-2 border-[#3E2A1E] flex items-center justify-center mx-auto text-rose-500 shadow-[2px_2px_0px_#3E2A1E]">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m0-6v2m0-8h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
       <div class="space-y-2">
-        <h2 class="text-xl font-extrabold text-white font-outfit">Access Denied</h2>
-        <p class="text-xs text-zinc-400 leading-relaxed" id="admin-security-msg">
+        <h2 class="text-xl font-extrabold text-[#3E2A1E] font-fredoka">Access Denied</h2>
+        <p class="text-xs text-zinc-600 leading-relaxed" id="admin-security-msg">
           You are not authorized to view the merchant dashboard. Please sign in with an administrator account.
         </p>
       </div>
       <div class="pt-4 flex gap-3 justify-center">
         <a 
           href="/login?redirect=/admin/dashboard" 
-          class="px-5 py-2.5 bg-white text-black hover:bg-[#C5A880] font-bold text-xs uppercase tracking-wider rounded-xl transition font-outfit"
+          class="px-5 py-2.5 bg-[#FF9EAF] text-white hover:bg-[#FF6B8B] font-bold text-xs uppercase tracking-wider rounded-xl border-2 border-[#3E2A1E] shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_#3E2A1E] font-fredoka"
         >
           Sign In
         </a>
         <a 
           href="/" 
-          class="px-5 py-2.5 bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white font-bold text-xs uppercase tracking-wider rounded-xl transition font-outfit"
+          class="px-5 py-2.5 bg-white border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFF5F7] font-bold text-xs uppercase tracking-wider rounded-xl transition hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_#3E2A1E] font-fredoka"
         >
           Back to Shop
         </a>
@@ -42,15 +42,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="space-y-8">
       
       <!-- Top header layout -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b-3 border-[#3E2A1E]/20 pb-6">
         <div class="space-y-1">
-          <span class="text-[#C5A880] uppercase tracking-widest text-[10px] font-bold font-outfit block">Operations Room</span>
-          <h1 class="text-3xl font-extrabold font-outfit text-white">Merchant Dashboard</h1>
+          <span class="text-[#FF9EAF] uppercase tracking-widest text-[10px] font-bold font-fredoka block">Operations Room</span>
+          <h1 class="text-3xl font-extrabold font-fredoka text-[#3E2A1E]">Merchant Dashboard</h1>
         </div>
         <div class="flex gap-3 mt-4 md:mt-0">
           <a 
             href="/" 
-            class="px-4 py-2 bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 text-xs font-bold font-outfit uppercase tracking-wider rounded-xl transition flex items-center gap-2 active:scale-95"
+            class="px-4 py-2 bg-white border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFF5F7] text-xs font-bold font-fredoka uppercase tracking-wider rounded-xl shadow-[2px_2px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E] transition flex items-center gap-2 active:scale-95"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -64,31 +64,31 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Total Revenue USD -->
-        <div class="glass-card p-6 rounded-2xl border border-white/5 space-y-2">
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block">Revenue (USD)</span>
-          <p class="text-2xl font-black text-white font-outfit" id="stat-revenue-usd">$0.00</p>
-          <span class="text-[10px] text-emerald-400 flex items-center gap-1">● Real-time synced</span>
+        <div class="glass-card p-6 space-y-2">
+          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Revenue (USD)</span>
+          <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-usd">$0.00</p>
+          <span class="text-[10px] text-emerald-600 flex items-center gap-1 font-fredoka font-bold">● Real-time synced</span>
         </div>
 
         <!-- Total Revenue CNY -->
-        <div class="glass-card p-6 rounded-2xl border border-white/5 space-y-2">
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block">Revenue (CNY)</span>
-          <p class="text-2xl font-black text-white font-outfit" id="stat-revenue-cny">¥0 CNY</p>
-          <span class="text-[10px] text-zinc-500">Approx. 6.8x conversion</span>
+        <div class="glass-card p-6 space-y-2">
+          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Revenue (CNY)</span>
+          <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-cny">¥0 CNY</p>
+          <span class="text-[10px] text-zinc-500 font-fredoka">Approx. 6.8x conversion</span>
         </div>
 
         <!-- Completed Orders -->
-        <div class="glass-card p-6 rounded-2xl border border-white/5 space-y-2">
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block">Completed Orders</span>
-          <p class="text-2xl font-black text-[#C5A880] font-outfit" id="stat-orders-completed">0</p>
-          <span class="text-[10px] text-zinc-500" id="stat-orders-total">Total Orders: 0</span>
+        <div class="glass-card p-6 space-y-2">
+          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Completed Orders</span>
+          <p class="text-2xl font-black text-[#FF9EAF] font-fredoka" id="stat-orders-completed">0</p>
+          <span class="text-[10px] text-zinc-500 font-fredoka" id="stat-orders-total">Total Orders: 0</span>
         </div>
 
         <!-- Pending Verification -->
-        <div class="glass-card p-6 rounded-2xl border border-white/5 space-y-2">
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block">Pending Review</span>
-          <p class="text-2xl font-black text-yellow-400 font-outfit" id="stat-orders-pending">0</p>
-          <span class="text-[10px] text-zinc-500">Awaiting payment verification</span>
+        <div class="glass-card p-6 space-y-2">
+          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Pending Review</span>
+          <p class="text-2xl font-black text-amber-600 font-fredoka" id="stat-orders-pending">0</p>
+          <span class="text-[10px] text-zinc-500 font-fredoka">Awaiting payment verification</span>
         </div>
 
       </div>
@@ -97,55 +97,55 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <!-- Category Sales Mix -->
-        <div class="lg:col-span-1 glass-card p-6 rounded-2xl border border-white/5 space-y-6 flex flex-col justify-between">
+        <div class="lg:col-span-1 glass-card p-6 space-y-6 flex flex-col justify-between">
           <div class="space-y-1">
-            <h3 class="text-sm font-bold text-white uppercase tracking-wider font-outfit">Sales Mix breakdown</h3>
-            <p class="text-xs text-zinc-500">Distribution of revenue between product departments</p>
+            <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">Sales Mix breakdown</h3>
+            <p class="text-xs text-zinc-500 font-fredoka">Distribution of revenue between product departments</p>
           </div>
 
           <div class="space-y-4">
-            <!-- Digital progress -->
+            <!-- Digital accounts split bar -->
             <div class="space-y-1.5 text-left">
               <div class="flex justify-between text-xs font-semibold">
-                <span class="text-emerald-400">Digital Vault</span>
-                <span class="text-white" id="stat-mix-digital-pct">0%</span>
+                <span class="text-emerald-700 font-fredoka">Digital Vault</span>
+                <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-digital-pct">0%</span>
               </div>
-              <div class="w-full h-2 bg-black/40 border border-white/5 rounded-full overflow-hidden">
-                <div id="stat-mix-digital-fill" class="h-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.3)] transition-all duration-500 w-0"></div>
+              <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
+                <div id="stat-mix-digital-fill" class="h-full bg-emerald-400 transition-all duration-500 w-0"></div>
               </div>
               <span class="text-[10px] text-zinc-500 block" id="stat-mix-digital-val">$0.00 sales</span>
             </div>
 
-            <!-- Apparel progress -->
+            <!-- Apparel/Physical accounts split bar -->
             <div class="space-y-1.5 text-left">
               <div class="flex justify-between text-xs font-semibold">
-                <span class="text-[#C5A880]">Streetwear Drop</span>
-                <span class="text-white" id="stat-mix-apparel-pct">0%</span>
+                <span class="text-[#FF9EAF] font-fredoka">Streetwear Drop</span>
+                <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-apparel-pct">0%</span>
               </div>
-              <div class="w-full h-2 bg-black/40 border border-white/5 rounded-full overflow-hidden">
-                <div id="stat-mix-apparel-fill" class="h-full bg-[#C5A880] shadow-[0_0_10px_rgba(197,168,128,0.3)] transition-all duration-500 w-0"></div>
+              <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
+                <div id="stat-mix-apparel-fill" class="h-full bg-[#FF9EAF] transition-all duration-500 w-0"></div>
               </div>
               <span class="text-[10px] text-zinc-500 block" id="stat-mix-apparel-val">$0.00 sales</span>
             </div>
+
           </div>
-          
-          <div class="text-[10px] text-zinc-600 border-t border-white/5 pt-4">
-            Data reflects approved transactions only.
+
+          <div class="text-[10px] text-zinc-600 border-t border-[#3E2A1E]/10 pt-4 font-fredoka">
+            Tip: Revamping catalog prices updates future calculations.
           </div>
         </div>
 
-        <!-- Orders Table container -->
-        <div class="lg:col-span-2 glass-card p-6 rounded-2xl border border-white/5 space-y-6">
-          <div class="flex items-center justify-between border-b border-white/5 pb-4">
-            <h3 class="text-sm font-bold text-white uppercase tracking-wider font-outfit">Transaction Ledger</h3>
+        <!-- Ledger logs table container -->
+        <div class="lg:col-span-2 glass-card p-6 space-y-6">
+          <div class="flex items-center justify-between border-b border-[#3E2A1E]/10 pb-4">
+            <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">Transaction Ledger</h3>
             <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-ledger-count">Total Rows: 0</span>
           </div>
 
-          <!-- Ledger Table -->
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse text-xs">
               <thead>
-                <tr class="border-b border-white/10 text-zinc-500 uppercase tracking-widest text-[9px] font-bold">
+                <tr class="border-b border-[#3E2A1E]/20 text-[#3E2A1E]/70 uppercase tracking-widest text-[9px] font-bold font-fredoka">
                   <th class="pb-3 pr-2">Order ID</th>
                   <th class="pb-3 px-2">Customer</th>
                   <th class="pb-3 px-2">Total (USD)</th>
@@ -154,14 +154,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                   <th class="pb-3 pl-2 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody id="ledger-rows" class="divide-y divide-white/5 text-zinc-300">
-                <!-- Dyn row insertion -->
+              <tbody id="ledger-rows" class="divide-y divide-[#3E2A1E]/10 text-zinc-700 font-fredoka">
                 <tr>
                   <td colspan="6" class="py-12 text-center text-zinc-500">Initializing transaction log...</td>
                 </tr>
               </tbody>
             </table>
           </div>
+
         </div>
 
       </div>
@@ -169,48 +169,46 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </div>
 
-  <!-- Detailed Order Modal Overlay -->
-  <div id="order-details-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
-    <div class="glass-card rounded-3xl border border-white/5 max-w-xl w-full p-8 relative space-y-6">
+  <!-- ORDER REVIEW DETAIL MODAL (Hidden initially) -->
+  <div id="order-details-modal" class="hidden fixed inset-0 z-50 bg-[#3E2A1E]/40 backdrop-blur-sm flex items-center justify-center p-6">
+    <div class="glass-card max-w-xl w-full p-8 relative space-y-6">
       
-      <!-- Close Button -->
+      <!-- Close button -->
       <button 
+        id="modal-close-btn" 
         type="button" 
-        id="modal-close-btn"
-        class="absolute top-4 right-4 p-2 text-zinc-500 hover:text-white rounded-full hover:bg-white/5 transition"
+        class="absolute top-4 right-4 p-2 text-zinc-500 hover:text-[#3E2A1E] rounded-full hover:bg-[#3E2A1E]/5 transition"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
       </button>
 
-      <div class="space-y-1 text-left border-b border-white/5 pb-4">
+      <div class="space-y-1 text-left border-b border-[#3E2A1E]/10 pb-4">
         <span class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest font-mono" id="modal-order-id">ORDER REFERENCE</span>
-        <h3 class="text-lg font-bold text-white font-outfit" id="modal-order-email">Customer Details</h3>
+        <h3 class="text-lg font-bold text-[#3E2A1E] font-fredoka" id="modal-order-email">Customer Details</h3>
       </div>
 
-      <!-- Items Section -->
       <div class="space-y-3 text-left">
-        <h4 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Ordered Items</h4>
-        <div id="modal-order-items" class="max-h-[160px] overflow-y-auto space-y-2 pr-2 border-y border-white/5 py-3">
-          <!-- Items -->
+        <h4 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-fredoka">Ordered Items</h4>
+        <div id="modal-order-items" class="max-h-[160px] overflow-y-auto space-y-2 pr-2 border-y border-[#3E2A1E]/10 py-3 font-fredoka">
+          <!-- Dyn injected -->
         </div>
       </div>
 
-      <!-- Tx details -->
       <div class="grid grid-cols-2 gap-4 text-left">
         <div>
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block">Payment Channel</span>
-          <p class="text-xs text-white font-semibold mt-0.5" id="modal-payment-method">-</p>
+          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Payment Channel</span>
+          <p class="text-xs text-[#3E2A1E] font-semibold mt-0.5" id="modal-payment-method">-</p>
         </div>
         <div>
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block">Reference / Hash</span>
-          <p class="text-xs text-white font-mono font-semibold mt-0.5 select-all break-all" id="modal-payment-hash">-</p>
+          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Reference / Hash</span>
+          <p class="text-xs text-[#3E2A1E] font-mono font-semibold mt-0.5 select-all break-all" id="modal-payment-hash">-</p>
         </div>
       </div>
 
       <!-- Actions -->
-      <div class="pt-4 border-t border-white/5 flex gap-3 justify-end" id="modal-actions-container">
+      <div class="pt-4 border-t border-[#3E2A1E]/10 flex gap-3 justify-end" id="modal-actions-container">
         <!-- Dyn actions based on status -->
       </div>
 
@@ -366,30 +364,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     ledgerRows.innerHTML = orders.map(order => {
-      let statusClass = 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20';
+      let statusClass = 'text-amber-700 bg-amber-50 border border-amber-300';
       if (order.status === 'completed' || order.status === 'paid') {
-        statusClass = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
+        statusClass = 'text-emerald-700 bg-emerald-50 border border-emerald-300';
       } else if (order.status === 'cancelled') {
-        statusClass = 'text-red-400 bg-red-500/10 border-red-500/20';
+        statusClass = 'text-rose-700 bg-rose-50 border border-rose-300';
       }
 
       const cleanId = order.id.substring(0, 10) + '...';
 
       return `
-        <tr class="hover:bg-white/5 transition-colors cursor-pointer" onclick="window.viewOrderDetails('${order.id}')">
-          <td class="py-3.5 pr-2 font-mono text-[10px] text-zinc-400 font-bold">${cleanId}</td>
+        <tr class="hover:bg-[#FFF5F7]/30 border-b border-[#3E2A1E]/5 transition-colors cursor-pointer" onclick="window.viewOrderDetails('${order.id}')">
+          <td class="py-3.5 pr-2 font-mono text-[10px] text-[#3E2A1E]/70 font-bold">${cleanId}</td>
           <td class="py-3.5 px-2 font-semibold truncate max-w-[120px]">${order.email}</td>
           <td class="py-3.5 px-2 font-bold font-mono">$${order.totalUsd.toFixed(2)}</td>
-          <td class="py-3.5 px-2 uppercase text-[10px] text-zinc-400">${order.paymentMethod}</td>
+          <td class="py-3.5 px-2 uppercase text-[10px] text-[#3E2A1E]/80">${order.paymentMethod}</td>
           <td class="py-3.5 px-2">
-            <span class="px-2 py-0.5 rounded border text-[9px] font-bold ${statusClass}">
+            <span class="px-2 py-0.5 rounded-full border text-[9px] font-bold ${statusClass}">
               ${order.status}
             </span>
           </td>
           <td class="py-3.5 pl-2 text-right">
             <button 
               type="button" 
-              class="px-2.5 py-1 bg-zinc-900 border border-zinc-800 hover:border-white/20 text-[10px] font-bold uppercase rounded hover:bg-zinc-800 text-zinc-300 transition"
+              class="px-2.5 py-1 bg-white border-2 border-[#3E2A1E] hover:bg-[#FFF5F7] text-[10px] font-bold uppercase rounded-lg shadow-[2px_2px_0px_#3E2A1E] text-[#3E2A1E] transition font-fredoka hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E]"
               onclick="event.stopPropagation(); window.viewOrderDetails('${order.id}')"
             >
               Review
@@ -418,14 +416,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     // Items compilation
     if (modalOrderItems) {
       modalOrderItems.innerHTML = order.items.map((item: any) => `
-        <div class="flex justify-between items-center text-xs py-1.5 border-b border-white/5 last:border-0">
+        <div class="flex justify-between items-center text-xs py-1.5 border-b border-[#3E2A1E]/10 last:border-0">
           <div>
-            <p class="font-bold text-white">${item.name}</p>
+            <p class="font-bold text-[#3E2A1E]">${item.name}</p>
             <p class="text-[10px] text-zinc-500 mt-0.5">
               ${item.type === 'digital' ? 'Digital Key' : `Clothing Size: ${item.size || 'M'}`} × ${item.quantity}
             </p>
           </div>
-          <span class="font-mono text-zinc-400 font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+          <span class="font-mono text-[#3E2A1E] font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
         </div>
       `).join('');
     }
@@ -437,21 +435,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <button 
             type="button"
             onclick="window.updateOrderStatus('${order.id}', 'cancelled')"
-            class="px-4 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 text-xs font-bold font-outfit transition active:scale-95 uppercase"
+            class="px-4 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 border-2 border-[#3E2A1E] text-rose-700 text-xs font-bold font-fredoka transition active:scale-95 uppercase shadow-[2px_2px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E]"
           >
             Cancel Order
           </button>
           <button 
             type="button"
             onclick="window.updateOrderStatus('${order.id}', 'completed')"
-            class="px-5 py-2.5 rounded-xl bg-white hover:bg-emerald-500 text-black hover:text-white font-bold text-xs font-outfit transition active:scale-95 uppercase shadow-lg"
+            class="px-5 py-2.5 rounded-xl bg-[#FF9EAF] hover:bg-[#FF6B8B] border-2 border-[#3E2A1E] text-white font-bold text-xs font-fredoka transition active:scale-95 uppercase shadow-[2px_2px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E]"
           >
             Approve & Mark Completed
           </button>
         `;
       } else {
         modalActionsContainer.innerHTML = `
-          <span class="text-zinc-500 text-xs font-bold uppercase tracking-wider">Final State: ${order.status}</span>
+          <span class="text-zinc-600 text-xs font-bold uppercase tracking-wider font-fredoka">Final State: ${order.status}</span>
         `;
       }
     }

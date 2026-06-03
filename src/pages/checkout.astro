@@ -3,16 +3,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Checkout | Puppy Shop">
   
-  <div class="min-h-screen py-12 px-6 md:py-20">
+  <div class="min-h-screen py-12 px-6 md:py-20 bg-[#FFFDF9] text-[#3E2A1E]">
     <div class="max-w-6xl mx-auto">
       
       <!-- Back Header -->
       <div class="mb-12">
         <a 
           href="/" 
-          class="inline-flex items-center gap-2 text-zinc-400 hover:text-white font-outfit uppercase tracking-wider text-sm font-bold transition-colors group"
+          class="inline-flex items-center gap-2 text-[#6D5A50] hover:text-[#FF6B8B] font-quicksand text-sm font-bold transition-colors group"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
           Back to boutique
@@ -24,11 +24,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         
         <!-- Left Side: Order Verification Form -->
         <div class="lg:col-span-7">
-          <h2 class="text-3xl font-extrabold font-outfit text-white mb-8">Verification Protocol</h2>
+          <h2 class="text-3xl font-bold font-fredoka text-[#3E2A1E] mb-8">Verification Protocol 🐾</h2>
           
           <form id="checkout-form" class="space-y-8">
             <!-- Web3Forms Configuration -->
-            <!-- Note: User should replace this key or we can let them configure it -->
             <input type="hidden" name="access_key" value="cae136d3-193a-4a59-bd40-6e4fa22afac9" />
             <input type="hidden" name="subject" value="New Order Placed on Puppy Shop" />
             <input type="hidden" name="from_name" value="Puppy Shop Checkout" />
@@ -38,88 +37,88 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <input type="hidden" id="hidden-total-price" name="total_price" value="" />
 
             <!-- SECTION 1: Contact & Shipping (Dynamic) -->
-            <div class="glass-card p-8 rounded-2xl border border-white/5 space-y-6">
-              <h3 class="text-lg font-bold font-outfit text-white border-b border-white/5 pb-3">01. Delivery Details</h3>
+            <div class="glass-card p-8 rounded-[2rem] border-3 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] bg-white space-y-6">
+              <h3 class="text-lg font-bold font-fredoka text-[#3E2A1E] border-b-2 border-[#E8E1D9] pb-3">01. Delivery Details</h3>
               
               <div class="space-y-4">
                 <div>
-                  <label for="email" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">Email Address</label>
+                  <label for="email" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">Email Address</label>
                   <input 
                     type="email" 
                     id="email" 
                     name="email" 
                     required 
                     placeholder="name@domain.com"
-                    class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                    class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                   />
-                  <p class="text-[10px] text-zinc-500 mt-1">We will send your digital goods and tracking updates here.</p>
+                  <p class="text-[10px] text-[#6D5A50] font-quicksand font-semibold mt-1">We will send your digital goods and tracking updates here.</p>
                 </div>
 
                 <!-- Shipping Address wrapper: Shown only if physical items exist -->
                 <div id="shipping-address-section" class="space-y-4 pt-2">
                   <div>
-                    <label for="name" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">Full Name</label>
+                    <label for="name" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">Full Name</label>
                     <input 
                       type="text" 
                       id="name" 
                       name="name" 
                       placeholder="John Doe"
-                      class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                      class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                     />
                   </div>
                   
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label for="address" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">Street Address</label>
+                      <label for="address" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">Street Address</label>
                       <input 
                         type="text" 
                         id="address" 
                         name="address" 
                         placeholder="123 Cyber Ave"
-                        class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                       />
                     </div>
                     <div>
-                      <label for="city" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">City</label>
+                      <label for="city" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">City</label>
                       <input 
                         type="text" 
                         id="city" 
                         name="city" 
                         placeholder="New York"
-                        class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                       />
                     </div>
                   </div>
 
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <label for="state" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">State/Region</label>
+                      <label for="state" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">State/Region</label>
                       <input 
                         type="text" 
                         id="state" 
                         name="state" 
                         placeholder="NY"
-                        class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                       />
                     </div>
                     <div>
-                      <label for="country" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">Country</label>
+                      <label for="country" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">Country</label>
                       <input 
                         type="text" 
                         id="country" 
                         name="country" 
                         placeholder="United States"
-                        class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                       />
                     </div>
                     <div>
-                      <label for="zip" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">ZIP/Postal Code</label>
+                      <label for="zip" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">ZIP/Postal Code</label>
                       <input 
                         type="text" 
                         id="zip" 
                         name="zip" 
                         placeholder="10001"
-                        class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                       />
                     </div>
                   </div>
@@ -128,22 +127,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
 
             <!-- SECTION 2: Payment Selection -->
-            <div class="glass-card p-8 rounded-2xl border border-white/5 space-y-6">
-              <h3 class="text-lg font-bold font-outfit text-white border-b border-white/5 pb-3">02. Transfer Payment</h3>
+            <div class="glass-card p-8 rounded-[2rem] border-3 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] bg-white space-y-6">
+              <h3 class="text-lg font-bold font-fredoka text-[#3E2A1E] border-b-2 border-[#E8E1D9] pb-3">02. Transfer Payment</h3>
               
               <!-- Tab Switcher -->
-              <div class="flex border border-white/10 rounded-xl overflow-hidden bg-black/30 p-1">
+              <div class="flex border-2 border-[#3E2A1E] rounded-xl overflow-hidden bg-[#F7F2EB] p-1 shadow-[2px_2px_0px_#3E2A1E]">
                 <button 
                   type="button"
                   id="tab-crypto"
-                  class="flex-1 py-3 text-sm font-outfit font-bold uppercase tracking-wider rounded-lg transition bg-white text-black"
+                  class="flex-1 py-3 text-sm font-fredoka font-bold uppercase tracking-wider rounded-lg transition bg-[#FFD6E0] border-r-2 border-[#3E2A1E] text-[#3E2A1E] shadow-[1px_1px_0px_#3E2A1E]"
                 >
                   Cryptocurrency
                 </button>
                 <button 
                   type="button"
                   id="tab-wire"
-                  class="flex-1 py-3 text-sm font-outfit font-bold uppercase tracking-wider rounded-lg transition text-zinc-400 hover:text-white"
+                  class="flex-1 py-3 text-sm font-quicksand font-bold uppercase tracking-wider rounded-lg transition text-[#6D5A50] hover:text-[#3E2A1E]"
                 >
                   Bank Wire
                 </button>
@@ -154,10 +153,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
               <!-- CRYPTO DETAILS -->
               <div id="payment-crypto-container" class="space-y-6">
-                <div class="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-6 space-y-4">
+                <div class="bg-[#D6E4FF]/45 border-2 border-[#3E2A1E] rounded-2xl p-6 space-y-4 shadow-[2px_2px_0px_#3E2A1E]">
                   <div class="flex items-start gap-4">
                     <!-- Dynamic QR from API -->
-                    <div class="w-24 h-24 bg-white p-1 rounded-xl flex items-center justify-center shrink-0 shadow-lg">
+                    <div class="w-24 h-24 bg-white p-1 rounded-xl flex items-center justify-center shrink-0 border-2 border-[#3E2A1E] shadow-md">
                       <img 
                         src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=THqSQXPyAvyxiH8EjVLsHf6YNa7XR31B3u" 
                         alt="Tron USDT QR Code" 
@@ -165,74 +164,74 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                       />
                     </div>
                     <div class="space-y-2 min-w-0">
-                      <span class="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-400/10 px-2.5 py-0.5 rounded-full border border-emerald-400/20">USDT TRC-20 Address</span>
-                      <p id="crypto-address-text" class="text-sm font-mono text-white break-all bg-black/40 p-2.5 rounded-lg border border-zinc-800 select-all">
+                      <span class="text-[10px] uppercase font-bold text-indigo-700 bg-indigo-100 px-2.5 py-0.5 rounded-full border border-indigo-200 font-quicksand">USDT TRC-20 Address</span>
+                      <p id="crypto-address-text" class="text-sm font-mono text-[#3E2A1E] break-all bg-[#FFFDF9] p-2.5 rounded-lg border-2 border-[#3E2A1E] select-all">
                         THqSQXPyAvyxiH8EjVLsHf6YNa7XR31B3u
                       </p>
                       <button 
                         type="button"
                         id="copy-crypto-btn"
-                        class="px-3 py-1.5 rounded-lg bg-zinc-800 text-xs font-bold text-white hover:bg-zinc-700 active:scale-95 transition"
+                        class="px-3 py-1.5 rounded-lg bg-white border-2 border-[#3E2A1E] text-xs font-bold text-[#3E2A1E] hover:bg-[#FFD6E0]/20 active:scale-95 transition font-fredoka shadow-[1px_1px_0px_#3E2A1E]"
                       >
                         Copy Wallet Address
                       </button>
                     </div>
                   </div>
-                  <p class="text-xs text-zinc-400 leading-relaxed">
+                  <p class="text-xs text-[#6D5A50] font-quicksand font-bold leading-relaxed">
                     Please transfer the exact order amount in USDT to the TRC-20 address above. Transactions will be validated via the blockchain.
                   </p>
                 </div>
 
                 <!-- Proof input -->
                 <div>
-                  <label for="txid" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">Transaction Hash (TxID)</label>
+                  <label for="txid" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">Transaction Hash (TxID)</label>
                   <input 
                     type="text" 
                     id="txid" 
                     name="txid" 
                     required 
                     placeholder="Enter blockchain transaction ID"
-                    class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                    class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                   />
-                  <p class="text-[10px] text-zinc-500 mt-1">Provide the TxID hash so we can automatically match this ledger action with your order.</p>
+                  <p class="text-[10px] text-[#6D5A50] font-quicksand font-semibold mt-1">Provide the TxID hash so we can automatically match this ledger action with your order.</p>
                 </div>
               </div>
 
               <!-- WIRE DETAILS (Hidden initially) -->
               <div id="payment-wire-container" class="space-y-6 hidden">
-                <div class="bg-[#C5A880]/5 border border-[#C5A880]/10 rounded-2xl p-6 space-y-4">
-                  <div class="space-y-3 font-outfit text-sm">
-                    <span class="inline-block text-[10px] uppercase font-bold text-[#C5A880] bg-[#C5A880]/10 px-2.5 py-0.5 rounded-full border border-[#C5A880]/20 mb-1">Kraken Wire Instructions</span>
+                <div class="bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-2xl p-6 space-y-4 shadow-[2px_2px_0px_#3E2A1E]">
+                  <div class="space-y-3 font-quicksand font-bold text-sm text-[#3E2A1E]">
+                    <span class="inline-block text-[10px] uppercase font-bold text-[#FF6B8B] bg-[#FFD6E0]/40 px-2.5 py-0.5 rounded-full border border-[#FF6B8B]/40 mb-1 font-fredoka">Kraken Wire Instructions</span>
                     
                     <!-- Reference / Memo is Critical -->
-                    <div class="grid grid-cols-3 gap-2 border-b border-red-500/20 pb-2 bg-red-500/5 p-2 rounded-lg">
-                      <span class="text-red-400 font-bold text-xs flex items-center">Reference / Memo<br/>(REQUIRED)</span>
-                      <span id="bank-memo-text" class="col-span-2 text-red-400 font-mono font-bold text-base flex items-center select-all">AA40 N84G W5VH 3FHQ</span>
+                    <div class="grid grid-cols-3 gap-2 border-b-2 border-red-200 pb-2 bg-red-50 p-2 rounded-lg">
+                      <span class="text-red-600 font-bold text-xs flex items-center">Reference / Memo<br/>(REQUIRED)</span>
+                      <span id="bank-memo-text" class="col-span-2 text-red-600 font-mono font-bold text-base flex items-center select-all">AA40 N84G W5VH 3FHQ</span>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-2 border-b border-white/5 pb-2">
-                      <span class="text-zinc-500">Account Holder</span>
-                      <span class="col-span-2 text-white font-semibold">Payward Trading Ltd.</span>
+                    <div class="grid grid-cols-3 gap-2 border-b-2 border-[#E8E1D9] pb-2">
+                      <span class="text-[#6D5A50]">Account Holder</span>
+                      <span class="col-span-2 text-[#3E2A1E] font-semibold">Payward Trading Ltd.</span>
                     </div>
-                    <div class="grid grid-cols-3 gap-2 border-b border-white/5 pb-2">
-                      <span class="text-zinc-500">IBAN Number</span>
-                      <span id="bank-iban-text" class="col-span-2 text-white font-mono font-semibold break-all select-all">LI82 0881 1010 4623 K003 U</span>
+                    <div class="grid grid-cols-3 gap-2 border-b-2 border-[#E8E1D9] pb-2">
+                      <span class="text-[#6D5A50]">IBAN Number</span>
+                      <span id="bank-iban-text" class="col-span-2 text-[#3E2A1E] font-mono font-semibold break-all select-all">LI82 0881 1010 4623 K003 U</span>
                     </div>
-                    <div class="grid grid-cols-3 gap-2 border-b border-white/5 pb-2">
-                      <span class="text-zinc-500">Account Number</span>
-                      <span id="bank-acct-text" class="col-span-2 text-white font-mono font-semibold select-all">0104623001003840</span>
+                    <div class="grid grid-cols-3 gap-2 border-b-2 border-[#E8E1D9] pb-2">
+                      <span class="text-[#6D5A50]">Account Number</span>
+                      <span id="bank-acct-text" class="col-span-2 text-[#3E2A1E] font-mono font-semibold select-all">0104623001003840</span>
                     </div>
-                    <div class="grid grid-cols-3 gap-2 border-b border-white/5 pb-2">
-                      <span class="text-zinc-500">SWIFT/BIC Code</span>
-                      <span id="swift-code-text" class="col-span-2 text-white font-mono font-semibold select-all">BFRILI22XXX</span>
+                    <div class="grid grid-cols-3 gap-2 border-b-2 border-[#E8E1D9] pb-2">
+                      <span class="text-[#6D5A50]">SWIFT/BIC Code</span>
+                      <span id="swift-code-text" class="col-span-2 text-[#3E2A1E] font-mono font-semibold select-all">BFRILI22XXX</span>
                     </div>
-                    <div class="grid grid-cols-3 gap-2 border-b border-white/5 pb-2">
-                      <span class="text-zinc-500">Receiving Bank</span>
-                      <span class="col-span-2 text-white font-semibold">Bank Frick</span>
+                    <div class="grid grid-cols-3 gap-2 border-b-2 border-[#E8E1D9] pb-2">
+                      <span class="text-[#6D5A50]">Receiving Bank</span>
+                      <span class="col-span-2 text-[#3E2A1E] font-semibold">Bank Frick</span>
                     </div>
                     <div class="grid grid-cols-3 gap-2">
-                      <span class="text-zinc-500">Bank Address</span>
-                      <span class="col-span-2 text-zinc-300 text-xs">Landstrasse 14, 9496 Balzers, Liechtenstein</span>
+                      <span class="text-[#6D5A50]">Bank Address</span>
+                      <span class="col-span-2 text-[#6D5A50] text-xs">Landstrasse 14, 9496 Balzers, Liechtenstein</span>
                     </div>
                   </div>
 
@@ -240,21 +239,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <button 
                       type="button"
                       id="copy-memo-btn"
-                      class="px-3 py-1.5 rounded-lg bg-red-500/20 border border-red-500/30 text-xs font-bold text-red-400 hover:bg-red-500/30 active:scale-95 transition"
+                      class="px-3 py-1.5 rounded-lg bg-red-100 border border-red-300 text-xs font-bold text-red-700 hover:bg-red-200 active:scale-95 transition font-fredoka shadow-[1px_1px_0px_#3E2A1E]"
                     >
                       Copy Reference / Memo
                     </button>
                     <button 
                       type="button"
                       id="copy-iban-btn"
-                      class="px-3 py-1.5 rounded-lg bg-zinc-800 text-xs font-bold text-white hover:bg-zinc-700 active:scale-95 transition"
+                      class="px-3 py-1.5 rounded-lg bg-white border-2 border-[#3E2A1E] text-xs font-bold text-[#3E2A1E] hover:bg-[#FFD6E0]/20 active:scale-95 transition font-fredoka shadow-[1px_1px_0px_#3E2A1E]"
                     >
                       Copy IBAN
                     </button>
                     <button 
                       type="button"
                       id="copy-swift-btn"
-                      class="px-3 py-1.5 rounded-lg bg-zinc-800 text-xs font-bold text-white hover:bg-zinc-700 active:scale-95 transition"
+                      class="px-3 py-1.5 rounded-lg bg-white border-2 border-[#3E2A1E] text-xs font-bold text-[#3E2A1E] hover:bg-[#FFD6E0]/20 active:scale-95 transition font-fredoka shadow-[1px_1px_0px_#3E2A1E]"
                     >
                       Copy SWIFT
                     </button>
@@ -264,23 +263,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <!-- Proof inputs -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label for="remitter" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">Remitter's Full Name</label>
+                    <label for="remitter" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand font-bold">Remitter's Full Name</label>
                     <input 
                       type="text" 
                       id="remitter" 
                       name="remitter_name" 
                       placeholder="Your name on the bank account"
-                      class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                      class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                     />
                   </div>
                   <div>
-                    <label for="sending-bank" class="block text-xs uppercase text-zinc-500 font-bold tracking-wider mb-2">Paying Bank Name</label>
+                    <label for="sending-bank" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand font-bold">Paying Bank Name</label>
                     <input 
                       type="text" 
                       id="sending-bank" 
                       name="sending_bank" 
                       placeholder="e.g. HSBC, Barclays"
-                      class="w-full bg-black/40 border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#C5A880] transition"
+                      class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
                     />
                   </div>
                 </div>
@@ -288,7 +287,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
 
             <!-- Validation Error Alert (Hidden by default) -->
-            <div id="error-message" class="hidden p-4 rounded-xl border border-red-500/20 bg-red-500/5 text-red-400 text-sm font-semibold">
+            <div id="error-message" class="hidden p-4 rounded-xl border border-red-200 bg-red-100 text-red-700 text-sm font-semibold font-quicksand">
               Something went wrong. Please verify the required inputs.
             </div>
 
@@ -296,17 +295,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <button 
               type="submit"
               id="submit-order-btn"
-              class="w-full py-4 rounded-xl bg-white hover:bg-[#C5A880] text-black font-bold uppercase tracking-wider text-sm font-outfit transition-all duration-300 hover:scale-[1.01] active:scale-[0.99]"
+              class="w-full py-4 rounded-xl bg-[#FFD6E0] border-3 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFB3C6] font-bold uppercase tracking-wider text-sm font-fredoka transition-all duration-300 shadow-[4px_4px_0px_#3E2A1E] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_#3E2A1E] active:scale-[0.99] cursor-pointer"
             >
-              Verify & Complete Order
+              Verify & Complete Order 🐾
             </button>
           </form>
         </div>
 
         <!-- Right Side: Order Summary -->
         <div class="lg:col-span-5">
-          <div class="glass-card p-8 rounded-2xl border border-white/5 space-y-6 sticky top-28">
-            <h3 class="text-lg font-bold font-outfit text-white border-b border-white/5 pb-3">Bag Summary</h3>
+          <div class="glass-card p-8 rounded-[2rem] border-3 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] bg-white space-y-6 sticky top-28">
+            <h3 class="text-lg font-bold font-fredoka text-[#3E2A1E] border-b-2 border-[#E8E1D9] pb-3">Bag Summary 🧁</h3>
             
             <!-- Items list -->
             <div id="checkout-summary-list" class="space-y-4 max-h-[300px] overflow-y-auto pr-2">
@@ -314,16 +313,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
 
             <!-- Price Breakdown -->
-            <div class="pt-6 border-t border-white/5 space-y-2 text-sm text-zinc-400">
+            <div class="pt-6 border-t-2 border-[#E8E1D9] space-y-2 text-sm text-[#6D5A50] font-quicksand font-bold">
               <div class="flex justify-between">
                 <span>Subtotal</span>
-                <span id="checkout-subtotal" class="text-white">$0.00</span>
+                <span id="checkout-subtotal" class="text-[#3E2A1E] font-fredoka">$0.00</span>
               </div>
               <div class="flex justify-between">
                 <span>Shipping Logistics</span>
-                <span class="text-emerald-400 font-bold uppercase tracking-widest text-xs">Free Courier</span>
+                <span class="text-indigo-600 font-bold uppercase tracking-widest text-xs">Free Courier 🧁</span>
               </div>
-              <div class="flex justify-between text-white font-bold font-outfit text-lg pt-4 border-t border-white/5">
+              <div class="flex justify-between text-[#FF6B8B] font-bold font-fredoka text-xl pt-4 border-t-2 border-[#3E2A1E]">
                 <span>Grand Total</span>
                 <span id="checkout-grand-total">$0.00</span>
               </div>
@@ -334,26 +333,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- SUCCESS SCREEN (Hidden initially) -->
-      <div id="checkout-success-view" class="hidden max-w-xl mx-auto text-center py-20 px-6 space-y-8 glass-card border border-white/5 rounded-3xl glow-gold">
-        <div class="w-20 h-20 rounded-full bg-[#C5A880]/10 border border-[#C5A880]/20 flex items-center justify-center mx-auto text-[#C5A880]">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <div id="checkout-success-view" class="hidden max-w-xl mx-auto text-center py-20 px-6 space-y-8 glass-card border-3 border-[#3E2A1E] shadow-[8px_8px_0px_#3E2A1E] rounded-[2rem] bg-white">
+        <div class="w-20 h-20 rounded-full bg-green-100 border-2 border-[#3E2A1E] flex items-center justify-center mx-auto text-green-600 shadow-[2px_2px_0px_#3E2A1E]">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
         <div class="space-y-4">
-          <h2 class="text-3xl font-extrabold font-outfit text-white tracking-tight">Order Logged Successfully</h2>
-          <p class="text-zinc-400 text-sm leading-relaxed max-w-sm mx-auto">
+          <h2 class="text-3xl font-bold font-fredoka text-[#3E2A1E] tracking-tight">Order Logged Successfully 🎉</h2>
+          <p class="text-[#6D5A50] text-sm leading-relaxed max-w-sm mx-auto font-quicksand font-bold">
             Your verification request is registered in our queue. We will check the ledger/transfer and dispatch your tracking coordinates & digital items to your email.
           </p>
         </div>
-        <div class="border-t border-white/5 pt-6 text-zinc-500 text-xs">
-          Order reference: <span id="checkout-reference-id" class="font-mono text-white font-bold">CA-837492</span>
+        <div class="border-t-2 border-[#E8E1D9] pt-6 text-[#6D5A50] text-xs font-quicksand font-bold">
+          Order reference: <span id="checkout-reference-id" class="font-mono text-[#3E2A1E] font-bold">CA-837492</span>
         </div>
         <a 
           href="/" 
-          class="inline-block px-8 py-3 rounded-xl bg-white hover:bg-[#C5A880] text-black font-bold uppercase tracking-wider text-xs font-outfit transition-all duration-300"
+          class="inline-block px-8 py-3 rounded-xl bg-[#FFD6E0] border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFB3C6] font-bold uppercase tracking-wider text-xs font-fredoka transition-all duration-300 shadow-[2px_2px_0px_#3E2A1E]"
         >
-          Return to Boutique
+          Return to Boutique 🐶
         </a>
       </div>
 

@@ -11,7 +11,7 @@ export interface Props {
 
 const {
   title,
-  description = "Premium Brand E-Commerce Store — Shop Digital Assets & Apparel.",
+  description = "Cozy Chibi Account Vault — Shop Premium Digital Accounts & Services instantly.",
   ogImage = "/images/og-image.png",
 } = Astro.props;
 
@@ -23,7 +23,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0B0B0C" />
+    <meta name="theme-color" content="#FFFDF9" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
@@ -34,7 +34,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -59,7 +59,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
       gtag('config', 'G-4RBFJ76E2B');
     </script>
   </head>
-  <body class="min-h-screen flex flex-col bg-[#0B0B0C] text-[#E4E4E7]">
+  <body class="min-h-screen flex flex-col bg-[#FFFDF9] text-[#3E2A1E]">
     <slot />
     <TelegramChat />
   </body>

@@ -1,152 +1,52 @@
 ---
 ---
-<!-- Film Strip Category Selection Carousel -->
-<div class="relative py-12 bg-[#09090A] border-y border-white/5 my-16 overflow-hidden select-none">
-  
-  <!-- Top sprocket tape strip -->
-  <div class="absolute top-0 left-0 right-0 h-4 bg-zinc-950 border-b border-white/5 film-strip-sprockets opacity-40"></div>
-  
-  <div class="max-w-7xl mx-auto px-6 flex flex-col items-center relative z-10">
-    
-    <!-- Title header inside film -->
-    <div class="text-center mb-8 space-y-1">
-      <span class="text-[10px] font-bold uppercase tracking-widest text-[#C5A880]">INTERACTIVE CAROUSEL</span>
-      <h2 class="text-2xl font-extrabold font-outfit text-white">Select Department</h2>
+<!-- Cute Kawaii Tilted Scrolling Ribbon Marquee -->
+<div class="relative py-8 bg-[#FFD6E0] border-y-3 border-[#3E2A1E] my-16 overflow-hidden select-none rotate-[-1deg] shadow-[4px_4px_0px_#3E2A1E]">
+  <div class="marquee-container flex whitespace-nowrap gap-12 font-fredoka text-base md:text-lg font-bold text-[#3E2A1E] tracking-wider">
+    <div class="marquee-content flex gap-12 animate-marquee">
+      <span>✨ AUTO DISPATCH 24/7</span>
+      <span>🐶 COZY PUPPY VAULT</span>
+      <span>🌟 700+ PREMIUM DIGITAL ACCOUNTS</span>
+      <span>🧁 INSTANT DECRYPTION</span>
+      <span>🎀 ZERO MIDDLEMAN FEES</span>
+      <span>🐾 SECURE LEDGER PROTOCOL</span>
+      <span>✨ AUTO DISPATCH 24/7</span>
+      <span>🐶 COZY PUPPY VAULT</span>
+      <span>🌟 700+ PREMIUM DIGITAL ACCOUNTS</span>
+      <span>🧁 INSTANT DECRYPTION</span>
+      <span>🎀 ZERO MIDDLEMAN FEES</span>
+      <span>🐾 SECURE LEDGER PROTOCOL</span>
     </div>
-
-    <!-- Department Film Frame Containers -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-      
-      <!-- Frame 1: Digital Vault -->
-      <div 
-        id="film-frame-digital"
-        class="film-card relative group aspect-[16/9] sm:aspect-[21/9] md:aspect-[18/9] rounded-2xl overflow-hidden border border-white/5 shadow-2xl hover:border-emerald-400/40 transition-all duration-500 cursor-pointer"
-        style="transform: perspective(1000px) rotateX(0deg) rotateY(0deg);"
-      >
-        <!-- Card highlight glow on hover -->
-        <div class="absolute inset-0 bg-gradient-to-t from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"></div>
-        
-        <!-- Film strip borders overlays inside card -->
-        <div class="absolute left-0 top-0 bottom-0 w-2.5 bg-black/60 border-r border-white/10 z-20 flex flex-col justify-between py-2 text-[6px] text-zinc-600 font-mono text-center select-none pointer-events-none">
-          <span>KODAK</span><span>5062</span><span>KODAK</span><span>5062</span>
-        </div>
-        <div class="absolute right-0 top-0 bottom-0 w-2.5 bg-black/60 border-l border-white/10 z-20 flex flex-col justify-between py-2 text-[6px] text-zinc-600 font-mono text-center select-none pointer-events-none">
-          <span>KODAK</span><span>5062</span><span>KODAK</span><span>5062</span>
-        </div>
-
-        <!-- Concept background image -->
-        <img 
-          src="/images/hero-bg.jpg" 
-          alt="Digital Accounts Department" 
-          class="film-img absolute inset-0 w-full h-full object-cover opacity-45 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out select-none"
-          draggable="false"
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent pointer-events-none z-10"></div>
-
-        <!-- Content -->
-        <div class="absolute inset-0 pl-8 pr-6 py-6 flex flex-col justify-between z-10 text-left">
-          <span class="px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 w-fit">
-            Digital Account Vault
-          </span>
-          <div class="space-y-1">
-            <h3 class="text-lg font-extrabold text-white font-outfit group-hover:text-emerald-400 transition-colors">虚拟产品 (Virtual Vault)</h3>
-            <p class="text-xs text-zinc-400 font-light leading-relaxed max-w-sm">
-              即刻获取 716 款 GPT 成品号、API 接口、Telegram 会员、推特及海外社媒增值账号。
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Frame 2: Apparel Department -->
-      <div 
-        id="film-frame-apparel"
-        class="film-card relative group aspect-[16/9] sm:aspect-[21/9] md:aspect-[18/9] rounded-2xl overflow-hidden border border-white/5 shadow-2xl hover:border-[#C5A880]/40 transition-all duration-500 cursor-pointer"
-        style="transform: perspective(1000px) rotateX(0deg) rotateY(0deg);"
-      >
-        <!-- Card highlight glow on hover -->
-        <div class="absolute inset-0 bg-gradient-to-t from-[#C5A880]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"></div>
-
-        <!-- Film strip borders overlays inside card -->
-        <div class="absolute left-0 top-0 bottom-0 w-2.5 bg-black/60 border-r border-white/10 z-20 flex flex-col justify-between py-2 text-[6px] text-zinc-600 font-mono text-center select-none pointer-events-none">
-          <span>KODAK</span><span>5062</span><span>KODAK</span><span>5062</span>
-        </div>
-        <div class="absolute right-0 top-0 bottom-0 w-2.5 bg-black/60 border-l border-white/10 z-20 flex flex-col justify-between py-2 text-[6px] text-zinc-600 font-mono text-center select-none pointer-events-none">
-          <span>KODAK</span><span>5062</span><span>KODAK</span><span>5062</span>
-        </div>
-
-        <!-- Abstract clothing image -->
-        <img 
-          src="/images/hoodie.png" 
-          alt="Physical Apparel Department" 
-          class="film-img absolute inset-0 w-full h-full object-cover opacity-35 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out select-none"
-          draggable="false"
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent pointer-events-none z-10"></div>
-
-        <!-- Content -->
-        <div class="absolute inset-0 pl-8 pr-6 py-6 flex flex-col justify-between z-10 text-left">
-          <span class="px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full bg-[#C5A880]/10 text-[#C5A880] border border-[#C5A880]/20 w-fit">
-            Apparel Collection
-          </span>
-          <div class="space-y-1">
-            <h3 class="text-lg font-extrabold text-white font-outfit group-hover:text-[#C5A880] transition-colors">实体服饰类 (Streetwear)</h3>
-            <p class="text-xs text-zinc-400 font-light leading-relaxed max-w-sm">
-              重磅 450GSM 有机棉、全手工重工刺绣、潮牌几何概念帽衫与黑光显色荧光 T 恤。
-            </p>
-          </div>
-        </div>
-      </div>
-
+    <div class="marquee-content flex gap-12 animate-marquee" aria-hidden="true">
+      <span>✨ AUTO DISPATCH 24/7</span>
+      <span>🐶 COZY PUPPY VAULT</span>
+      <span>🌟 700+ PREMIUM DIGITAL ACCOUNTS</span>
+      <span>🧁 INSTANT DECRYPTION</span>
+      <span>🎀 ZERO MIDDLEMAN FEES</span>
+      <span>🐾 SECURE LEDGER PROTOCOL</span>
+      <span>✨ AUTO DISPATCH 24/7</span>
+      <span>🐶 COZY PUPPY VAULT</span>
+      <span>🌟 700+ PREMIUM DIGITAL ACCOUNTS</span>
+      <span>🧁 INSTANT DECRYPTION</span>
+      <span>🎀 ZERO MIDDLEMAN FEES</span>
+      <span>🐾 SECURE LEDGER PROTOCOL</span>
     </div>
-
   </div>
-
-  <!-- Bottom sprocket tape strip -->
-  <div class="absolute bottom-0 left-0 right-0 h-4 bg-zinc-950 border-t border-white/5 film-strip-sprockets opacity-40"></div>
 </div>
 
-<script>
-  function setupFilmCards() {
-    const cards = document.querySelectorAll('.film-card');
-    
-    cards.forEach(card => {
-      const img = card.querySelector('.film-img') as HTMLImageElement;
-      
-      card.addEventListener('mousemove', (e: MouseEvent) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const deltaX = (x - centerX) / centerX;
-        const deltaY = (y - centerY) / centerY;
-
-        // Slight 3D rotation tilt
-        const rotateY = deltaX * 10;
-        const rotateX = -deltaY * 10;
-
-        (card as HTMLElement).style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        if (img) img.style.transform = `scale(1.05)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        (card as HTMLElement).style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-        if (img) img.style.transform = `scale(1)`;
-      });
-    });
-
-    // Navigation click links
-    const btnDigital = document.getElementById('film-frame-digital');
-    const btnApparel = document.getElementById('film-frame-apparel');
-
-    btnDigital?.addEventListener('click', () => {
-      document.getElementById('digital')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-
-    btnApparel?.addEventListener('click', () => {
-      document.getElementById('apparel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+<style>
+  .marquee-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
   }
 
-  setupFilmCards();
-</script>
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+</style>

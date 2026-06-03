@@ -4,226 +4,174 @@
 
 @layer base {
   html {
-    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+    font-family: 'Fredoka', 'Quicksand', system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    background-color: #0B0B0C;
+    background-color: #FFFDF9;
   }
   body {
-    background-color: #0B0B0C;
-    color: #E4E4E7; /* gray-300 */
+    background-color: #FFFDF9;
+    color: #3E2A1E; /* Cozy cocoa dark brown */
     overflow-x: hidden;
   }
   ::selection {
-    background-color: #C5A880; /* Gold */
-    color: #0B0B0C;
+    background-color: #FFD6E0; /* Cute strawberry pink */
+    color: #3E2A1E;
   }
 
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #0B0B0C;
+    background: #FFFDF9;
   }
   ::-webkit-scrollbar-thumb {
-    background: #27272A; /* gray-800 */
-    border-radius: 4px;
+    background: #FFD6E0;
+    border: 3px solid #FFFDF9;
+    border-radius: 8px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #3F3F46; /* gray-700 */
+    background: #FFB3C6;
   }
 }
 
 @layer utilities {
-  /* Glassmorphism */
+  /* Cute Bubbly Card (Neo-brutalism chibi) */
   .glass-card {
-    background: rgba(18, 18, 20, 0.7);
+    background: #FFFFFF;
+    border: 3px solid #3E2A1E;
+    box-shadow: 4px 4px 0px #3E2A1E;
+    border-radius: 24px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .glass-card:hover {
+    transform: translateY(-4px) rotate(0.5deg);
+    box-shadow: 8px 8px 0px #3E2A1E;
+  }
+
+  /* Cute sticky nav */
+  .glass-nav {
+    background: rgba(255, 253, 249, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 3px solid #3E2A1E;
   }
 
-  .glass-nav {
-    background: rgba(11, 11, 12, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  /* Text Gradients */
+  /* Text Gradients (Kawaii pastel gradients) */
   .text-gradient-gold {
-    background: linear-gradient(135deg, #F5E3C6 0%, #C5A880 50%, #9A7B56 100%);
+    background: linear-gradient(135deg, #FF9EAF 0%, #FF6B8B 50%, #E86A92 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-crypto {
-    background: linear-gradient(135deg, #A7F3D0 0%, #10B981 50%, #064E3B 100%);
+    background: linear-gradient(135deg, #A7F3D0 0%, #059669 50%, #047857 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-silver {
-    background: linear-gradient(135deg, #FFFFFF 0%, #D4D4D8 50%, #71717A 100%);
+    background: linear-gradient(135deg, #C084FC 0%, #818CF8 50%, #6366F1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  /* Glow Effects */
+  /* Cute Glow Effects (Soft pastel clouds) */
   .glow-gold {
-    box-shadow: 0 0 25px rgba(197, 168, 128, 0.15);
+    box-shadow: 0 0 25px rgba(255, 158, 175, 0.25);
   }
 
   .glow-crypto {
-    box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+    box-shadow: 0 0 25px rgba(5, 150, 105, 0.2);
   }
 
-  /* Custom Hover Transition */
+  /* Bouncy Hover Lift */
   .hover-lift {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
   }
   .hover-lift:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px) rotate(1deg);
+    box-shadow: 8px 8px 0px #3E2A1E;
   }
 
   /* Rich Product Descriptions Render styles */
   .prose-dark p {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    color: #D4D4D8; /* gray-300 */
+    color: #4A3E3D;
     line-height: 1.6;
   }
   .prose-dark b, .prose-dark strong {
     font-weight: 700;
-    color: #FFFFFF;
+    color: #271C19;
   }
   .prose-dark h3 {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 700;
-    color: #F4F4F5;
+    color: #3E2A1E;
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
-    border-left: 3px solid #C5A880;
-    padding-left: 0.5rem;
+    border-left: 4px solid #FF9EAF;
+    padding-left: 0.6rem;
   }
   .prose-dark a {
-    color: #C5A880;
+    color: #FF6B8B;
     text-decoration: underline;
     transition: color 0.2s ease;
   }
   .prose-dark a:hover {
-    color: #FFFFFF;
+    color: #FF3E6C;
   }
 
-  /* CRT TV Preloader & Screen Effects */
+  /* Cute Bouncing Preloader & Bouncy Animation effects */
   .crt-screen {
     position: relative;
     overflow: hidden;
-    background-color: #031405; /* Deep phosphor green background */
-    box-shadow: inset 0 0 80px rgba(0, 0, 0, 1), 0 0 30px rgba(20, 240, 20, 0.05);
+    background-color: #FFF5F7; /* Soft pink-cream loading screen */
+    box-shadow: inset 0 0 40px rgba(255, 182, 193, 0.3);
   }
 
-  /* Curved screen mask simulating vintage CRT glass */
-  .crt-curve {
-    position: relative;
-  }
-  .crt-curve::after {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: radial-gradient(circle, rgba(18, 16, 16, 0) 60%, rgba(0, 0, 0, 0.8) 120%);
-    z-index: 5;
-    pointer-events: none;
-  }
-
-  .crt-scanlines {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(
-      rgba(18, 16, 16, 0) 50%, 
-      rgba(0, 0, 0, 0.35) 50%
-    );
-    background-size: 100% 4px;
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  .crt-noise {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.07;
-    z-index: 4;
-    pointer-events: none;
-    animation: crt-fuzz 0.15s steps(2) infinite;
-  }
-
-  @keyframes crt-fuzz {
-    0% { background-position: 0 0; }
-    100% { background-position: 5% 5%; }
-  }
-
-  .crt-sweeper {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgba(20,250,20,0) 0%,
-      rgba(20,250,20,0.06) 10%,
-      rgba(20,250,20,0.12) 20%,
-      rgba(20,250,20,0.06) 30%,
-      rgba(20,250,20,0) 40%
-    );
-    z-index: 3;
-    pointer-events: none;
-    animation: scanline-sweep 4s linear infinite;
-  }
-
-  @keyframes scanline-sweep {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-  }
-
-  /* Retro CRT power-off collapse animation */
+  /* Retro CRT power-off collapse animation adjusted for cute transition */
   @keyframes crt-off-collapse {
     0% {
       transform: scaleY(1) scaleX(1);
-      filter: brightness(1.2) contrast(1);
+      opacity: 1;
     }
-    35% {
-      transform: scaleY(0.006) scaleX(1);
-      filter: brightness(4) contrast(1.5);
-    }
-    75% {
-      transform: scaleY(0.006) scaleX(0.006);
-      filter: brightness(15) contrast(3);
-      background-color: #fff;
+    40% {
+      transform: scaleY(0.01) scaleX(1.1);
+      opacity: 0.8;
+      background-color: #FFD6E0;
     }
     100% {
       transform: scaleY(0) scaleX(0);
-      filter: brightness(0);
-      background-color: #fff;
+      opacity: 0;
+      background-color: #FFF;
     }
   }
 
   .crt-collapse {
-    animation: crt-off-collapse 0.55s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+    animation: crt-off-collapse 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
 
-  /* Phosphor green text glow */
-  .glow-green-text {
-    text-shadow: 0 0 4px rgba(20, 250, 20, 0.6), 0 0 10px rgba(20, 250, 20, 0.3);
+  /* Bouncing keyframe animation for mascot and loaders */
+  @keyframes cute-bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(0.97); }
   }
 
-  /* Film Strip Styles */
+  .animate-cute-bounce {
+    animation: cute-bounce 2s infinite ease-in-out;
+  }
+
+  /* Cute filmstrip or tape design */
   .film-strip-sprockets {
     background-image: repeating-linear-gradient(
       90deg,
-      #0B0B0C 0px,
-      #0B0B0C 14px,
+      #FFFDF9 0px,
+      #FFFDF9 14px,
       transparent 14px,
       transparent 28px
     );
@@ -231,3 +179,4 @@
     background-repeat: repeat-x;
   }
 }
+
