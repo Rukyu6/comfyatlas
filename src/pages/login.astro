@@ -47,6 +47,17 @@ import Footer from '../components/Footer.astro';
 
         <!-- Main Auth Form -->
         <form id="auth-form" class="space-y-4">
+          <!-- Username Field (Only visible on Register tab) -->
+          <div id="username-field" class="space-y-1 text-left hidden">
+            <label for="username" class="text-[10px] font-bold uppercase tracking-wider text-zinc-600 font-fredoka">Username / Nickname</label>
+            <input 
+              type="text" 
+              id="username" 
+              placeholder="e.g. MyNickname"
+              class="w-full bg-white border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-sm text-[#3E2A1E] placeholder-zinc-400 focus:outline-none focus:border-[#FF9EAF] transition-all duration-300 shadow-[2px_2px_0px_#3E2A1E]"
+            />
+          </div>
+
           <!-- Email Field -->
           <div class="space-y-1 text-left">
             <label for="email" class="text-[10px] font-bold uppercase tracking-wider text-zinc-600 font-fredoka">Email Address</label>
@@ -127,7 +138,8 @@ import Footer from '../components/Footer.astro';
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword, 
     signInWithPopup, 
-    GoogleAuthProvider 
+    GoogleAuthProvider,
+    updateProfile
   } from '../lib/firebase.js';
 
   let currentTab = 'signin'; // 'signin' or 'register'
@@ -142,6 +154,8 @@ import Footer from '../components/Footer.astro';
   const authForm = document.getElementById('auth-form');
   const emailInput = document.getElementById('email') as HTMLInputElement;
   const passwordInput = document.getElementById('password') as HTMLInputElement;
+  const usernameField = document.getElementById('username-field');
+  const usernameInput = document.getElementById('username') as HTMLInputElement;
   const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
   const btnText = document.getElementById('btn-text');
   const btnSpinner = document.getElementById('btn-spinner');
@@ -159,6 +173,9 @@ import Footer from '../components/Footer.astro';
       if (authTitle) authTitle.textContent = "Welcome Back";
       if (authSubtitle) authSubtitle.textContent = "Sign in to manage your digital vault and tracking";
       if (btnText) btnText.textContent = "Access Secure Account";
+
+      if (usernameField) usernameField.classList.add('hidden');
+      if (usernameInput) usernameInput.required = false;
     } else {
       tabRegister?.classList.add('bg-[#FF9EAF]', 'text-white', 'border-2', 'border-[#3E2A1E]', 'shadow-[2px_2px_0px_#3E2A1E]');
       tabRegister?.classList.remove('text-zinc-500', 'hover:text-[#3E2A1E]');
@@ -168,6 +185,9 @@ import Footer from '../components/Footer.astro';
       if (authTitle) authTitle.textContent = "Create Account";
       if (authSubtitle) authSubtitle.textContent = "Register to unlock automated vault dispatches and tracking";
       if (btnText) btnText.textContent = "Register & Get Access";
+
+      if (usernameField) usernameField.classList.remove('hidden');
+      if (usernameInput) usernameInput.required = true;
     }
     hideError();
   }
@@ -211,7 +231,11 @@ import Footer from '../components/Footer.astro';
       if (currentTab === 'signin') {
         await signInWithEmailAndPassword(authInstance, email, password);
       } else {
-        await createUserWithEmailAndPassword(authInstance, email, password);
+        const username = usernameInput.value.trim();
+        const cred = await createUserWithEmailAndPassword(authInstance, email, password);
+        if (cred && cred.user) {
+          await updateProfile(cred.user, { displayName: username });
+        }
       }
       // Successful Auth redirect
       window.location.href = redirectPath;

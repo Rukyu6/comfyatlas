@@ -6,7 +6,8 @@ import {
   signInWithPopup as fbSignInWithPopup, 
   signOut as fbSignOut, 
   onAuthStateChanged as fbOnAuthStateChanged,
-  GoogleAuthProvider as fbGoogleAuthProvider
+  GoogleAuthProvider as fbGoogleAuthProvider,
+  updateProfile as fbUpdateProfile
 } from 'firebase/auth';
 import { 
   getFirestore, 
@@ -124,6 +125,19 @@ export const createUserWithEmailAndPassword = async (authObj, email, password) =
   localStorage.setItem('mock_user', JSON.stringify(userPayload));
   mockAuthInstance._triggerChange();
   return { user: userPayload };
+};
+
+export const updateProfile = async (user, profile) => {
+  if (isFirebaseConfigured && auth) {
+    return fbUpdateProfile(user, profile);
+  }
+  // Mock profile update
+  if (mockAuthInstance.currentUser) {
+    mockAuthInstance.currentUser.displayName = profile.displayName;
+    localStorage.setItem('mock_user', JSON.stringify(mockAuthInstance.currentUser));
+    mockAuthInstance._triggerChange();
+  }
+  return true;
 };
 
 export const signInWithPopup = async (authObj, provider) => {

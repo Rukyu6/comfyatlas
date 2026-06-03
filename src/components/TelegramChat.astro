@@ -1,7 +1,6 @@
 ---
 // Telegram Support Chat Widget Component
-const botUsername = import.meta.env.PUBLIC_TELEGRAM_BOT_USERNAME || 'PuppyShop_Support_Bot';
-const telegramLink = `https://t.me/${botUsername}`;
+const telegramLink = 'https://t.me/RukyuCrono';
 ---
 
 <!-- Fixed Container -->
@@ -10,22 +9,22 @@ const telegramLink = `https://t.me/${botUsername}`;
   <!-- Chat Popup Window -->
   <div 
     id="telegram-chat-window" 
-    class="hidden opacity-0 scale-95 origin-bottom-right transition-all duration-300 w-80 sm:w-96 rounded-2xl glass-card border border-white/10 shadow-2xl overflow-hidden mb-4"
+    class="hidden opacity-0 scale-95 origin-bottom-right transition-all duration-300 w-80 sm:w-96 rounded-3xl bg-[#FFFDF9] border-2 border-[#3E2A1E] shadow-[8px_8px_0px_rgba(62,42,30,0.15)] overflow-hidden mb-4"
   >
     <!-- Header -->
-    <div class="bg-gradient-to-r from-sky-600 to-blue-500 p-4 text-white flex items-center justify-between">
+    <div class="bg-gradient-to-r from-[#FF9EAF] to-[#FFD6E0] p-4 text-[#3E2A1E] flex items-center justify-between border-b-2 border-[#3E2A1E]">
       <div class="flex items-center gap-3">
         <!-- Bot Avatar indicator -->
         <div class="relative">
-          <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-sm border border-white/20">
+          <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center font-bold text-sm border-2 border-[#3E2A1E] shadow-[2px_2px_0px_rgba(62,42,30,1)]">
             🐶
           </div>
           <!-- Online status dot -->
-          <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-blue-500 rounded-full"></span>
+          <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-[#3E2A1E] rounded-full"></span>
         </div>
-        <div class="text-left">
-          <h4 class="text-xs font-bold font-outfit uppercase tracking-wider">Puppy Support Bot</h4>
-          <span class="text-[9px] text-sky-100 flex items-center gap-1 font-semibold">
+        <div class="text-left font-fredoka">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[#3E2A1E]">Puppy Support Bot</h4>
+          <span class="text-[9px] text-[#3E2A1E]/80 flex items-center gap-1 font-semibold">
             ● ONLINE SUPPORT
           </span>
         </div>
@@ -34,7 +33,7 @@ const telegramLink = `https://t.me/${botUsername}`;
       <button 
         type="button" 
         id="telegram-close-btn" 
-        class="text-sky-100 hover:text-white hover:bg-white/10 p-1.5 rounded-full transition"
+        class="text-[#3E2A1E] hover:bg-black/5 p-1.5 rounded-full transition"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -43,12 +42,12 @@ const telegramLink = `https://t.me/${botUsername}`;
     </div>
 
     <!-- Message Body -->
-    <div class="p-4 space-y-4 max-h-[250px] overflow-y-auto bg-black/60">
+    <div id="telegram-chat-messages" class="p-4 space-y-4 h-[250px] overflow-y-auto bg-[#FFFDF9] border-b border-[#3E2A1E]/10">
       
       <!-- Bot welcome bubble -->
       <div class="flex items-start gap-2.5 max-w-[85%] text-left">
-        <div class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-        <div class="bg-zinc-900 border border-white/5 rounded-2xl rounded-tl-none p-3 text-[11px] text-zinc-300 leading-relaxed font-light">
+        <div class="w-6 h-6 rounded-full bg-[#3E2A1E] text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">🤖</div>
+        <div class="bg-[#FFD6E0]/30 border-2 border-[#FFD6E0] rounded-2xl rounded-tl-none p-3 text-[11px] text-[#3E2A1E] leading-relaxed font-fredoka">
           Hello! Welcome to <strong>Puppy Shop</strong> support. 👋
           <br/><br/>
           I can instantly decrypt your digital card keys, verify your bank wire transfer, or help you track shipping coordinates.
@@ -57,28 +56,28 @@ const telegramLink = `https://t.me/${botUsername}`;
 
       <!-- Instruction bubble -->
       <div class="flex items-start gap-2.5 max-w-[85%] text-left">
-        <div class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-        <div class="bg-zinc-900 border border-white/5 rounded-2xl rounded-tl-none p-3 text-[11px] text-zinc-300 leading-relaxed font-light">
-          Type your inquiry below or tap <strong>"Start Chat"</strong> to open Telegram.
+        <div class="w-6 h-6 rounded-full bg-[#3E2A1E] text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">🤖</div>
+        <div class="bg-[#FFD6E0]/30 border-2 border-[#FFD6E0] rounded-2xl rounded-tl-none p-3 text-[11px] text-[#3E2A1E] leading-relaxed font-fredoka">
+          Type your inquiry below and we will notify the owner instantly, or click <strong>"Contact Blogger"</strong> to chat directly.
         </div>
       </div>
 
     </div>
 
     <!-- Input Area -->
-    <div class="p-3 bg-zinc-950 border-t border-white/5 text-left space-y-2">
+    <div class="p-3 bg-[#FFFDF9] text-left space-y-2">
       <!-- Decorative Input -->
       <div class="relative">
         <textarea 
           id="telegram-chat-input"
-          placeholder="Describe your issue (e.g., Verify Order ord_8372)..."
+          placeholder="Describe your issue (e.g. Verify Order)..."
           rows="2"
-          class="w-full bg-black/40 border border-zinc-800 rounded-xl pl-3 pr-10 py-2.5 text-[11px] text-white placeholder-zinc-600 focus:outline-none focus:border-sky-500/50 transition-all duration-300 resize-none font-sans"
+          class="w-full bg-white border-2 border-[#3E2A1E] rounded-2xl pl-3 pr-10 py-2.5 text-[11px] text-[#3E2A1E] placeholder-[#3E2A1E]/40 focus:outline-none focus:ring-2 focus:ring-[#FF9EAF]/30 transition-all duration-300 resize-none font-sans"
         ></textarea>
         <button 
           type="button" 
           id="telegram-send-btn"
-          class="absolute right-2.5 bottom-3.5 text-sky-400 hover:text-white p-1 rounded-lg hover:bg-sky-500/10 active:scale-95 transition"
+          class="absolute right-2.5 bottom-3.5 text-[#FF9EAF] hover:text-[#FFB3C6] p-1 rounded-lg hover:bg-[#FF9EAF]/10 active:scale-95 transition"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 transform rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -92,13 +91,13 @@ const telegramLink = `https://t.me/${botUsername}`;
         target="_blank"
         rel="noopener noreferrer"
         id="telegram-direct-btn"
-        class="w-full py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold rounded-xl text-[10px] font-outfit uppercase tracking-wider transition duration-300 flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(56,189,248,0.25)] hover:scale-[1.01] decoration-none"
+        class="w-full py-2.5 bg-[#3E2A1E] hover:bg-[#523727] text-[#FFFDF9] font-bold rounded-2xl text-[10px] font-fredoka uppercase tracking-wider transition duration-300 flex items-center justify-center gap-2 border-2 border-[#3E2A1E] shadow-[4px_4px_0px_rgba(62,42,30,0.15)] hover:scale-[1.01] decoration-none hover:shadow-none hover:translate-y-0.5"
       >
         <!-- Mini Telegram Icon -->
         <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.27-2.03-.49-.82-.27-1.47-.42-1.42-.88.03-.24.36-.49.99-.74 3.89-1.69 6.48-2.8 7.78-3.33 3.69-1.52 4.45-1.78 4.95-1.79.11 0 .36.03.52.16.13.11.17.27.19.38.02.13.02.38-.01.52z"/>
         </svg>
-        Start Chat on Telegram
+        Contact Blogger on Telegram
       </a>
     </div>
 
@@ -108,13 +107,13 @@ const telegramLink = `https://t.me/${botUsername}`;
   <button 
     id="telegram-widget-trigger" 
     type="button" 
-    class="relative w-14 h-14 rounded-full bg-gradient-to-tr from-sky-500 via-sky-600 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
+    class="relative w-14 h-14 rounded-full bg-[#FF9EAF] border-2 border-[#3E2A1E] hover:bg-[#FFB3C6] text-[#3E2A1E] shadow-[4px_4px_0px_rgba(62,42,30,1)] flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
   >
     <!-- Background pulse indicator -->
-    <span class="absolute -inset-1.5 bg-sky-500/25 rounded-full filter blur-md animate-ping opacity-60 pointer-events-none"></span>
+    <span class="absolute -inset-1.5 bg-[#FF9EAF]/25 rounded-full filter blur-md animate-ping opacity-60 pointer-events-none"></span>
 
     <!-- Message count indicator -->
-    <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-red-500 text-[9px] font-black text-white flex items-center justify-center shadow-md animate-bounce">
+    <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#3E2A1E] text-[9px] font-black text-white flex items-center justify-center shadow-md animate-bounce">
       1
     </span>
 
@@ -125,12 +124,30 @@ const telegramLink = `https://t.me/${botUsername}`;
   </button>
 </div>
 
-<script define:vars={{ telegramLink }}>
+<script>
+  import { authInstance, onAuthStateChanged } from '../lib/firebase.js';
+
   const trigger = document.getElementById('telegram-widget-trigger');
   const windowBox = document.getElementById('telegram-chat-window');
   const closeBtn = document.getElementById('telegram-close-btn');
   const sendBtn = document.getElementById('telegram-send-btn');
   const textarea = document.getElementById('telegram-chat-input');
+  const messagesContainer = document.getElementById('telegram-chat-messages');
+
+  let isSending = false;
+  let currentUsername = '';
+  let currentUserEmail = '';
+
+  // Track authentication state
+  onAuthStateChanged(authInstance, (user) => {
+    if (user) {
+      currentUsername = user.displayName || '';
+      currentUserEmail = user.email || '';
+    } else {
+      currentUsername = '';
+      currentUserEmail = '';
+    }
+  });
 
   function toggleWidget() {
     if (windowBox.classList.contains('hidden')) {
@@ -148,20 +165,92 @@ const telegramLink = `https://t.me/${botUsername}`;
     }
   }
 
-  function handleSend() {
+  async function handleSend() {
     const text = textarea.value.trim();
-    if (!text) return;
+    if (!text || isSending) return;
     
-    // Construct Telegram deep-link with start parameters
-    // Format: https://t.me/botname?start=base64Text or simple text query
-    const encodedText = encodeURIComponent(text);
-    const deepLink = `${telegramLink}?start=${encodedText}`;
-
-    // Clear textarea
+    isSending = true;
+    textarea.disabled = true;
+    sendBtn.disabled = true;
+    
+    // 1. Add User Bubble
+    const userBubble = document.createElement('div');
+    userBubble.className = 'flex items-start gap-2.5 max-w-[85%] text-right ml-auto justify-end';
+    userBubble.innerHTML = `
+      <div class="bg-[#FF9EAF]/20 border-2 border-[#FF9EAF] rounded-2xl rounded-tr-none p-3 text-[11px] text-[#3E2A1E] leading-relaxed font-fredoka">
+        ${escapeHtml(text)}
+      </div>
+      <div class="w-6 h-6 rounded-full bg-[#FF9EAF] flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">👤</div>
+    `;
+    messagesContainer.appendChild(userBubble);
     textarea.value = '';
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    // Open link in a new tab
-    window.open(deepLink, '_blank');
+    try {
+      // 2. Post to our API support-notify
+      const response = await fetch('/api/support-notify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          message: text,
+          username: currentUsername,
+          email: currentUserEmail
+        })
+      });
+      
+      const result = await response.json();
+
+      // 3. Add Response Bubble
+      const replyBubble = document.createElement('div');
+      replyBubble.className = 'flex items-start gap-2.5 max-w-[85%] text-left';
+      
+      if (response.ok && result.success) {
+        replyBubble.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-[#3E2A1E] text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">🐶</div>
+          <div class="bg-[#FFD6E0]/40 border-2 border-[#FFD6E0] rounded-2xl rounded-tl-none p-3 text-[11px] text-[#3E2A1E] leading-relaxed font-fredoka animate-fade-in">
+            您的留言已成功发送给博主！博主会尽快通过 TG 回复您。 🐾<br/>
+            Your message has been sent to the blogger! We will contact you soon.
+          </div>
+        `;
+      } else {
+        replyBubble.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">⚠️</div>
+          <div class="bg-red-50 border-2 border-red-200 rounded-2xl rounded-tl-none p-3 text-[11px] text-red-700 leading-relaxed font-fredoka">
+            发送失败。请点击下方按钮直接在 Telegram 联系博主。<br/>
+            Sending failed. Please use the button below to message directly.
+          </div>
+        `;
+      }
+      messagesContainer.appendChild(replyBubble);
+    } catch (e) {
+      const replyBubble = document.createElement('div');
+      replyBubble.className = 'flex items-start gap-2.5 max-w-[85%] text-left';
+      replyBubble.innerHTML = `
+        <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">⚠️</div>
+        <div class="bg-red-50 border-2 border-red-200 rounded-2xl rounded-tl-none p-3 text-[11px] text-red-700 leading-relaxed font-fredoka">
+          网络连接错误，请点击下方按钮直接跳转联系博主。<br/>
+          Connection error. Please contact the blogger directly using the button below.
+        </div>
+      `;
+      messagesContainer.appendChild(replyBubble);
+    } finally {
+      isSending = false;
+      textarea.disabled = false;
+      sendBtn.disabled = false;
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      textarea.focus();
+    }
+  }
+
+  function escapeHtml(string) {
+    return String(string)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
   }
 
   // Event handlers

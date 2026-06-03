@@ -340,9 +340,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </svg>
         </div>
         <div class="space-y-4">
-          <h2 class="text-3xl font-bold font-fredoka text-[#3E2A1E] tracking-tight">Order Logged Successfully 🎉</h2>
-          <p class="text-[#6D5A50] text-sm leading-relaxed max-w-sm mx-auto font-quicksand font-bold">
-            Your verification request is registered in our queue. We will check the ledger/transfer and dispatch your tracking coordinates & digital items to your email.
+          <h2 class="text-3xl font-bold font-fredoka text-[#3E2A1E] tracking-tight">Order Submitted Successfully! 🎉</h2>
+          <p class="text-[#6D5A50] text-xs leading-relaxed max-w-md mx-auto font-quicksand font-bold">
+            We are preparing your keys manually (usually takes 5-15 mins). Once shipped, card keys will display instantly in your <strong>Order Vault</strong> history page.<br/><br/>
+            系统已收到您的订单，正为您人工配货（通常需 5~15 分钟）。发货后卡密将自动呈现于您的“订单保险库”（Order Vault）中，请稍后刷新查看。
           </p>
         </div>
         <div class="border-t-2 border-[#E8E1D9] pt-6 text-[#6D5A50] text-xs font-quicksand font-bold">
@@ -389,10 +390,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const inputRemitter = document.getElementById('remitter') as HTMLInputElement;
   const inputSendingBank = document.getElementById('sending-bank') as HTMLInputElement;
 
+  let currentUserDisplayName = '';
+
   // Watch Authentication State to auto-fill
   onAuthStateChanged(authInstance, (user) => {
     if (user) {
       currentUserUid = user.uid;
+      currentUserDisplayName = user.displayName || '';
       const emailField = document.getElementById('email') as HTMLInputElement;
       if (emailField && !emailField.value) {
         emailField.value = user.email || '';
@@ -547,6 +551,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       const orderData = {
         uid: currentUserUid,
+        username: currentUserDisplayName || email.split('@')[0],
         email,
         items: cart.map(item => ({
           id: item.id,
@@ -561,12 +566,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         txId: txIdVal,
         totalUsd,
         totalCny,
-        status: 'pending'
+        status: 'pending',
+        createdAt: new Date().toISOString()
       };
 
       // 1. Create order document in database (Firebase or Mock fallback)
       const orderRef = await addDoc(collection(dbInstance, 'orders'), orderData);
       const orderId = orderRef.id;
+
+      // 1.5 Push order alert to Telegram Bot 1 (Puppy Shop Order Bot)
+      try {
+        await fetch('/api/order-notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderId: orderId,
+            totalUsd: totalUsd,
+            totalCny: totalCny,
+            paymentMethod: orderData.paymentMethod,
+            createdAt: orderData.createdAt,
+            username: orderData.username
+          })
+        });
+      } catch (err) {
+        console.error("Failed to trigger Telegram order alert:", err);
+      }
 
       // 2. Append database Order ID to the Web3Forms payload for email indexing
       formData.append('database_order_id', orderId);

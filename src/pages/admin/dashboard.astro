@@ -207,6 +207,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
       </div>
 
+      <!-- Card Key Input / Dispatch Content Section -->
+      <div id="modal-dispatch-section" class="space-y-1.5 text-left hidden">
+        <label for="modal-dispatch-input" class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">发货卡密内容 (Card Credentials)</label>
+        <textarea 
+          id="modal-dispatch-input" 
+          rows="2"
+          placeholder="输入您代购的卡密或账号信息 (例如: GGG-F4PK1Q3IWZ704T4L)..."
+          class="w-full bg-white border-2 border-[#3E2A1E] rounded-xl px-4 py-2 text-xs text-[#3E2A1E] placeholder-zinc-400 focus:outline-none focus:border-[#FF9EAF] shadow-[2px_2px_0px_#3E2A1E]"
+        ></textarea>
+      </div>
+
       <!-- Actions -->
       <div class="pt-4 border-t border-[#3E2A1E]/10 flex gap-3 justify-end" id="modal-actions-container">
         <!-- Dyn actions based on status -->
@@ -253,6 +264,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const modalPaymentMethod = document.getElementById('modal-payment-method');
   const modalPaymentHash = document.getElementById('modal-payment-hash');
   const modalActionsContainer = document.getElementById('modal-actions-container');
+  const modalDispatchSection = document.getElementById('modal-dispatch-section');
+  const modalDispatchInput = document.getElementById('modal-dispatch-input') as HTMLTextAreaElement;
 
   let activeOrders: any[] = [];
   let selectedOrder: any = null;
@@ -376,7 +389,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       return `
         <tr class="hover:bg-[#FFF5F7]/30 border-b border-[#3E2A1E]/5 transition-colors cursor-pointer" onclick="window.viewOrderDetails('${order.id}')">
           <td class="py-3.5 pr-2 font-mono text-[10px] text-[#3E2A1E]/70 font-bold">${cleanId}</td>
-          <td class="py-3.5 px-2 font-semibold truncate max-w-[120px]">${order.email}</td>
+          <td class="py-3.5 px-2 truncate max-w-[150px]">
+            <span class="font-semibold block">${order.username || '游客'}</span>
+            <span class="text-[10px] text-zinc-500 font-normal block">${order.email}</span>
+          </td>
           <td class="py-3.5 px-2 font-bold font-mono">$${order.totalUsd.toFixed(2)}</td>
           <td class="py-3.5 px-2 uppercase text-[10px] text-[#3E2A1E]/80">${order.paymentMethod}</td>
           <td class="py-3.5 px-2">
@@ -409,7 +425,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     selectedOrder = order;
 
     if (modalOrderId) modalOrderId.textContent = `ORDER ID: ${order.id}`;
-    if (modalOrderEmail) modalOrderEmail.textContent = order.email;
+    if (modalOrderEmail) {
+      modalOrderEmail.innerHTML = order.username ? `${order.username} <span class="text-xs text-zinc-500 font-normal">(${order.email})</span>` : order.email;
+    }
     if (modalPaymentMethod) modalPaymentMethod.textContent = order.paymentMethod === 'USDT' ? 'Cryptocurrency (USDT TRC-20)' : 'Manual Bank Wire Transfer';
     if (modalPaymentHash) modalPaymentHash.textContent = order.txId;
 
@@ -454,6 +472,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       }
     }
 
+    // Toggle dispatch credentials input based on items type and status
+    const hasDigital = order.items.some((i: any) => i.type === 'digital');
+    if (modalDispatchSection && modalDispatchInput) {
+      if (hasDigital && order.status === 'pending') {
+        modalDispatchSection.classList.remove('hidden');
+        modalDispatchInput.value = '';
+        modalDispatchInput.disabled = false;
+        modalDispatchInput.placeholder = "输入您代购的卡密或账号信息 (例如: GGG-F4PK1Q3IWZ704T4L)...";
+      } else if (hasDigital && (order.status === 'completed' || order.status === 'paid')) {
+        modalDispatchSection.classList.remove('hidden');
+        modalDispatchInput.value = order.dispatchContent || '无卡密明细';
+        modalDispatchInput.disabled = true;
+      } else {
+        modalDispatchSection.classList.add('hidden');
+      }
+    }
+
     detailsModal?.classList.remove('hidden');
   }
 
@@ -463,14 +498,58 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     
     try {
       const docRef = doc(dbInstance, 'orders', id);
-      await updateDoc(docRef, { status });
+      const updateData: any = { status };
+      
+      let dispatchVal = '';
+      if (status === 'completed' && selectedOrder) {
+        const hasDigital = selectedOrder.items.some((i: any) => i.type === 'digital');
+        if (hasDigital && modalDispatchInput) {
+          dispatchVal = modalDispatchInput.value.trim();
+          if (!dispatchVal) {
+            if (!confirm('提示：发货卡密内容为空。确定直接发货吗？')) {
+              return;
+            }
+          }
+          updateData.dispatchContent = dispatchVal;
+        }
+      }
+
+      await updateDoc(docRef, updateData);
       
       // Update selected order cached state
       if (selectedOrder && selectedOrder.id === id) {
         selectedOrder.status = status;
+        if (dispatchVal) {
+          selectedOrder.dispatchContent = dispatchVal;
+        }
       }
       
       alert(`Order status updated successfully.`);
+
+      // If completed, trigger Bot 1 dispatch webhook
+      if (status === 'completed' && selectedOrder) {
+        try {
+          await fetch('/api/dispatch-notify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              orderId: id,
+              email: selectedOrder.email,
+              createdAt: selectedOrder.createdAt || new Date().toISOString(),
+              items: selectedOrder.items,
+              dispatchContent: dispatchVal,
+              username: selectedOrder.username || ''
+            })
+          });
+        } catch (webhookErr) {
+          console.error("Failed to trigger Telegram dispatch notification:", webhookErr);
+        }
+      }
+
+      // Close modal on success
+      if (detailsModal) detailsModal.classList.add('hidden');
+      selectedOrder = null;
+
     } catch (err) {
       console.error("Failed to update status:", err);
       alert("Failed to update status in database.");
