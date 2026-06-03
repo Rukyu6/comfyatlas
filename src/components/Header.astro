@@ -251,45 +251,30 @@
     'pt': { flag: '🇧🇷', label: 'Português' }
   };
 
-  function setLanguageCookie(langCode) {
-    const domain = window.location.hostname;
-    const domainParts = domain.split('.');
-    
-    // 1. Thoroughly wipe any existing googtrans cookies on root and subdomains to prevent duplicates
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + domain;
-    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + domain;
-    if (domainParts.length > 2) {
-      const rootDomain = domainParts.slice(-2).join('.');
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + rootDomain;
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + rootDomain;
-    }
-    
-    // 2. Set the fresh translation cookie at path root /
-    if (langCode !== 'en') {
-      document.cookie = "googtrans=/en/" + langCode + "; path=/;";
-    }
+  // Convert ISO codes to translate.js names
+  function isoToTranslateJs(iso) {
+    const map = {
+      'en': 'english',
+      'zh-CN': 'chinese_simplified',
+      'zh-TW': 'chinese_traditional',
+      'fr': 'french',
+      'de': 'german',
+      'es': 'spanish',
+      'ja': 'japanese',
+      'ru': 'russian',
+      'ko': 'korean',
+      'it': 'italian',
+      'hi': 'hindi',
+      'pt': 'portuguese'
+    };
+    return map[iso] || iso;
   }
 
-  // Determine current language visual from LocalStorage (Primary) or Cookie (Fallback)
+  // Determine current language from LocalStorage
   let currentLang = 'en';
   const localSavedLang = localStorage.getItem('active_language');
-  
   if (localSavedLang && langMap[localSavedLang]) {
     currentLang = localSavedLang;
-  } else {
-    // Read from cookie as fallback
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; googtrans=`);
-    if (parts.length === 2) {
-      const cookieVal = parts.pop().split(';').shift();
-      if (cookieVal) {
-        const cleanCode = cookieVal.replace(/"/g, '').split('/').pop();
-        if (cleanCode && langMap[cleanCode]) {
-          currentLang = cleanCode;
-        }
-      }
-    }
   }
 
   // Update button visual state immediately on page load
@@ -321,42 +306,41 @@
       if (activeFlag) activeFlag.textContent = flag;
       if (activeLabel) activeLabel.textContent = label;
 
-      // 2. Persist in local storage and cookies
+      // 2. Persist in local storage
       localStorage.setItem('active_language', lang);
-      setLanguageCookie(lang);
 
-      // 3. Trigger Google translation
-      const selectEl = document.querySelector('.goog-te-combo') as HTMLSelectElement;
-      if (selectEl) {
-        selectEl.value = lang;
-        selectEl.dispatchEvent(new Event('change'));
-      } else {
-        // Fallback: If Google Translate script is still loading, force a reload to apply the cookie translation
-        setTimeout(() => {
-          window.location.reload();
-        }, 120);
+      // 3. Trigger translate.js translation
+      const translate = (window as any).translate;
+      if (translate) {
+        const translateJsLang = isoToTranslateJs(lang);
+        translate.changeLanguage(translateJsLang);
       }
     });
   });
 
-  // Inject Google Translate script dynamically in background
-  if (!document.getElementById('google_translate_script') && typeof window !== 'undefined') {
-    const trDiv = document.createElement('div');
-    trDiv.id = 'google_translate_element';
-    trDiv.style.display = 'none';
-    document.body.appendChild(trDiv);
-
-    (window as any).googleTranslateElementInit = function() {
-      new (window as any).google.translate.TranslateElement({
-        pageLanguage: 'en',
-        layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    };
-
+  // Inject translate.js script dynamically in background (works inside China!)
+  if (!document.getElementById('translate_js_script') && typeof window !== 'undefined') {
     const script = document.createElement('script');
-    script.id = 'google_translate_script';
-    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.id = 'translate_js_script';
+    script.src = 'https://cdn.staticfile.net/translate.js/3.18.66/translate.js';
+    script.onload = () => {
+      const translate = (window as any).translate;
+      if (translate) {
+        translate.language.setLocal('english');
+        translate.service.use('client.edge');
+        translate.selectLanguageTag.show = false;
+        translate.listener.start();
+        translate.execute();
+        
+        // Auto translate on load if a language was previously saved
+        if (currentLang && currentLang !== 'en') {
+          const translateJsLang = isoToTranslateJs(currentLang);
+          setTimeout(() => {
+            translate.changeLanguage(translateJsLang);
+          }, 150);
+        }
+      }
+    };
     document.body.appendChild(script);
   }
 </script>
