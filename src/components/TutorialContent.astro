@@ -57,6 +57,7 @@ const { tutorials, activeId } = Astro.props;
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
   .tutorial-pane.hidden {
+    display: none !important;
     opacity: 0;
     transform: translateY(8px);
     pointer-events: none;

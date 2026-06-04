@@ -105,21 +105,33 @@ const orderedCategories = [
 </BaseLayout>
 
 <script>
+  console.log("Guide script initialized");
   const navButtons = document.querySelectorAll('.nav-item-btn');
   const panes = document.querySelectorAll('.tutorial-pane');
   const mobileSelect = document.getElementById('mobile-guide-select') as HTMLSelectElement;
 
+  console.log(`Found ${navButtons.length} nav buttons and ${panes.length} panes.`);
+
   function switchTutorial(targetId: string) {
+    console.log("Switching to tutorial ID:", targetId);
+    let matchedPane = false;
+    
     // 1. Toggle pane active state and classes
     panes.forEach(pane => {
       if (pane.id === `tutorial-pane-${targetId}`) {
+        console.log("Showing pane:", pane.id);
         pane.classList.remove('hidden');
         pane.classList.add('active-pane', 'animate-fade-in');
+        matchedPane = true;
       } else {
         pane.classList.add('hidden');
         pane.classList.remove('active-pane', 'animate-fade-in');
       }
     });
+
+    if (!matchedPane) {
+      console.warn("No matching pane found for ID:", targetId);
+    }
 
     // 2. Synchronize navigation buttons styling
     navButtons.forEach(btn => {
@@ -150,6 +162,7 @@ const orderedCategories = [
   navButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const docId = btn.getAttribute('data-doc-id');
+      console.log("Nav button clicked, docId:", docId);
       if (docId) switchTutorial(docId);
     });
   });
@@ -157,6 +170,7 @@ const orderedCategories = [
   // Hook mobile selection event listener
   mobileSelect?.addEventListener('change', (e) => {
     const docId = (e.target as HTMLSelectElement).value;
+    console.log("Mobile select changed, docId:", docId);
     if (docId) switchTutorial(docId);
   });
 </script>
