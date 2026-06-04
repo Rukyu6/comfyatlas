@@ -1,0 +1,73 @@
+---
+interface Item {
+  id: string;
+  name: string;
+  emoji: string;
+}
+
+interface Category {
+  name: string;
+  key: string;
+  items: Item[];
+}
+
+interface Props {
+  categories: Category[];
+  activeId: string;
+}
+
+const { categories, activeId } = Astro.props;
+---
+
+<aside class="w-full lg:w-80 shrink-0 space-y-4 lg:sticky lg:top-24 max-h-[85vh] overflow-y-auto select-none pr-1 scrollbar-thin">
+  {categories.map((cat) => (
+    <div class="glass-sidebar-section rounded-2xl p-4 transition-all duration-300 border border-[#3E2A1E]/10 bg-white/40 backdrop-blur-md shadow-sm hover:shadow-md hover:bg-white/60">
+      <h3 class="text-xs font-bold uppercase tracking-wider text-[#6D5A50] font-quicksand border-b border-[#3E2A1E]/5 pb-2 mb-3 flex items-center justify-between">
+        <span>{cat.name}</span>
+        <span class="text-[10px] bg-[#3E2A1E]/5 text-[#6D5A50] px-2 py-0.5 rounded-full font-sans">
+          {cat.items.length}
+        </span>
+      </h3>
+      <div class="space-y-1">
+        {cat.items.map((tut) => {
+          const isActive = tut.id === activeId;
+          return (
+            <button
+              type="button"
+              data-doc-id={tut.id}
+              class={`nav-item-btn w-full text-left py-2.5 px-4 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer transform active:scale-[0.98] ${
+                isActive
+                  ? "bg-gradient-to-r from-[#FFD6E0] to-[#FFB3C6] text-[#3E2A1E] font-bold border border-[#FF6B8B]/40 shadow-sm translate-x-1"
+                  : "text-[#6D5A50] hover:bg-white/60 hover:text-[#3E2A1E] hover:translate-x-1 border border-transparent"
+              }`}
+            >
+              {tut.emoji ? (
+                <span class="text-sm scale-110 select-none">{tut.emoji}</span>
+              ) : (
+                <span class="text-sm select-none opacity-50">📄</span>
+              )}
+              <span class="truncate">{tut.name}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  ))}
+</aside>
+
+<style>
+  /* Custom scrollbar behavior for the sidebar */
+  aside::-webkit-scrollbar {
+    width: 4px;
+  }
+  aside::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  aside::-webkit-scrollbar-thumb {
+    background-color: rgba(62, 42, 30, 0.1);
+    border-radius: 10px;
+  }
+  aside:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(62, 42, 30, 0.2);
+  }
+</style>
