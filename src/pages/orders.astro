@@ -153,8 +153,8 @@ import Footer from '../components/Footer.astro';
       }
 
       // Check payment methods
-      const methodLabel = order.paymentMethod === 'USDT' ? 'Cryptocurrency (USDT TRC20)' : 'Manual Bank Wire';
-      const refLabel = order.paymentMethod === 'USDT' ? `TxID: ${order.txId}` : `Ref: ${order.txId}`;
+      const methodLabel = order.paymentMethod || 'Cryptocurrency';
+      const refLabel = `TxID: ${order.txId || ''}`;
 
       // Build cart list markup
       const cartItems = order.items.map(item => {

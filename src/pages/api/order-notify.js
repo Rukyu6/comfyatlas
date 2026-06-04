@@ -21,7 +21,7 @@ export async function POST({ request }) {
     }
 
     const host = request.headers.get('host') || 'comfyatlas.com';
-    const methodLabel = paymentMethod === 'USDT' ? 'USDT (TRC-20)' : '银行转账';
+    const methodLabel = paymentMethod;
     
     // Formatting date to CST (Shanghai)
     let formattedDate = '';
