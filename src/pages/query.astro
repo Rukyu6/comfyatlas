@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="订单查询 | Puppy Shop">
+  <Header />
+
+  <main class="flex-grow pt-32 pb-24 px-6 max-w-4xl mx-auto w-full relative z-10 text-[#3E2A1E]">
+    <div class="space-y-8">
+      
+      <!-- Page Title -->
+      <div class="text-center space-y-2 mb-12">
+        <span class="text-[#FF9EAF] uppercase tracking-widest text-[10px] font-bold font-fredoka block">Order Query</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold font-fredoka text-[#3E2A1E]">订单查询 / Query Orders 🔍</h1>
+        <p class="text-xs text-zinc-500 font-quicksand font-bold">付款过后没有进入查看页面的用户，可以通过输入您的邮箱地址或订单号来查看卡密。</p>
+      </div>
+
+      <!-- Search Input Card -->
+      <div class="glass-card p-6 md:p-8 rounded-[2rem] border-3 border-[#3E2A1E] shadow-[6px_6px_0px_#3E2A1E] bg-white max-w-xl mx-auto space-y-6">
+        <div class="space-y-4">
+          <div>
+            <label for="query-input" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">邮箱地址 或 订单号 / Email or Order ID</label>
+            <div class="relative">
+              <input 
+                type="text" 
+                id="query-input" 
+                placeholder="请输入您下单的邮箱或订单号 (Email / Order ID)"
+                class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl pl-4 pr-12 py-3.5 text-sm text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
+              />
+              <div class="absolute right-4 top-4.5 text-[#6D5A50]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          <button 
+            type="button" 
+            id="query-submit-btn"
+            class="w-full py-3.5 rounded-xl bg-[#FFD6E0] border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFB3C6] font-bold uppercase tracking-wider text-xs font-fredoka transition-all duration-300 shadow-[2px_2px_0px_#3E2A1E] active:scale-95 cursor-pointer"
+          >
+            查询我的订单 / Search My Orders 🐾
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div id="query-loading" class="hidden text-center py-12 text-zinc-600">
+        <div class="animate-spin inline-block w-8 h-8 border-4 border-[#FF9EAF] border-t-transparent rounded-full mb-4"></div>
+        <p class="text-xs uppercase tracking-widest font-fredoka">Searching purchase records...</p>
+      </div>
+
+      <!-- No Results State -->
+      <div id="query-empty" class="hidden text-center py-12 glass-card p-8 max-w-md mx-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#3E2A1E]/40 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h3 class="text-[#3E2A1E] font-bold text-sm font-fredoka">未找到匹配订单 / No Orders Found</h3>
+        <p class="text-xs text-zinc-600 mt-2">没有找到与您输入匹配的订单。请核对邮箱地址或订单号是否正确。</p>
+      </div>
+
+      <!-- Query Results list -->
+      <div id="query-results" class="hidden space-y-6 max-w-2xl mx-auto">
+        <!-- JS inserts results cards here -->
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { collection, dbInstance, getDocs, query, where, getDoc, doc } from '../lib/firebase.js';
+
+  // DOM Elements
+  const queryInput = document.getElementById('query-input') as HTMLInputElement;
+  const searchBtn = document.getElementById('query-submit-btn');
+  const loadingSec = document.getElementById('query-loading');
+  const emptySec = document.getElementById('query-empty');
+  const resultsSec = document.getElementById('query-results');
+
+  searchBtn?.addEventListener('click', executeQuery);
+  queryInput?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') executeQuery();
+  });
+
+  async function executeQuery() {
+    const rawVal = queryInput.value.trim();
+    if (!rawVal) return;
+
+    // Reset layout states
+    loadingSec?.classList.remove('hidden');
+    emptySec?.classList.add('hidden');
+    resultsSec?.classList.add('hidden');
+    if (resultsSec) resultsSec.innerHTML = '';
+
+    try {
+      let orders: any[] = [];
+
+      // Check if it's an email address or Order ID
+      const isEmail = rawVal.includes('@');
+      
+      if (isEmail) {
+        // Query by email
+        const q = query(
+          collection(dbInstance, 'orders'),
+          where('email', '==', rawVal)
+        );
+        const snapshot = await getDocs(q);
+        snapshot.docs.forEach(docSnap => {
+          orders.push({ id: docSnap.id, ...docSnap.data() });
+        });
+      } else {
+        // Query by Order ID
+        const docRef = doc(dbInstance, 'orders', rawVal);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          orders.push({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          // Fallback check if case sensitivity or custom matching is needed
+          const qFallback = query(collection(dbInstance, 'orders'));
+          const snapFallback = await getDocs(qFallback);
+          snapFallback.docs.forEach(d => {
+            const data = d.data();
+            if (d.id === rawVal || data.txId === rawVal) {
+              orders.push({ id: d.id, ...data });
+            }
+          });
+        }
+      }
+
+      if (orders.length === 0) {
+        loadingSec?.classList.add('hidden');
+        emptySec?.classList.remove('hidden');
+        return;
+      }
+
+      // Sort by date descending
+      orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      
+      renderQueryResults(orders);
+    } catch (err) {
+      console.error("Query failed:", err);
+      loadingSec?.classList.add('hidden');
+      if (emptySec) {
+        emptySec.classList.remove('hidden');
+        const h3 = emptySec.querySelector('h3');
+        const p = emptySec.querySelector('p');
+        if (h3) h3.textContent = "查询出错 / Query Error";
+        if (p) p.textContent = "连接数据库失败，请稍后刷新重试。";
+      }
+    }
+  }
+
+  function renderQueryResults(orders: any[]) {
+    if (!resultsSec || !loadingSec) return;
+
+    resultsSec.innerHTML = orders.map(order => {
+      const date = new Date(order.createdAt).toLocaleDateString('zh-CN', {
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit'
+      });
+
+      // Status Badge
+      let statusColor = 'text-amber-700 bg-amber-50 border-amber-300';
+      let statusLabel = '审核中 (Pending Validation)';
+      
+      if (order.status === 'completed' || order.status === 'paid') {
+        statusColor = 'text-emerald-700 bg-emerald-50 border-emerald-300';
+        statusLabel = '交易已完成 (Completed)';
+      } else if (order.status === 'cancelled') {
+        statusColor = 'text-rose-700 bg-rose-50 border-rose-300';
+        statusLabel = '订单已取消 (Cancelled)';
+      }
+
+      // Render Item rows
+      const itemsListHtml = order.items.map(item => `
+        <div class="flex items-center justify-between py-2 border-b border-[#3E2A1E]/10 last:border-0">
+          <div class="flex items-center gap-3">
+            <img src="${item.image}" class="w-8 h-8 rounded-lg object-cover border-2 border-[#3E2A1E]" />
+            <div class="text-left">
+              <p class="text-xs font-bold text-[#3E2A1E] line-clamp-1">${item.name}</p>
+              <p class="text-[10px] text-zinc-500 mt-0.5">${item.size ? `规格: ${item.size} | ` : ''}数量: ${item.quantity}</p>
+            </div>
+          </div>
+          <span class="text-xs font-bold font-fredoka text-[#3E2A1E]">$${(item.price * item.quantity).toFixed(2)}</span>
+        </div>
+      `).join('');
+
+      // Credentials card block for digital items
+      let credentialsBlock = '';
+      const hasDigital = order.items.some(item => item.type === 'digital');
+      if (hasDigital) {
+        if (order.status === 'completed' || order.status === 'paid') {
+          const keyText = order.dispatchContent 
+            ? `<div class="p-3 bg-white border-2 border-[#3E2A1E] rounded-xl font-mono text-xs text-[#3E2A1E] break-all select-all shadow-[2px_2px_0px_#3E2A1E] mt-1.5">${order.dispatchContent}</div>` 
+            : `<p class="text-[11px] text-[#3E2A1E] font-light">卡密已派发。如果未在此处正常显示或邮箱未收到，请联系右下角客服咨询。</p>`;
+
+          credentialsBlock = `
+            <div class="p-4 bg-emerald-50 border-2 border-emerald-500 text-left space-y-2 rounded-2xl">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-2 font-fredoka">
+                  🔑 提取卡密 (Card Keys / Credentials)
+                </h4>
+                <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider font-fredoka">Dispatched ✓</span>
+              </div>
+              <p class="text-[11px] text-[#3E2A1E] font-light">
+                您的账号密钥如下，建议立即复制并保存好，本站卖出自动删档：
+              </p>
+              ${keyText}
+              <button 
+                type="button" 
+                onclick="navigator.clipboard.writeText('${order.dispatchContent || order.id}'); alert('已复制卡密信息！');"
+                class="mt-1.5 px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 border-2 border-[#3E2A1E] text-[#3E2A1E] text-[10px] font-bold rounded-xl shadow-[2px_2px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E] transition-all font-fredoka"
+              >
+                复制卡密 / COPY
+              </button>
+            </div>
+          `;
+        } else if (order.status === 'pending') {
+          credentialsBlock = `
+            <div class="p-4 bg-amber-50 border-2 border-amber-500 text-left space-y-2 rounded-2xl animate-pulse">
+              <h4 class="text-xs font-bold text-amber-700 uppercase tracking-wider flex items-center gap-2 font-fredoka">
+                ⏳ 配货处理中 (Fulfilling manually)
+              </h4>
+              <p class="text-[11px] text-[#3E2A1E] font-medium leading-relaxed">
+                管理员正在核对区块链/支付账单为您人工发货，通常需要 5~15 分钟，发货后此处卡密将直接激活显示。请过几分钟后在此处重新输入订单号或邮箱刷新查看。
+              </p>
+            </div>
+          `;
+        }
+      }
+
+      return `
+        <div class="glass-card p-6 bg-white border-2 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] rounded-3xl space-y-4">
+          <!-- Header -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#3E2A1E]/10 pb-4">
+            <div class="text-left">
+              <span class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest font-mono">订单号: ${order.id}</span>
+              <p class="text-xs text-zinc-500 mt-0.5">下单时间: ${date}</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full border-2 text-[10px] font-bold uppercase tracking-wider font-fredoka ${statusColor}">
+              ${statusLabel}
+            </span>
+          </div>
+
+          <!-- Items -->
+          <div class="divide-y divide-[#3E2A1E]/10">
+            ${itemsListHtml}
+          </div>
+
+          <!-- Card Keys -->
+          ${credentialsBlock}
+
+          <!-- Footer Summary -->
+          <div class="pt-4 border-t border-[#3E2A1E]/10 flex justify-between items-center">
+            <span class="text-xs text-[#6D5A50]">付款通道: ${order.paymentMethod || '加密货币'}</span>
+            <span class="text-base font-black text-[#3E2A1E] font-fredoka">
+              实付: $${order.totalUsd.toFixed(2)} <span class="text-xs text-zinc-500 font-normal font-sans">(¥${order.totalCny} CNY)</span>
+            </span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    loadingSec.classList.add('hidden');
+    resultsSec.classList.remove('hidden');
+  }
+</script>

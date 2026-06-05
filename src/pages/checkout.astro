@@ -134,6 +134,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="space-y-3">
                 <label class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider font-quicksand">选择付款网络 / Select Payment Network</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="payment-networks-grid">
+                  <!-- Wallet Balance Payment Button (Initially Hidden) -->
+                  <button type="button" id="pay-method-balance" class="hidden payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFFDF9] text-[#3E2A1E] font-fredoka shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="BALANCE" data-name="余额支付 (Wallet Balance)" data-badge="Wallet Balance Payment">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">余额支付</span>
+                    <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Balance: $<span id="checkout-wallet-balance">0.00</span></span>
+                  </button>
+
                   <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFD6E0] text-[#3E2A1E] font-fredoka shadow-[4px_4px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="USDT_TRC20" data-address="TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" data-name="USDT (TRC-20)" data-badge="USDT TRC-20 Address" data-note="请向上述 TRC-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the TRC-20 address above.">
                     <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">USDT</span>
                     <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Tron (TRC-20)</span>
@@ -158,7 +164,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">TRX</span>
                     <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Tron Network</span>
                   </button>
-
                 </div>
               </div>
 
@@ -308,11 +313,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     dbInstance, 
     collection, 
     addDoc, 
-    onAuthStateChanged 
+    onAuthStateChanged,
+    doc,
+    getDoc,
+    setDoc
   } from '../lib/firebase.js';
 
   // Checkout flow Logic
   let cart = [];
+  let userBalanceUsd = 0;
 
   // Returns 'cny' for CJK languages, 'usd' for everything else
   function getCurrencyMode(): 'cny' | 'usd' {
@@ -340,13 +349,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   let currentUserDisplayName = '';
 
   // Watch Authentication State to auto-fill
-  onAuthStateChanged(authInstance, (user) => {
+  onAuthStateChanged(authInstance, async (user) => {
     if (user) {
       currentUserUid = user.uid;
       currentUserDisplayName = user.displayName || '';
       const emailField = document.getElementById('email') as HTMLInputElement;
       if (emailField && !emailField.value) {
         emailField.value = user.email || '';
+      }
+
+      // Fetch user wallet balance
+      try {
+        const userDocRef = doc(dbInstance, 'users', user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          userBalanceUsd = userDocSnap.data()?.balance_usd || 0;
+        }
+        updateBalancePaymentOption();
+      } catch (err) {
       }
     }
   });
@@ -441,6 +461,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ? `¥${totalCostCny} CNY ($${totalCost.toFixed(2)} USD)`
         : `$${totalCost.toFixed(2)} USD (¥${totalCostCny} CNY)`;
     }
+
+    updateBalancePaymentOption();
+  }
+
+  function updateBalancePaymentOption() {
+    const balanceBtn = document.getElementById('pay-method-balance');
+    const balanceSpan = document.getElementById('checkout-wallet-balance');
+    const totalCost = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    if (balanceBtn && balanceSpan) {
+      balanceSpan.textContent = userBalanceUsd.toFixed(2);
+      if (currentUserUid !== 'guest' && userBalanceUsd >= totalCost) {
+        balanceBtn.classList.remove('hidden');
+      } else {
+        balanceBtn.classList.add('hidden');
+      }
+    }
   }
 
   // Click-to-copy utility
@@ -500,16 +537,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const note = btn.getAttribute('data-note') || '';
       const id = btn.getAttribute('data-id') || '';
 
+      if (id === 'BALANCE') {
+        paymentCryptoContainer?.classList.add('hidden');
+        txidInputContainer?.classList.add('hidden');
+        inputTxID.removeAttribute('required');
+      } else {
+        paymentCryptoContainer?.classList.remove('hidden');
+        txidInputContainer?.classList.remove('hidden');
+        inputTxID.setAttribute('required', 'true');
+        
+        // Update inputs & display text
+        if (badgeLabel) badgeLabel.textContent = badge;
+        if (cryptoAddressText) cryptoAddressText.textContent = address;
+        if (qrImage) {
+          qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(address)}`;
+        }
+        if (noteParagraph) {
+          noteParagraph.innerHTML = note;
+        }
+      }
+
       // Update inputs & display text
       if (hiddenPaymentMethod) hiddenPaymentMethod.value = name;
-      if (badgeLabel) badgeLabel.textContent = badge;
-      if (cryptoAddressText) cryptoAddressText.textContent = address;
-      if (qrImage) {
-        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(address)}`;
-      }
-      if (noteParagraph) {
-        noteParagraph.innerHTML = note;
-      }
 
 
     });
@@ -528,11 +577,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const email = (document.getElementById('email') as HTMLInputElement).value;
       const paymentMethod = hiddenPaymentMethod.value;
       
-      // All methods are cryptocurrency networks, so we always read the TxID hash
-      const txIdVal = inputTxID.value;
+      const isBalancePayment = paymentMethod.includes("余额");
+      const txIdVal = isBalancePayment ? "Wallet-Deducted" : inputTxID.value;
       
       const totalUsd = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
       const totalCny = Math.round(totalUsd * 6.8);
+
+      if (isBalancePayment) {
+        if (currentUserUid === 'guest') {
+          throw new Error("请先登录会员账号再进行余额支付。 / Please log in first.");
+        }
+        
+        // Fetch latest balance from DB
+        const userDocRef = doc(dbInstance, 'users', currentUserUid);
+        const userDocSnap = await getDoc(userDocRef);
+        let latestBalanceUsd = 0;
+        if (userDocSnap.exists()) {
+          latestBalanceUsd = userDocSnap.data()?.balance_usd || 0;
+        }
+        if (latestBalanceUsd < totalUsd) {
+          throw new Error("余额不足，请先充值或切换支付方式。 / Insufficient wallet balance.");
+        }
+
+        // Deduct balance
+        const newBalanceUsd = latestBalanceUsd - totalUsd;
+        await setDoc(userDocRef, {
+          balance_usd: newBalanceUsd,
+          email: email
+        });
+      }
 
       const orderData = {
         uid: currentUserUid,
@@ -551,7 +624,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         txId: txIdVal,
         totalUsd,
         totalCny,
-        status: 'pending',
+        status: isBalancePayment ? 'paid' : 'pending',
         createdAt: new Date().toISOString()
       };
 

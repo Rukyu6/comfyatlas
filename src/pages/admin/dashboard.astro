@@ -60,110 +60,161 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <!-- ANALYTICS HIGHLIGHTS -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Total Revenue USD -->
-        <div class="glass-card p-6 space-y-2">
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Revenue (USD)</span>
-          <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-usd">$0.00</p>
-          <span class="text-[10px] text-emerald-600 flex items-center gap-1 font-fredoka font-bold">● Real-time synced</span>
-        </div>
-
-        <!-- Total Revenue CNY -->
-        <div class="glass-card p-6 space-y-2">
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Revenue (CNY)</span>
-          <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-cny">¥0 CNY</p>
-          <span class="text-[10px] text-zinc-500 font-fredoka">Approx. 6.8x conversion</span>
-        </div>
-
-        <!-- Completed Orders -->
-        <div class="glass-card p-6 space-y-2">
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Completed Orders</span>
-          <p class="text-2xl font-black text-[#FF9EAF] font-fredoka" id="stat-orders-completed">0</p>
-          <span class="text-[10px] text-zinc-500 font-fredoka" id="stat-orders-total">Total Orders: 0</span>
-        </div>
-
-        <!-- Pending Verification -->
-        <div class="glass-card p-6 space-y-2">
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Pending Review</span>
-          <p class="text-2xl font-black text-amber-600 font-fredoka" id="stat-orders-pending">0</p>
-          <span class="text-[10px] text-zinc-500 font-fredoka">Awaiting payment verification</span>
-        </div>
-
+      <!-- Navigation Tabs -->
+      <div class="flex border-b-2 border-[#3E2A1E]/10 gap-6">
+        <button 
+          id="tab-btn-orders" 
+          type="button" 
+          class="pb-3 border-b-3 border-[#FF9EAF] text-[#FF9EAF] font-bold text-sm font-fredoka transition-all cursor-pointer"
+        >
+          📦 订单管理 / Orders Queue
+        </button>
+        <button 
+          id="tab-btn-deposits" 
+          type="button" 
+          class="pb-3 border-b-3 border-transparent text-zinc-500 hover:text-[#3E2A1E] font-bold text-sm font-fredoka transition-all cursor-pointer"
+        >
+          💰 充值审核 / Deposit Reviews
+        </button>
       </div>
 
-      <!-- ANALYTICS SPLIT CHART & ORDERS HEADER -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Category Sales Mix -->
-        <div class="lg:col-span-1 glass-card p-6 space-y-6 flex flex-col justify-between">
-          <div class="space-y-1">
-            <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">Sales Mix breakdown</h3>
-            <p class="text-xs text-zinc-500 font-fredoka">Distribution of revenue between product departments</p>
+      <!-- Tab View: Orders -->
+      <div id="view-orders" class="space-y-8">
+        <!-- ANALYTICS HIGHLIGHTS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Total Revenue USD -->
+          <div class="glass-card p-6 space-y-2">
+            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Revenue (USD)</span>
+            <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-usd">$0.00</p>
+            <span class="text-[10px] text-emerald-600 flex items-center gap-1 font-fredoka font-bold">● Real-time synced</span>
           </div>
 
-          <div class="space-y-4">
-            <!-- Digital accounts split bar -->
-            <div class="space-y-1.5 text-left">
-              <div class="flex justify-between text-xs font-semibold">
-                <span class="text-emerald-700 font-fredoka">Digital Vault</span>
-                <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-digital-pct">0%</span>
-              </div>
-              <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
-                <div id="stat-mix-digital-fill" class="h-full bg-emerald-400 transition-all duration-500 w-0"></div>
-              </div>
-              <span class="text-[10px] text-zinc-500 block" id="stat-mix-digital-val">$0.00 sales</span>
-            </div>
-
-            <!-- Apparel/Physical accounts split bar -->
-            <div class="space-y-1.5 text-left">
-              <div class="flex justify-between text-xs font-semibold">
-                <span class="text-[#FF9EAF] font-fredoka">Streetwear Drop</span>
-                <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-apparel-pct">0%</span>
-              </div>
-              <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
-                <div id="stat-mix-apparel-fill" class="h-full bg-[#FF9EAF] transition-all duration-500 w-0"></div>
-              </div>
-              <span class="text-[10px] text-zinc-500 block" id="stat-mix-apparel-val">$0.00 sales</span>
-            </div>
-
+          <!-- Total Revenue CNY -->
+          <div class="glass-card p-6 space-y-2">
+            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Revenue (CNY)</span>
+            <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-cny">¥0 CNY</p>
+            <span class="text-[10px] text-zinc-500 font-fredoka">Approx. 6.8x conversion</span>
           </div>
 
-          <div class="text-[10px] text-zinc-600 border-t border-[#3E2A1E]/10 pt-4 font-fredoka">
-            Tip: Revamping catalog prices updates future calculations.
+          <!-- Completed Orders -->
+          <div class="glass-card p-6 space-y-2">
+            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Completed Orders</span>
+            <p class="text-2xl font-black text-[#FF9EAF] font-fredoka" id="stat-orders-completed">0</p>
+            <span class="text-[10px] text-zinc-500 font-fredoka" id="stat-orders-total">Total Orders: 0</span>
           </div>
+
+          <!-- Pending Verification -->
+          <div class="glass-card p-6 space-y-2">
+            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Pending Review</span>
+            <p class="text-2xl font-black text-amber-600 font-fredoka" id="stat-orders-pending">0</p>
+            <span class="text-[10px] text-zinc-500 font-fredoka">Awaiting payment verification</span>
+          </div>
+
         </div>
 
-        <!-- Ledger logs table container -->
-        <div class="lg:col-span-2 glass-card p-6 space-y-6">
+        <!-- ANALYTICS SPLIT CHART & ORDERS HEADER -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- Category Sales Mix -->
+          <div class="lg:col-span-1 glass-card p-6 space-y-6 flex flex-col justify-between">
+            <div class="space-y-1">
+              <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">Sales Mix breakdown</h3>
+              <p class="text-xs text-zinc-500 font-fredoka">Distribution of revenue between product departments</p>
+            </div>
+
+            <div class="space-y-4">
+              <!-- Digital accounts split bar -->
+              <div class="space-y-1.5 text-left">
+                <div class="flex justify-between text-xs font-semibold">
+                  <span class="text-emerald-700 font-fredoka">Digital Vault</span>
+                  <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-digital-pct">0%</span>
+                </div>
+                <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
+                  <div id="stat-mix-digital-fill" class="h-full bg-emerald-400 transition-all duration-500 w-0"></div>
+                </div>
+                <span class="text-[10px] text-zinc-500 block" id="stat-mix-digital-val">$0.00 sales</span>
+              </div>
+
+              <!-- Apparel/Physical accounts split bar -->
+              <div class="space-y-1.5 text-left">
+                <div class="flex justify-between text-xs font-semibold">
+                  <span class="text-[#FF9EAF] font-fredoka">Streetwear Drop</span>
+                  <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-apparel-pct">0%</span>
+                </div>
+                <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
+                  <div id="stat-mix-apparel-fill" class="h-full bg-[#FF9EAF] transition-all duration-500 w-0"></div>
+                </div>
+                <span class="text-[10px] text-zinc-500 block" id="stat-mix-apparel-val">$0.00 sales</span>
+              </div>
+
+            </div>
+
+            <div class="text-[10px] text-zinc-600 border-t border-[#3E2A1E]/10 pt-4 font-fredoka">
+              Tip: Revamping catalog prices updates future calculations.
+            </div>
+          </div>
+
+          <!-- Ledger logs table container -->
+          <div class="lg:col-span-2 glass-card p-6 space-y-6">
+            <div class="flex items-center justify-between border-b border-[#3E2A1E]/10 pb-4">
+              <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">Transaction Ledger</h3>
+              <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-ledger-count">Total Rows: 0</span>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="border-b border-[#3E2A1E]/20 text-[#3E2A1E]/70 uppercase tracking-widest text-[9px] font-bold font-fredoka">
+                    <th class="pb-3 pr-2">Order ID</th>
+                    <th class="pb-3 px-2">Customer</th>
+                    <th class="pb-3 px-2">Total (USD)</th>
+                    <th class="pb-3 px-2">Method</th>
+                    <th class="pb-3 px-2">Status</th>
+                    <th class="pb-3 pl-2 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="ledger-rows" class="divide-y divide-[#3E2A1E]/10 text-zinc-700 font-fredoka">
+                  <tr>
+                    <td colspan="6" class="py-12 text-center text-zinc-500">Initializing transaction log...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Tab View: Deposits -->
+      <div id="view-deposits" class="hidden space-y-6">
+        <div class="glass-card p-6 space-y-6">
           <div class="flex items-center justify-between border-b border-[#3E2A1E]/10 pb-4">
-            <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">Transaction Ledger</h3>
-            <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-ledger-count">Total Rows: 0</span>
+            <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">充值审核列表 / Deposit Request reviews</h3>
+            <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-deposits-count">Total Requests: 0</span>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse text-xs">
               <thead>
                 <tr class="border-b border-[#3E2A1E]/20 text-[#3E2A1E]/70 uppercase tracking-widest text-[9px] font-bold font-fredoka">
-                  <th class="pb-3 pr-2">Order ID</th>
-                  <th class="pb-3 px-2">Customer</th>
-                  <th class="pb-3 px-2">Total (USD)</th>
-                  <th class="pb-3 px-2">Method</th>
-                  <th class="pb-3 px-2">Status</th>
-                  <th class="pb-3 pl-2 text-right">Actions</th>
+                  <th class="pb-3 pr-2">申请ID / ID</th>
+                  <th class="pb-3 px-2">客户邮箱 / Customer Email</th>
+                  <th class="pb-3 px-2">充值金额 / Amount</th>
+                  <th class="pb-3 px-2">转账凭证 / TxID</th>
+                  <th class="pb-3 px-2">状态 / Status</th>
+                  <th class="pb-3 pl-2 text-right">操作 / Actions</th>
                 </tr>
               </thead>
-              <tbody id="ledger-rows" class="divide-y divide-[#3E2A1E]/10 text-zinc-700 font-fredoka">
+              <tbody id="deposit-ledger-rows" class="divide-y divide-[#3E2A1E]/10 text-zinc-700 font-fredoka">
                 <tr>
-                  <td colspan="6" class="py-12 text-center text-zinc-500">Initializing transaction log...</td>
+                  <td colspan="6" class="py-12 text-center text-zinc-500">加载充值申请列表中... / Loading deposit requests...</td>
                 </tr>
               </tbody>
             </table>
           </div>
-
         </div>
-
       </div>
 
     </div>
@@ -228,7 +279,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <script>
-  import { authInstance, onAuthStateChanged, collection, dbInstance, onSnapshot, doc, updateDoc } from '../../lib/firebase.js';
+  import { authInstance, onAuthStateChanged, collection, dbInstance, onSnapshot, doc, updateDoc, getDoc, setDoc } from '../../lib/firebase.js';
 
   // Configured admin email address
   const adminEmail = import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com';
@@ -290,6 +341,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     mainView?.classList.remove('hidden');
     
     syncLedger();
+    syncDeposits();
   });
 
   // Listen to orders updates in real-time
@@ -568,4 +620,155 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       selectedOrder = null;
     }
   });
+
+  // Tab navigation bindings
+  const tabBtnOrders = document.getElementById('tab-btn-orders');
+  const tabBtnDeposits = document.getElementById('tab-btn-deposits');
+  const viewOrders = document.getElementById('view-orders');
+  const viewDeposits = document.getElementById('view-deposits');
+
+  tabBtnOrders?.addEventListener('click', () => {
+    tabBtnOrders.classList.add('border-[#FF9EAF]', 'text-[#FF9EAF]');
+    tabBtnOrders.classList.remove('border-transparent', 'text-zinc-500');
+    tabBtnDeposits?.classList.remove('border-[#FF9EAF]', 'text-[#FF9EAF]');
+    tabBtnDeposits?.classList.add('border-transparent', 'text-zinc-500');
+
+    viewOrders?.classList.remove('hidden');
+    viewDeposits?.classList.add('hidden');
+  });
+
+  tabBtnDeposits?.addEventListener('click', () => {
+    tabBtnDeposits.classList.add('border-[#FF9EAF]', 'text-[#FF9EAF]');
+    tabBtnDeposits.classList.remove('border-transparent', 'text-zinc-500');
+    tabBtnOrders?.classList.remove('border-[#FF9EAF]', 'text-[#FF9EAF]');
+    tabBtnOrders?.classList.add('border-transparent', 'text-zinc-500');
+
+    viewOrders?.classList.add('hidden');
+    viewDeposits?.classList.remove('hidden');
+  });
+
+  // Deposits sync logic
+  let activeDeposits: any[] = [];
+  const depositLedgerRows = document.getElementById('deposit-ledger-rows');
+  const depositsCount = document.getElementById('stat-deposits-count');
+
+  function syncDeposits() {
+    const collRef = collection(dbInstance, 'deposits');
+    
+    onSnapshot(collRef, (snapshot) => {
+      const deposits: any[] = [];
+      snapshot.docs.forEach((doc) => {
+        deposits.push({ id: doc.id, ...doc.data() });
+      });
+
+      activeDeposits = deposits.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      renderDepositsTable(activeDeposits);
+    });
+  }
+
+  function renderDepositsTable(deposits: any[]) {
+    if (!depositLedgerRows) return;
+    if (depositsCount) depositsCount.textContent = `Total Requests: ${deposits.length}`;
+
+    if (deposits.length === 0) {
+      depositLedgerRows.innerHTML = `
+        <tr>
+          <td colspan="6" class="py-12 text-center text-zinc-500">暂无充值申请记录 / No deposit requests.</td>
+        </tr>
+      `;
+      return;
+    }
+
+    depositLedgerRows.innerHTML = deposits.map(dep => {
+      let statusClass = 'text-amber-700 bg-amber-50 border border-amber-300';
+      if (dep.status === 'approved') {
+        statusClass = 'text-emerald-700 bg-emerald-50 border border-emerald-300';
+      } else if (dep.status === 'rejected') {
+        statusClass = 'text-rose-700 bg-rose-50 border border-rose-300';
+      }
+
+      const actionsHtml = dep.status === 'pending' ? `
+        <button 
+          type="button" 
+          class="px-2.5 py-1 bg-emerald-100 hover:bg-emerald-200 border-2 border-[#3E2A1E] text-emerald-800 text-[10px] font-bold rounded-lg shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-1px] cursor-pointer font-fredoka"
+          onclick="window.approveDeposit('${dep.id}', '${dep.uid}', ${dep.amount})"
+        >
+          Approve
+        </button>
+        <button 
+          type="button" 
+          class="px-2.5 py-1 bg-rose-100 hover:bg-rose-200 border-2 border-[#3E2A1E] text-rose-800 text-[10px] font-bold rounded-lg shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-1px] cursor-pointer font-fredoka"
+          onclick="window.rejectDeposit('${dep.id}')"
+        >
+          Reject
+        </button>
+      ` : `<span class="text-zinc-500 font-bold uppercase tracking-wider text-[9px]">${dep.status}</span>`;
+
+      return `
+        <tr class="hover:bg-[#FFF5F7]/30 border-b border-[#3E2A1E]/5 transition-colors">
+          <td class="py-3.5 pr-2 font-mono text-[10px] text-[#3E2A1E]/70 font-bold">${dep.id.substring(0, 10)}...</td>
+          <td class="py-3.5 px-2 font-semibold">
+            <span class="block truncate">${dep.email}</span>
+            <span class="text-[10px] text-zinc-500 font-normal block">${dep.uid}</span>
+          </td>
+          <td class="py-3.5 px-2 font-bold font-mono text-emerald-600">+$${Number(dep.amount).toFixed(2)} USDT</td>
+          <td class="py-3.5 px-2 font-mono text-[10px] max-w-[200px] truncate select-all" title="${dep.txId}">${dep.txId}</td>
+          <td class="py-3.5 px-2">
+            <span class="px-2 py-0.5 rounded-full border text-[9px] font-bold ${statusClass}">
+              ${dep.status}
+            </span>
+          </td>
+          <td class="py-3.5 pl-2 text-right space-x-1 whitespace-nowrap">
+            ${actionsHtml}
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // Bind approval/rejection operations to window context
+  (window as any).approveDeposit = async function(depId: string, uid: string, amount: number) {
+    if (!confirm(`确定通过该充值申请，为该会员账户充值 $${amount} USDT 吗？`)) return;
+
+    try {
+      // 1. Fetch current balance
+      const userDocRef = doc(dbInstance, 'users', uid);
+      const userDocSnap = await getDoc(userDocRef);
+      let currentBalanceUsd = 0;
+      let email = '';
+      if (userDocSnap.exists()) {
+        currentBalanceUsd = userDocSnap.data()?.balance_usd || 0;
+        email = userDocSnap.data()?.email || '';
+      }
+
+      // 2. Increment user balance
+      const newBalanceUsd = currentBalanceUsd + Number(amount);
+      await setDoc(userDocRef, {
+        balance_usd: newBalanceUsd,
+        email: email
+      });
+
+      // 3. Mark deposit as approved
+      const depDocRef = doc(dbInstance, 'deposits', depId);
+      await updateDoc(depDocRef, { status: 'approved' });
+
+      alert(`充值申请已通过！会员账户已成功入账 $${amount.toFixed(2)} USD (USDT)。`);
+    } catch (err) {
+      console.error("Failed to approve deposit:", err);
+      alert("通过审核失败，请检查网络连接或数据库。");
+    }
+  };
+
+  (window as any).rejectDeposit = async function(depId: string) {
+    if (!confirm("确定要拒绝该充值申请吗？")) return;
+
+    try {
+      const depDocRef = doc(dbInstance, 'deposits', depId);
+      await updateDoc(depDocRef, { status: 'rejected' });
+      alert("充值申请已被拒绝。");
+    } catch (err) {
+      console.error("Failed to reject deposit:", err);
+      alert("拒绝审核失败。");
+    }
+  };
 </script>

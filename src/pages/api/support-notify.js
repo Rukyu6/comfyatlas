@@ -25,17 +25,27 @@ export async function POST({ request }) {
       hour12: false
     });
 
-    let userLabel = `*客户:* 网页游客`;
-    if (email) {
-      userLabel = username ? `*客户:* ${username} (${email})` : `*客户邮箱:* ${email}`;
+    let formattedMessage = '';
+    if (body.type === 'deposit') {
+      formattedMessage = `💰 *【充值申请】*\n` +
+                         `-----------------------------\n` +
+                         `*客户邮箱:* ${email || '未知'}\n` +
+                         `*充值金额:* ${body.amount} USDT\n` +
+                         `*交易哈希 (TxID):* \`${body.txId}\`\n` +
+                         `*发送时间:* ${currentTimestamp}\n` +
+                         `*请登录管理员后台进行审核!*`;
+    } else {
+      let userLabel = `*客户:* 网页游客`;
+      if (email) {
+        userLabel = username ? `*客户:* ${username} (${email})` : `*客户邮箱:* ${email}`;
+      }
+      formattedMessage = `💬 *客户咨询留言*\n` +
+                         `-----------------------------\n` +
+                         `${userLabel}\n` +
+                         `*留言内容:* ${message}\n` +
+                         `*发送时间:* ${currentTimestamp}\n` +
+                         `*通知状态:* 发送成功`;
     }
-
-    const formattedMessage = `💬 *客户咨询留言*\n` +
-                             `-----------------------------\n` +
-                             `${userLabel}\n` +
-                             `*留言内容:* ${message}\n` +
-                             `*发送时间:* ${currentTimestamp}\n` +
-                             `*通知状态:* 发送成功`;
 
     const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
     const res = await fetch(telegramUrl, {

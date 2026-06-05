@@ -20,7 +20,8 @@ import {
   onSnapshot as fbOnSnapshot,
   updateDoc as fbUpdateDoc,
   doc as fbDoc,
-  getDoc as fbGetDoc
+  getDoc as fbGetDoc,
+  setDoc as fbSetDoc
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -219,11 +220,23 @@ export const addDoc = async (collRef, data) => {
     return fbAddDoc(collRef, data);
   }
   
-  const orders = getMockOrders();
-  const newId = 'ord_' + Math.random().toString(36).substr(2, 9);
+  const collPath = collRef.path;
+  const prefix = collPath === 'orders' ? 'ord_' : (collPath === 'deposits' ? 'dep_' : 'doc_');
+  const newId = prefix + Math.random().toString(36).substr(2, 9);
   const newDoc = { id: newId, ...data, createdAt: new Date().toISOString() };
-  orders.push(newDoc);
-  saveMockOrders(orders);
+  
+  if (collPath === 'orders') {
+    const orders = getMockOrders();
+    orders.push(newDoc);
+    saveMockOrders(orders);
+  } else {
+    const list = JSON.parse(localStorage.getItem(`mock_${collPath}`) || '[]');
+    list.push(newDoc);
+    localStorage.setItem(`mock_${collPath}`, JSON.stringify(list));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('mock-db-update'));
+    }
+  }
   return { id: newId };
 };
 
@@ -232,12 +245,28 @@ export const updateDoc = async (docRef, data) => {
     return fbUpdateDoc(docRef, data);
   }
   
-  const orders = getMockOrders();
+  const path = docRef.path || '';
   const id = docRef.id;
-  const index = orders.findIndex(o => o.id === id);
-  if (index !== -1) {
-    orders[index] = { ...orders[index], ...data };
-    saveMockOrders(orders);
+  const parts = path.split('/');
+  const collPath = parts[0];
+  
+  if (collPath === 'orders') {
+    const orders = getMockOrders();
+    const index = orders.findIndex(o => o.id === id);
+    if (index !== -1) {
+      orders[index] = { ...orders[index], ...data };
+      saveMockOrders(orders);
+    }
+  } else {
+    const list = JSON.parse(localStorage.getItem(`mock_${collPath}`) || '[]');
+    const index = list.findIndex(item => item.id === id);
+    if (index !== -1) {
+      list[index] = { ...list[index], ...data };
+      localStorage.setItem(`mock_${collPath}`, JSON.stringify(list));
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('mock-db-update'));
+      }
+    }
   }
   return true;
 };
@@ -247,20 +276,27 @@ export const getDocs = async (queryObj) => {
     return fbGetDocs(queryObj);
   }
   
+  const collPath = queryObj ? queryObj.collPath : '';
+  let dataList = [];
+  if (collPath === 'orders') {
+    dataList = getMockOrders();
+  } else {
+    dataList = JSON.parse(localStorage.getItem(`mock_${collPath}`) || '[]');
+  }
+  
   // Resolve filters client side
-  let orders = getMockOrders();
   if (queryObj && queryObj.filters) {
     queryObj.filters.forEach(filter => {
       const { field, op, val } = filter;
       if (op === '==') {
-        orders = orders.filter(o => o[field] === val);
+        dataList = dataList.filter(o => o[field] === val);
       }
     });
   }
   
   if (queryObj && queryObj.sortField) {
     const { sortField, direction } = queryObj;
-    orders.sort((a, b) => {
+    dataList.sort((a, b) => {
       const valA = a[sortField];
       const valB = b[sortField];
       if (valA < valB) return direction === 'desc' ? 1 : -1;
@@ -270,7 +306,7 @@ export const getDocs = async (queryObj) => {
   }
   
   return {
-    docs: orders.map(doc => ({
+    docs: dataList.map(doc => ({
       id: doc.id,
       data: () => doc
     }))
@@ -328,6 +364,81 @@ export const onSnapshot = (queryOrRef, callback) => {
   return () => {
     window.removeEventListener('mock-db-update', listener);
   };
+};
+
+export const getDoc = async (docRef) => {
+  if (isFirebaseConfigured && db) {
+    return fbGetDoc(docRef);
+  }
+  
+  const id = docRef.id;
+  const path = docRef.path || '';
+  const collectionName = path.split('/')[0];
+  
+  if (collectionName === 'users') {
+    const mockUsers = JSON.parse(localStorage.getItem('mock_wallet_users') || '{}');
+    const userData = mockUsers[id] || { balance_usd: 0, email: '' };
+    return {
+      exists: () => true,
+      data: () => userData
+    };
+  } else if (collectionName === 'telegram_support_mappings') {
+    const mockMappings = JSON.parse(localStorage.getItem('mock_support_mappings') || '{}');
+    const mapping = mockMappings[id];
+    return {
+      exists: () => !!mapping,
+      data: () => mapping
+    };
+  } else if (collectionName === 'orders') {
+    const mockOrders = JSON.parse(localStorage.getItem('mock_orders') || '[]');
+    const order = mockOrders.find(o => o.id === id);
+    return {
+      exists: () => !!order,
+      data: () => order
+    };
+  }
+  
+  return {
+    exists: () => false,
+    data: () => null
+  };
+};
+
+export const setDoc = async (docRef, data) => {
+  if (isFirebaseConfigured && db) {
+    return fbSetDoc(docRef, data);
+  }
+  
+  const id = docRef.id;
+  const path = docRef.path || '';
+  const collectionName = path.split('/')[0];
+  
+  if (collectionName === 'users') {
+    const mockUsers = JSON.parse(localStorage.getItem('mock_wallet_users') || '{}');
+    mockUsers[id] = data;
+    localStorage.setItem('mock_wallet_users', JSON.stringify(mockUsers));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('mock-db-update'));
+    }
+  } else if (collectionName === 'telegram_support_mappings') {
+    const mockMappings = JSON.parse(localStorage.getItem('mock_support_mappings') || '{}');
+    mockMappings[id] = data;
+    localStorage.setItem('mock_support_mappings', JSON.stringify(mockMappings));
+  } else if (collectionName === 'orders') {
+    const mockOrders = JSON.parse(localStorage.getItem('mock_orders') || '[]');
+    const idx = mockOrders.findIndex(o => o.id === id);
+    if (idx !== -1) {
+      mockOrders[idx] = { ...mockOrders[idx], ...data };
+    } else {
+      mockOrders.push({ id, ...data });
+    }
+    localStorage.setItem('mock_orders', JSON.stringify(mockOrders));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('mock-db-update'));
+    }
+  }
+  
+  return true;
 };
 
 // Export active auth/db instances

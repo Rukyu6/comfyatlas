@@ -130,13 +130,13 @@
 </style>
 
 <script>
-  import { authInstance, onAuthStateChanged, signOut } from '../lib/firebase.js';
+  import { authInstance, onAuthStateChanged, signOut, getDoc, doc, dbInstance } from '../lib/firebase.js';
 
   // --- Auth logic ---
   const authContainer = document.getElementById('header-auth-container');
   const adminEmail = import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com';
 
-  onAuthStateChanged(authInstance, (user) => {
+  onAuthStateChanged(authInstance, async (user) => {
     if (!authContainer) return;
 
     if (!user) {
@@ -157,6 +157,27 @@
     const nameLabel = user.displayName || email.split('@')[0];
     const isAdmin = email === adminEmail;
     
+    // First render with $0
+    renderUserDropdown(nameLabel, email, isAdmin, 0);
+
+    // Fetch user balance
+    try {
+      const userDocRef = doc(dbInstance, 'users', user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+      let balanceUsd = 0;
+      if (userDocSnap.exists()) {
+        balanceUsd = userDocSnap.data()?.balance_usd || 0;
+      }
+      renderUserDropdown(nameLabel, email, isAdmin, balanceUsd);
+    } catch (e) {
+      console.error("Failed to fetch user balance:", e);
+    }
+  });
+
+  function renderUserDropdown(nameLabel: string, email: string, isAdmin: boolean, balanceUsd: number) {
+    if (!authContainer) return;
+    const balanceCny = (balanceUsd * 6.8).toFixed(2);
+
     authContainer.innerHTML = `
       <div class="relative inline-block text-left">
         <button 
@@ -181,6 +202,13 @@
           <div class="px-4 py-3 border-b-2 border-[#3E2A1E] text-[10px] text-[#6D5A50] uppercase tracking-widest font-mono">
             Account: <span class="text-[#3E2A1E] font-bold block truncate mt-0.5">${email}</span>
           </div>
+
+          <!-- Wallet Balance -->
+          <div class="px-4 py-2.5 border-b-2 border-[#3E2A1E] text-[10px] text-[#6D5A50] font-fredoka">
+            USDT Balance / 余额: 
+            <span class="text-[#FF6B8B] font-bold block text-sm mt-0.5">$${balanceUsd.toFixed(2)} <span class="text-xs text-zinc-500 font-normal font-sans">(¥${balanceCny} CNY)</span></span>
+          </div>
+
           <div class="py-1">
             <a 
               href="/orders" 
@@ -220,15 +248,11 @@
       userDropdown?.classList.toggle('hidden');
     });
 
-    document.addEventListener('click', () => {
-      userDropdown?.classList.add('hidden');
-    });
-
     logoutBtn?.addEventListener('click', async () => {
       await signOut(authInstance);
       window.location.reload();
     });
-  });
+  }
 
   // --- Google Translate / i18n Switcher ---
   const langSwitcherBtn = document.getElementById('lang-switcher-btn');
