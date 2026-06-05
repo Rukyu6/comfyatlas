@@ -51,6 +51,12 @@
 <script>
   let cart = [];
 
+  // Returns 'cny' for CJK languages, 'usd' for everything else
+  function getCurrencyMode(): 'cny' | 'usd' {
+    const lang = localStorage.getItem('active_language') || 'en';
+    return ['zh-CN', 'zh-TW', 'ja', 'ko'].includes(lang) ? 'cny' : 'usd';
+  }
+
   // DOM Elements
   const cartTrigger = document.getElementById('cart-trigger');
   const cartClose = document.getElementById('cart-close');
@@ -131,25 +137,37 @@
       return;
     }
 
-    cartItemsContainer.innerHTML = cart.map(item => `
-      <div class="flex items-center gap-4 bg-zinc-900/50 border border-white/5 p-4 rounded-xl">
-        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg bg-black/20" />
-        <div class="flex-grow min-w-0">
-          <h4 class="text-sm font-bold text-white truncate font-outfit">${item.name}</h4>
-          <p class="text-xs text-zinc-500 mt-0.5 font-outfit">
-            ${item.type === 'physical' ? `Size: <span class="text-white">${item.size}</span>` : `Option: <span class="text-[#C5A880]">${item.size || 'Default'}</span>`}
-          </p>
-          <div class="flex items-center justify-between mt-2">
-            <span class="text-sm font-bold text-[#C5A880]">$${(item.price * item.quantity).toFixed(2)}</span>
-            <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-black/20 text-xs">
-              <button type="button" class="qty-minus px-2 py-1 hover:bg-white/5 text-zinc-400 hover:text-white" data-id="${item.cartItemId}">-</button>
-              <span class="px-2 text-white font-outfit">${item.quantity}</span>
-              <button type="button" class="qty-plus px-2 py-1 hover:bg-white/5 text-zinc-400 hover:text-white" data-id="${item.cartItemId}">+</button>
+    const mode = getCurrencyMode();
+
+    cartItemsContainer.innerHTML = cart.map(item => {
+      const itemUsd = item.price * item.quantity;
+      const itemCny = Math.round(itemUsd * 6.8);
+      const priceText = mode === 'cny' ? `¥${itemCny} CNY` : `$${itemUsd.toFixed(2)}`;
+      const secondaryPriceText = mode === 'cny' ? `$${itemUsd.toFixed(2)} USD` : `¥${itemCny} CNY`;
+
+      return `
+        <div class="flex items-center gap-4 bg-zinc-900/50 border border-white/5 p-4 rounded-xl">
+          <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg bg-black/20" />
+          <div class="flex-grow min-w-0">
+            <h4 class="text-sm font-bold text-white truncate font-outfit">${item.name}</h4>
+            <p class="text-xs text-zinc-500 mt-0.5 font-outfit">
+              ${item.type === 'physical' ? `Size: <span class="text-white">${item.size}</span>` : `Option: <span class="text-[#C5A880]">${item.size || 'Default'}</span>`}
+            </p>
+            <div class="flex items-center justify-between mt-2">
+              <div class="flex flex-col items-start">
+                <span class="text-sm font-bold text-[#C5A880]">${priceText}</span>
+                <span class="text-[9px] text-zinc-500 font-medium">${secondaryPriceText}</span>
+              </div>
+              <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-black/20 text-xs">
+                <button type="button" class="qty-minus px-2 py-1 hover:bg-white/5 text-zinc-400 hover:text-white" data-id="${item.cartItemId}">-</button>
+                <span class="px-2 text-white font-outfit">${item.quantity}</span>
+                <button type="button" class="qty-plus px-2 py-1 hover:bg-white/5 text-zinc-400 hover:text-white" data-id="${item.cartItemId}">+</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     // Quantity click handlers
     cartItemsContainer.querySelectorAll('.qty-minus').forEach(btn => {
@@ -167,7 +185,12 @@
 
     // Total Cost Update
     const totalCost = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotal.textContent = `$${totalCost.toFixed(2)}`;
+    const totalCostCny = Math.round(totalCost * 6.8);
+    if (mode === 'cny') {
+      cartTotal.innerHTML = `¥${totalCostCny} <span class="text-xs text-zinc-500 font-normal">($${totalCost.toFixed(2)} USD)</span>`;
+    } else {
+      cartTotal.innerHTML = `$${totalCost.toFixed(2)} <span class="text-xs text-zinc-500 font-normal">(¥${totalCostCny} CNY)</span>`;
+    }
 
     checkoutBtn.removeAttribute('disabled');
   }
@@ -201,6 +224,11 @@
       cartTrigger.classList.add('scale-110');
       setTimeout(() => cartTrigger.classList.remove('scale-110'), 200);
     }
+  });
+
+  // Listen for language change events to update currency rendering instantly
+  window.addEventListener('language:change', () => {
+    renderCart();
   });
 
   // Run on page load

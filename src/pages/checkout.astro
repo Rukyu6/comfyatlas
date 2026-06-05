@@ -158,10 +158,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">TRX</span>
                     <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Tron Network</span>
                   </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFFDF9] text-[#3E2A1E] font-fredoka shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer col-span-2 md:col-span-1" data-id="STRIPE" data-address="STRIPE_DIRECT" data-name="Stripe (Credit Card)" data-badge="Stripe Payment Gateway" data-note="支持 Visa / Mastercard / 银联等信用卡及借记卡支付。点击提交订单后，您将被自动重定向至 Stripe 官方收银台完成付款。<br/>We support Visa, Mastercard, UnionPay and more. You will be redirected to Stripe to securely complete your payment.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">Stripe</span>
-                    <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Credit Card / 信用卡</span>
-                  </button>
+
                 </div>
               </div>
 
@@ -298,44 +295,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </a>
       </div>
 
-      <!-- STRIPE VERIFICATION SCREEN (Hidden initially) -->
-      <div id="checkout-verifying-view" class="hidden max-w-xl mx-auto text-center py-20 px-6 space-y-8 glass-card border-3 border-[#3E2A1E] shadow-[8px_8px_0px_#3E2A1E] rounded-[2rem] bg-white">
-        <div class="flex items-center justify-center mx-auto mb-4">
-          <div class="animate-spin inline-block w-12 h-12 border-4 border-[#FF6B8B] border-t-transparent rounded-full"></div>
-        </div>
-        <div class="space-y-4">
-          <h2 class="text-2xl font-bold font-fredoka text-[#3E2A1E]">Verifying Stripe Payment...</h2>
-          <p class="text-[#6D5A50] text-xs leading-relaxed max-w-md mx-auto font-quicksand font-bold">
-            Please wait while we verify your credit card payment with Stripe. Do not close or refresh this page.<br/><br/>
-            正在确认您的 Stripe 支付结果，请勿关闭或刷新此页面。
-          </p>
-        </div>
-      </div>
 
-      <!-- STRIPE ERROR SCREEN (Hidden initially) -->
-      <div id="checkout-error-view" class="hidden max-w-xl mx-auto text-center py-20 px-6 space-y-8 glass-card border-3 border-[#3E2A1E] shadow-[8px_8px_0px_#3E2A1E] rounded-[2rem] bg-white">
-        <div class="w-20 h-20 rounded-full bg-red-100 border-2 border-[#3E2A1E] flex items-center justify-center mx-auto text-red-600 shadow-[2px_2px_0px_#3E2A1E]">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
-        </div>
-        <div class="space-y-4">
-          <h2 class="text-2xl font-bold font-fredoka text-red-600">Verification Failed!</h2>
-          <p id="stripe-error-message" class="text-[#6D5A50] text-xs leading-relaxed max-w-md mx-auto font-quicksand font-bold">
-            We could not verify your payment. If you have been charged, please contact customer support with your Order ID.<br/><br/>
-            无法确认您的付款状态。如果您已扣款，请携带订单号联系右下角客服。
-          </p>
-        </div>
-        <div class="border-t-2 border-[#E8E1D9] pt-6 text-[#6D5A50] text-xs font-quicksand font-bold">
-          Order reference: <span id="checkout-error-reference-id" class="font-mono text-[#3E2A1E] font-bold">Unknown</span>
-        </div>
-        <a 
-          href="/" 
-          class="inline-block px-8 py-3 rounded-xl bg-[#FFD6E0] border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFB3C6] font-bold uppercase tracking-wider text-xs font-fredoka transition-all duration-300 shadow-[2px_2px_0px_#3E2A1E]"
-        >
-          Return to Boutique 🐶
-        </a>
-      </div>
 
     </div>
   </div>
@@ -353,6 +313,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   // Checkout flow Logic
   let cart = [];
+
+  // Returns 'cny' for CJK languages, 'usd' for everything else
+  function getCurrencyMode(): 'cny' | 'usd' {
+    const lang = localStorage.getItem('active_language') || 'en';
+    return ['zh-CN', 'zh-TW', 'ja', 'ko'].includes(lang) ? 'cny' : 'usd';
+  }
+
   let currentUserUid = 'guest';
   const form = document.getElementById('checkout-form') as HTMLFormElement;
   const errorMsg = document.getElementById('error-message');
@@ -386,13 +353,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   // Load and check cart
   function checkCart() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const statusParam = urlParams.get('status');
-    if (statusParam) {
-      // In Stripe redirect phase, skip empty cart checks and verify payment status
-      handleStripeRedirect(urlParams);
-      return;
-    }
+
 
     const savedCart = localStorage.getItem('boutique_cart');
     if (savedCart) {
@@ -412,72 +373,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     renderCheckout();
   }
 
-  // Handle Stripe Redirection Outcomes
-  async function handleStripeRedirect(urlParams) {
-    const status = urlParams.get('status');
-    const orderId = urlParams.get('order_id');
-    const sessionId = urlParams.get('session_id');
 
-    const mainGrid = document.getElementById('checkout-main-grid');
-    const verifyingView = document.getElementById('checkout-verifying-view');
-    const successView = document.getElementById('checkout-success-view');
-    const errorView = document.getElementById('checkout-error-view');
-    const stripeErrorMsg = document.getElementById('stripe-error-message');
-    const errorRefId = document.getElementById('checkout-error-reference-id');
-    const successRefId = document.getElementById('checkout-reference-id');
-
-    if (status === 'success' && orderId && sessionId) {
-      if (mainGrid) mainGrid.classList.add('hidden');
-      if (verifyingView) verifyingView.classList.remove('hidden');
-
-      try {
-        const res = await fetch('/api/verify-stripe-payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ orderId, sessionId })
-        });
-        const data = await res.json();
-
-        if (data.success) {
-          // Empty client cart
-          localStorage.removeItem('boutique_cart');
-
-          // Local storage mock DB update fallback (if Firestore not active)
-          const savedOrders = localStorage.getItem('mock_orders');
-          if (savedOrders) {
-            const orders = JSON.parse(savedOrders);
-            const idx = orders.findIndex(o => o.id === orderId);
-            if (idx !== -1) {
-              orders[idx].status = 'paid';
-              orders[idx].stripeSessionId = sessionId;
-              localStorage.setItem('mock_orders', JSON.stringify(orders));
-            }
-          }
-
-          if (successRefId) successRefId.textContent = orderId;
-          if (verifyingView) verifyingView.classList.add('hidden');
-          if (successView) successView.classList.remove('hidden');
-        } else {
-          throw new Error(data.error || 'Payment verification failed.');
-        }
-      } catch (err) {
-        console.error("Stripe verification failed:", err);
-        if (stripeErrorMsg) {
-          stripeErrorMsg.innerHTML = `无法确认您的付款状态：${err.message || '未知错误'}<br/><br/>We could not verify your payment: ${err.message || 'Unknown error'}`;
-        }
-        if (errorRefId) errorRefId.textContent = orderId || 'Unknown';
-        if (verifyingView) verifyingView.classList.add('hidden');
-        if (errorView) errorView.classList.remove('hidden');
-      }
-    } else if (status === 'cancel') {
-      if (mainGrid) mainGrid.classList.add('hidden');
-      if (stripeErrorMsg) {
-        stripeErrorMsg.innerHTML = `您已取消支付。如果您需要重新支付，请返回商店首页重新下单。<br/><br/>You have cancelled the Stripe checkout process. If you want to pay, return to the store and try again.`;
-      }
-      if (errorRefId) errorRefId.textContent = orderId || 'Unknown';
-      if (errorView) errorView.classList.remove('hidden');
-    }
-  }
 
   // Render Page Content
   function renderCheckout() {
@@ -496,20 +392,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       input.removeAttribute('required');
     });
 
+    const mode = getCurrencyMode();
+
     // Render list
-    listContainer.innerHTML = cart.map(item => `
-      <div class="flex items-center justify-between text-sm py-2 border-b border-[#E8E1D9]/50">
-        <div class="min-w-0 pr-4">
-          <span class="text-[#3E2A1E] font-bold block truncate font-fredoka">${item.name}</span>
-          <span class="text-[#6D5A50] text-xs font-quicksand">${item.type === 'physical' ? `Size: ${item.size} × ${item.quantity}` : `Digital × ${item.quantity}`}</span>
+    listContainer.innerHTML = cart.map(item => {
+      const itemUsd = item.price * item.quantity;
+      const itemCny = Math.round(itemUsd * 6.8);
+      const priceText = mode === 'cny'
+        ? `¥${itemCny} CNY`
+        : `$${itemUsd.toFixed(2)}`;
+      const secondaryPriceText = mode === 'cny'
+        ? `$${itemUsd.toFixed(2)} USD`
+        : `¥${itemCny} CNY`;
+
+      return `
+        <div class="flex items-center justify-between text-sm py-2 border-b border-[#E8E1D9]/50">
+          <div class="min-w-0 pr-4">
+            <span class="text-[#3E2A1E] font-bold block truncate font-fredoka">${item.name}</span>
+            <span class="text-[#6D5A50] text-xs font-quicksand">${item.type === 'physical' ? `Size: ${item.size} × ${item.quantity}` : `Digital × ${item.quantity}`}</span>
+          </div>
+          <div class="flex flex-col items-end text-right shrink-0">
+            <span class="text-[#FF6B8B] font-fredoka font-bold">${priceText}</span>
+            <span class="text-[9px] text-[#6D5A50] font-quicksand font-bold">${secondaryPriceText}</span>
+          </div>
         </div>
-        <span class="text-[#FF6B8B] font-fredoka font-bold shrink-0">$${(item.price * item.quantity).toFixed(2)}</span>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     const totalCost = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    subtotalText.textContent = `$${totalCost.toFixed(2)}`;
-    grandtotalText.textContent = `$${totalCost.toFixed(2)}`;
+    const totalCostCny = Math.round(totalCost * 6.8);
+
+    if (mode === 'cny') {
+      subtotalText.innerHTML = `¥${totalCostCny} <span class="text-xs text-[#6D5A50] font-quicksand font-normal">($${totalCost.toFixed(2)} USD)</span>`;
+      grandtotalText.innerHTML = `¥${totalCostCny} <span class="text-xs text-[#6D5A50] font-quicksand font-normal">($${totalCost.toFixed(2)} USD)</span>`;
+    } else {
+      subtotalText.innerHTML = `$${totalCost.toFixed(2)} <span class="text-xs text-[#6D5A50] font-quicksand font-normal">(¥${totalCostCny} CNY)</span>`;
+      grandtotalText.innerHTML = `$${totalCost.toFixed(2)} <span class="text-xs text-[#6D5A50] font-quicksand font-normal">(¥${totalCostCny} CNY)</span>`;
+    }
 
     // Set hidden inputs for form payload
     const cartSummaryString = cart.map(item => `${item.quantity}x ${item.name}${item.size ? ` (${item.size})` : ''}`).join(', ');
@@ -517,7 +436,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const hiddenTotalPrice = document.getElementById('hidden-total-price') as HTMLInputElement;
 
     if (hiddenCartData) hiddenCartData.value = cartSummaryString;
-    if (hiddenTotalPrice) hiddenTotalPrice.value = `$${totalCost.toFixed(2)}`;
+    if (hiddenTotalPrice) {
+      hiddenTotalPrice.value = mode === 'cny'
+        ? `¥${totalCostCny} CNY ($${totalCost.toFixed(2)} USD)`
+        : `$${totalCost.toFixed(2)} USD (¥${totalCostCny} CNY)`;
+    }
   }
 
   // Click-to-copy utility
@@ -588,28 +511,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         noteParagraph.innerHTML = note;
       }
 
-      // Hide or show layout elements depending on Stripe selection
-      if (id === 'STRIPE') {
-        const addressBlock = cryptoAddressText?.parentElement;
-        if (addressBlock) addressBlock.style.display = 'none';
-        const qrWrapper = qrImage?.parentElement;
-        if (qrWrapper) qrWrapper.style.display = 'none';
-        
-        if (txidInputContainer) {
-          txidInputContainer.style.display = 'none';
-          inputTxID.removeAttribute('required');
-        }
-      } else {
-        const addressBlock = cryptoAddressText?.parentElement;
-        if (addressBlock) addressBlock.style.display = 'block';
-        const qrWrapper = qrImage?.parentElement;
-        if (qrWrapper) qrWrapper.style.display = 'flex'; // it is a flex wrapper in html
-        
-        if (txidInputContainer) {
-          txidInputContainer.style.display = 'block';
-          inputTxID.setAttribute('required', 'required');
-        }
-      }
+
     });
   });
 
@@ -657,26 +559,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const orderRef = await addDoc(collection(dbInstance, 'orders'), orderData);
       const orderId = orderRef.id;
 
-      // 1.2 If payment method is Stripe, redirect to Stripe Checkout Session
-      if (paymentMethod === "Stripe (Credit Card)") {
-        submitBtn.textContent = 'Redirecting to Stripe...';
-        const stripeRes = await fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            orderId: orderId,
-            email: email,
-            items: orderData.items
-          })
-        });
-        const stripeData = await stripeRes.json();
-        if (stripeData.url) {
-          window.location.href = stripeData.url;
-          return;
-        } else {
-          throw new Error(stripeData.error || 'Failed to initialize Stripe checkout session.');
-        }
-      }
+
 
       // 1.5 Push order alert to Telegram Bot 1 (Puppy Shop Order Bot)
       try {

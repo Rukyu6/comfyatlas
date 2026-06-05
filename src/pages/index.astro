@@ -195,6 +195,12 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
   let activeCategoryId = '';
   let searchQuery = '';
 
+  // Returns 'cny' for CJK languages, 'usd' for everything else
+  function getCurrencyMode(): 'cny' | 'usd' {
+    const lang = localStorage.getItem('active_language') || 'en';
+    return ['zh-CN', 'zh-TW', 'ja', 'ko'].includes(lang) ? 'cny' : 'usd';
+  }
+
   // Vault DOM Elements
   const desktopSidebar = document.getElementById('desktop-categories-sidebar');
   const mobileBar = document.getElementById('mobile-categories-bar');
@@ -361,6 +367,8 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
       return;
     }
 
+    const currencyMode = getCurrencyMode();
+
     productsGrid.innerHTML = filtered.map(p => {
       // Find lowest SKU price or default product price
       let displayPriceUsd = p.price_usd;
@@ -376,6 +384,15 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
       const cleanStock = isOutOfStock ? 'OUT OF STOCK' : `STOCK: ${p.stock}`;
       const isMultiOption = p.skus && p.skus.length > 1;
       const cleanId = p.id.replace('pid_', '');
+      const prefix = isMultiOption ? 'From ' : '';
+
+      // Build primary & secondary price strings based on language
+      const primaryPrice = currencyMode === 'cny'
+        ? `${prefix}¥${displayPriceCny} CNY`
+        : `${prefix}$${displayPriceUsd.toFixed(2)}`;
+      const secondaryPrice = currencyMode === 'cny'
+        ? `$${displayPriceUsd.toFixed(2)} USD`
+        : `¥${displayPriceCny} CNY`;
 
       return `
         <a 
@@ -417,10 +434,10 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
             <!-- Price -->
             <div class="flex flex-col items-end text-right min-w-[70px]">
               <span class="text-sm md:text-lg font-black text-[#3E2A1E] font-fredoka">
-                ${isMultiOption ? 'From ' : ''}$${displayPriceUsd.toFixed(2)}
+                ${primaryPrice}
               </span>
               <span class="text-[9px] text-[#6D5A50] font-quicksand font-bold">
-                ¥${displayPriceCny} CNY
+                ${secondaryPrice}
               </span>
             </div>
 

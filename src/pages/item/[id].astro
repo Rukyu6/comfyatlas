@@ -155,6 +155,12 @@ const cleanId = product.id.replace('pid_', '');
   const stockBadge = document.getElementById('product-stock-badge');
   const addToBagBtn = document.getElementById('add-to-bag-btn');
 
+  // Returns 'cny' for CJK languages, 'usd' for everything else
+  function getCurrencyMode(): 'cny' | 'usd' {
+    const lang = localStorage.getItem('active_language') || 'en';
+    return ['zh-CN', 'zh-TW', 'ja', 'ko'].includes(lang) ? 'cny' : 'usd';
+  }
+
   function initPage() {
     const contextEl = document.getElementById('product-page-context');
     if (!contextEl) return;
@@ -169,54 +175,18 @@ const cleanId = product.id.replace('pid_', '');
     if (!product) return;
 
     // Load SKUs list
-    let skusList = product.skus || [];
-    if (skusList.length === 0) {
-      skusList = [{
-        id: 'sku_default',
-        name: 'Default Option',
-        price_cny: product.price_cny,
-        price_usd: product.price_usd,
-        stock: product.stock,
-        picture: product.image
-      }];
-    }
+    const skusList = getSkusList();
 
-    // Render SKU buttons
+    // Render SKU options
+    renderSkus();
+
+    // Auto-select first active SKU
     if (skuContainer) {
-      skuContainer.innerHTML = skusList.map((sku, index) => {
-        const isOutOfStock = sku.stock === '0' || sku.stock === '缺货';
-        return `
-          <button
-            type="button"
-            class="sku-select-btn p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all duration-300 font-fredoka group ${
-              isOutOfStock 
-                ? 'opacity-40 pointer-events-none border-[#E8E1D9] bg-zinc-100' 
-                : 'border-[#3E2A1E] bg-white hover:bg-[#FFD6E0]/20'
-            }"
-            data-sku-index="${index}"
-          >
-            <span class="text-sm font-bold text-[#3E2A1E] group-hover:text-[#FF6B8B] transition-colors leading-tight mb-2">${sku.name}</span>
-            <div class="flex items-baseline justify-between w-full mt-auto font-quicksand font-bold">
-              <span class="text-xs text-[#FF6B8B]">$${sku.price_usd.toFixed(2)}</span>
-              <span class="text-[9px] text-[#6D5A50]">Stock: ${sku.stock}</span>
-            </div>
-          </button>
-        `;
-      }).join('');
-
-      // Auto-select first active SKU
       const availableBtns = skuContainer.querySelectorAll('.sku-select-btn');
       if (availableBtns.length > 0) {
-        selectSku(skusList[parseInt(availableBtns[0].getAttribute('data-sku-index'))], availableBtns[0]);
+        const firstIdx = parseInt(availableBtns[0].getAttribute('data-sku-index') || '0');
+        selectSku(skusList[firstIdx]);
       }
-
-      // Hook click listeners
-      availableBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const idx = parseInt(btn.getAttribute('data-sku-index') || '0');
-          selectSku(skusList[idx], btn);
-        });
-      });
     }
 
     // Hook quantity handlers
@@ -260,19 +230,76 @@ const cleanId = product.id.replace('pid_', '');
     });
   }
 
-  function selectSku(sku, btnElement) {
-    selectedSku = sku;
-    selectedQuantity = 1; // Reset quantity
+  function getSkusList() {
+    if (!product) return [];
+    let list = product.skus || [];
+    if (list.length === 0) {
+      list = [{
+        id: 'sku_default',
+        name: 'Default Option',
+        price_cny: product.price_cny,
+        price_usd: product.price_usd,
+        stock: product.stock,
+        picture: product.image
+      }];
+    }
+    return list;
+  }
 
-    // Highlights
-    const allBtns = skuContainer?.querySelectorAll('.sku-select-btn');
-    allBtns?.forEach(b => {
-      b.classList.remove('bg-[#FFD6E0]', 'shadow-[2px_2px_0px_#3E2A1E]');
-      b.classList.add('bg-white');
+  function renderSkus() {
+    if (!skuContainer || !product) return;
+    const skusList = getSkusList();
+    const mode = getCurrencyMode();
+
+    skuContainer.innerHTML = skusList.map((sku, index) => {
+      const isOutOfStock = sku.stock === '0' || sku.stock === '缺货';
+      const isSelected = selectedSku && selectedSku.id === sku.id;
+      const priceLabel = mode === 'cny'
+        ? `¥${sku.price_cny} CNY`
+        : `$${sku.price_usd.toFixed(2)}`;
+      const secondaryPriceLabel = mode === 'cny'
+        ? `$${sku.price_usd.toFixed(2)} USD`
+        : `¥${sku.price_cny} CNY`;
+
+      return `
+        <button
+          type="button"
+          class="sku-select-btn p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all duration-300 font-fredoka group ${
+            isOutOfStock 
+              ? 'opacity-40 pointer-events-none border-[#E8E1D9] bg-zinc-100' 
+              : isSelected
+                ? 'bg-[#FFD6E0] border-[#3E2A1E] shadow-[2px_2px_0px_#3E2A1E]'
+                : 'border-[#3E2A1E] bg-white hover:bg-[#FFD6E0]/20'
+          }"
+          data-sku-index="${index}"
+        >
+          <span class="text-sm font-bold text-[#3E2A1E] group-hover:text-[#FF6B8B] transition-colors leading-tight mb-2">${sku.name}</span>
+          <div class="flex items-baseline justify-between w-full mt-auto font-quicksand font-bold gap-2 flex-wrap">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+              <span class="text-xs text-[#FF6B8B]">${priceLabel}</span>
+              <span class="text-[9px] text-[#6D5A50] font-medium">${secondaryPriceLabel}</span>
+            </div>
+            <span class="text-[9px] text-[#6D5A50]">Stock: ${sku.stock}</span>
+          </div>
+        </button>
+      `;
+    }).join('');
+
+    // Hook click listeners
+    const btnElements = skuContainer.querySelectorAll('.sku-select-btn');
+    btnElements.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-sku-index') || '0');
+        selectSku(skusList[idx]);
+      });
     });
+  }
 
-    btnElement.classList.remove('bg-white');
-    btnElement.classList.add('bg-[#FFD6E0]', 'shadow-[2px_2px_0px_#3E2A1E]');
+  function selectSku(sku) {
+    selectedSku = sku;
+    
+    // Highlight the selected option button and redraw list
+    renderSkus();
 
     // Update Stock Display
     if (stockDisplay) stockDisplay.textContent = `In stock: ${sku.stock}`;
@@ -287,10 +314,22 @@ const cleanId = product.id.replace('pid_', '');
 
     const usdPrice = selectedSku.price_usd * selectedQuantity;
     const cnyPrice = selectedSku.price_cny * selectedQuantity;
+    const mode = getCurrencyMode();
 
-    totalUsd.textContent = `$${usdPrice.toFixed(2)}`;
-    totalCny.textContent = `¥${cnyPrice.toFixed(0)} CNY`;
+    if (mode === 'cny') {
+      totalUsd.textContent = `¥${cnyPrice.toFixed(0)} CNY`;
+      totalCny.textContent = `$${usdPrice.toFixed(2)} USD`;
+    } else {
+      totalUsd.textContent = `$${usdPrice.toFixed(2)}`;
+      totalCny.textContent = `¥${cnyPrice.toFixed(0)} CNY`;
+    }
   }
+
+  // Listen for language switcher changes to update display instantly
+  window.addEventListener('language:change', () => {
+    renderSkus();
+    updateQtyDisplay();
+  });
 
   initPage();
 </script>

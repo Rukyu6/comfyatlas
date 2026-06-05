@@ -315,6 +315,9 @@
         const translateJsLang = isoToTranslateJs(lang);
         translate.changeLanguage(translateJsLang);
       }
+
+      // 4. Dispatch custom event for currency dynamic updates
+      window.dispatchEvent(new CustomEvent('language:change', { detail: { lang } }));
     });
   });
 
