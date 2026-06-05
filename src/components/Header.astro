@@ -22,8 +22,8 @@
           type="button" 
           class="px-3.5 py-2 bg-white border-2 border-[#3E2A1E] hover:bg-[#FFD6E0]/20 text-[#3E2A1E] text-xs font-bold font-fredoka uppercase tracking-wider rounded-xl transition flex items-center gap-2 active:scale-95 shadow-[2px_2px_0px_#3E2A1E]"
         >
-          <span id="active-lang-flag">🇺🇸</span>
-          <span id="active-lang-label" class="hidden sm:inline">English</span>
+          <span id="active-lang-flag">🇰🇷</span>
+          <span id="active-lang-label" class="hidden sm:inline">한국어</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-[#6D5A50]" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
@@ -296,10 +296,12 @@
   }
 
   // Determine current language from LocalStorage
-  let currentLang = 'en';
+  let currentLang = 'ko';
   const localSavedLang = localStorage.getItem('active_language');
   if (localSavedLang && langMap[localSavedLang]) {
     currentLang = localSavedLang;
+  } else {
+    localStorage.setItem('active_language', 'ko');
   }
 
   // Update button visual state immediately on page load

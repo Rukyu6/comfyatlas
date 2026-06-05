@@ -4,14 +4,14 @@
 
 @layer base {
   html {
-    font-family: 'Fredoka', 'Quicksand', system-ui, -apple-system, sans-serif;
+    font-family: 'Jua', 'Gowun Dodum', 'Fredoka', 'Quicksand', system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    background-color: #FFFDF9;
+    background-color: #FFFDFB;
   }
   body {
-    background-color: #FFFDF9;
+    background-color: #FFFDFB;
     color: #3E2A1E; /* Cozy cocoa dark brown */
     overflow-x: hidden;
   }
@@ -41,23 +41,23 @@
   /* Cute Bubbly Card (Neo-brutalism chibi) */
   .glass-card {
     background: #FFFFFF;
-    border: 3px solid #3E2A1E;
+    border: 2px solid #3E2A1E;
     box-shadow: 4px 4px 0px #3E2A1E;
     border-radius: 24px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .glass-card:hover {
-    transform: translateY(-4px) rotate(0.5deg);
-    box-shadow: 8px 8px 0px #3E2A1E;
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px #3E2A1E;
   }
 
   /* Cute sticky nav */
   .glass-nav {
-    background: rgba(255, 253, 249, 0.95);
+    background: rgba(255, 253, 251, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 3px solid #3E2A1E;
+    border-bottom: 2px solid #3E2A1E;
   }
 
   /* Text Gradients (Kawaii pastel gradients) */
@@ -126,34 +126,17 @@
     color: #FF3E6C;
   }
 
-  /* Cute Bouncing Preloader & Bouncy Animation effects */
-  .crt-screen {
-    position: relative;
-    overflow: hidden;
-    background-color: #FFF5F7; /* Soft pink-cream loading screen */
-    box-shadow: inset 0 0 40px rgba(255, 182, 193, 0.3);
-  }
-
-  /* Retro CRT power-off collapse animation adjusted for cute transition */
-  @keyframes crt-off-collapse {
-    0% {
-      transform: scaleY(1) scaleX(1);
-      opacity: 1;
-    }
-    40% {
-      transform: scaleY(0.01) scaleX(1.1);
-      opacity: 0.8;
-      background-color: #FFD6E0;
-    }
-    100% {
-      transform: scaleY(0) scaleX(0);
-      opacity: 0;
-      background-color: #FFF;
-    }
-  }
-
-  .crt-collapse {
-    animation: crt-off-collapse 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  /* Cute Chibi Preloader screen */
+  .cute-loader-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background-color: #FFFDFB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
   }
 
   /* Bouncing keyframe animation for mascot and loaders */

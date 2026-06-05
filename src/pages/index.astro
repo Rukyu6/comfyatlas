@@ -14,7 +14,7 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
   <Header />
 
   <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-[#FFFDF9]">
+  <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-[#FFFDFB]">
     <!-- Ambient Background Glows -->
     <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#FFD6E0]/20 rounded-full filter blur-[120px] pointer-events-none"></div>
     <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[400px] h-[400px] bg-indigo-200/20 rounded-full filter blur-[100px] pointer-events-none"></div>
@@ -36,7 +36,7 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
         <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
           <a 
             href="#digital" 
-            class="w-full sm:w-auto px-8 py-4 bg-[#FFD6E0] border-3 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFB3C6] font-bold uppercase tracking-wider rounded-full shadow-[4px_4px_0px_#3E2A1E] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_#3E2A1E] active:scale-95 transition-all duration-300 text-sm font-fredoka text-center"
+            class="w-full sm:w-auto px-8 py-4 bg-[#FFD6E0] border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFB3C6] font-bold uppercase tracking-wider rounded-full shadow-[3px_3px_0px_#3E2A1E] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[4px_4px_0px_#3E2A1E] active:scale-95 transition-all duration-300 text-sm font-fredoka text-center"
           >
             Explore Digital Vault 🐾
           </a>
@@ -47,7 +47,7 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
       <div class="lg:col-span-5 flex justify-center lg:justify-end">
         <div 
           id="hero-art-container"
-          class="relative w-full max-w-[400px] aspect-square rounded-[2rem] overflow-hidden border-4 border-[#3E2A1E] shadow-[8px_8px_0px_#3E2A1E] transition-all duration-300 ease-out cursor-pointer group bg-white"
+          class="relative w-full max-w-[400px] aspect-square rounded-[2rem] overflow-hidden border-2 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] transition-all duration-300 ease-out cursor-pointer group bg-white"
         >
           <!-- Glowing border indicator on hover -->
           <div class="absolute inset-0 bg-gradient-to-tr from-[#FFD6E0]/20 to-indigo-200/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
@@ -61,7 +61,7 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
           />
 
           <!-- Overlay Glass Plate -->
-          <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/90 backdrop-blur-md border-3 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] z-20 text-left space-y-1 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+          <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/90 backdrop-blur-md border-2 border-[#3E2A1E] shadow-[2px_2px_0px_#3E2A1E] z-20 text-left space-y-1 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
             <span class="text-[9px] font-black uppercase tracking-widest text-[#FF6B8B]">OFFICIAL MASCOT</span>
             <h3 class="text-sm font-bold text-[#3E2A1E] font-fredoka">Cozy Chibi Assistant</h3>
           </div>
@@ -82,37 +82,37 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
   <FilmStripSlider />
 
   <!-- Digital Vault Section (Crawled from chuhai91.cc) -->
-  <section id="digital" class="py-24 border-t-3 border-[#3E2A1E] relative min-h-[800px] bg-[#FFFDF9]">
+  <section id="digital" class="py-24 border-t-2 border-[#3E2A1E] relative min-h-[800px] bg-[#FFFDFB]">
     <div class="max-w-7xl mx-auto px-6">
       
       <!-- Announcement Board -->
-      <div class="glass-card p-6 md:p-8 rounded-[2rem] border-3 border-[#3E2A1E] shadow-[6px_6px_0px_#3E2A1E] bg-white mb-12 text-left space-y-6">
+      <div class="glass-card p-6 md:p-8 rounded-[2rem] border-2 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] bg-white mb-12 text-left space-y-6">
         <h3 class="text-xl font-bold font-fredoka text-[#FF6B8B] flex items-center gap-2 border-b-2 border-[#E8E1D9] pb-3 select-none">
           📢 最新公告 / Announcements
         </h3>
         <div class="space-y-3 font-quicksand font-bold text-xs md:text-sm">
           <!-- Item 1: Red -->
-          <div class="p-4 rounded-2xl bg-red-50 border-l-4 border-red-500 text-red-700 flex items-start gap-3">
+          <div class="p-4 rounded-2xl bg-red-50 border-l-2 border-red-400 text-red-700 flex items-start gap-3">
             <span class="text-base">⚠️</span>
             <p>本站商品仅供学习测试使用，请勿使用本站商品从事违法活动，否则一经发现，后果自负，本站将配合相关部门打击！</p>
           </div>
           <!-- Item 2: Green -->
-          <div class="p-4 rounded-2xl bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 flex items-start gap-3">
+          <div class="p-4 rounded-2xl bg-emerald-50 border-l-2 border-emerald-400 text-emerald-700 flex items-start gap-3">
             <span class="text-base">📧</span>
             <p>本站为卡密发货，发送邮箱。付款过后没有进入查看页面的用户，可以通过首页右上角“订单查询”来查看卡密。</p>
           </div>
           <!-- Item 3: Brown -->
-          <div class="p-4 rounded-2xl bg-[#F0E6DF] border-l-4 border-[#3E2A1E] text-[#3E2A1E] flex items-start gap-3">
+          <div class="p-4 rounded-2xl bg-[#F0E6DF] border-l-2 border-[#3E2A1E] text-[#3E2A1E] flex items-start gap-3">
             <span class="text-base">🔒</span>
             <p>账号都是独享，卖出删档 - 本站不保存任何已售账户数据，请自行保存好发货信息。</p>
           </div>
           <!-- Item 4: Purple -->
-          <div class="p-4 rounded-2xl bg-indigo-50 border-l-4 border-indigo-500 text-indigo-700 flex items-start gap-3">
+          <div class="p-4 rounded-2xl bg-indigo-50 border-l-2 border-indigo-400 text-indigo-700 flex items-start gap-3">
             <span class="text-base">💳</span>
             <p>⭐️⭐⭐ 支持支付宝、微信、USDT支付（支付不了换支付通道） 注册会员用USDT充值余额，可0手续费下单。</p>
           </div>
           <!-- Item 5: Blue -->
-          <div class="p-4 rounded-2xl bg-blue-50 border-l-4 border-blue-500 text-blue-700 flex items-start gap-3">
+          <div class="p-4 rounded-2xl bg-blue-50 border-l-2 border-blue-400 text-blue-700 flex items-start gap-3">
             <span class="text-base">💬</span>
             <div>
               <p>账号使用遇见困难或问题，请先查看帮助教程，大概率可以解决你的问题。</p>
@@ -134,7 +134,7 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
               type="text" 
               id="search-bar" 
               placeholder="Search 700+ digital accounts..." 
-              class="w-full bg-white border-3 border-[#3E2A1E] rounded-2xl pl-11 pr-4 py-3 text-sm text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] shadow-[4px_4px_0px_#3E2A1E] focus:shadow-[6px_6px_0px_#3E2A1E] transition-all duration-300 font-quicksand font-bold"
+              class="w-full bg-white border-2 border-[#3E2A1E] rounded-2xl pl-11 pr-4 py-3 text-sm text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] shadow-[3px_3px_0px_#3E2A1E] focus:shadow-[4px_4px_0px_#3E2A1E] transition-all duration-300 font-quicksand font-bold"
             />
             <div class="absolute left-4 top-4 text-[#6D5A50]">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">

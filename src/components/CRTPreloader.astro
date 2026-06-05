@@ -1,11 +1,9 @@
----
----
 <!-- Cozy Puppy Chibi Preloader Overlay Wrapper -->
 <div 
   id="crt-preloader-wrapper" 
-  class="fixed inset-0 z-50 bg-[#FFF5F7] flex items-center justify-center font-quicksand select-none"
+  class="fixed inset-0 z-50 bg-[#FFFDFB] flex items-center justify-center font-quicksand select-none transition-opacity duration-500 ease-out"
 >
-  <!-- Chibi Box Container (collapses on load finish) -->
+  <!-- Chibi Box Container -->
   <div 
     id="crt-monitor" 
     class="glass-card max-w-md w-11/12 p-8 text-center bg-white flex flex-col justify-between items-center relative gap-6"
@@ -23,7 +21,7 @@
 
     <!-- Main Loading Log Info -->
     <div class="w-full space-y-4 text-center">
-      <h3 class="text-xl font-bold text-[#3E2A1E] font-fredoka">🐶 PUPPY SHOP LOADING...</h3>
+      <h3 class="text-xl font-bold text-[#3E2A1E] font-fredoka">🐶 퍼피숍 준비 중... 🐾</h3>
       
       <!-- Terminal Log Text -->
       <div id="crt-terminal-log" class="text-xs text-[#6D5A50] font-bold min-h-[32px] max-w-xs mx-auto leading-relaxed">
@@ -33,14 +31,14 @@
       <!-- Loading Bar -->
       <div class="space-y-2 pt-2 border-t-2 border-[#E8E1D9]">
         <div class="flex items-center justify-between text-xs font-bold text-[#3E2A1E] font-fredoka">
-          <span>COZY SYSTEM INJECTOR</span>
+          <span>로딩 상태</span>
           <span id="crt-progress-percentage">0%</span>
         </div>
         <!-- Progress Bar Container -->
-        <div class="w-full h-5 border-3 border-[#3E2A1E] bg-[#FFFDF9] p-0.5 rounded-full overflow-hidden shadow-[2px_2px_0px_#3E2A1E]">
+        <div class="w-full h-5 border-2 border-[#3E2A1E] bg-[#FFFDF9] p-0.5 rounded-full overflow-hidden shadow-[2px_2px_0px_#3E2A1E]">
           <div 
             id="crt-progress-fill" 
-            class="h-full bg-[#FF9EAF] border-r-3 border-[#3E2A1E] rounded-full w-0 transition-all duration-100 ease-out"
+            class="h-full bg-[#FF9EAF] border-r-2 border-[#3E2A1E] rounded-full w-0 transition-all duration-100 ease-out"
           ></div>
         </div>
       </div>
@@ -49,13 +47,13 @@
 
     <!-- Footer Action -->
     <div class="w-full flex items-center justify-between text-[10px] font-bold text-[#6D5A50] border-t-2 border-[#E8E1D9] pt-4 font-quicksand">
-      <span>VIBES STATUS: COZY 🧁</span>
+      <span>상태: 매우 사랑스러움 🧁</span>
       <button 
         id="crt-skip-btn" 
         type="button" 
         class="px-4 py-2 border-2 border-[#3E2A1E] bg-[#FFD6E0] hover:bg-[#FFB3C6] text-[#3E2A1E] rounded-xl font-fredoka text-xs font-bold transition-all duration-200 active:scale-95 shadow-[2px_2px_0px_#3E2A1E]"
       >
-        Skip Loading 🐾
+        건너뛰기 🐾
       </button>
     </div>
 
@@ -64,12 +62,12 @@
 
 <script>
   const logLines = [
-    "🐾 PUPPY OS v1.0.0 STARTING...",
-    "🐶 SECURE DOMAIN: COMFYATLAS.COM OK",
-    "✨ BREADING COZY VIBES...",
-    "🍰 LOAFING 716 ACCOUNT VAULT ITEMS...",
-    "🧁 PREPARING COOKIES AND TEA...",
-    "🐾 GATEWAY SECURE: SERVED WITH LOVE!"
+    "🐾 퍼피 OS 시작 중...",
+    "🐶 보안 도메인 연결 완료",
+    "✨ 사랑스러운 분위기 충전 중...",
+    "🍰 디지털 계정 금고 준비 완료!",
+    "🧁 달콤한 쿠키 준비 중...",
+    "🐾 준비 완료! 행복한 시간 되세요!"
   ];
 
   const wrapper = document.getElementById('crt-preloader-wrapper');
@@ -90,7 +88,7 @@
     startTerminalTyping();
 
     skipBtn?.addEventListener('click', () => {
-      triggerCRTCollapse();
+      triggerFadeOut();
     });
   }
 
@@ -118,7 +116,7 @@
     await updateProgress(100);
     await delay(300);
 
-    triggerCRTCollapse();
+    triggerFadeOut();
   }
 
   function updateProgress(percentage) {
@@ -138,10 +136,10 @@
     });
   }
 
-  function triggerCRTCollapse() {
-    if (!monitor || !wrapper) return;
+  function triggerFadeOut() {
+    if (!wrapper) return;
     
-    monitor.classList.add('crt-collapse');
+    wrapper.style.opacity = '0';
 
     setTimeout(() => {
       wrapper.style.display = 'none';
