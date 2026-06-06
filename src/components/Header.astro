@@ -8,9 +8,9 @@
 
     <!-- Menu Links -->
     <nav class="hidden md:flex items-center gap-8 font-sora text-sm font-semibold text-white/70">
-      <a href="/#digital" class="hover:text-white transition-colors text-xs tracking-tight">Digital Vault</a>
-      <a href="/query" class="hover:text-white transition-colors text-xs tracking-tight">Order Query</a>
-      <a href="/#how-it-works" class="hover:text-white transition-colors text-xs tracking-tight">How It Works</a>
+      <a href="/#digital" class="hover:text-white transition-colors text-xs tracking-tight">商品分类</a>
+      <a href="/query" class="hover:text-white transition-colors text-xs tracking-tight">订单查询</a>
+      <a href="/#how-it-works" class="hover:text-white transition-colors text-xs tracking-tight">使用说明</a>
     </nav>
 
     <!-- Header Actions (Auth + i18n + Cart) -->
@@ -81,7 +81,7 @@
           href="/login" 
           class="px-5 py-2 bg-[#E7AC08] hover:bg-[#FAC514] border border-[#FAC514] text-[#080808] text-xs font-bold font-sora rounded-full transition active:scale-95 inline-block decoration-none"
         >
-          Sign In
+          登录
         </a>
       </div>
 
@@ -148,7 +148,7 @@
           href="/login" 
           class="px-5 py-2 bg-[#E7AC08] hover:bg-[#FAC514] border border-[#FAC514] text-[#080808] text-xs font-bold font-sora rounded-full transition active:scale-95 inline-block decoration-none"
         >
-          Sign In
+          登录
         </a>
       `;
       return;
@@ -202,12 +202,12 @@
           class="hidden absolute right-0 mt-2 w-56 rounded-2xl bg-[#1C1917]/95 border border-[#292929] shadow-[0_12px_35px_rgba(0,0,0,0.85)] p-2 z-50 text-left text-white backdrop-blur-md"
         >
           <div class="px-4 py-3 border-b border-[#292929] text-[10px] text-white/50 uppercase tracking-widest font-mono">
-            Account: <span class="text-white font-bold block truncate mt-0.5">${email}</span>
+            账户: <span class="text-white font-bold block truncate mt-0.5">${email}</span>
           </div>
 
           <!-- Wallet Balance -->
           <div class="px-4 py-2.5 border-b border-[#292929] text-[10px] text-white/50 font-sora">
-            USDT Balance / 余额: 
+            USDT 余额: 
             <span class="text-[#FAC514] font-bold block text-sm mt-0.5">$${balanceUsd.toFixed(2)} <span class="text-xs text-white/40 font-normal font-sans">(¥${balanceCny} CNY)</span></span>
           </div>
 
@@ -216,14 +216,14 @@
               href="/orders" 
               class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs text-white/80 hover:bg-white/10 transition font-sora font-semibold"
             >
-              Order Vault
+              我的订单
             </a>
             ${isAdmin ? `
               <a 
                 href="/admin/dashboard" 
                 class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs text-[#FAC514] hover:bg-white/10 transition font-sora font-semibold"
               >
-                Operations Room
+                后台管理
               </a>
             ` : ''}
           </div>
@@ -233,7 +233,7 @@
               type="button" 
               class="w-full flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs text-red-400 hover:bg-red-500/10 transition font-sora font-semibold text-left"
             >
-              Sign Out
+              退出登录
             </button>
           </div>
         </div>
