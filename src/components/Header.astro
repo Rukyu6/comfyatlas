@@ -8,9 +8,9 @@
 
     <!-- Menu Links -->
     <nav class="hidden md:flex items-center gap-8 font-sora text-sm font-semibold text-white/70">
-      <a href="/#digital" class="hover:text-white transition-colors text-xs tracking-tight">Digital Vault / 상품분류</a>
-      <a href="/query" class="hover:text-white transition-colors text-xs tracking-tight">Order Query / 주문조회</a>
-      <a href="/#how-it-works" class="hover:text-white transition-colors text-xs tracking-tight">How It Works / 이용안내</a>
+      <a href="/#digital" class="hover:text-white transition-colors text-xs tracking-tight">Digital Vault / 商品分类</a>
+      <a href="/query" class="hover:text-white transition-colors text-xs tracking-tight">Order Query / 订单查询</a>
+      <a href="/#how-it-works" class="hover:text-white transition-colors text-xs tracking-tight">How It Works / 使用说明</a>
     </nav>
 
     <!-- Header Actions (Auth + i18n + Cart) -->
@@ -23,8 +23,8 @@
           type="button" 
           class="px-3.5 py-2 bg-transparent border border-white/10 hover:bg-white/5 text-white/80 text-xs font-semibold font-sora rounded-full transition flex items-center gap-2 active:scale-95"
         >
-          <span id="active-lang-flag">🇰🇷</span>
-          <span id="active-lang-label" class="hidden sm:inline">한국어</span>
+          <span id="active-lang-flag">🇨🇳</span>
+          <span id="active-lang-label" class="hidden sm:inline">中文</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white/50" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
@@ -207,7 +207,7 @@
 
           <!-- Wallet Balance -->
           <div class="px-4 py-2.5 border-b border-[#292929] text-[10px] text-white/50 font-sora">
-            USDT Balance / 잔액: 
+            USDT Balance / 余额: 
             <span class="text-[#FAC514] font-bold block text-sm mt-0.5">$${balanceUsd.toFixed(2)} <span class="text-xs text-white/40 font-normal font-sans">(¥${balanceCny} CNY)</span></span>
           </div>
 
@@ -297,12 +297,12 @@
   }
 
   // Determine current language from LocalStorage
-  let currentLang = 'ko';
+  let currentLang = 'zh-CN';
   const localSavedLang = localStorage.getItem('active_language');
   if (localSavedLang && langMap[localSavedLang]) {
     currentLang = localSavedLang;
   } else {
-    localStorage.setItem('active_language', 'ko');
+    localStorage.setItem('active_language', 'zh-CN');
   }
 
   // Update button visual state immediately on page load
@@ -357,14 +357,14 @@
     script.onload = () => {
       const translate = (window as any).translate;
       if (translate) {
-        translate.language.setLocal('english');
+        translate.language.setLocal('chinese_simplified');
         translate.service.use('client.edge');
         translate.selectLanguageTag.show = false;
         translate.listener.start();
         translate.execute();
         
         // Auto translate on load if a language was previously saved
-        if (currentLang && currentLang !== 'en') {
+        if (currentLang && currentLang !== 'zh-CN') {
           const translateJsLang = isoToTranslateJs(currentLang);
           setTimeout(() => {
             translate.changeLanguage(translateJsLang);

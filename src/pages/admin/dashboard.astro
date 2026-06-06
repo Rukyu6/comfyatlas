@@ -799,15 +799,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     script.onload = () => {
       const translate = (window as any).translate;
       if (translate) {
-        translate.language.setLocal('english');
+        translate.language.setLocal('chinese_simplified');
         translate.service.use('client.edge');
         translate.selectLanguageTag.show = false;
         translate.listener.start();
         translate.execute();
         
         // Auto translate on load if a language was previously saved
-        const currentLang = localStorage.getItem('active_language') || 'ko';
-        if (currentLang && currentLang !== 'en') {
+        const currentLang = localStorage.getItem('active_language') || 'zh-CN';
+        if (currentLang && currentLang !== 'zh-CN') {
           const translateJsLang = isoToTranslateJs(currentLang);
           setTimeout(() => {
             translate.changeLanguage(translateJsLang);
