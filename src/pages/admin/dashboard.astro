@@ -76,6 +76,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         >
           💰 充值审核
         </button>
+        <button 
+          id="tab-btn-customers" 
+          type="button" 
+          class="pb-3 border-b-2 border-transparent text-zinc-500 hover:text-white font-bold text-sm font-fredoka transition-all cursor-pointer"
+        >
+          👥 客户管理
+        </button>
       </div>
 
       <!-- Tab View: Orders -->
@@ -217,6 +224,34 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
       </div>
 
+      <!-- Tab View: Customers -->
+      <div id="view-customers" class="hidden space-y-6">
+        <div class="glass-card p-6 space-y-6 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
+          <div class="flex items-center justify-between border-b border-[#292929] pb-4">
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider font-fredoka">客户/会员管理</h3>
+            <span class="text-[10px] font-bold text-zinc-400 font-mono" id="stat-customers-count">客户总数: 0</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="border-b border-[#292929] text-zinc-400 uppercase tracking-widest text-[9px] font-bold font-fredoka">
+                  <th class="pb-3 pr-2">用户 ID (UID)</th>
+                  <th class="pb-3 px-2">客户邮箱</th>
+                  <th class="pb-3 px-2">会员余额</th>
+                  <th class="pb-3 pl-2 text-right">操作</th>
+                </tr>
+              </thead>
+              <tbody id="customer-ledger-rows" class="divide-y divide-[#292929] text-zinc-300 font-fredoka">
+                <tr>
+                  <td colspan="4" class="py-12 text-center text-zinc-500">正在加载客户列表中...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -318,8 +353,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const modalDispatchSection = document.getElementById('modal-dispatch-section');
   const modalDispatchInput = document.getElementById('modal-dispatch-input') as HTMLTextAreaElement;
 
+  // Customers Elements
+  const tabBtnCustomers = document.getElementById('tab-btn-customers');
+  const viewCustomers = document.getElementById('view-customers');
+  const customerLedgerRows = document.getElementById('customer-ledger-rows');
+  const customersCount = document.getElementById('stat-customers-count');
+
   let activeOrders: any[] = [];
   let selectedOrder: any = null;
+  let activeCustomers: any[] = [];
 
   // Protect Admin Route client-side
   onAuthStateChanged(authInstance, (user) => {
@@ -342,6 +384,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     
     syncLedger();
     syncDeposits();
+    syncCustomers();
   });
 
   // Listen to orders updates in real-time
@@ -649,9 +692,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     tabBtnOrders.classList.remove('border-transparent', 'text-zinc-500');
     tabBtnDeposits?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
     tabBtnDeposits?.classList.add('border-transparent', 'text-zinc-500');
+    tabBtnCustomers?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
+    tabBtnCustomers?.classList.add('border-transparent', 'text-zinc-500');
 
     viewOrders?.classList.remove('hidden');
     viewDeposits?.classList.add('hidden');
+    viewCustomers?.classList.add('hidden');
   });
 
   tabBtnDeposits?.addEventListener('click', () => {
@@ -659,9 +705,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     tabBtnDeposits.classList.remove('border-transparent', 'text-zinc-500');
     tabBtnOrders?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
     tabBtnOrders?.classList.add('border-transparent', 'text-zinc-500');
+    tabBtnCustomers?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
+    tabBtnCustomers?.classList.add('border-transparent', 'text-zinc-500');
 
     viewOrders?.classList.add('hidden');
     viewDeposits?.classList.remove('hidden');
+    viewCustomers?.classList.add('hidden');
+  });
+
+  tabBtnCustomers?.addEventListener('click', () => {
+    tabBtnCustomers.classList.add('border-[#E7AC08]', 'text-[#E7AC08]');
+    tabBtnCustomers.classList.remove('border-transparent', 'text-zinc-500');
+    tabBtnOrders?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
+    tabBtnOrders?.classList.add('border-transparent', 'text-zinc-500');
+    tabBtnDeposits?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
+    tabBtnDeposits?.classList.add('border-transparent', 'text-zinc-500');
+
+    viewOrders?.classList.add('hidden');
+    viewDeposits?.classList.add('hidden');
+    viewCustomers?.classList.remove('hidden');
   });
 
   // Deposits sync logic
@@ -792,6 +854,94 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     } catch (err) {
       console.error("Failed to reject deposit:", err);
       alert("拒绝审核失败。");
+    }
+  };
+
+  // Customers sync and balance adjustment logic
+  function syncCustomers() {
+    const collRef = collection(dbInstance, 'users');
+    
+    onSnapshot(collRef, (snapshot) => {
+      const customers: any[] = [];
+      snapshot.docs.forEach((doc) => {
+        customers.push({ id: doc.id, ...doc.data() });
+      });
+
+      // Sort by email or balance or default
+      activeCustomers = customers.sort((a, b) => (a.email || '').localeCompare(b.email || ''));
+      renderCustomersTable(activeCustomers);
+    }, (err) => {
+      console.error("Failed to sync customers:", err);
+      if (customerLedgerRows) {
+        customerLedgerRows.innerHTML = `
+          <tr>
+            <td colspan="4" class="py-12 text-center text-rose-400 bg-rose-500/5 font-bold">
+              加载客户列表失败，请在 Firebase 控制台检查安全规则配置！<br/>
+              <span class="text-[10px] font-normal text-zinc-550">错误信息: ${err.message}</span>
+            </td>
+          </tr>
+        `;
+      }
+    });
+  }
+
+  function renderCustomersTable(customers: any[]) {
+    if (!customerLedgerRows) return;
+    if (customersCount) customersCount.textContent = `客户总数: ${customers.length}`;
+
+    if (customers.length === 0) {
+      customerLedgerRows.innerHTML = `
+        <tr>
+          <td colspan="4" class="py-12 text-center text-zinc-500">暂无注册客户记录。</td>
+        </tr>
+      `;
+      return;
+    }
+
+    customerLedgerRows.innerHTML = customers.map(cust => {
+      const balance = typeof cust.balance_usd === 'number' ? cust.balance_usd : parseFloat(cust.balance_usd || 0);
+      return `
+        <tr class="hover:bg-white/5 border-b border-[#292929] transition-colors">
+          <td class="py-3.5 pr-2 font-mono text-[10px] text-zinc-500 font-bold select-all">${cust.id}</td>
+          <td class="py-3.5 px-2 font-semibold">
+            <span class="block text-white truncate max-w-[250px]">${cust.email || '无邮箱'}</span>
+          </td>
+          <td class="py-3.5 px-2 font-bold font-mono text-[#E7AC08]">$${balance.toFixed(2)} USDT</td>
+          <td class="py-3.5 pl-2 text-right space-x-1 whitespace-nowrap">
+            <button 
+              type="button" 
+              class="px-2.5 py-1 bg-[#E7AC08]/10 border border-[#E7AC08]/30 hover:bg-[#E7AC08]/20 text-[#E7AC08] text-[10px] font-bold rounded-lg transition active:scale-95"
+              onclick="window.adjustCustomerBalance('${cust.id}', ${balance})"
+            >
+              调整余额
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  (window as any).adjustCustomerBalance = async function(uid: string, currentBalance: number) {
+    const newBalanceStr = prompt(`当前余额为: $${currentBalance.toFixed(2)} USDT\n请输入新的账户余额 (USDT 纯数字，如 100):`, currentBalance.toString());
+    if (newBalanceStr === null) return;
+
+    const newBalance = parseFloat(newBalanceStr);
+    if (isNaN(newBalance) || newBalance < 0) {
+      alert("请输入有效的账户余额！");
+      return;
+    }
+
+    if (!confirm(`确定要将该客户 (UID: ${uid}) 的余额调整为 $${newBalance.toFixed(2)} USDT 吗？`)) return;
+
+    try {
+      const userDocRef = doc(dbInstance, 'users', uid);
+      await updateDoc(userDocRef, {
+        balance_usd: newBalance
+      });
+      alert("账户余额调整成功！");
+    } catch (err) {
+      console.error("Failed to update user balance:", err);
+      alert("更新余额失败，请检查网络连接或权限规则。");
     }
   };
 
