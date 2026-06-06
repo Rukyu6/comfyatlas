@@ -18,8 +18,14 @@ import Footer from '../components/Footer.astro';
         
         <!-- Auth Header -->
         <div class="text-center mb-8">
-          <h1 class="text-2xl font-extrabold font-sora text-white tracking-tight" id="auth-title">Welcome Back</h1>
-          <p class="text-xs text-zinc-400 mt-1 font-sora" id="auth-subtitle">Sign in to manage your digital vault and tracking</p>
+          <h1 class="text-2xl font-extrabold font-sora text-white tracking-tight">
+            <span id="auth-title-signin">欢迎回来</span>
+            <span id="auth-title-register" class="hidden">创建账户</span>
+          </h1>
+          <p class="text-xs text-zinc-400 mt-1 font-sora">
+            <span id="auth-subtitle-signin">登录以管理您的数字商品库与订单追踪</span>
+            <span id="auth-subtitle-register" class="hidden">注册以开通自动发货与订单追踪</span>
+          </p>
         </div>
 
         <!-- Tabs toggle -->
@@ -29,14 +35,14 @@ import Footer from '../components/Footer.astro';
             type="button" 
             class="py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 bg-[#E7AC08] text-[#080808] border border-[#FAC514] shadow-md font-sora"
           >
-            Sign In
+            登录
           </button>
           <button 
             id="tab-register" 
             type="button" 
             class="py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 text-zinc-500 hover:text-white font-sora"
           >
-            Register
+            注册
           </button>
         </div>
 
@@ -49,18 +55,18 @@ import Footer from '../components/Footer.astro';
         <form id="auth-form" class="space-y-4">
           <!-- Username Field (Only visible on Register tab) -->
           <div id="username-field" class="space-y-1 text-left hidden">
-            <label for="username" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">Username / Nickname</label>
+            <label for="username" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">用户名 / 昵称</label>
             <input 
               type="text" 
               id="username" 
-              placeholder="e.g. MyNickname"
+              placeholder="例如：我的昵称"
               class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition-all duration-300"
             />
           </div>
 
           <!-- Email Field -->
           <div class="space-y-1 text-left">
-            <label for="email" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">Email Address</label>
+            <label for="email" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">电子邮箱</label>
             <input 
               type="email" 
               id="email" 
@@ -72,7 +78,7 @@ import Footer from '../components/Footer.astro';
 
           <!-- Password Field -->
           <div class="space-y-1 text-left">
-            <label for="password" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">Password</label>
+            <label for="password" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">密码</label>
             <input 
               type="password" 
               id="password" 
@@ -88,7 +94,10 @@ import Footer from '../components/Footer.astro';
             id="submit-btn"
             class="w-full py-4 bg-[#E7AC08] text-[#080808] hover:bg-[#FAC514] border border-[#FAC514] font-bold uppercase tracking-wider rounded-xl shadow-lg transition-all text-xs font-sora flex items-center justify-center gap-2 active:scale-[0.98] cursor-pointer"
           >
-            <span id="btn-text">Access Secure Account</span>
+            <span id="btn-text-signin">登录安全账户</span>
+            <span id="btn-text-register" class="hidden">注册并登录</span>
+            <span id="btn-text-submitting-signin" class="hidden">正在验证...</span>
+            <span id="btn-text-submitting-register" class="hidden">正在创建...</span>
             <div id="btn-spinner" class="hidden w-4 h-4 border-2 border-[#080808] border-t-transparent rounded-full animate-spin"></div>
           </button>
         </form>
@@ -96,7 +105,7 @@ import Footer from '../components/Footer.astro';
         <!-- Divider -->
         <div class="flex items-center my-6">
           <div class="flex-grow border-t border-[#292929]"></div>
-          <span class="px-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-sora">Or Continue With</span>
+          <span class="px-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-sora">或者使用以下方式继续</span>
           <div class="flex-grow border-t border-[#292929]"></div>
         </div>
 
@@ -121,7 +130,7 @@ import Footer from '../components/Footer.astro';
               </linearGradient>
             </defs>
           </svg>
-          <span class="group-hover:text-[#FAC514] transition-colors">Sign In with Google</span>
+          <span class="group-hover:text-[#FAC514] transition-colors">使用 Google 账号登录</span>
         </button>
 
       </div>
@@ -149,18 +158,51 @@ import Footer from '../components/Footer.astro';
   // DOM Elements
   const tabSignin = document.getElementById('tab-signin');
   const tabRegister = document.getElementById('tab-register');
-  const authTitle = document.getElementById('auth-title');
-  const authSubtitle = document.getElementById('auth-subtitle');
   const authForm = document.getElementById('auth-form');
   const emailInput = document.getElementById('email') as HTMLInputElement;
   const passwordInput = document.getElementById('password') as HTMLInputElement;
   const usernameField = document.getElementById('username-field');
   const usernameInput = document.getElementById('username') as HTMLInputElement;
   const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
-  const btnText = document.getElementById('btn-text');
   const btnSpinner = document.getElementById('btn-spinner');
   const googleBtn = document.getElementById('google-btn');
   const errorBanner = document.getElementById('auth-error-banner');
+
+  // Spans for localization stability
+  const titleSignin = document.getElementById('auth-title-signin');
+  const titleRegister = document.getElementById('auth-title-register');
+  const subtitleSignin = document.getElementById('auth-subtitle-signin');
+  const subtitleRegister = document.getElementById('auth-subtitle-register');
+  const btnTextSignin = document.getElementById('btn-text-signin');
+  const btnTextRegister = document.getElementById('btn-text-register');
+  const btnTextSubmittingSignin = document.getElementById('btn-text-submitting-signin');
+  const btnTextSubmittingRegister = document.getElementById('btn-text-submitting-register');
+
+  let isSubmittingState = false;
+
+  function updateButtonTextVisibility(submitting) {
+    isSubmittingState = submitting;
+    
+    // Hide all first
+    btnTextSignin?.classList.add('hidden');
+    btnTextRegister?.classList.add('hidden');
+    btnTextSubmittingSignin?.classList.add('hidden');
+    btnTextSubmittingRegister?.classList.add('hidden');
+
+    if (submitting) {
+      if (currentTab === 'signin') {
+        btnTextSubmittingSignin?.classList.remove('hidden');
+      } else {
+        btnTextSubmittingRegister?.classList.remove('hidden');
+      }
+    } else {
+      if (currentTab === 'signin') {
+        btnTextSignin?.classList.remove('hidden');
+      } else {
+        btnTextRegister?.classList.remove('hidden');
+      }
+    }
+  }
 
   function toggleTab(tab) {
     currentTab = tab;
@@ -170,9 +212,12 @@ import Footer from '../components/Footer.astro';
       tabRegister?.classList.remove('bg-[#E7AC08]', 'text-[#080808]', 'border', 'border-[#FAC514]', 'shadow-md');
       tabRegister?.classList.add('text-zinc-500', 'hover:text-white');
       
-      if (authTitle) authTitle.textContent = "Welcome Back";
-      if (authSubtitle) authSubtitle.textContent = "Sign in to manage your digital vault and tracking";
-      if (btnText) btnText.textContent = "Access Secure Account";
+      titleSignin?.classList.remove('hidden');
+      titleRegister?.classList.add('hidden');
+      subtitleSignin?.classList.remove('hidden');
+      subtitleRegister?.classList.add('hidden');
+      
+      updateButtonTextVisibility(false);
 
       if (usernameField) usernameField.classList.add('hidden');
       if (usernameInput) usernameInput.required = false;
@@ -182,9 +227,12 @@ import Footer from '../components/Footer.astro';
       tabSignin?.classList.remove('bg-[#E7AC08]', 'text-[#080808]', 'border', 'border-[#FAC514]', 'shadow-md');
       tabSignin?.classList.add('text-zinc-500', 'hover:text-white');
       
-      if (authTitle) authTitle.textContent = "Create Account";
-      if (authSubtitle) authSubtitle.textContent = "Register to unlock automated vault dispatches and tracking";
-      if (btnText) btnText.textContent = "Register & Get Access";
+      titleRegister?.classList.remove('hidden');
+      titleSignin?.classList.add('hidden');
+      subtitleRegister?.classList.remove('hidden');
+      subtitleSignin?.classList.add('hidden');
+      
+      updateButtonTextVisibility(false);
 
       if (usernameField) usernameField.classList.remove('hidden');
       if (usernameInput) usernameInput.required = true;
@@ -203,15 +251,14 @@ import Footer from '../components/Footer.astro';
     errorBanner?.classList.add('hidden');
   }
 
-  function setSubmitting(isSubmitting) {
-    if (submitBtn) submitBtn.disabled = isSubmitting;
-    if (isSubmitting) {
+  function setSubmitting(submitting) {
+    if (submitBtn) submitBtn.disabled = submitting;
+    if (submitting) {
       btnSpinner?.classList.remove('hidden');
-      if (btnText) btnText.textContent = currentTab === 'signin' ? "Verifying..." : "Creating...";
     } else {
       btnSpinner?.classList.add('hidden');
-      if (btnText) btnText.textContent = currentTab === 'signin' ? "Access Secure Account" : "Register & Get Access";
     }
+    updateButtonTextVisibility(submitting);
   }
 
   // Bind Switch Tab clicks
@@ -241,17 +288,17 @@ import Footer from '../components/Footer.astro';
       window.location.href = redirectPath;
     } catch (err: any) {
       console.error(err);
-      let errorMsg = err.message || "Authentication process failed.";
+      let errorMsg = err.message || "身份验证失败。";
       
       // Clean up Firebase standard errors
       if (errorMsg.includes('auth/invalid-credential') || errorMsg.includes('auth/user-not-found') || errorMsg.includes('auth/wrong-password')) {
-        errorMsg = "Access Denied: Invalid email or password credentials.";
+        errorMsg = "拒绝访问：邮箱或密码错误。";
       } else if (errorMsg.includes('auth/email-already-in-use')) {
-        errorMsg = "Access Denied: This email address is already registered.";
+        errorMsg = "拒绝访问：该邮箱已被注册。";
       } else if (errorMsg.includes('auth/weak-password')) {
-        errorMsg = "Access Denied: Password is too weak (min 6 characters required).";
+        errorMsg = "拒绝访问：密码强度过弱（至少需要 6 位字符）。";
       } else if (errorMsg.includes('auth/invalid-email')) {
-        errorMsg = "Access Denied: Please enter a valid email address.";
+        errorMsg = "拒绝访问：请输入有效的邮箱地址。";
       }
       
       showError(errorMsg);
@@ -269,7 +316,7 @@ import Footer from '../components/Footer.astro';
     } catch (err: any) {
       console.error(err);
       if (err.message && !err.message.includes('auth/popup-closed-by-user')) {
-        showError("Google authentication failed. Please try again.");
+        showError("Google 身份验证失败，请重试。");
       }
     }
   });
