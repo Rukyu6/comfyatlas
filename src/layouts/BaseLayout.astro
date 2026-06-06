@@ -57,6 +57,47 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
       gtag('js', new Date());
       gtag('config', 'G-4RBFJ76E2B');
     </script>
+
+    <!-- System Language Detection -->
+    <script is:inline>
+      (function() {
+        const langMap = {
+          'en': true, 'zh-CN': true, 'fr': true, 'de': true, 'es': true,
+          'zh-TW': true, 'ja': true, 'ru': true, 'ko': true, 'it': true,
+          'hi': true, 'pt': true
+        };
+        
+        function getSystemLanguage() {
+          const sysLang = navigator.language || navigator.userLanguage || '';
+          if (!sysLang) return 'zh-CN';
+          if (langMap[sysLang]) return sysLang;
+          
+          const base = sysLang.split('-')[0];
+          if (langMap[base]) return base;
+          
+          if (sysLang.startsWith('zh')) {
+            if (sysLang.includes('TW') || sysLang.includes('HK') || sysLang.includes('MO') || sysLang.includes('Hant')) {
+              return 'zh-TW';
+            }
+            return 'zh-CN';
+          }
+          return 'en';
+        }
+        
+        const isManual = localStorage.getItem('active_language_manual') === 'true';
+        const saved = localStorage.getItem('active_language');
+        
+        let resolved = 'zh-CN';
+        if (isManual && saved && langMap[saved]) {
+          resolved = saved;
+        } else {
+          resolved = getSystemLanguage();
+        }
+        
+        window.__activeLanguage = resolved;
+        localStorage.setItem('active_language', resolved);
+      })();
+    </script>
   </head>
   <body class="min-h-screen flex flex-col bg-black text-[#F8FAFC] selection:bg-[#E7AC08]/30 selection:text-white">
     <slot />

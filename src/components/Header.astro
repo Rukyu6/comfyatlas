@@ -301,8 +301,6 @@
   const localSavedLang = localStorage.getItem('active_language');
   if (localSavedLang && langMap[localSavedLang]) {
     currentLang = localSavedLang;
-  } else {
-    localStorage.setItem('active_language', 'zh-CN');
   }
 
   // Update button visual state immediately on page load
@@ -336,6 +334,7 @@
 
       // 2. Persist in local storage
       localStorage.setItem('active_language', lang);
+      localStorage.setItem('active_language_manual', 'true');
 
       // 3. Trigger translate.js translation
       const translate = (window as any).translate;
