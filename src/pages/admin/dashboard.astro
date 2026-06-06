@@ -734,10 +734,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <span class="block truncate text-white">${dep.email}</span>
             <span class="text-[10px] text-zinc-500 font-normal block">${dep.uid}</span>
           </td>
-          <td class="py-3.5 px-2 font-mono text-[10px] max-w-[200px] truncate select-all" title="${dep.txId}">${dep.txId}</td>
+          <td class="py-3.5 px-2 font-bold font-mono text-[#E7AC08] font-sora">+$${Number(dep.amount).toFixed(2)} USDT</td>
+          <td class="py-3.5 px-2 font-mono text-[10px] max-w-[200px] truncate select-all text-zinc-300" title="${dep.txId}">${dep.txId}</td>
           <td class="py-3.5 px-2">
             <span class="px-2 py-0.5 rounded-full border text-[9px] font-bold ${statusClass}">
-              ${dep.status}
+              ${depositStatusMap[dep.status] || dep.status}
             </span>
           </td>
           <td class="py-3.5 pl-2 text-right space-x-1 whitespace-nowrap">
