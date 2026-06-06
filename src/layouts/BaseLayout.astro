@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import TelegramChat from '../components/TelegramChat.astro';
 
 
 export interface Props {
@@ -101,5 +102,6 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
   </head>
   <body class="min-h-screen flex flex-col bg-black text-[#F8FAFC] selection:bg-[#E7AC08]/30 selection:text-white">
     <slot />
+    <TelegramChat />
   </body>
 </html>
