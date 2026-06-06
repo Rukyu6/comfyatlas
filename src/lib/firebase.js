@@ -180,11 +180,11 @@ export const onAuthStateChanged = (authObj, callback) => {
   return mockAuthInstance.onAuthStateChanged(callback);
 };
 
-export class GoogleAuthProvider {
+export const GoogleAuthProvider = (isFirebaseConfigured && auth) ? fbGoogleAuthProvider : class MockGoogleAuthProvider {
   constructor() {
     this.providerId = 'google.com';
   }
-}
+};
 
 
 // Mock Firestore functions
