@@ -4,28 +4,28 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
 ---
 
 <!-- Fixed Container -->
-<div class="fixed bottom-6 right-6 z-50 select-none font-sans">
+<div class="fixed bottom-6 right-6 z-50 select-none font-sora">
   
   <!-- Chat Popup Window -->
   <div 
     id="telegram-chat-window" 
-    class="hidden opacity-0 scale-95 origin-bottom-right transition-all duration-300 w-80 sm:w-96 rounded-3xl bg-[#FFFDF9] border-2 border-[#3E2A1E] shadow-[8px_8px_0px_rgba(62,42,30,0.15)] overflow-hidden mb-4"
+    class="hidden opacity-0 scale-95 origin-bottom-right transition-all duration-300 w-80 sm:w-96 rounded-3xl bg-[#090909] border border-[#292929] shadow-[0_12px_35px_rgba(0,0,0,0.85)] overflow-hidden mb-4 backdrop-blur-md"
   >
     <!-- Header -->
-    <div class="bg-gradient-to-r from-[#FF9EAF] to-[#FFD6E0] p-4 text-[#3E2A1E] flex items-center justify-between border-b-2 border-[#3E2A1E]">
+    <div class="bg-gradient-to-r from-[#E7AC08] to-[#FAC514] p-4 text-[#080808] flex items-center justify-between border-b border-[#FAC514]/30">
       <div class="flex items-center gap-3">
         <!-- Bot Avatar indicator -->
         <div class="relative">
-          <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center font-bold text-sm border-2 border-[#3E2A1E] shadow-[2px_2px_0px_rgba(62,42,30,1)]">
-            🐶
+          <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center font-bold text-sm border border-[#FAC514] shadow-md">
+            ⚡
           </div>
           <!-- Online status dot -->
-          <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-[#3E2A1E] rounded-full"></span>
+          <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-black rounded-full"></span>
         </div>
-        <div class="text-left font-sans">
-          <h4 class="text-sm font-bold text-[#3E2A1E]">你好 👋</h4>
-          <span class="text-[10px] text-[#3E2A1E]/80 flex items-center gap-1 font-medium">
-            人工客服：10:00 - 23:00
+        <div class="text-left font-sora">
+          <h4 class="text-sm font-bold text-black">System Support</h4>
+          <span class="text-[10px] text-black/80 flex items-center gap-1 font-semibold">
+            Online: 10:00 - 23:00
           </span>
         </div>
       </div>
@@ -33,7 +33,7 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
       <button 
         type="button" 
         id="telegram-close-btn" 
-        class="text-[#3E2A1E] hover:bg-black/5 p-1.5 rounded-full transition"
+        class="text-black hover:bg-black/10 p-1.5 rounded-full transition"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -42,22 +42,22 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
     </div>
 
     <!-- Message Body -->
-    <div id="telegram-chat-messages" class="p-4 space-y-4 h-[250px] overflow-y-auto bg-[#FFFDF9] border-b border-[#3E2A1E]/10">
+    <div id="telegram-chat-messages" class="p-4 space-y-4 h-[250px] overflow-y-auto bg-black/40 border-b border-[#292929]">
       
       <!-- Bot welcome bubble -->
       <div class="flex items-start gap-2.5 max-w-[85%] text-left">
-        <div class="w-6 h-6 rounded-full bg-[#3E2A1E] text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">🤖</div>
-        <div class="bg-[#FFD6E0]/30 border-2 border-[#FFD6E0] rounded-2xl rounded-tl-none p-3 text-[11px] text-[#3E2A1E] leading-relaxed font-sans">
+        <div class="w-6 h-6 rounded-full bg-stone-900 border border-white/10 text-white flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
+        <div class="bg-stone-900/60 border border-[#292929] rounded-2xl rounded-tl-none p-3 text-[11px] text-zinc-300 leading-relaxed font-sans">
           账号使用遇到困难或问题，请先查看帮助教程，大概率可以解决您的问题。
           <br/><br/>
-          ⭐️ 教程：<a href="/guide" class="text-blue-600 underline font-bold hover:text-blue-800">点击查看帮助教程</a>
+          ⭐️ 教程：<a href="/guide" class="text-[#FAC514] underline font-bold hover:text-[#E7AC08]">点击查看帮助教程</a>
         </div>
       </div>
 
       <!-- Instruction bubble -->
       <div class="flex items-start gap-2.5 max-w-[85%] text-left">
-        <div class="w-6 h-6 rounded-full bg-[#3E2A1E] text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">🤖</div>
-        <div class="bg-[#FFD6E0]/30 border-2 border-[#FFD6E0] rounded-2xl rounded-tl-none p-3 text-[11px] text-[#3E2A1E] leading-relaxed font-sans">
+        <div class="w-6 h-6 rounded-full bg-stone-900 border border-white/10 text-white flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
+        <div class="bg-stone-900/60 border border-[#292929] rounded-2xl rounded-tl-none p-3 text-[11px] text-zinc-300 leading-relaxed font-sans">
           <strong>开始对话：</strong>请一次性发送 订单号 + 问题截图。
         </div>
       </div>
@@ -65,19 +65,19 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
     </div>
 
     <!-- Input Area -->
-    <div class="p-3 bg-[#FFFDF9] text-left space-y-2">
+    <div class="p-3 bg-[#090909] text-left space-y-2">
       <!-- Decorative Input -->
       <div class="relative">
         <textarea 
           id="telegram-chat-input"
           placeholder="请输入您的问题（例如：订单号 + 问题描述）..."
           rows="2"
-          class="w-full bg-white border-2 border-[#3E2A1E] rounded-2xl pl-3 pr-10 py-2.5 text-[11px] text-[#3E2A1E] placeholder-[#3E2A1E]/40 focus:outline-none focus:ring-2 focus:ring-[#FF9EAF]/30 transition-all duration-300 resize-none font-sans"
+          class="w-full bg-black border border-[#292929] rounded-2xl pl-3 pr-10 py-2.5 text-[11px] text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition-all duration-300 resize-none font-sans"
         ></textarea>
         <button 
           type="button" 
           id="telegram-send-btn"
-          class="absolute right-2.5 bottom-3.5 text-[#FF9EAF] hover:text-[#FFB3C6] p-1 rounded-lg hover:bg-[#FF9EAF]/10 active:scale-95 transition"
+          class="absolute right-2.5 bottom-3.5 text-[#E7AC08] hover:text-[#FAC514] p-1 rounded-lg hover:bg-[#E7AC08]/10 active:scale-95 transition"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 transform rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -91,7 +91,7 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
         target="_blank"
         rel="noopener noreferrer"
         id="telegram-direct-btn"
-        class="w-full py-2.5 bg-[#3E2A1E] hover:bg-[#523727] text-[#FFFDF9] font-bold rounded-2xl text-[11px] font-sans transition duration-300 flex items-center justify-center gap-2 border-2 border-[#3E2A1E] shadow-[4px_4px_0px_rgba(62,42,30,0.15)] hover:scale-[1.01] decoration-none hover:shadow-none hover:translate-y-0.5"
+        class="w-full py-2.5 bg-[#E7AC08] hover:bg-[#FAC514] text-[#080808] font-bold rounded-2xl text-[11px] font-sans transition duration-300 flex items-center justify-center gap-2 border border-[#FAC514] shadow-md hover:scale-[1.01] decoration-none"
       >
         <!-- Mini Telegram Icon -->
         <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -107,19 +107,19 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
   <button 
     id="telegram-widget-trigger" 
     type="button" 
-    class="relative w-14 h-14 rounded-full bg-[#FF9EAF] border-2 border-[#3E2A1E] hover:bg-[#FFB3C6] text-[#3E2A1E] shadow-[4px_4px_0px_rgba(62,42,30,1)] flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
+    class="relative w-14 h-14 rounded-full bg-[#E7AC08] border border-[#FAC514] hover:bg-[#FAC514] text-[#080808] shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
   >
     <!-- Background pulse indicator -->
-    <span class="absolute -inset-1.5 bg-[#FF9EAF]/25 rounded-full filter blur-md animate-ping opacity-60 pointer-events-none"></span>
+    <span class="absolute -inset-1.5 bg-[#E7AC08]/25 rounded-full filter blur-md animate-ping opacity-60 pointer-events-none"></span>
 
     <!-- Message count indicator -->
-    <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#3E2A1E] text-[9px] font-black text-white flex items-center justify-center shadow-md animate-bounce">
+    <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#080808] text-[9px] font-black text-white flex items-center justify-center border border-[#FAC514] shadow-md animate-bounce">
       1
     </span>
 
     <!-- TG Icon SVG -->
     <svg class="h-6 w-6 transform group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.27-2.03-.49-.82-.27-1.47-.42-1.42-.88.03-.24.36-.49.99-.74 3.89-1.69 6.48-2.8 7.78-3.33 3.69-1.52 4.45-1.78 4.95-1.79.11 0 .36.03.52.16.13.11.17.27.19.38.02.13.02.38-.01.52z"/>
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.29-.27-1.95-.49-.82-.27-1.47-.42-1.42-.88.03-.24.36-.49.99-.74 3.89-1.69 6.48-2.8 7.78-3.33 3.69-1.52 4.45-1.78 4.95-1.79.11 0 .36.03.52.16.13.11.17.27.19.38.02.13.02.38-.01.52z"/>
     </svg>
   </button>
 </div>
@@ -150,6 +150,7 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
   });
 
   function toggleWidget() {
+    if (!windowBox) return;
     if (windowBox.classList.contains('hidden')) {
       // Open
       windowBox.classList.remove('hidden');
@@ -166,6 +167,7 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
   }
 
   async function handleSend() {
+    if (!textarea || !messagesContainer || !sendBtn) return;
     const text = textarea.value.trim();
     if (!text || isSending) return;
     
@@ -177,10 +179,10 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
     const userBubble = document.createElement('div');
     userBubble.className = 'flex items-start gap-2.5 max-w-[85%] text-right ml-auto justify-end';
     userBubble.innerHTML = `
-      <div class="bg-[#FF9EAF]/20 border-2 border-[#FF9EAF] rounded-2xl rounded-tr-none p-3 text-[11px] text-[#3E2A1E] leading-relaxed font-fredoka">
+      <div class="bg-[#E7AC08]/15 border border-[#FAC514]/30 rounded-2xl rounded-tr-none p-3 text-[11px] text-zinc-200 leading-relaxed font-sans">
         ${escapeHtml(text)}
       </div>
-      <div class="w-6 h-6 rounded-full bg-[#FF9EAF] flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">👤</div>
+      <div class="w-6 h-6 rounded-full bg-[#E7AC08] flex items-center justify-center text-xs shrink-0 select-none border border-[#FAC514] text-black">👤</div>
     `;
     messagesContainer.appendChild(userBubble);
     textarea.value = '';
@@ -208,16 +210,16 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
       
       if (response.ok && result.success) {
         replyBubble.innerHTML = `
-          <div class="w-6 h-6 rounded-full bg-[#3E2A1E] text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">🐶</div>
-          <div class="bg-[#FFD6E0]/40 border-2 border-[#FFD6E0] rounded-2xl rounded-tl-none p-3 text-[11px] text-[#3E2A1E] leading-relaxed font-fredoka animate-fade-in">
-            您的留言已成功发送给博主！博主会尽快通过 TG 回复您。 🐾<br/>
+          <div class="w-6 h-6 rounded-full bg-stone-900 border border-white/10 text-white flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
+          <div class="bg-stone-900/60 border border-[#292929] rounded-2xl rounded-tl-none p-3 text-[11px] text-zinc-300 leading-relaxed font-sans">
+            您的留言已成功发送给博主！博主会尽快通过 TG 回复您。 ⚡<br/>
             Your message has been sent to the blogger! We will contact you soon.
           </div>
         `;
       } else {
         replyBubble.innerHTML = `
-          <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">⚠️</div>
-          <div class="bg-red-50 border-2 border-red-200 rounded-2xl rounded-tl-none p-3 text-[11px] text-red-700 leading-relaxed font-fredoka">
+          <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs shrink-0 select-none">⚠️</div>
+          <div class="bg-red-950/20 border border-red-900 rounded-2xl rounded-tl-none p-3 text-[11px] text-red-400 leading-relaxed font-sans">
             发送失败。请点击下方按钮直接在 Telegram 联系博主。<br/>
             Sending failed. Please use the button below to message directly.
           </div>
@@ -228,8 +230,8 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
       const replyBubble = document.createElement('div');
       replyBubble.className = 'flex items-start gap-2.5 max-w-[85%] text-left';
       replyBubble.innerHTML = `
-        <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs shrink-0 select-none border border-[#3E2A1E]">⚠️</div>
-        <div class="bg-red-50 border-2 border-red-200 rounded-2xl rounded-tl-none p-3 text-[11px] text-red-700 leading-relaxed font-fredoka">
+        <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs shrink-0 select-none">⚠️</div>
+        <div class="bg-red-950/20 border border-red-900 rounded-2xl rounded-tl-none p-3 text-[11px] text-red-400 leading-relaxed font-sans">
           网络连接错误，请点击下方按钮直接跳转联系博主。<br/>
           Connection error. Please contact the blogger directly using the button below.
         </div>
