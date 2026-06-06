@@ -7,41 +7,41 @@ import Footer from '../components/Footer.astro';
 <BaseLayout title="Sign In — Puppy Shop">
   <Header />
 
-  <main class="flex-grow flex items-center justify-center pt-32 pb-20 px-6 relative overflow-hidden">
+  <main class="flex-grow flex items-center justify-center pt-32 pb-20 px-6 relative overflow-hidden bg-black text-white">
     <!-- Ambient backgrounds -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FF9EAF]/5 rounded-full filter blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#E7AC08]/5 rounded-full filter blur-[120px] pointer-events-none"></div>
     
     <div class="w-full max-w-md relative z-10">
       
       <!-- Glass Card container -->
-      <div class="glass-card p-8 relative overflow-hidden">
+      <div class="glass-card p-8 relative overflow-hidden bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl">
         
         <!-- Auth Header -->
         <div class="text-center mb-8">
-          <h1 class="text-2xl font-extrabold font-fredoka text-[#3E2A1E] tracking-tight" id="auth-title">Welcome Back</h1>
-          <p class="text-xs text-zinc-600 mt-1 font-fredoka" id="auth-subtitle">Sign in to manage your digital vault and tracking</p>
+          <h1 class="text-2xl font-extrabold font-sora text-white tracking-tight" id="auth-title">Welcome Back</h1>
+          <p class="text-xs text-zinc-400 mt-1 font-sora" id="auth-subtitle">Sign in to manage your digital vault and tracking</p>
         </div>
 
         <!-- Tabs toggle -->
-        <div class="grid grid-cols-2 gap-1.5 bg-[#3E2A1E]/5 p-1.5 rounded-2xl border-2 border-[#3E2A1E] mb-6">
+        <div class="grid grid-cols-2 gap-1.5 bg-[#090909]/80 p-1.5 rounded-2xl border border-[#292929] mb-6">
           <button 
             id="tab-signin" 
             type="button" 
-            class="py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 bg-[#FF9EAF] text-white border-2 border-[#3E2A1E] shadow-[2px_2px_0px_#3E2A1E] font-fredoka"
+            class="py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 bg-[#E7AC08] text-[#080808] border border-[#FAC514] shadow-md font-sora"
           >
             Sign In
           </button>
           <button 
             id="tab-register" 
             type="button" 
-            class="py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 text-zinc-500 hover:text-[#3E2A1E] font-fredoka"
+            class="py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 text-zinc-500 hover:text-white font-sora"
           >
             Register
           </button>
         </div>
 
         <!-- Status/Error Banner -->
-        <div id="auth-error-banner" class="hidden px-4 py-3 rounded-xl bg-red-50 border-2 border-red-500 text-red-600 text-xs mb-6 text-left animate-pulse font-fredoka">
+        <div id="auth-error-banner" class="hidden px-4 py-3 rounded-xl bg-red-950/20 border border-red-900 text-red-400 text-xs mb-6 text-left animate-pulse font-sora">
           <!-- Dynamically inserted error -->
         </div>
 
@@ -49,36 +49,36 @@ import Footer from '../components/Footer.astro';
         <form id="auth-form" class="space-y-4">
           <!-- Username Field (Only visible on Register tab) -->
           <div id="username-field" class="space-y-1 text-left hidden">
-            <label for="username" class="text-[10px] font-bold uppercase tracking-wider text-zinc-600 font-fredoka">Username / Nickname</label>
+            <label for="username" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">Username / Nickname</label>
             <input 
               type="text" 
               id="username" 
               placeholder="e.g. MyNickname"
-              class="w-full bg-white border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-sm text-[#3E2A1E] placeholder-zinc-400 focus:outline-none focus:border-[#FF9EAF] transition-all duration-300 shadow-[2px_2px_0px_#3E2A1E]"
+              class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition-all duration-300"
             />
           </div>
 
           <!-- Email Field -->
           <div class="space-y-1 text-left">
-            <label for="email" class="text-[10px] font-bold uppercase tracking-wider text-zinc-600 font-fredoka">Email Address</label>
+            <label for="email" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">Email Address</label>
             <input 
               type="email" 
               id="email" 
               required
               placeholder="name@example.com"
-              class="w-full bg-white border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-sm text-[#3E2A1E] placeholder-zinc-400 focus:outline-none focus:border-[#FF9EAF] transition-all duration-300 shadow-[2px_2px_0px_#3E2A1E]"
+              class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition-all duration-300"
             />
           </div>
 
           <!-- Password Field -->
           <div class="space-y-1 text-left">
-            <label for="password" class="text-[10px] font-bold uppercase tracking-wider text-zinc-600 font-fredoka">Password</label>
+            <label for="password" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">Password</label>
             <input 
               type="password" 
               id="password" 
               required
               placeholder="••••••••"
-              class="w-full bg-white border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-sm text-[#3E2A1E] placeholder-zinc-400 focus:outline-none focus:border-[#FF9EAF] transition-all duration-300 shadow-[2px_2px_0px_#3E2A1E]"
+              class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition-all duration-300"
             />
           </div>
 
@@ -86,25 +86,25 @@ import Footer from '../components/Footer.astro';
           <button 
             type="submit" 
             id="submit-btn"
-            class="w-full py-4 bg-[#FF9EAF] text-white hover:bg-[#FF6B8B] font-bold uppercase tracking-wider rounded-xl border-2 border-[#3E2A1E] shadow-[3px_3px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[4px_4px_0px_#3E2A1E] transition-all text-xs font-fredoka flex items-center justify-center gap-2 active:scale-[0.98]"
+            class="w-full py-4 bg-[#E7AC08] text-[#080808] hover:bg-[#FAC514] border border-[#FAC514] font-bold uppercase tracking-wider rounded-xl shadow-lg transition-all text-xs font-sora flex items-center justify-center gap-2 active:scale-[0.98] cursor-pointer"
           >
             <span id="btn-text">Access Secure Account</span>
-            <div id="btn-spinner" class="hidden w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div id="btn-spinner" class="hidden w-4 h-4 border-2 border-[#080808] border-t-transparent rounded-full animate-spin"></div>
           </button>
         </form>
 
         <!-- Divider -->
         <div class="flex items-center my-6">
-          <div class="flex-grow border-t border-[#3E2A1E]/10"></div>
-          <span class="px-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-fredoka">Or Continue With</span>
-          <div class="flex-grow border-t border-[#3E2A1E]/10"></div>
+          <div class="flex-grow border-t border-[#292929]"></div>
+          <span class="px-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-sora">Or Continue With</span>
+          <div class="flex-grow border-t border-[#292929]"></div>
         </div>
 
         <!-- Google OAuth Button -->
         <button 
           id="google-btn" 
           type="button" 
-          class="w-full py-3.5 bg-white border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFF5F7] font-bold rounded-xl shadow-[3px_3px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[4px_4px_0px_#3E2A1E] transition-all text-xs font-fredoka flex items-center justify-center gap-3 group active:scale-[0.98]"
+          class="w-full py-3.5 bg-transparent border border-[#292929] text-white hover:bg-white/5 font-bold rounded-xl shadow-md transition-all text-xs font-sora flex items-center justify-center gap-3 group active:scale-[0.98] cursor-pointer"
         >
           <!-- Custom G Logo -->
           <svg class="h-4 w-4" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +121,7 @@ import Footer from '../components/Footer.astro';
               </linearGradient>
             </defs>
           </svg>
-          <span class="group-hover:text-[#FF6B8B] transition-colors">Sign In with Google</span>
+          <span class="group-hover:text-[#FAC514] transition-colors">Sign In with Google</span>
         </button>
 
       </div>
@@ -165,10 +165,10 @@ import Footer from '../components/Footer.astro';
   function toggleTab(tab) {
     currentTab = tab;
     if (tab === 'signin') {
-      tabSignin?.classList.add('bg-[#FF9EAF]', 'text-white', 'border-2', 'border-[#3E2A1E]', 'shadow-[2px_2px_0px_#3E2A1E]');
-      tabSignin?.classList.remove('text-zinc-500', 'hover:text-[#3E2A1E]');
-      tabRegister?.classList.remove('bg-[#FF9EAF]', 'text-white', 'border-2', 'border-[#3E2A1E]', 'shadow-[2px_2px_0px_#3E2A1E]');
-      tabRegister?.classList.add('text-zinc-500', 'hover:text-[#3E2A1E]');
+      tabSignin?.classList.add('bg-[#E7AC08]', 'text-[#080808]', 'border', 'border-[#FAC514]', 'shadow-md');
+      tabSignin?.classList.remove('text-zinc-500', 'hover:text-white');
+      tabRegister?.classList.remove('bg-[#E7AC08]', 'text-[#080808]', 'border', 'border-[#FAC514]', 'shadow-md');
+      tabRegister?.classList.add('text-zinc-500', 'hover:text-white');
       
       if (authTitle) authTitle.textContent = "Welcome Back";
       if (authSubtitle) authSubtitle.textContent = "Sign in to manage your digital vault and tracking";
@@ -177,10 +177,10 @@ import Footer from '../components/Footer.astro';
       if (usernameField) usernameField.classList.add('hidden');
       if (usernameInput) usernameInput.required = false;
     } else {
-      tabRegister?.classList.add('bg-[#FF9EAF]', 'text-white', 'border-2', 'border-[#3E2A1E]', 'shadow-[2px_2px_0px_#3E2A1E]');
-      tabRegister?.classList.remove('text-zinc-500', 'hover:text-[#3E2A1E]');
-      tabSignin?.classList.remove('bg-[#FF9EAF]', 'text-white', 'border-2', 'border-[#3E2A1E]', 'shadow-[2px_2px_0px_#3E2A1E]');
-      tabSignin?.classList.add('text-zinc-500', 'hover:text-[#3E2A1E]');
+      tabRegister?.classList.add('bg-[#E7AC08]', 'text-[#080808]', 'border', 'border-[#FAC514]', 'shadow-md');
+      tabRegister?.classList.remove('text-zinc-500', 'hover:text-white');
+      tabSignin?.classList.remove('bg-[#E7AC08]', 'text-[#080808]', 'border', 'border-[#FAC514]', 'shadow-md');
+      tabSignin?.classList.add('text-zinc-500', 'hover:text-white');
       
       if (authTitle) authTitle.textContent = "Create Account";
       if (authSubtitle) authSubtitle.textContent = "Register to unlock automated vault dispatches and tracking";

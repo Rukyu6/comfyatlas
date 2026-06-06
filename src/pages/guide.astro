@@ -41,47 +41,47 @@ const orderedCategories = [
   <Header />
 
   <!-- Main Background Container with Gradients -->
-  <div class="relative min-h-screen flex flex-col pt-24 md:pt-28 pb-16 bg-gradient-to-b from-[#FFF3F5] via-[#FFFDF9] to-[#FFFDF9] overflow-hidden">
+  <div class="relative min-h-screen flex flex-col pt-24 md:pt-28 pb-16 bg-black text-white overflow-hidden">
     <!-- Radial mesh pattern overlay -->
-    <div class="absolute inset-0 bg-[radial-gradient(#ffccd5_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#222_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none"></div>
 
     <!-- Soft ambient background glows -->
-    <div class="absolute top-40 left-[-10%] w-[35rem] h-[35rem] bg-[#FFD6E0]/25 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-40 right-[-10%] w-[35rem] h-[35rem] bg-[#FFEEDD]/30 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-40 left-[-10%] w-[35rem] h-[35rem] bg-[#E7AC08]/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-40 right-[-10%] w-[35rem] h-[35rem] bg-[#E7AC08]/3 rounded-full blur-3xl pointer-events-none"></div>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 flex flex-col font-sans relative z-10 select-none">
       
       <!-- Top Title section -->
       <div class="text-center mb-8 md:mb-12 mt-6">
-        <h1 class="text-3xl md:text-5xl font-black font-fredoka text-[#3E2A1E] mb-3 tracking-wide">
+        <h1 class="text-3xl md:text-5xl font-black font-sora text-white mb-3 tracking-wide">
           帮助中心 & 登录教程 🐾
         </h1>
-        <p class="text-[#6D5A50] font-quicksand font-bold max-w-2xl mx-auto text-xs md:text-sm leading-relaxed">
+        <p class="text-zinc-400 font-sora font-semibold max-w-2xl mx-auto text-xs md:text-sm leading-relaxed">
           点击左侧分类以查看各类账号的极简登录配置指南、代理网络设置及常见问题自救。
         </p>
       </div>
 
       <!-- Mobile Selector for smaller viewports (collapses categories) -->
       <div class="lg:hidden w-full mb-6 relative">
-        <label for="mobile-guide-select" class="block text-xs font-bold uppercase text-[#6D5A50] tracking-wider mb-2 font-quicksand">
+        <label for="mobile-guide-select" class="block text-xs font-bold uppercase text-zinc-455 tracking-wider mb-2 font-sora">
           选择教程目录
         </label>
         <div class="relative">
           <select 
             id="mobile-guide-select"
-            class="w-full bg-white/70 backdrop-blur-md border border-[#3E2A1E]/15 text-xs font-semibold text-[#3E2A1E] rounded-2xl px-4 py-3.5 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#FF6B8B]/40 focus:border-[#FF6B8B]"
+            class="w-full bg-[#1C1917]/70 backdrop-blur-md border border-[#292929] text-xs font-semibold text-white rounded-2xl px-4 py-3.5 shadow-md appearance-none focus:outline-none focus:border-[#E7AC08]"
           >
             {orderedCategories.map(cat => (
-              <optgroup label={cat.name}>
+              <optgroup label={cat.name} class="bg-[#1C1917] text-white">
                 {cat.items.map(tut => (
-                  <option value={tut.id} selected={tut.id === landingDocId}>
+                  <option value={tut.id} selected={tut.id === landingDocId} class="bg-[#1C1917] text-white">
                     {tut.emoji ? `${tut.emoji} ` : ""} {tut.name}
                   </option>
                 ))}
               </optgroup>
             ))}
           </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[#3E2A1E]/70">
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/70">
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
             </svg>
@@ -137,9 +137,9 @@ const orderedCategories = [
     navButtons.forEach(btn => {
       const docId = btn.getAttribute('data-doc-id');
       if (docId === targetId) {
-        btn.className = "nav-item-btn w-full text-left py-2.5 px-4 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer transform active:scale-[0.98] bg-gradient-to-r from-[#FFD6E0] to-[#FFB3C6] text-[#3E2A1E] font-bold border border-[#FF6B8B]/40 shadow-sm translate-x-1";
+        btn.className = "nav-item-btn w-full text-left py-2.5 px-4 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer transform active:scale-[0.98] bg-[#E7AC08] text-[#080808] font-bold border border-[#FAC514] shadow-md translate-x-1 font-sora";
       } else {
-        btn.className = "nav-item-btn w-full text-left py-2.5 px-4 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer transform active:scale-[0.98] text-[#6D5A50] hover:bg-white/60 hover:text-[#3E2A1E] hover:translate-x-1 border border-transparent";
+        btn.className = "nav-item-btn w-full text-left py-2.5 px-4 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer transform active:scale-[0.98] text-zinc-400 hover:bg-white/5 hover:text-white hover:translate-x-1 border border-transparent font-sora";
       }
     });
 

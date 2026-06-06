@@ -4,126 +4,132 @@
 
 @layer base {
   html {
-    font-family: 'Jua', 'Gowun Dodum', 'Fredoka', 'Quicksand', system-ui, -apple-system, sans-serif;
+    font-family: 'Sora', 'Plus Jakarta Sans', 'Jua', 'Gowun Dodum', system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    background-color: #FFFDFB;
+    background-color: #000000;
   }
   body {
-    background-color: #FFFDFB;
-    color: #3E2A1E; /* Cozy cocoa dark brown */
+    background-color: #000000;
+    color: #F8FAFC;
     overflow-x: hidden;
   }
   ::selection {
-    background-color: #FFD6E0; /* Cute strawberry pink */
-    color: #3E2A1E;
+    background-color: rgba(231, 172, 8, 0.25);
+    color: #FFFFFF;
   }
 
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #FFFDF9;
+    background: #000000;
   }
   ::-webkit-scrollbar-thumb {
-    background: #FFD6E0;
-    border: 3px solid #FFFDF9;
+    background: #222222;
+    border: 2px solid #000000;
     border-radius: 8px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #FFB3C6;
+    background: #44403C;
   }
 }
 
 @layer utilities {
-  /* Cute Bubbly Card (Neo-brutalism chibi) */
+  /* Sleek Dark Glass Card (WorldClaw Style) */
   .glass-card {
-    background: #FFFFFF;
-    border: 2px solid #3E2A1E;
-    box-shadow: 4px 4px 0px #3E2A1E;
-    border-radius: 24px;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: rgba(28, 25, 23, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid #292929;
+    border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .glass-card:hover {
     transform: translateY(-2px);
-    box-shadow: 6px 6px 0px #3E2A1E;
+    border-color: #44403C;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(231, 172, 8, 0.04);
   }
 
-  /* Cute sticky nav */
+  /* Sleek Transparent Nav */
   .glass-nav {
-    background: rgba(255, 253, 251, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 2px solid #3E2A1E;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid #1C1917;
   }
 
-  /* Text Gradients (Kawaii pastel gradients) */
+  /* Text Gradients (Gold/Amber & Crypto) */
   .text-gradient-gold {
-    background: linear-gradient(135deg, #FF9EAF 0%, #FF6B8B 50%, #E86A92 100%);
+    background: linear-gradient(173.5deg, #ECBF40 0%, #F3BC21 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .text-gradient-crypto {
-    background: linear-gradient(135deg, #A7F3D0 0%, #059669 50%, #047857 100%);
+    background: linear-gradient(135deg, #34D399 0%, #059669 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .text-gradient-silver {
-    background: linear-gradient(135deg, #C084FC 0%, #818CF8 50%, #6366F1 100%);
+    background: linear-gradient(135deg, #E2E8F0 0%, #94A3B8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  /* Cute Glow Effects (Soft pastel clouds) */
+  /* Glow Effects */
   .glow-gold {
-    box-shadow: 0 0 25px rgba(255, 158, 175, 0.25);
+    box-shadow: 0 0 30px rgba(231, 172, 8, 0.15);
   }
 
   .glow-crypto {
-    box-shadow: 0 0 25px rgba(5, 150, 105, 0.2);
+    box-shadow: 0 0 30px rgba(5, 150, 105, 0.1);
   }
 
   /* Bouncy Hover Lift */
   .hover-lift {
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease;
   }
   .hover-lift:hover {
-    transform: translateY(-6px) rotate(1deg);
-    box-shadow: 8px 8px 0px #3E2A1E;
+    transform: translateY(-4px);
+    border-color: #FAC514;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
   }
 
   /* Rich Product Descriptions Render styles */
   .prose-dark p {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    color: #4A3E3D;
+    color: #9A9993;
     line-height: 1.6;
   }
   .prose-dark b, .prose-dark strong {
     font-weight: 700;
-    color: #271C19;
+    color: #F8FAFC;
   }
   .prose-dark h3 {
     font-size: 1rem;
     font-weight: 700;
-    color: #3E2A1E;
+    color: #FAC514;
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
-    border-left: 4px solid #FF9EAF;
+    border-left: 2px solid #FAC514;
     padding-left: 0.6rem;
   }
   .prose-dark a {
-    color: #FF6B8B;
+    color: #E7AC08;
     text-decoration: underline;
     transition: color 0.2s ease;
   }
   .prose-dark a:hover {
-    color: #FF3E6C;
+    color: #FAC514;
   }
 
   /* Cute Chibi Preloader screen */
@@ -131,7 +137,7 @@
     position: fixed;
     inset: 0;
     z-index: 100;
-    background-color: #FFFDFB;
+    background-color: #000000;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -173,8 +179,8 @@
   .film-strip-sprockets {
     background-image: repeating-linear-gradient(
       90deg,
-      #FFFDF9 0px,
-      #FFFDF9 14px,
+      #000000 0px,
+      #000000 14px,
       transparent 14px,
       transparent 28px
     );
@@ -182,4 +188,3 @@
     background-repeat: repeat-x;
   }
 }
-

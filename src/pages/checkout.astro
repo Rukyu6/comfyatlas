@@ -3,14 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Checkout | Puppy Shop">
   
-  <div class="min-h-screen py-12 px-6 md:py-20 bg-[#FFFDF9] text-[#3E2A1E]">
+  <div class="min-h-screen py-12 px-6 md:py-20 bg-black text-white font-sora">
     <div class="max-w-6xl mx-auto">
       
       <!-- Back Header -->
       <div class="mb-12">
         <a 
           href="/" 
-          class="inline-flex items-center gap-2 text-[#6D5A50] hover:text-[#FF6B8B] font-quicksand text-sm font-bold transition-colors group"
+          class="inline-flex items-center gap-2 text-zinc-400 hover:text-[#E7AC08] font-sora text-sm font-semibold transition-colors group"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -20,11 +20,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- Checkout Container -->
-      <div id="checkout-main-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div id="checkout-main-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start animate-fadeIn">
         
         <!-- Left Side: Order Verification Form -->
         <div class="lg:col-span-7">
-          <h2 class="text-3xl font-bold font-fredoka text-[#3E2A1E] mb-8">收银台 / Checkout 🐾</h2>
+          <h2 class="text-3xl font-bold font-sora text-white mb-8">收银台 / Checkout 🐾</h2>
           
           <form id="checkout-form" class="space-y-8">
             <!-- Web3Forms Configuration -->
@@ -37,88 +37,88 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <input type="hidden" id="hidden-total-price" name="total_price" value="" />
 
             <!-- SECTION 1: Contact & Shipping (Dynamic) -->
-            <div class="glass-card p-8 rounded-[2rem] border-3 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] bg-white space-y-6">
-              <h3 class="text-lg font-bold font-fredoka text-[#3E2A1E] border-b-2 border-[#E8E1D9] pb-3">01. 接收邮箱 / Delivery Email</h3>
+            <div class="glass-card p-8 rounded-[2rem] border border-[#292929] bg-[#1C1917]/50 backdrop-blur-xl space-y-6">
+              <h3 class="text-lg font-bold font-sora text-white border-b border-[#292929] pb-3">01. 接收邮箱 / Delivery Email</h3>
               
               <div class="space-y-4">
                 <div>
-                  <label for="email" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">电子邮箱地址 / Email Address</label>
+                  <label for="email" class="block text-xs uppercase text-zinc-400 font-bold tracking-wider mb-2 font-sora">电子邮箱地址 / Email Address</label>
                   <input 
                     type="email" 
                     id="email" 
                     name="email" 
                     required 
                     placeholder="name@domain.com"
-                    class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
+                    class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition font-sora font-semibold"
                   />
-                  <p class="text-[10px] text-[#6D5A50] font-quicksand font-semibold mt-1">购买的账号卡密及发货更新将自动发送至此邮箱，请确保填写正确。</p>
+                  <p class="text-[10px] text-zinc-500 font-sora font-semibold mt-1">购买的账号卡密及发货更新将自动发送至此邮箱，请确保填写正确。</p>
                 </div>
 
                 <!-- Shipping Address wrapper: Permanently Hidden -->
                 <div id="shipping-address-section" class="space-y-4 pt-2 hidden">
                   <div>
-                    <label for="name" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">Full Name</label>
+                    <label for="name" class="block text-xs uppercase text-zinc-400 font-bold tracking-wider mb-2 font-sora">Full Name</label>
                     <input 
                       type="text" 
                       id="name" 
                       name="name" 
                       placeholder="John Doe"
-                      class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
+                      class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] transition font-sora font-semibold"
                     />
                   </div>
                   
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label for="address" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">Street Address</label>
+                      <label for="address" class="block text-xs uppercase text-zinc-400 font-bold tracking-wider mb-2 font-sora">Street Address</label>
                       <input 
                         type="text" 
                         id="address" 
                         name="address" 
                         placeholder="123 Cyber Ave"
-                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
+                        class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] transition font-sora font-semibold"
                       />
                     </div>
                     <div>
-                      <label for="city" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">City</label>
+                      <label for="city" class="block text-xs uppercase text-zinc-400 font-bold tracking-wider mb-2 font-sora">City</label>
                       <input 
                         type="text" 
                         id="city" 
                         name="city" 
                         placeholder="New York"
-                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
+                        class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] transition font-sora font-semibold"
                       />
                     </div>
                   </div>
 
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <label for="state" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">State/Region</label>
+                      <label for="state" class="block text-xs uppercase text-zinc-400 font-bold tracking-wider mb-2 font-sora">State/Region</label>
                       <input 
                         type="text" 
                         id="state" 
                         name="state" 
                         placeholder="NY"
-                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
+                        class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] transition font-sora font-semibold"
                       />
                     </div>
                     <div>
-                      <label for="country" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">Country</label>
+                      <label for="country" class="block text-xs uppercase text-zinc-400 font-bold tracking-wider mb-2 font-sora">Country</label>
                       <input 
                         type="text" 
                         id="country" 
                         name="country" 
                         placeholder="United States"
-                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
+                        class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] transition font-sora font-semibold"
                       />
                     </div>
                     <div>
-                      <label for="zip" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">ZIP/Postal Code</label>
+                      <label for="zip" class="block text-xs uppercase text-zinc-400 font-bold tracking-wider mb-2 font-sora">ZIP/Postal Code</label>
                       <input 
                         type="text" 
                         id="zip" 
                         name="zip" 
                         placeholder="10001"
-                        class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
+                        class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] transition font-sora font-semibold"
                       />
                     </div>
                   </div>
@@ -127,42 +127,42 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
 
             <!-- SECTION 2: Payment Selection -->
-            <div class="glass-card p-8 rounded-[2rem] border-3 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] bg-white space-y-6">
-              <h3 class="text-lg font-bold font-fredoka text-[#3E2A1E] border-b-2 border-[#E8E1D9] pb-3">02. 转账支付 / Transfer Payment</h3>
+            <div class="glass-card p-8 rounded-[2rem] border border-[#292929] bg-[#1C1917]/50 backdrop-blur-xl space-y-6">
+              <h3 class="text-lg font-bold font-sora text-white border-b border-[#292929] pb-3">02. 转账支付 / Transfer Payment</h3>
 
               <!-- Payment Method Selection Grid -->
               <div class="space-y-3">
-                <label class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider font-quicksand">选择付款网络 / Select Payment Network</label>
+                <label class="block text-xs uppercase text-zinc-400 font-bold tracking-wider font-sora">选择付款网络 / Select Payment Network</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="payment-networks-grid">
                   <!-- Wallet Balance Payment Button (Initially Hidden) -->
-                  <button type="button" id="pay-method-balance" class="hidden payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFFDF9] text-[#3E2A1E] font-fredoka shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="BALANCE" data-name="余额支付 (Wallet Balance)" data-badge="Wallet Balance Payment">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">余额支付</span>
-                    <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Balance: $<span id="checkout-wallet-balance">0.00</span></span>
+                  <button type="button" id="pay-method-balance" class="hidden payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#292929] bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="BALANCE" data-name="余额支付 (Wallet Balance)" data-badge="Wallet Balance Payment">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#E7AC08]">余额支付</span>
+                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">Balance: $<span id="checkout-wallet-balance">0.00</span></span>
                   </button>
 
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFD6E0] text-[#3E2A1E] font-fredoka shadow-[4px_4px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="USDT_TRC20" data-address="TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" data-name="USDT (TRC-20)" data-badge="USDT TRC-20 Address" data-note="请向上述 TRC-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the TRC-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">USDT</span>
-                    <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Tron (TRC-20)</span>
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#FAC514] bg-[#E7AC08] text-[#080808] font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="USDT_TRC20" data-address="TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" data-name="USDT (TRC-20)" data-badge="USDT TRC-20 Address" data-note="请向上述 TRC-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the TRC-20 address above.">
+                    <span class="text-xs uppercase font-extrabold tracking-widest">USDT</span>
+                    <span class="text-[9px] font-bold mt-0.5 font-sans text-[#080808]/90">Tron (TRC-20)</span>
                   </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFFDF9] text-[#3E2A1E] font-fredoka shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="USDT_BEP20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDT (BEP-20)" data-badge="USDT BEP-20 Address" data-note="请向上述 BEP-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the BEP-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">USDT</span>
-                    <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">BNB Chain (BEP-20)</span>
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#292929] bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="USDT_BEP20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDT (BEP-20)" data-badge="USDT BEP-20 Address" data-note="请向上述 BEP-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the BEP-20 address above.">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#E7AC08]">USDT</span>
+                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">BNB Chain (BEP-20)</span>
                   </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFFDF9] text-[#3E2A1E] font-fredoka shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="USDT_ERC20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDT (ERC-20)" data-badge="USDT ERC-20 Address" data-note="请向上述 ERC-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the ERC-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">USDT</span>
-                    <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Ethereum (ERC-20)</span>
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#292929] bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="USDT_ERC20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDT (ERC-20)" data-badge="USDT ERC-20 Address" data-note="请向上述 ERC-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the ERC-20 address above.">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#E7AC08]">USDT</span>
+                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">Ethereum (ERC-20)</span>
                   </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFFDF9] text-[#3E2A1E] font-fredoka shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="USDC_BEP20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDC (BEP-20)" data-badge="USDC BEP-20 Address" data-note="请向上述 BEP-20 地址转入精确的订单金额（USDC）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDC to the BEP-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">USDC</span>
-                    <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">BNB Chain (BEP-20)</span>
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#292929] bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="USDC_BEP20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDC (BEP-20)" data-badge="USDC BEP-20 Address" data-note="请向上述 BEP-20 地址转入精确的订单金额（USDC）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDC to the BEP-20 address above.">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#E7AC08]">USDC</span>
+                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">BNB Chain (BEP-20)</span>
                   </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFFDF9] text-[#3E2A1E] font-fredoka shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="USDC_ERC20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDC (ERC-20)" data-badge="USDC ERC-20 Address" data-note="请向上述 ERC-20 地址转入精确的订单金额（USDC）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDC to the ERC-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">USDC</span>
-                    <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Ethereum (ERC-20)</span>
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#292929] bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="USDC_ERC20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDC (ERC-20)" data-badge="USDC ERC-20 Address" data-note="请向上述 ERC-20 地址转入精确的订单金额（USDC）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDC to the ERC-20 address above.">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#E7AC08]">USDC</span>
+                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">Ethereum (ERC-20)</span>
                   </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border-2 border-[#3E2A1E] bg-[#FFFDF9] text-[#3E2A1E] font-fredoka shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="TRX" data-address="TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" data-name="TRX (Tron)" data-badge="TRX Tron Address" data-note="请向上述 Tron 地址转入精确的订单金额（TRX）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in TRX to the Tron address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#FF6B8B]">TRX</span>
-                    <span class="text-[9px] font-bold text-[#6D5A50] mt-0.5 font-quicksand">Tron Network</span>
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#292929] bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="TRX" data-address="TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" data-name="TRX (Tron)" data-badge="TRX Tron Address" data-note="请向上述 Tron 地址转入精确的订单金额（TRX）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in TRX to the Tron address above.">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#E7AC08]">TRX</span>
+                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">Tron Network</span>
                   </button>
                 </div>
               </div>
@@ -171,15 +171,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <input type="hidden" id="hidden-payment-method" name="payment_method" value="USDT (TRC-20)" />
 
               <!-- CRYPTO DETAILS -->
-              <div id="payment-crypto-container" class="space-y-6">
-                <div class="bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-2xl p-6 space-y-6 shadow-[2px_2px_0px_#3E2A1E] flex flex-col items-center text-center">
+              <div id="payment-crypto-container" class="space-y-6 animate-fadeIn">
+                <div class="bg-[#090909] border border-[#292929] rounded-2xl p-6 space-y-6 shadow-md flex flex-col items-center text-center">
                   
-                  <span id="payment-badge-label" class="text-[10px] uppercase font-bold text-[#FF6B8B] bg-[#FFD6E0]/45 px-3.5 py-1 rounded-full border border-[#FF6B8B]/30 font-fredoka">
+                  <span id="payment-badge-label" class="text-[10px] uppercase font-bold text-[#E7AC08] bg-[#E7AC08]/10 px-3.5 py-1 rounded-full border border-[#E7AC08]/30 font-sora">
                     USDT TRC-20 Address
                   </span>
 
                   <!-- Dynamic QR Code -->
-                  <div class="w-36 h-36 bg-white p-2 rounded-2xl flex items-center justify-center border-2 border-[#3E2A1E] shadow-[3px_3px_0px_#3E2A1E] hover:scale-105 transition-transform duration-300">
+                  <div class="w-36 h-36 bg-white p-2 rounded-2xl flex items-center justify-center border border-[#292929] hover:scale-105 transition-transform duration-300">
                     <img 
                       id="payment-qr-image"
                       src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" 
@@ -189,28 +189,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                   </div>
 
                   <div class="w-full space-y-3">
-                    <div class="text-xs font-bold text-[#6D5A50] font-quicksand">点击下方地址即可自动复制 / Click to copy address:</div>
-                    <p id="crypto-address-text" class="text-xs md:text-sm font-mono text-[#3E2A1E] break-all bg-[#FDFBF7] py-3 px-4 rounded-xl border-2 border-[#3E2A1E] select-all cursor-pointer hover:bg-[#FFD6E0]/10 transition-colors font-bold shadow-[2px_2px_0px_rgba(62,42,30,0.15)]">
+                    <div class="text-xs font-bold text-zinc-400 font-sora">点击下方地址即可自动复制 / Click to copy address:</div>
+                    <p id="crypto-address-text" class="text-xs md:text-sm font-mono text-white break-all bg-black py-3 px-4 rounded-xl border border-[#292929] select-all cursor-pointer hover:bg-white/5 transition-colors font-bold shadow-sm">
                       TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA
                     </p>
                     <button 
                       type="button"
                       id="copy-crypto-btn"
-                      class="px-6 py-2.5 rounded-xl bg-[#FFD6E0] border-2 border-[#3E2A1E] text-xs font-bold text-[#3E2A1E] hover:bg-[#FFB3C6] active:scale-95 transition font-fredoka shadow-[2px_2px_0px_#3E2A1E] cursor-pointer"
+                      class="px-6 py-2.5 rounded-xl bg-transparent border border-[#292929] text-xs font-bold text-white hover:bg-white/5 active:scale-95 transition font-sora shadow-sm cursor-pointer"
                     >
                       Copy Wallet Address
                     </button>
                   </div>
 
-                  <p id="payment-note-paragraph" class="text-xs text-[#6D5A50] font-quicksand font-bold leading-relaxed border-t border-[#E8E1D9] pt-4 w-full">
+                  <p id="payment-note-paragraph" class="text-xs text-zinc-500 font-sora font-semibold leading-relaxed border-t border-[#292929] pt-4 w-full">
                     请向上述 TRC-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>
                     Please transfer the exact order amount in USDT to the TRC-20 address above.
                   </p>
                 </div>
 
                 <!-- Proof input -->
-                <div id="txid-input-container">
-                  <label for="txid" class="block text-xs uppercase text-[#6D5A50] font-bold tracking-wider mb-2 font-quicksand">
+                <div id="txid-input-container" class="space-y-2">
+                  <label for="txid" class="block text-xs uppercase text-zinc-400 font-bold tracking-wider font-sora">
                     转账交易哈希 / Transaction Hash (TxID)
                   </label>
                   <input 
@@ -219,9 +219,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     name="txid" 
                     required 
                     placeholder="请输入区块链交易哈希值 (TxID) / Enter TxID"
-                    class="w-full bg-[#FFFDF9] border-2 border-[#3E2A1E] rounded-xl px-4 py-3 text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] transition font-quicksand font-semibold shadow-[2px_2px_0px_#3E2A1E]"
+                    class="w-full bg-black border border-[#292929] rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition font-sora font-semibold"
                   />
-                  <p class="text-[10px] text-[#6D5A50] font-quicksand font-semibold mt-1">
+                  <p class="text-[10px] text-zinc-550 font-sora font-semibold">
                     请填写您转账的交易哈希，以便我们自动匹配和确认您的订单。<br/>
                     Provide the TxID hash so we can automatically match this ledger action with your order.
                   </p>
@@ -230,7 +230,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
 
             <!-- Validation Error Alert (Hidden by default) -->
-            <div id="error-message" class="hidden p-4 rounded-xl border border-red-200 bg-red-100 text-red-700 text-sm font-semibold font-quicksand">
+            <div id="error-message" class="hidden p-4 rounded-xl border border-red-900 bg-red-950/20 text-red-400 text-sm font-semibold font-sora">
               Something went wrong. Please verify the required inputs.
             </div>
 
@@ -238,7 +238,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <button 
               type="submit"
               id="submit-order-btn"
-              class="w-full py-4 rounded-xl bg-[#FFD6E0] border-3 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFB3C6] font-bold uppercase tracking-wider text-sm font-fredoka transition-all duration-300 shadow-[4px_4px_0px_#3E2A1E] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_#3E2A1E] active:scale-[0.99] cursor-pointer"
+              class="w-full py-4 rounded-xl bg-[#E7AC08] border border-[#FAC514] text-[#080808] hover:bg-[#FAC514] font-bold uppercase tracking-wider text-sm font-sora transition-all duration-300 shadow-lg active:scale-[0.99] cursor-pointer"
             >
               确认并提交订单 / Verify & Submit Order 🐾
             </button>
@@ -247,8 +247,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
  
         <!-- Right Side: Order Summary -->
         <div class="lg:col-span-5">
-          <div class="glass-card p-8 rounded-[2rem] border-3 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] bg-white space-y-6 sticky top-28">
-            <h3 class="text-lg font-bold font-fredoka text-[#3E2A1E] border-b-2 border-[#E8E1D9] pb-3">订单汇总 / Order Summary 🧁</h3>
+          <div class="glass-card p-8 rounded-[2rem] border border-[#292929] bg-[#1C1917]/50 backdrop-blur-xl space-y-6 sticky top-28">
+            <h3 class="text-lg font-bold font-sora text-white border-b border-[#292929] pb-3">订单汇总 / Order Summary 🧁</h3>
             
             <!-- Items list -->
             <div id="checkout-summary-list" class="space-y-4 max-h-[300px] overflow-y-auto pr-2">
@@ -256,16 +256,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
  
             <!-- Price Breakdown -->
-            <div class="pt-6 border-t-2 border-[#E8E1D9] space-y-2 text-sm text-[#6D5A50] font-quicksand font-bold">
+            <div class="pt-6 border-t border-[#292929] space-y-2 text-sm text-zinc-400 font-sora font-semibold">
               <div class="flex justify-between">
                 <span>商品小计 / Subtotal</span>
-                <span id="checkout-subtotal" class="text-[#3E2A1E] font-fredoka">$0.00</span>
+                <span id="checkout-subtotal" class="text-white font-sora">$0.00</span>
               </div>
               <div class="flex justify-between">
                 <span>配送方式 / Delivery</span>
-                <span class="text-[#FF6B8B] font-bold uppercase tracking-widest text-xs">自动发货 / Auto Delivery 🧁</span>
+                <span class="text-[#E7AC08] font-bold uppercase tracking-wider text-xs">自动发货 / Auto Delivery 🧁</span>
               </div>
-              <div class="flex justify-between text-[#FF6B8B] font-bold font-fredoka text-xl pt-4 border-t-2 border-[#3E2A1E]">
+              <div class="flex justify-between text-[#E7AC08] font-bold font-sora text-xl pt-4 border-t border-[#292929]">
                 <span>实付总额 / Grand Total</span>
                 <span id="checkout-grand-total">$0.00</span>
               </div>
@@ -276,31 +276,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- SUCCESS SCREEN (Hidden initially) -->
-      <div id="checkout-success-view" class="hidden max-w-xl mx-auto text-center py-20 px-6 space-y-8 glass-card border-3 border-[#3E2A1E] shadow-[8px_8px_0px_#3E2A1E] rounded-[2rem] bg-white">
-        <div class="w-20 h-20 rounded-full bg-green-100 border-2 border-[#3E2A1E] flex items-center justify-center mx-auto text-green-600 shadow-[2px_2px_0px_#3E2A1E]">
+      <div id="checkout-success-view" class="hidden max-w-xl mx-auto text-center py-20 px-6 space-y-8 glass-card border border-[#292929] rounded-[2rem] bg-[#1C1917]/50 backdrop-blur-xl text-white">
+        <div class="w-20 h-20 rounded-full bg-green-950/20 border border-green-800 flex items-center justify-center mx-auto text-green-400 shadow-md">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
         <div class="space-y-4">
-          <h2 class="text-3xl font-bold font-fredoka text-[#3E2A1E] tracking-tight">Order Submitted Successfully! 🎉</h2>
-          <p class="text-[#6D5A50] text-xs leading-relaxed max-w-md mx-auto font-quicksand font-bold">
+          <h2 class="text-3xl font-bold font-sora text-white tracking-tight">Order Submitted Successfully! 🎉</h2>
+          <p class="text-zinc-400 text-xs leading-relaxed max-w-md mx-auto font-sans">
             We are preparing your keys manually (usually takes 5-15 mins). Once shipped, card keys will display instantly in your <strong>Order Vault</strong> history page.<br/><br/>
             系统已收到您的订单，正为您人工配货（通常需 5~15 分钟）。发货后卡密将自动呈现于您的“订单保险库”（Order Vault）中，请稍后刷新查看。
           </p>
         </div>
-        <div class="border-t-2 border-[#E8E1D9] pt-6 text-[#6D5A50] text-xs font-quicksand font-bold">
-          Order reference: <span id="checkout-reference-id" class="font-mono text-[#3E2A1E] font-bold">CA-837492</span>
+        <div class="border-t border-[#292929] pt-6 text-zinc-400 text-xs font-sora">
+          Order reference: <span id="checkout-reference-id" class="font-mono text-white font-bold">CA-837492</span>
         </div>
         <a 
           href="/" 
-          class="inline-block px-8 py-3 rounded-xl bg-[#FFD6E0] border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFB3C6] font-bold uppercase tracking-wider text-xs font-fredoka transition-all duration-300 shadow-[2px_2px_0px_#3E2A1E]"
+          class="inline-block px-8 py-3 rounded-xl bg-[#E7AC08] border border-[#FAC514] text-[#080808] hover:bg-[#FAC514] font-bold uppercase tracking-wider text-xs font-sora transition-all duration-300 shadow-md"
         >
           Return to Boutique 🐶
         </a>
       </div>
-
-
 
     </div>
   </div>
@@ -373,8 +371,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   // Load and check cart
   function checkCart() {
-
-
     const savedCart = localStorage.getItem('boutique_cart');
     if (savedCart) {
       try {
@@ -392,8 +388,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     renderCheckout();
   }
-
-
 
   // Render Page Content
   function renderCheckout() {
@@ -426,14 +420,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         : `¥${itemCny} CNY`;
 
       return `
-        <div class="flex items-center justify-between text-sm py-2 border-b border-[#E8E1D9]/50">
+        <div class="flex items-center justify-between text-sm py-2 border-b border-[#292929]">
           <div class="min-w-0 pr-4">
-            <span class="text-[#3E2A1E] font-bold block truncate font-fredoka">${item.name}</span>
-            <span class="text-[#6D5A50] text-xs font-quicksand">${item.type === 'physical' ? `Size: ${item.size} × ${item.quantity}` : `Digital × ${item.quantity}`}</span>
+            <span class="text-white font-bold block truncate font-sora">${item.name}</span>
+            <span class="text-zinc-400 text-xs font-sans">${item.type === 'physical' ? `Size: ${item.size} × ${item.quantity}` : `Digital × ${item.quantity}`}</span>
           </div>
           <div class="flex flex-col items-end text-right shrink-0">
-            <span class="text-[#FF6B8B] font-fredoka font-bold">${priceText}</span>
-            <span class="text-[9px] text-[#6D5A50] font-quicksand font-bold">${secondaryPriceText}</span>
+            <span class="text-[#E7AC08] font-sora font-bold">${priceText}</span>
+            <span class="text-[9px] text-zinc-550 font-sans font-bold">${secondaryPriceText}</span>
           </div>
         </div>
       `;
@@ -443,11 +437,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const totalCostCny = Math.round(totalCost * 6.8);
 
     if (mode === 'cny') {
-      subtotalText.innerHTML = `¥${totalCostCny} <span class="text-xs text-[#6D5A50] font-quicksand font-normal">($${totalCost.toFixed(2)} USD)</span>`;
-      grandtotalText.innerHTML = `¥${totalCostCny} <span class="text-xs text-[#6D5A50] font-quicksand font-normal">($${totalCost.toFixed(2)} USD)</span>`;
+      subtotalText.innerHTML = `¥${totalCostCny} <span class="text-xs text-zinc-400 font-sans font-normal">($${totalCost.toFixed(2)} USD)</span>`;
+      grandtotalText.innerHTML = `¥${totalCostCny} <span class="text-xs text-zinc-400 font-sans font-normal">($${totalCost.toFixed(2)} USD)</span>`;
     } else {
-      subtotalText.innerHTML = `$${totalCost.toFixed(2)} <span class="text-xs text-[#6D5A50] font-quicksand font-normal">(¥${totalCostCny} CNY)</span>`;
-      grandtotalText.innerHTML = `$${totalCost.toFixed(2)} <span class="text-xs text-[#6D5A50] font-quicksand font-normal">(¥${totalCostCny} CNY)</span>`;
+      subtotalText.innerHTML = `$${totalCost.toFixed(2)} <span class="text-xs text-zinc-400 font-sans font-normal">(¥${totalCostCny} CNY)</span>`;
+      grandtotalText.innerHTML = `$${totalCost.toFixed(2)} <span class="text-xs text-zinc-400 font-sans font-normal">(¥${totalCostCny} CNY)</span>`;
     }
 
     // Set hidden inputs for form payload
@@ -491,10 +485,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       navigator.clipboard.writeText(textToCopy).then(() => {
         const originalText = trigger.textContent;
         trigger.textContent = 'Copied!';
-        trigger.classList.add('bg-emerald-500/20', 'text-[#137333]');
+        trigger.classList.add('bg-emerald-950/40', 'text-emerald-350');
         setTimeout(() => {
           trigger.textContent = originalText;
-          trigger.classList.remove('bg-emerald-500/20', 'text-[#137333]');
+          trigger.classList.remove('bg-emerald-950/40', 'text-emerald-350');
         }, 1500);
       });
     });
@@ -509,7 +503,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     navigator.clipboard.writeText(text).then(() => {
       const originalText = cryptoAddressText.innerText;
       cryptoAddressText.innerText = "COPIED / 地址已复制 ✓";
-      cryptoAddressText.style.color = "#FF6B8B";
+      cryptoAddressText.style.color = "#E7AC08";
       setTimeout(() => {
         cryptoAddressText.innerText = text;
         cryptoAddressText.style.color = "";
@@ -522,13 +516,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     btn.addEventListener('click', () => {
       // Remove active classes from all buttons
       paymentButtons.forEach(b => {
-        b.classList.remove('bg-[#FFD6E0]', 'shadow-[4px_4px_0px_#3E2A1E]');
-        b.classList.add('bg-[#FFFDF9]', 'shadow-[2px_2px_0px_#3E2A1E]');
+        b.classList.remove('bg-[#E7AC08]', 'border-[#FAC514]', 'text-[#080808]');
+        b.classList.add('bg-transparent', 'border-[#292929]', 'text-white');
       });
 
       // Add active classes to selected button
-      btn.classList.remove('bg-[#FFFDF9]', 'shadow-[2px_2px_0px_#3E2A1E]');
-      btn.classList.add('bg-[#FFD6E0]', 'shadow-[4px_4px_0px_#3E2A1E]');
+      btn.classList.remove('bg-transparent', 'border-[#292929]', 'text-white');
+      btn.classList.add('bg-[#E7AC08]', 'border-[#FAC514]', 'text-[#080808]');
 
       // Fetch network attributes
       const name = btn.getAttribute('data-name') || '';
@@ -559,8 +553,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       // Update inputs & display text
       if (hiddenPaymentMethod) hiddenPaymentMethod.value = name;
-
-
     });
   });
 
@@ -628,13 +620,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         createdAt: new Date().toISOString()
       };
 
-      // 1. Create order document in database (Firebase or Mock fallback)
+      // 1. Create order document in database
       const orderRef = await addDoc(collection(dbInstance, 'orders'), orderData);
       const orderId = orderRef.id;
 
-
-
-      // 1.5 Push order alert to Telegram Bot 1 (Puppy Shop Order Bot)
+      // 1.5 Push order alert to Telegram Bot
       try {
         await fetch('/api/order-notify', {
           method: 'POST',
@@ -677,11 +667,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       } else {
         throw new Error(result.message || 'Form submission failed');
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       if (errorMsg) {
         errorMsg.classList.remove('hidden');
-        errorMsg.textContent = 'Submission error. Please verify database connection or checkout keys.';
+        errorMsg.textContent = err.message || 'Submission error. Please verify database connection or checkout keys.';
       }
       submitBtn.disabled = false;
       submitBtn.textContent = 'Verify & Complete Order';

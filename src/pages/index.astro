@@ -14,29 +14,29 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
   <Header />
 
   <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-[#FFFDFB]">
+  <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-black text-white">
     <!-- Ambient Background Glows -->
-    <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#FFD6E0]/20 rounded-full filter blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[400px] h-[400px] bg-indigo-200/20 rounded-full filter blur-[100px] pointer-events-none"></div>
+    <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#E7AC08]/5 rounded-full filter blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[400px] h-[400px] bg-[#E7AC08]/5 rounded-full filter blur-[100px] pointer-events-none"></div>
     
     <div class="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10 w-full">
       <!-- Left side: Text & Buttons -->
       <div class="lg:col-span-7 text-left space-y-8">
-        <span class="inline-block px-4 py-1.5 rounded-full bg-[#FFD6E0]/40 border-2 border-[#3E2A1E] text-xs font-bold uppercase tracking-widest text-[#3E2A1E] animate-bounce">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-[#E7AC08]/10 border border-[#E7AC08]/30 text-xs font-bold uppercase tracking-widest text-[#E7AC08] animate-pulse font-sora">
           🐾 Cozy Drop 01 🐾
         </span>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-fredoka text-[#3E2A1E] tracking-tight leading-tight">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-sora text-white tracking-tight leading-tight">
           Welcome to the <br />
           <span class="text-gradient-gold">Cozy Chibi Vault</span>
         </h1>
-        <p class="text-base sm:text-lg text-[#6D5A50] font-quicksand font-bold leading-relaxed max-w-xl">
+        <p class="text-base sm:text-lg text-zinc-400 font-sans leading-relaxed max-w-xl">
           Explore our massive collection of instant premium digital accounts and services. Fully automated 24/7 delivery, secure blockchain vault, and zero transaction fees!
         </p>
         
         <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
           <a 
             href="#digital" 
-            class="w-full sm:w-auto px-8 py-4 bg-[#FFD6E0] border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFB3C6] font-bold uppercase tracking-wider rounded-full shadow-[3px_3px_0px_#3E2A1E] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[4px_4px_0px_#3E2A1E] active:scale-95 transition-all duration-300 text-sm font-fredoka text-center"
+            class="w-full sm:w-auto px-8 py-4 bg-[#E7AC08] hover:bg-[#FAC514] border border-[#FAC514] text-[#080808] font-bold uppercase tracking-wider rounded-full shadow-lg active:scale-95 transition-all duration-300 text-sm font-sora text-center"
           >
             Explore Digital Vault 🐾
           </a>
@@ -47,10 +47,10 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
       <div class="lg:col-span-5 flex justify-center lg:justify-end">
         <div 
           id="hero-art-container"
-          class="relative w-full max-w-[400px] aspect-square rounded-[2rem] overflow-hidden border-2 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] transition-all duration-300 ease-out cursor-pointer group bg-white"
+          class="relative w-full max-w-[400px] aspect-square rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl transition-all duration-300 ease-out cursor-pointer group bg-[#1C1917]/70 backdrop-blur-xl"
         >
           <!-- Glowing border indicator on hover -->
-          <div class="absolute inset-0 bg-gradient-to-tr from-[#FFD6E0]/20 to-indigo-200/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
+          <div class="absolute inset-0 bg-gradient-to-tr from-[#E7AC08]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
           
           <!-- Image -->
           <img 
@@ -61,19 +61,19 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
           />
 
           <!-- Overlay Glass Plate -->
-          <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/90 backdrop-blur-md border-2 border-[#3E2A1E] shadow-[2px_2px_0px_#3E2A1E] z-20 text-left space-y-1 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-            <span class="text-[9px] font-black uppercase tracking-widest text-[#FF6B8B]">OFFICIAL MASCOT</span>
-            <h3 class="text-sm font-bold text-[#3E2A1E] font-fredoka">Cozy Chibi Assistant</h3>
+          <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-[#090909]/90 backdrop-blur-md border border-white/10 shadow-xl z-20 text-left space-y-1 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+            <span class="text-[9px] font-black uppercase tracking-widest text-[#E7AC08] font-sora">OFFICIAL MASCOT</span>
+            <h3 class="text-sm font-bold text-white font-sora">Cozy Chibi Assistant</h3>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Subtle Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#6D5A50] text-xs uppercase tracking-widest font-bold font-quicksand">
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-400 text-xs uppercase tracking-widest font-semibold font-sora">
       Scroll Down
-      <div class="w-2 h-6 bg-[#E8E1D9] border border-[#3E2A1E] rounded-full overflow-hidden">
-        <div class="w-full h-1/2 bg-[#FF6B8B] animate-bounce"></div>
+      <div class="w-2 h-6 bg-zinc-800 rounded-full overflow-hidden">
+        <div class="w-full h-1/2 bg-[#E7AC08] animate-bounce"></div>
       </div>
     </div>
   </section>
@@ -82,41 +82,41 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
   <FilmStripSlider />
 
   <!-- Digital Vault Section (Crawled from chuhai91.cc) -->
-  <section id="digital" class="py-24 border-t-2 border-[#3E2A1E] relative min-h-[800px] bg-[#FFFDFB]">
+  <section id="digital" class="py-24 border-t border-[#1C1917] relative min-h-[800px] bg-black text-white">
     <div class="max-w-7xl mx-auto px-6">
       
       <!-- Announcement Board -->
-      <div class="glass-card p-6 md:p-8 rounded-[2rem] border-2 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] bg-white mb-12 text-left space-y-6">
-        <h3 class="text-xl font-bold font-fredoka text-[#FF6B8B] flex items-center gap-2 border-b-2 border-[#E8E1D9] pb-3 select-none">
+      <div class="glass-card p-6 md:p-8 rounded-[2rem] bg-[#1C1917]/50 backdrop-blur-xl border border-[#292929] mb-12 text-left space-y-6">
+        <h3 class="text-xl font-bold font-sora text-[#FAC514] flex items-center gap-2 border-b border-[#292929] pb-3 select-none">
           📢 最新公告 / Announcements
         </h3>
-        <div class="space-y-3 font-quicksand font-bold text-xs md:text-sm">
+        <div class="space-y-3 font-sans font-medium text-xs md:text-sm">
           <!-- Item 1: Red -->
-          <div class="p-4 rounded-2xl bg-red-50 border-l-2 border-red-400 text-red-700 flex items-start gap-3">
+          <div class="p-4 rounded-2xl bg-red-950/20 border-l-2 border-red-500 text-red-300 flex items-start gap-3 border border-red-950/40">
             <span class="text-base">⚠️</span>
             <p>本站商品仅供学习测试使用，请勿使用本站商品从事违法活动，否则一经发现，后果自负，本站将配合相关部门打击！</p>
           </div>
           <!-- Item 2: Green -->
-          <div class="p-4 rounded-2xl bg-emerald-50 border-l-2 border-emerald-400 text-emerald-700 flex items-start gap-3">
+          <div class="p-4 rounded-2xl bg-emerald-950/20 border-l-2 border-emerald-500 text-emerald-300 flex items-start gap-3 border border-emerald-950/40">
             <span class="text-base">📧</span>
             <p>本站为卡密发货，发送邮箱。付款过后没有进入查看页面的用户，可以通过首页右上角“订单查询”来查看卡密。</p>
           </div>
-          <!-- Item 3: Brown -->
-          <div class="p-4 rounded-2xl bg-[#F0E6DF] border-l-2 border-[#3E2A1E] text-[#3E2A1E] flex items-start gap-3">
+          <!-- Item 3: Brown/Stone -->
+          <div class="p-4 rounded-2xl bg-stone-900/40 border-l-2 border-stone-500 text-stone-300 flex items-start gap-3 border border-stone-850">
             <span class="text-base">🔒</span>
             <p>账号都是独享，卖出删档 - 本站不保存任何已售账户数据，请自行保存好发货信息。</p>
           </div>
-          <!-- Item 4: Purple -->
-          <div class="p-4 rounded-2xl bg-indigo-50 border-l-2 border-indigo-400 text-indigo-700 flex items-start gap-3">
+          <!-- Item 4: Amber -->
+          <div class="p-4 rounded-2xl bg-amber-950/20 border-l-2 border-[#E7AC08] text-amber-200 flex items-start gap-3 border border-amber-950/40">
             <span class="text-base">💳</span>
             <p>⭐️⭐⭐ 支持支付宝、微信、USDT支付（支付不了换支付通道） 注册会员用USDT充值余额，可0手续费下单。</p>
           </div>
           <!-- Item 5: Blue -->
-          <div class="p-4 rounded-2xl bg-blue-50 border-l-2 border-blue-400 text-blue-700 flex items-start gap-3">
+          <div class="p-4 rounded-2xl bg-blue-950/20 border-l-2 border-blue-500 text-blue-300 flex items-start gap-3 border border-blue-950/40">
             <span class="text-base">💬</span>
             <div>
               <p>账号使用遇见困难或问题，请先查看帮助教程，大概率可以解决你的问题。</p>
-              <p class="mt-1 font-semibold text-blue-600">售后请联系客服并发送：<strong>订单号 + 问题截图 + 问题账号</strong>，我们将尽快为您处理。</p>
+              <p class="mt-1 font-semibold text-[#FAC514]">售后请联系客服并发送：<strong>订单号 + 问题截图 + 问题账号</strong>，我们将尽快为您处理。</p>
             </div>
           </div>
         </div>
@@ -124,8 +124,8 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
 
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
         <div>
-          <span class="text-[#FF6B8B] uppercase tracking-widest text-xs font-bold font-fredoka block mb-2">🐾 Automated Dispatch</span>
-          <h2 class="text-3xl md:text-5xl font-bold font-fredoka text-[#3E2A1E]">Digital Account Vault</h2>
+          <span class="text-[#E7AC08] uppercase tracking-widest text-xs font-bold font-sora block mb-2">🐾 Automated Dispatch</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-sora text-white">Digital Account Vault</h2>
         </div>
         <!-- Search Input -->
         <div class="mt-6 md:mt-0 w-full max-w-sm">
@@ -134,9 +134,9 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
               type="text" 
               id="search-bar" 
               placeholder="Search 700+ digital accounts..." 
-              class="w-full bg-white border-2 border-[#3E2A1E] rounded-2xl pl-11 pr-4 py-3 text-sm text-[#3E2A1E] placeholder-[#6D5A50] focus:outline-none focus:border-[#FF6B8B] shadow-[3px_3px_0px_#3E2A1E] focus:shadow-[4px_4px_0px_#3E2A1E] transition-all duration-300 font-quicksand font-bold"
+              class="w-full bg-[#1C1917]/70 border border-[#292929] rounded-2xl pl-11 pr-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition-all duration-300 font-sora font-semibold"
             />
-            <div class="absolute left-4 top-4 text-[#6D5A50]">
+            <div class="absolute left-4 top-4.5 text-zinc-500">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -162,8 +162,8 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
         <div class="md:col-span-3">
           <div id="digital-products-grid" class="flex flex-col gap-4">
             <!-- Loading state -->
-            <div class="col-span-full text-center py-20 text-[#6D5A50] font-quicksand font-bold">
-              <div class="animate-spin inline-block w-8 h-8 border-4 border-[#FF6B8B] border-t-transparent rounded-full mb-4"></div>
+            <div class="col-span-full text-center py-20 text-zinc-500 font-sans">
+              <div class="animate-spin inline-block w-8 h-8 border-4 border-[#E7AC08] border-t-transparent rounded-full mb-4"></div>
               <p>Decrypting Digital Vault...</p>
             </div>
           </div>
@@ -175,52 +175,54 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
   </section>
 
   <!-- How It Works Section -->
-  <section id="how-it-works" class="py-24 border-t-3 border-[#3E2A1E] bg-[#FDFBF7]">
+  <section id="how-it-works" class="py-24 border-t border-[#1C1917] bg-[#090909]">
     <div class="max-w-5xl mx-auto px-6">
       <div class="text-center mb-16">
-        <span class="text-[#FF6B8B] uppercase tracking-widest text-xs font-bold font-fredoka block mb-2">🍰 Transaction Protocol</span>
-        <h2 class="text-3xl md:text-4xl font-bold font-fredoka text-[#3E2A1E]">How Purchases Work</h2>
-        <p class="text-[#6D5A50] mt-4 text-sm font-quicksand font-bold">
+        <span class="text-[#E7AC08] uppercase tracking-widest text-xs font-bold font-sora block mb-2">🍰 Transaction Protocol</span>
+        <h2 class="text-3xl md:text-4xl font-bold font-sora text-white">How Purchases Work</h2>
+        <p class="text-zinc-400 mt-4 text-sm font-sora font-medium">
           We operate on a zero-middleman payment processing model to bypass high transaction fees.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Step 1 -->
-        <div class="glass-card p-8 rounded-[2rem] relative bg-white">
-          <div class="w-12 h-12 rounded-xl bg-[#FFD6E0] border-2 border-[#3E2A1E] flex items-center justify-center font-fredoka font-bold text-xl text-[#3E2A1E] mb-6 shadow-[2px_2px_0px_#3E2A1E]">
+        <div class="glass-card p-8 rounded-[2rem] relative bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl">
+          <div class="w-12 h-12 rounded-xl bg-stone-900 border border-[#292929] flex items-center justify-center font-sora font-bold text-xl text-[#E7AC08] mb-6">
             01
           </div>
-          <h3 class="text-lg font-bold text-[#3E2A1E] font-fredoka mb-2">Assemble Your Bag</h3>
-          <p class="text-[#6D5A50] text-sm leading-relaxed font-quicksand font-medium">
+          <h3 class="text-lg font-bold text-white font-sora mb-2">Assemble Your Bag</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed font-sans font-medium">
             Load up your desired digital accounts and service options in the active bag.
           </p>
         </div>
 
         <!-- Step 2 -->
-        <div class="glass-card p-8 rounded-[2rem] relative bg-white">
-          <div class="w-12 h-12 rounded-xl bg-[#D6E4FF] border-2 border-[#3E2A1E] flex items-center justify-center font-fredoka font-bold text-xl text-[#3E2A1E] mb-6 shadow-[2px_2px_0px_#3E2A1E]">
+        <div class="glass-card p-8 rounded-[2rem] relative bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl">
+          <div class="w-12 h-12 rounded-xl bg-stone-900 border border-[#292929] flex items-center justify-center font-sora font-bold text-xl text-[#E7AC08] mb-6">
             02
           </div>
-          <h3 class="text-lg font-bold text-[#3E2A1E] font-fredoka mb-2">Transfer Payment</h3>
-          <p class="text-[#6D5A50] text-sm leading-relaxed font-quicksand font-medium">
+          <h3 class="text-lg font-bold text-white font-sora mb-2">Transfer Payment</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed font-sans font-medium">
             Send the exact total using Cryptocurrency (USDT / BTC / ETH) using our provided instructions.
           </p>
         </div>
 
         <!-- Step 3 -->
-        <div class="glass-card p-8 rounded-[2rem] relative bg-white">
-          <div class="w-12 h-12 rounded-xl bg-[#E8DBFC] border-2 border-[#3E2A1E] flex items-center justify-center font-fredoka font-bold text-xl text-[#3E2A1E] mb-6 shadow-[2px_2px_0px_#3E2A1E]">
+        <div class="glass-card p-8 rounded-[2rem] relative bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl">
+          <div class="w-12 h-12 rounded-xl bg-stone-900 border border-[#292929] flex items-center justify-center font-sora font-bold text-xl text-[#E7AC08] mb-6">
             03
           </div>
-          <h3 class="text-lg font-bold text-[#3E2A1E] font-fredoka mb-2">Instant Validation</h3>
-          <p class="text-[#6D5A50] text-sm leading-relaxed font-quicksand font-medium">
+          <h3 class="text-lg font-bold text-white font-sora mb-2">Instant Validation</h3>
+          <p class="text-zinc-400 text-sm leading-relaxed font-sans font-medium">
             Submit your TxID or bank reference. We inspect the ledger, email your digital products, and deliver them to your orders vault instantly.
           </p>
         </div>
       </div>
     </div>
   </section>
+
+  <CartDrawer />
 
   <Footer />
 
@@ -281,35 +283,6 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
     });
   }
 
-  // General add to cart logic using HTML attributes
-  function addToCartFromAttributes(element, size = '') {
-    const id = element.getAttribute('data-product-id');
-    const name = element.getAttribute('data-product-name');
-    const price = parseFloat(element.getAttribute('data-product-price') || '0');
-    const image = element.getAttribute('data-product-image');
-    const type = element.getAttribute('data-product-type');
-
-    if (!size && type === 'physical') {
-      const activeSizeBtn = element.querySelector('.size-btn.bg-white');
-      size = activeSizeBtn ? activeSizeBtn.getAttribute('data-size') || '' : '';
-    }
-
-    const cartItemId = type === 'physical' ? `${id}_${size}` : id;
-
-    window.dispatchEvent(new CustomEvent('cart:add', {
-      detail: {
-        cartItemId,
-        id,
-        name,
-        price,
-        image,
-        type,
-        size,
-        quantity: 1
-      }
-    }));
-  }
-
   // Render Categories in Sidebar & Mobile Scroller
   function renderCategories() {
     if (!desktopSidebar || !mobileBar) return;
@@ -328,13 +301,13 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
           type="button"
           class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center justify-between group ${
             isActive 
-              ? 'bg-[#FFD6E0] text-[#3E2A1E] border-2 border-[#3E2A1E] shadow-[2px_2px_0px_#3E2A1E] font-fredoka font-bold' 
-              : 'text-[#6D5A50] hover:text-[#3E2A1E] hover:bg-[#FFD6E0]/15 border-2 border-transparent font-quicksand font-bold'
+              ? 'bg-[#E7AC08] text-[#080808] border border-[#FAC514] shadow-md font-sora font-bold' 
+              : 'text-zinc-400 hover:text-white hover:bg-white/5 border border-transparent font-sora font-semibold'
           }"
           data-category-id="${cat.cid}"
         >
           <span class="truncate pr-2">${cat.name}</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] bg-[#F0E6DF] text-[#6D5A50] group-hover:bg-[#FFD6E0]/30 group-hover:text-[#3E2A1E] font-mono transition">
+          <span class="px-2 py-0.5 rounded-full text-[10px] bg-stone-900 text-zinc-500 group-hover:bg-white/10 group-hover:text-white font-mono transition">
             ${count}
           </span>
         </button>
@@ -350,8 +323,8 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
           type="button"
           class="shrink-0 px-4 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
             isActive 
-              ? 'bg-[#FF6B8B] text-white border-2 border-[#3E2A1E] shadow-[2px_2px_0px_#3E2A1E] font-fredoka font-bold' 
-              : 'bg-white text-[#6D5A50] border-2 border-[#3E2A1E] font-quicksand font-bold hover:bg-[#FFD6E0]/20'
+              ? 'bg-[#E7AC08] text-[#080808] border border-[#FAC514] shadow-md font-sora font-bold' 
+              : 'bg-[#1C1917]/70 text-zinc-400 border border-[#292929] font-sora font-semibold hover:bg-white/5'
           }"
           data-category-id="${cat.cid}"
         >
@@ -395,8 +368,8 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
 
     if (filtered.length === 0) {
       productsGrid.innerHTML = `
-        <div class="col-span-full text-center py-24 text-[#6D5A50] font-quicksand font-bold">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#6D5A50] mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <div class="col-span-full text-center py-24 text-zinc-500 font-sans">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-zinc-650 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <p>No products found matching your criteria.</p>
@@ -435,14 +408,14 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
       return `
         <a 
           href="/item/${cleanId}/"
-          class="glass-card hover-lift rounded-2xl p-4 flex flex-row items-center justify-between border-3 border-[#3E2A1E] shadow-[4px_4px_0px_#3E2A1E] cursor-pointer block text-left decoration-none bg-white gap-4 group transition-all duration-300"
+          class="glass-card hover-lift rounded-2xl p-4 flex flex-row items-center justify-between border border-[#292929] cursor-pointer block text-left decoration-none bg-[#1C1917]/60 backdrop-blur-md gap-4 group transition-all duration-300"
         >
           <!-- Left side: Product Icon & Info -->
           <div class="flex items-center gap-4 min-w-0 flex-1">
             <!-- Icon -->
             <img 
               src="${p.image || '/favicon.ico'}" 
-              class="w-10 h-10 md:w-12 md:h-12 rounded-2xl border-2 border-[#3E2A1E] shrink-0 object-cover bg-[#FDFBF7] shadow-[2px_2px_0px_#3E2A1E]" 
+              class="w-10 h-10 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-stone-900 shadow-md" 
               alt="${p.name}"
               onerror="this.src='/favicon.ico'"
             />
@@ -451,17 +424,17 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
             <div class="min-w-0 flex-1">
               <div class="flex items-center gap-2 mb-1.5 flex-wrap">
                 <!-- Category Badge -->
-                <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full bg-[#D6E4FF] text-indigo-600 border border-indigo-200 font-quicksand select-none">
+                <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full bg-indigo-950/40 text-indigo-400 border border-indigo-900 font-sora select-none">
                   ${p.category.split(' ')[0]}
                 </span>
                 <!-- Stock Badge -->
-                <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full ${isOutOfStock ? 'bg-red-100 text-red-600 border border-red-200' : 'bg-[#F0E6DF] text-[#6D5A50] border border-[#3E2A1E]/10'} font-mono select-none">
+                <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full ${isOutOfStock ? 'bg-red-950/40 text-red-400 border border-red-900' : 'bg-stone-800 text-stone-400 border border-stone-700'} font-mono select-none">
                   ${cleanStock}
                 </span>
               </div>
               
               <!-- Title -->
-              <h4 class="text-xs md:text-sm font-bold text-[#3E2A1E] leading-snug font-fredoka group-hover:text-[#FF6B8B] transition-colors line-clamp-2 pr-2">
+              <h4 class="text-xs md:text-sm font-bold text-white leading-snug font-sora group-hover:text-[#FAC514] transition-colors line-clamp-2 pr-2">
                 ${p.name}
               </h4>
             </div>
@@ -471,17 +444,17 @@ import FilmStripSlider from '../components/FilmStripSlider.astro';
           <div class="flex items-center gap-3 md:gap-4 shrink-0">
             <!-- Price -->
             <div class="flex flex-col items-end text-right min-w-[70px]">
-              <span class="text-sm md:text-lg font-black text-[#3E2A1E] font-fredoka">
+              <span class="text-sm md:text-lg font-black text-[#E7AC08] font-sora">
                 ${primaryPrice}
               </span>
-              <span class="text-[9px] text-[#6D5A50] font-quicksand font-bold">
+              <span class="text-[9px] text-zinc-400 font-sora font-semibold">
                 ${secondaryPrice}
               </span>
             </div>
 
             <!-- Action Button -->
             <span 
-              class="px-3 py-1.5 md:px-4 md:py-2.5 rounded-xl bg-white border-2 border-[#3E2A1E] text-[#3E2A1E] group-hover:bg-[#FFD6E0] font-fredoka font-bold text-[10px] md:text-xs uppercase tracking-wider transition-all duration-300 inline-block text-center shadow-[2px_2px_0px_#3E2A1E]"
+              class="px-3 py-1.5 md:px-4 md:py-2.5 rounded-xl bg-transparent border border-white/10 text-white group-hover:bg-[#E7AC08] group-hover:text-[#080808] group-hover:border-[#FAC514] font-sora font-bold text-[10px] md:text-xs uppercase tracking-wider transition-all duration-300 inline-block text-center"
             >
               ${isMultiOption ? 'Select' : 'Buy'}
             </span>

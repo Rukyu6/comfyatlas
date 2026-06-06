@@ -23,7 +23,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#FFFDF9" />
+    <meta name="theme-color" content="#000000" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
@@ -34,7 +34,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300..800&family=Plus+Jakarta+Sans:wght@300..800&family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -59,7 +59,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
       gtag('config', 'G-4RBFJ76E2B');
     </script>
   </head>
-  <body class="min-h-screen flex flex-col bg-[#FFFDF9] text-[#3E2A1E]">
+  <body class="min-h-screen flex flex-col bg-black text-[#F8FAFC] selection:bg-[#E7AC08]/30 selection:text-white">
     <slot />
     <TelegramChat />
   </body>
