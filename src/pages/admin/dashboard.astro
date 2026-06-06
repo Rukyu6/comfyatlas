@@ -6,30 +6,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <!-- Security Error Overlay (Hidden initially) -->
   <div 
     id="admin-security-overlay" 
-    class="hidden fixed inset-0 z-50 bg-[#FFFDF9] flex flex-col items-center justify-center p-6 text-center select-none"
+    class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-6 text-center select-none"
   >
-    <div class="glass-card p-8 max-w-md w-full text-center space-y-6">
-      <div class="w-16 h-16 rounded-full bg-rose-50 border-2 border-[#3E2A1E] flex items-center justify-center mx-auto text-rose-500 shadow-[2px_2px_0px_#3E2A1E]">
+    <div class="glass-card p-8 max-w-md w-full text-center space-y-6 bg-[#1C1917]/80 border border-[#292929] backdrop-blur-xl text-white">
+      <div class="w-16 h-16 rounded-full bg-rose-950/20 border border-rose-500/30 flex items-center justify-center mx-auto text-rose-400">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m0-6v2m0-8h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
       <div class="space-y-2">
-        <h2 class="text-xl font-extrabold text-[#3E2A1E] font-fredoka">拒绝访问</h2>
-        <p class="text-xs text-zinc-600 leading-relaxed" id="admin-security-msg">
+        <h2 class="text-xl font-extrabold text-white font-fredoka">拒绝访问</h2>
+        <p class="text-xs text-zinc-400 leading-relaxed" id="admin-security-msg">
           您无权查看商家后台。请使用管理员账户登录。
         </p>
       </div>
       <div class="pt-4 flex gap-3 justify-center">
         <a 
           href="/login?redirect=/admin/dashboard" 
-          class="px-5 py-2.5 bg-[#FF9EAF] text-white hover:bg-[#FF6B8B] font-bold text-xs uppercase tracking-wider rounded-xl border-2 border-[#3E2A1E] shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_#3E2A1E] font-fredoka"
+          class="px-5 py-2.5 bg-[#E7AC08] text-black hover:bg-[#FAC514] font-bold text-xs uppercase tracking-wider rounded-xl border border-[#FAC514] transition active:scale-95 font-fredoka"
         >
           登录账户
         </a>
         <a 
           href="/" 
-          class="px-5 py-2.5 bg-white border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFF5F7] font-bold text-xs uppercase tracking-wider rounded-xl transition hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_#3E2A1E] font-fredoka"
+          class="px-5 py-2.5 bg-transparent border border-[#292929] text-white hover:bg-white/5 font-bold text-xs uppercase tracking-wider rounded-xl transition active:scale-95 font-fredoka"
         >
           返回商城
         </a>
@@ -42,15 +42,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="space-y-8">
       
       <!-- Top header layout -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between border-b-3 border-[#3E2A1E]/20 pb-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#292929] pb-6">
         <div class="space-y-1">
-          <span class="text-[#FF9EAF] uppercase tracking-widest text-[10px] font-bold font-fredoka block">运营管理室</span>
-          <h1 class="text-3xl font-extrabold font-fredoka text-[#3E2A1E]">商家后台管理</h1>
+          <span class="text-[#E7AC08] uppercase tracking-widest text-[10px] font-bold font-fredoka block">运营管理室</span>
+          <h1 class="text-3xl font-extrabold font-fredoka text-white">商家后台管理</h1>
         </div>
         <div class="flex gap-3 mt-4 md:mt-0">
           <a 
             href="/" 
-            class="px-4 py-2 bg-white border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFF5F7] text-xs font-bold font-fredoka uppercase tracking-wider rounded-xl shadow-[2px_2px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E] transition flex items-center gap-2 active:scale-95"
+            class="px-4 py-2 bg-transparent border border-[#292929] text-white hover:bg-white/5 text-xs font-bold font-fredoka uppercase tracking-wider rounded-xl transition flex items-center gap-2 active:scale-95"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -61,18 +61,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
 
       <!-- Navigation Tabs -->
-      <div class="flex border-b-2 border-[#3E2A1E]/10 gap-6">
+      <div class="flex border-b border-[#292929] gap-6">
         <button 
           id="tab-btn-orders" 
           type="button" 
-          class="pb-3 border-b-3 border-[#FF9EAF] text-[#FF9EAF] font-bold text-sm font-fredoka transition-all cursor-pointer"
+          class="pb-3 border-b-2 border-[#E7AC08] text-[#E7AC08] font-bold text-sm font-fredoka transition-all cursor-pointer"
         >
           📦 订单队列
         </button>
         <button 
           id="tab-btn-deposits" 
           type="button" 
-          class="pb-3 border-b-3 border-transparent text-zinc-500 hover:text-[#3E2A1E] font-bold text-sm font-fredoka transition-all cursor-pointer"
+          class="pb-3 border-b-2 border-transparent text-zinc-500 hover:text-white font-bold text-sm font-fredoka transition-all cursor-pointer"
         >
           💰 充值审核
         </button>
@@ -84,30 +84,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           <!-- Total Revenue USD -->
-          <div class="glass-card p-6 space-y-2">
-            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">总营收 (USD)</span>
-            <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-usd">$0.00</p>
-            <span class="text-[10px] text-emerald-600 flex items-center gap-1 font-fredoka font-bold">● 实时同步</span>
+          <div class="glass-card p-6 space-y-2 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
+            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">总营收 (USD)</span>
+            <p class="text-2xl font-black text-[#E7AC08] font-fredoka" id="stat-revenue-usd">$0.00</p>
+            <span class="text-[10px] text-emerald-400 flex items-center gap-1 font-fredoka font-bold">● 实时同步</span>
           </div>
 
           <!-- Total Revenue CNY -->
-          <div class="glass-card p-6 space-y-2">
-            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">总营收 (CNY)</span>
-            <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-cny">¥0 CNY</p>
+          <div class="glass-card p-6 space-y-2 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
+            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">总营收 (CNY)</span>
+            <p class="text-2xl font-black text-white font-fredoka" id="stat-revenue-cny">¥0 CNY</p>
             <span class="text-[10px] text-zinc-500 font-fredoka">按约 6.8 汇率换算</span>
           </div>
 
           <!-- Completed Orders -->
-          <div class="glass-card p-6 space-y-2">
-            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">已完成订单</span>
-            <p class="text-2xl font-black text-[#FF9EAF] font-fredoka" id="stat-orders-completed">0</p>
+          <div class="glass-card p-6 space-y-2 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
+            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">已完成订单</span>
+            <p class="text-2xl font-black text-[#E7AC08] font-fredoka" id="stat-orders-completed">0</p>
             <span class="text-[10px] text-zinc-500 font-fredoka" id="stat-orders-total">订单总数: 0</span>
           </div>
 
           <!-- Pending Verification -->
-          <div class="glass-card p-6 space-y-2">
-            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">待审核订单</span>
-            <p class="text-2xl font-black text-amber-600 font-fredoka" id="stat-orders-pending">0</p>
+          <div class="glass-card p-6 space-y-2 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
+            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">待审核订单</span>
+            <p class="text-2xl font-black text-amber-500 font-fredoka" id="stat-orders-pending">0</p>
             <span class="text-[10px] text-zinc-500 font-fredoka">等待支付凭证核对</span>
           </div>
 
@@ -117,55 +117,55 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           <!-- Category Sales Mix -->
-          <div class="lg:col-span-1 glass-card p-6 space-y-6 flex flex-col justify-between">
+          <div class="lg:col-span-1 glass-card p-6 space-y-6 flex flex-col justify-between bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
             <div class="space-y-1">
-              <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">销售占比分析</h3>
-              <p class="text-xs text-zinc-500 font-fredoka">各个商品分类的营收分布占比</p>
+              <h3 class="text-sm font-bold text-white uppercase tracking-wider font-fredoka">销售占比分析</h3>
+              <p class="text-xs text-zinc-400 font-fredoka">各个商品分类的营收分布占比</p>
             </div>
 
             <div class="space-y-4">
               <!-- Digital accounts split bar -->
               <div class="space-y-1.5 text-left">
                 <div class="flex justify-between text-xs font-semibold">
-                  <span class="text-emerald-700 font-fredoka">数字商品库</span>
-                  <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-digital-pct">0%</span>
+                  <span class="text-emerald-400 font-fredoka">数字商品库</span>
+                  <span class="text-white font-fredoka" id="stat-mix-digital-pct">0%</span>
                 </div>
-                <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
-                  <div id="stat-mix-digital-fill" class="h-full bg-emerald-400 transition-all duration-500 w-0"></div>
+                <div class="w-full h-3.5 bg-black border border-[#292929] rounded-full overflow-hidden">
+                  <div id="stat-mix-digital-fill" class="h-full bg-emerald-500 transition-all duration-500 w-0"></div>
                 </div>
-                <span class="text-[10px] text-zinc-500 block" id="stat-mix-digital-val">销售额 $0.00</span>
+                <span class="text-[10px] text-zinc-400 block" id="stat-mix-digital-val">销售额 $0.00</span>
               </div>
 
               <!-- Apparel/Physical accounts split bar -->
               <div class="space-y-1.5 text-left">
                 <div class="flex justify-between text-xs font-semibold">
-                  <span class="text-[#FF9EAF] font-fredoka">潮流服饰</span>
-                  <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-apparel-pct">0%</span>
+                  <span class="text-[#E7AC08] font-fredoka">潮流服饰</span>
+                  <span class="text-white font-fredoka" id="stat-mix-apparel-pct">0%</span>
                 </div>
-                <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
-                  <div id="stat-mix-apparel-fill" class="h-full bg-[#FF9EAF] transition-all duration-500 w-0"></div>
+                <div class="w-full h-3.5 bg-black border border-[#292929] rounded-full overflow-hidden">
+                  <div id="stat-mix-apparel-fill" class="h-full bg-[#E7AC08] transition-all duration-500 w-0"></div>
                 </div>
-                <span class="text-[10px] text-zinc-500 block" id="stat-mix-apparel-val">销售额 $0.00</span>
+                <span class="text-[10px] text-zinc-400 block" id="stat-mix-apparel-val">销售额 $0.00</span>
               </div>
 
             </div>
 
-            <div class="text-[10px] text-zinc-600 border-t border-[#3E2A1E]/10 pt-4 font-fredoka">
+            <div class="text-[10px] text-zinc-500 border-t border-[#292929] pt-4 font-fredoka">
               提示：调整商品价格会更新未来的订单统计。
             </div>
           </div>
 
           <!-- Ledger logs table container -->
-          <div class="lg:col-span-2 glass-card p-6 space-y-6">
-            <div class="flex items-center justify-between border-b border-[#3E2A1E]/10 pb-4">
-              <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">交易账目明细</h3>
-              <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-ledger-count">总行数: 0</span>
+          <div class="lg:col-span-2 glass-card p-6 space-y-6 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
+            <div class="flex items-center justify-between border-b border-[#292929] pb-4">
+              <h3 class="text-sm font-bold text-white uppercase tracking-wider font-fredoka">交易账目明细</h3>
+              <span class="text-[10px] font-bold text-zinc-400 font-mono" id="stat-ledger-count">总行数: 0</span>
             </div>
 
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr class="border-b border-[#3E2A1E]/20 text-[#3E2A1E]/70 uppercase tracking-widest text-[9px] font-bold font-fredoka">
+                  <tr class="border-b border-[#292929] text-zinc-400 uppercase tracking-widest text-[9px] font-bold font-fredoka">
                     <th class="pb-3 pr-2">订单 ID</th>
                     <th class="pb-3 px-2">客户</th>
                     <th class="pb-3 px-2">总计 (USD)</th>
@@ -174,7 +174,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                     <th class="pb-3 pl-2 text-right">操作</th>
                   </tr>
                 </thead>
-                <tbody id="ledger-rows" class="divide-y divide-[#3E2A1E]/10 text-zinc-700 font-fredoka">
+                <tbody id="ledger-rows" class="divide-y divide-[#292929] text-zinc-300 font-fredoka">
                   <tr>
                     <td colspan="6" class="py-12 text-center text-zinc-500">Initializing transaction log...</td>
                   </tr>
@@ -189,16 +189,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <!-- Tab View: Deposits -->
       <div id="view-deposits" class="hidden space-y-6">
-        <div class="glass-card p-6 space-y-6">
-          <div class="flex items-center justify-between border-b border-[#3E2A1E]/10 pb-4">
-            <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">充值审核管理</h3>
-            <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-deposits-count">充值申请总数: 0</span>
+        <div class="glass-card p-6 space-y-6 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
+          <div class="flex items-center justify-between border-b border-[#292929] pb-4">
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider font-fredoka">充值审核管理</h3>
+            <span class="text-[10px] font-bold text-zinc-400 font-mono" id="stat-deposits-count">充值申请总数: 0</span>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse text-xs">
               <thead>
-                <tr class="border-b border-[#3E2A1E]/20 text-[#3E2A1E]/70 uppercase tracking-widest text-[9px] font-bold font-fredoka">
+                <tr class="border-b border-[#292929] text-zinc-400 uppercase tracking-widest text-[9px] font-bold font-fredoka">
                   <th class="pb-3 pr-2">申请 ID</th>
                   <th class="pb-3 px-2">客户邮箱</th>
                   <th class="pb-3 px-2">充值金额</th>
@@ -207,9 +207,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                   <th class="pb-3 pl-2 text-right">操作</th>
                 </tr>
               </thead>
-              <tbody id="deposit-ledger-rows" class="divide-y divide-[#3E2A1E]/10 text-zinc-700 font-fredoka">
+              <tbody id="deposit-ledger-rows" class="divide-y divide-[#292929] text-zinc-300 font-fredoka">
                 <tr>
-                  <td colspan="6" class="py-12 text-center text-zinc-500">加载充值申请列表中... / Loading deposit requests...</td>
+                  <td colspan="6" class="py-12 text-center text-zinc-500">正在加载充值申请列表中...</td>
                 </tr>
               </tbody>
             </table>
@@ -221,56 +221,56 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </div>
 
   <!-- ORDER REVIEW DETAIL MODAL (Hidden initially) -->
-  <div id="order-details-modal" class="hidden fixed inset-0 z-50 bg-[#3E2A1E]/40 backdrop-blur-sm flex items-center justify-center p-6">
-    <div class="glass-card max-w-xl w-full p-8 relative space-y-6">
+  <div id="order-details-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-6">
+    <div class="glass-card max-w-xl w-full p-8 relative space-y-6 bg-[#1C1917] border border-[#292929] backdrop-blur-xl text-white">
       
       <!-- Close button -->
       <button 
         id="modal-close-btn" 
         type="button" 
-        class="absolute top-4 right-4 p-2 text-zinc-500 hover:text-[#3E2A1E] rounded-full hover:bg-[#3E2A1E]/5 transition"
+        class="absolute top-4 right-4 p-2 text-zinc-400 hover:text-white rounded-full hover:bg-white/5 transition"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
       </button>
 
-      <div class="space-y-1 text-left border-b border-[#3E2A1E]/10 pb-4">
-        <span class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest font-mono" id="modal-order-id">订单参考信息</span>
-        <h3 class="text-lg font-bold text-[#3E2A1E] font-fredoka" id="modal-order-email">客户明细</h3>
+      <div class="space-y-1 text-left border-b border-[#292929] pb-4">
+        <span class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest font-mono" id="modal-order-id">订单参考信息</span>
+        <h3 class="text-lg font-bold text-white font-fredoka" id="modal-order-email">客户明细</h3>
       </div>
 
       <div class="space-y-3 text-left">
-        <h4 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-fredoka">已购商品</h4>
-        <div id="modal-order-items" class="max-h-[160px] overflow-y-auto space-y-2 pr-2 border-y border-[#3E2A1E]/10 py-3 font-fredoka">
+        <h4 class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest font-fredoka">已购商品</h4>
+        <div id="modal-order-items" class="max-h-[160px] overflow-y-auto space-y-2 pr-2 border-y border-[#292929] py-3 font-fredoka">
           <!-- Dyn injected -->
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-4 text-left">
         <div>
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">支付通道</span>
-          <p class="text-xs text-[#3E2A1E] font-semibold mt-0.5" id="modal-payment-method">-</p>
+          <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">支付通道</span>
+          <p class="text-xs text-white font-semibold mt-0.5" id="modal-payment-method">-</p>
         </div>
         <div>
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">交易单号 / 哈希</span>
-          <p class="text-xs text-[#3E2A1E] font-mono font-semibold mt-0.5 select-all break-all" id="modal-payment-hash">-</p>
+          <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">交易单号 / 哈希</span>
+          <p class="text-xs text-white font-mono font-semibold mt-0.5 select-all break-all" id="modal-payment-hash">-</p>
         </div>
       </div>
 
       <!-- Card Key Input / Dispatch Content Section -->
       <div id="modal-dispatch-section" class="space-y-1.5 text-left hidden">
-        <label for="modal-dispatch-input" class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">发货卡密内容 (Card Credentials)</label>
+        <label for="modal-dispatch-input" class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">发货卡密内容 (Card Credentials)</label>
         <textarea 
           id="modal-dispatch-input" 
           rows="2"
           placeholder="输入您代购的卡密或账号信息 (例如: GGG-F4PK1Q3IWZ704T4L)..."
-          class="w-full bg-white border-2 border-[#3E2A1E] rounded-xl px-4 py-2 text-xs text-[#3E2A1E] placeholder-zinc-400 focus:outline-none focus:border-[#FF9EAF] shadow-[2px_2px_0px_#3E2A1E]"
+          class="w-full bg-black border border-[#292929] rounded-xl px-4 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08]"
         ></textarea>
       </div>
 
       <!-- Actions -->
-      <div class="pt-4 border-t border-[#3E2A1E]/10 flex gap-3 justify-end" id="modal-actions-container">
+      <div class="pt-4 border-t border-[#292929] flex gap-3 justify-end" id="modal-actions-container">
         <!-- Dyn actions based on status -->
       </div>
 
@@ -436,25 +436,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
 
     ledgerRows.innerHTML = orders.map(order => {
-      let statusClass = 'text-amber-700 bg-amber-50 border border-amber-300';
+      let statusClass = 'text-amber-400 bg-amber-500/10 border border-amber-500/20';
       if (order.status === 'completed' || order.status === 'paid') {
-        statusClass = 'text-emerald-700 bg-emerald-50 border border-emerald-300';
+        statusClass = 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20';
       } else if (order.status === 'cancelled') {
-        statusClass = 'text-rose-700 bg-rose-50 border border-rose-300';
+        statusClass = 'text-rose-400 bg-rose-500/10 border border-rose-500/20';
       }
 
       const cleanId = order.id.substring(0, 10) + '...';
       const displayStatus = statusMap[order.status] || order.status;
 
       return `
-        <tr class="hover:bg-[#FFF5F7]/30 border-b border-[#3E2A1E]/5 transition-colors cursor-pointer" onclick="window.viewOrderDetails('${order.id}')">
-          <td class="py-3.5 pr-2 font-mono text-[10px] text-[#3E2A1E]/70 font-bold">${cleanId}</td>
+        <tr class="hover:bg-white/5 border-b border-[#292929] transition-colors cursor-pointer" onclick="window.viewOrderDetails('${order.id}')">
+          <td class="py-3.5 pr-2 font-mono text-[10px] text-zinc-500 font-bold">${cleanId}</td>
           <td class="py-3.5 px-2 truncate max-w-[150px]">
-            <span class="font-semibold block">${order.username || '游客'}</span>
+            <span class="font-semibold block text-white">${order.username || '游客'}</span>
             <span class="text-[10px] text-zinc-500 font-normal block">${order.email}</span>
           </td>
-          <td class="py-3.5 px-2 font-bold font-mono">$${order.totalUsd.toFixed(2)}</td>
-          <td class="py-3.5 px-2 uppercase text-[10px] text-[#3E2A1E]/80">${order.paymentMethod}</td>
+          <td class="py-3.5 px-2 font-bold font-mono text-white">$${order.totalUsd.toFixed(2)}</td>
+          <td class="py-3.5 px-2 uppercase text-[10px] text-zinc-400">${order.paymentMethod}</td>
           <td class="py-3.5 px-2">
             <span class="px-2 py-0.5 rounded-full border text-[9px] font-bold ${statusClass}">
               ${displayStatus}
@@ -463,7 +463,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <td class="py-3.5 pl-2 text-right">
             <button 
               type="button" 
-              class="px-2.5 py-1 bg-white border-2 border-[#3E2A1E] hover:bg-[#FFF5F7] text-[10px] font-bold uppercase rounded-lg shadow-[2px_2px_0px_#3E2A1E] text-[#3E2A1E] transition font-fredoka hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E]"
+              class="px-2.5 py-1 bg-transparent border border-[#292929] hover:bg-white/5 text-[10px] font-bold uppercase rounded-lg text-white transition hover:border-white"
               onclick="event.stopPropagation(); window.viewOrderDetails('${order.id}')"
             >
               审核
@@ -501,14 +501,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     // Items compilation
     if (modalOrderItems) {
       modalOrderItems.innerHTML = order.items.map((item: any) => `
-        <div class="flex justify-between items-center text-xs py-1.5 border-b border-[#3E2A1E]/10 last:border-0">
+        <div class="flex justify-between items-center text-xs py-1.5 border-b border-[#292929] last:border-0">
           <div>
-            <p class="font-bold text-[#3E2A1E]">${item.name}</p>
-            <p class="text-[10px] text-zinc-500 mt-0.5">
+            <p class="font-bold text-white">${item.name}</p>
+            <p class="text-[10px] text-zinc-400 mt-0.5">
               ${item.type === 'digital' ? '卡密商品' : `服饰尺码: ${item.size || 'M'}`} × ${item.quantity}
             </p>
           </div>
-          <span class="font-mono text-[#3E2A1E] font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+          <span class="font-mono text-[#E7AC08] font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
         </div>
       `).join('');
     }
@@ -520,14 +520,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <button 
             type="button"
             onclick="window.updateOrderStatus('${order.id}', 'cancelled')"
-            class="px-4 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 border-2 border-[#3E2A1E] text-rose-700 text-xs font-bold font-fredoka transition active:scale-95 uppercase shadow-[2px_2px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E]"
+            class="px-4 py-2 rounded-xl bg-transparent border border-rose-500/30 text-rose-400 text-xs font-bold font-fredoka transition active:scale-95 uppercase hover:bg-rose-500/10"
           >
             取消订单
           </button>
           <button 
             type="button"
             onclick="window.updateOrderStatus('${order.id}', 'completed')"
-            class="px-5 py-2.5 rounded-xl bg-[#FF9EAF] hover:bg-[#FF6B8B] border-2 border-[#3E2A1E] text-white font-bold text-xs font-fredoka transition active:scale-95 uppercase shadow-[2px_2px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E]"
+            class="px-5 py-2.5 rounded-xl bg-[#E7AC08] hover:bg-[#FAC514] border border-[#FAC514] text-black font-bold text-xs font-fredoka transition active:scale-95 uppercase"
           >
             审核通过并完成发货
           </button>
@@ -535,7 +535,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       } else {
         const displayStatus = statusMap[order.status] || order.status;
         modalActionsContainer.innerHTML = `
-          <span class="text-zinc-600 text-xs font-bold uppercase tracking-wider font-fredoka">最终状态: ${displayStatus}</span>
+          <span class="text-zinc-400 text-xs font-bold uppercase tracking-wider font-fredoka">最终状态: ${displayStatus}</span>
         `;
       }
     }
@@ -645,9 +645,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const viewDeposits = document.getElementById('view-deposits');
 
   tabBtnOrders?.addEventListener('click', () => {
-    tabBtnOrders.classList.add('border-[#FF9EAF]', 'text-[#FF9EAF]');
+    tabBtnOrders.classList.add('border-[#E7AC08]', 'text-[#E7AC08]');
     tabBtnOrders.classList.remove('border-transparent', 'text-zinc-500');
-    tabBtnDeposits?.classList.remove('border-[#FF9EAF]', 'text-[#FF9EAF]');
+    tabBtnDeposits?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
     tabBtnDeposits?.classList.add('border-transparent', 'text-zinc-500');
 
     viewOrders?.classList.remove('hidden');
@@ -655,9 +655,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   });
 
   tabBtnDeposits?.addEventListener('click', () => {
-    tabBtnDeposits.classList.add('border-[#FF9EAF]', 'text-[#FF9EAF]');
+    tabBtnDeposits.classList.add('border-[#E7AC08]', 'text-[#E7AC08]');
     tabBtnDeposits.classList.remove('border-transparent', 'text-zinc-500');
-    tabBtnOrders?.classList.remove('border-[#FF9EAF]', 'text-[#FF9EAF]');
+    tabBtnOrders?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
     tabBtnOrders?.classList.add('border-transparent', 'text-zinc-500');
 
     viewOrders?.classList.add('hidden');
@@ -703,24 +703,24 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     };
 
     depositLedgerRows.innerHTML = deposits.map(dep => {
-      let statusClass = 'text-amber-700 bg-amber-50 border border-amber-300';
+      let statusClass = 'text-amber-400 bg-amber-500/10 border border-amber-500/20';
       if (dep.status === 'approved') {
-        statusClass = 'text-emerald-700 bg-emerald-50 border border-emerald-300';
+        statusClass = 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20';
       } else if (dep.status === 'rejected') {
-        statusClass = 'text-rose-700 bg-rose-50 border border-rose-300';
+        statusClass = 'text-rose-400 bg-rose-500/10 border border-rose-500/20';
       }
 
       const actionsHtml = dep.status === 'pending' ? `
         <button 
           type="button" 
-          class="px-2.5 py-1 bg-emerald-100 hover:bg-emerald-200 border-2 border-[#3E2A1E] text-emerald-800 text-[10px] font-bold rounded-lg shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-1px] cursor-pointer font-fredoka"
+          class="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-emerald-400 text-[10px] font-bold rounded-lg transition"
           onclick="window.approveDeposit('${dep.id}', '${dep.uid}', ${dep.amount})"
         >
           审核通过
         </button>
         <button 
           type="button" 
-          class="px-2.5 py-1 bg-rose-100 hover:bg-rose-200 border-2 border-[#3E2A1E] text-rose-800 text-[10px] font-bold rounded-lg shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-1px] cursor-pointer font-fredoka"
+          class="px-2.5 py-1 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 text-rose-400 text-[10px] font-bold rounded-lg transition"
           onclick="window.rejectDeposit('${dep.id}')"
         >
           拒绝申请
@@ -728,13 +728,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       ` : `<span class="text-zinc-500 font-bold uppercase tracking-wider text-[9px]">${depositStatusMap[dep.status] || dep.status}</span>`;
 
       return `
-        <tr class="hover:bg-[#FFF5F7]/30 border-b border-[#3E2A1E]/5 transition-colors">
-          <td class="py-3.5 pr-2 font-mono text-[10px] text-[#3E2A1E]/70 font-bold">${dep.id.substring(0, 10)}...</td>
+        <tr class="hover:bg-white/5 border-b border-[#292929] transition-colors">
+          <td class="py-3.5 pr-2 font-mono text-[10px] text-zinc-500 font-bold">${dep.id.substring(0, 10)}...</td>
           <td class="py-3.5 px-2 font-semibold">
-            <span class="block truncate">${dep.email}</span>
+            <span class="block truncate text-white">${dep.email}</span>
             <span class="text-[10px] text-zinc-500 font-normal block">${dep.uid}</span>
           </td>
-          <td class="py-3.5 px-2 font-bold font-mono text-emerald-600">+$${Number(dep.amount).toFixed(2)} USDT</td>
           <td class="py-3.5 px-2 font-mono text-[10px] max-w-[200px] truncate select-all" title="${dep.txId}">${dep.txId}</td>
           <td class="py-3.5 px-2">
             <span class="px-2 py-0.5 rounded-full border text-[9px] font-bold ${statusClass}">
