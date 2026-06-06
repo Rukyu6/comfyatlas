@@ -771,4 +771,50 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       alert("拒绝审核失败。");
     }
   };
+
+  // --- Translation client-side integration ---
+  function isoToTranslateJs(iso: string) {
+    const map: Record<string, string> = {
+      'en': 'english',
+      'zh-CN': 'chinese_simplified',
+      'zh-TW': 'chinese_traditional',
+      'fr': 'french',
+      'de': 'german',
+      'es': 'spanish',
+      'ja': 'japanese',
+      'ru': 'russian',
+      'ko': 'korean',
+      'it': 'italian',
+      'hi': 'hindi',
+      'pt': 'portuguese'
+    };
+    return map[iso] || iso;
+  }
+
+  // Inject translate.js script dynamically in background (works inside China!)
+  if (!document.getElementById('translate_js_script') && typeof window !== 'undefined') {
+    const script = document.createElement('script');
+    script.id = 'translate_js_script';
+    script.src = 'https://cdn.staticfile.net/translate.js/3.18.66/translate.js';
+    script.onload = () => {
+      const translate = (window as any).translate;
+      if (translate) {
+        translate.language.setLocal('english');
+        translate.service.use('client.edge');
+        translate.selectLanguageTag.show = false;
+        translate.listener.start();
+        translate.execute();
+        
+        // Auto translate on load if a language was previously saved
+        const currentLang = localStorage.getItem('active_language') || 'ko';
+        if (currentLang && currentLang !== 'en') {
+          const translateJsLang = isoToTranslateJs(currentLang);
+          setTimeout(() => {
+            translate.changeLanguage(translateJsLang);
+          }, 150);
+        }
+      }
+    };
+    document.body.appendChild(script);
+  }
 </script>
