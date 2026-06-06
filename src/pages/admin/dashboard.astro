@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Merchant Backoffice — Puppy Shop">
+<BaseLayout title="商家管理后台 — Puppy Shop">
   <!-- Security Error Overlay (Hidden initially) -->
   <div 
     id="admin-security-overlay" 
@@ -15,9 +15,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </svg>
       </div>
       <div class="space-y-2">
-        <h2 class="text-xl font-extrabold text-[#3E2A1E] font-fredoka">Access Denied</h2>
+        <h2 class="text-xl font-extrabold text-[#3E2A1E] font-fredoka">拒绝访问</h2>
         <p class="text-xs text-zinc-600 leading-relaxed" id="admin-security-msg">
-          You are not authorized to view the merchant dashboard. Please sign in with an administrator account.
+          您无权查看商家后台。请使用管理员账户登录。
         </p>
       </div>
       <div class="pt-4 flex gap-3 justify-center">
@@ -25,13 +25,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           href="/login?redirect=/admin/dashboard" 
           class="px-5 py-2.5 bg-[#FF9EAF] text-white hover:bg-[#FF6B8B] font-bold text-xs uppercase tracking-wider rounded-xl border-2 border-[#3E2A1E] shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_#3E2A1E] font-fredoka"
         >
-          Sign In
+          登录账户
         </a>
         <a 
           href="/" 
           class="px-5 py-2.5 bg-white border-2 border-[#3E2A1E] text-[#3E2A1E] hover:bg-[#FFF5F7] font-bold text-xs uppercase tracking-wider rounded-xl transition hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_#3E2A1E] font-fredoka"
         >
-          Back to Shop
+          返回商城
         </a>
       </div>
     </div>
@@ -44,8 +44,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <!-- Top header layout -->
       <div class="flex flex-col md:flex-row md:items-end justify-between border-b-3 border-[#3E2A1E]/20 pb-6">
         <div class="space-y-1">
-          <span class="text-[#FF9EAF] uppercase tracking-widest text-[10px] font-bold font-fredoka block">Operations Room</span>
-          <h1 class="text-3xl font-extrabold font-fredoka text-[#3E2A1E]">Merchant Dashboard</h1>
+          <span class="text-[#FF9EAF] uppercase tracking-widest text-[10px] font-bold font-fredoka block">运营管理室</span>
+          <h1 class="text-3xl font-extrabold font-fredoka text-[#3E2A1E]">商家后台管理</h1>
         </div>
         <div class="flex gap-3 mt-4 md:mt-0">
           <a 
@@ -55,7 +55,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
-            Boutique Front
+            商城首页
           </a>
         </div>
       </div>
@@ -67,14 +67,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           type="button" 
           class="pb-3 border-b-3 border-[#FF9EAF] text-[#FF9EAF] font-bold text-sm font-fredoka transition-all cursor-pointer"
         >
-          📦 Orders Queue
+          📦 订单队列
         </button>
         <button 
           id="tab-btn-deposits" 
           type="button" 
           class="pb-3 border-b-3 border-transparent text-zinc-500 hover:text-[#3E2A1E] font-bold text-sm font-fredoka transition-all cursor-pointer"
         >
-          💰 Deposit Reviews
+          💰 充值审核
         </button>
       </div>
 
@@ -85,30 +85,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           
           <!-- Total Revenue USD -->
           <div class="glass-card p-6 space-y-2">
-            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Revenue (USD)</span>
+            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">总营收 (USD)</span>
             <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-usd">$0.00</p>
-            <span class="text-[10px] text-emerald-600 flex items-center gap-1 font-fredoka font-bold">● Real-time synced</span>
+            <span class="text-[10px] text-emerald-600 flex items-center gap-1 font-fredoka font-bold">● 实时同步</span>
           </div>
 
           <!-- Total Revenue CNY -->
           <div class="glass-card p-6 space-y-2">
-            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Revenue (CNY)</span>
+            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">总营收 (CNY)</span>
             <p class="text-2xl font-black text-[#3E2A1E] font-fredoka" id="stat-revenue-cny">¥0 CNY</p>
-            <span class="text-[10px] text-zinc-500 font-fredoka">Approx. 6.8x conversion</span>
+            <span class="text-[10px] text-zinc-500 font-fredoka">按约 6.8 汇率换算</span>
           </div>
 
           <!-- Completed Orders -->
           <div class="glass-card p-6 space-y-2">
-            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Completed Orders</span>
+            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">已完成订单</span>
             <p class="text-2xl font-black text-[#FF9EAF] font-fredoka" id="stat-orders-completed">0</p>
-            <span class="text-[10px] text-zinc-500 font-fredoka" id="stat-orders-total">Total Orders: 0</span>
+            <span class="text-[10px] text-zinc-500 font-fredoka" id="stat-orders-total">订单总数: 0</span>
           </div>
 
           <!-- Pending Verification -->
           <div class="glass-card p-6 space-y-2">
-            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Pending Review</span>
+            <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">待审核订单</span>
             <p class="text-2xl font-black text-amber-600 font-fredoka" id="stat-orders-pending">0</p>
-            <span class="text-[10px] text-zinc-500 font-fredoka">Awaiting payment verification</span>
+            <span class="text-[10px] text-zinc-500 font-fredoka">等待支付凭证核对</span>
           </div>
 
         </div>
@@ -119,59 +119,59 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <!-- Category Sales Mix -->
           <div class="lg:col-span-1 glass-card p-6 space-y-6 flex flex-col justify-between">
             <div class="space-y-1">
-              <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">Sales Mix breakdown</h3>
-              <p class="text-xs text-zinc-500 font-fredoka">Distribution of revenue between product departments</p>
+              <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">销售占比分析</h3>
+              <p class="text-xs text-zinc-500 font-fredoka">各个商品分类的营收分布占比</p>
             </div>
 
             <div class="space-y-4">
               <!-- Digital accounts split bar -->
               <div class="space-y-1.5 text-left">
                 <div class="flex justify-between text-xs font-semibold">
-                  <span class="text-emerald-700 font-fredoka">Digital Vault</span>
+                  <span class="text-emerald-700 font-fredoka">数字商品库</span>
                   <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-digital-pct">0%</span>
                 </div>
                 <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
                   <div id="stat-mix-digital-fill" class="h-full bg-emerald-400 transition-all duration-500 w-0"></div>
                 </div>
-                <span class="text-[10px] text-zinc-500 block" id="stat-mix-digital-val">$0.00 sales</span>
+                <span class="text-[10px] text-zinc-500 block" id="stat-mix-digital-val">销售额 $0.00</span>
               </div>
 
               <!-- Apparel/Physical accounts split bar -->
               <div class="space-y-1.5 text-left">
                 <div class="flex justify-between text-xs font-semibold">
-                  <span class="text-[#FF9EAF] font-fredoka">Streetwear Drop</span>
+                  <span class="text-[#FF9EAF] font-fredoka">潮流服饰</span>
                   <span class="text-[#3E2A1E] font-fredoka" id="stat-mix-apparel-pct">0%</span>
                 </div>
                 <div class="w-full h-3.5 bg-[#3E2A1E]/5 border-2 border-[#3E2A1E] rounded-full overflow-hidden">
                   <div id="stat-mix-apparel-fill" class="h-full bg-[#FF9EAF] transition-all duration-500 w-0"></div>
                 </div>
-                <span class="text-[10px] text-zinc-500 block" id="stat-mix-apparel-val">$0.00 sales</span>
+                <span class="text-[10px] text-zinc-500 block" id="stat-mix-apparel-val">销售额 $0.00</span>
               </div>
 
             </div>
 
             <div class="text-[10px] text-zinc-600 border-t border-[#3E2A1E]/10 pt-4 font-fredoka">
-              Tip: Revamping catalog prices updates future calculations.
+              提示：调整商品价格会更新未来的订单统计。
             </div>
           </div>
 
           <!-- Ledger logs table container -->
           <div class="lg:col-span-2 glass-card p-6 space-y-6">
             <div class="flex items-center justify-between border-b border-[#3E2A1E]/10 pb-4">
-              <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">Transaction Ledger</h3>
-              <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-ledger-count">Total Rows: 0</span>
+              <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">交易账目明细</h3>
+              <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-ledger-count">总行数: 0</span>
             </div>
 
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
                 <thead>
                   <tr class="border-b border-[#3E2A1E]/20 text-[#3E2A1E]/70 uppercase tracking-widest text-[9px] font-bold font-fredoka">
-                    <th class="pb-3 pr-2">Order ID</th>
-                    <th class="pb-3 px-2">Customer</th>
-                    <th class="pb-3 px-2">Total (USD)</th>
-                    <th class="pb-3 px-2">Method</th>
-                    <th class="pb-3 px-2">Status</th>
-                    <th class="pb-3 pl-2 text-right">Actions</th>
+                    <th class="pb-3 pr-2">订单 ID</th>
+                    <th class="pb-3 px-2">客户</th>
+                    <th class="pb-3 px-2">总计 (USD)</th>
+                    <th class="pb-3 px-2">支付方式</th>
+                    <th class="pb-3 px-2">状态</th>
+                    <th class="pb-3 pl-2 text-right">操作</th>
                   </tr>
                 </thead>
                 <tbody id="ledger-rows" class="divide-y divide-[#3E2A1E]/10 text-zinc-700 font-fredoka">
@@ -191,20 +191,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div id="view-deposits" class="hidden space-y-6">
         <div class="glass-card p-6 space-y-6">
           <div class="flex items-center justify-between border-b border-[#3E2A1E]/10 pb-4">
-            <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">Deposit Request reviews</h3>
-            <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-deposits-count">Total Requests: 0</span>
+            <h3 class="text-sm font-bold text-[#3E2A1E] uppercase tracking-wider font-fredoka">充值审核管理</h3>
+            <span class="text-[10px] font-bold text-zinc-500 font-mono" id="stat-deposits-count">充值申请总数: 0</span>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse text-xs">
               <thead>
                 <tr class="border-b border-[#3E2A1E]/20 text-[#3E2A1E]/70 uppercase tracking-widest text-[9px] font-bold font-fredoka">
-                  <th class="pb-3 pr-2">申请ID / ID</th>
-                  <th class="pb-3 px-2">客户邮箱 / Customer Email</th>
-                  <th class="pb-3 px-2">充值金额 / Amount</th>
-                  <th class="pb-3 px-2">转账凭证 / TxID</th>
-                  <th class="pb-3 px-2">状态 / Status</th>
-                  <th class="pb-3 pl-2 text-right">操作 / Actions</th>
+                  <th class="pb-3 pr-2">申请 ID</th>
+                  <th class="pb-3 px-2">客户邮箱</th>
+                  <th class="pb-3 px-2">充值金额</th>
+                  <th class="pb-3 px-2">转账凭证</th>
+                  <th class="pb-3 px-2">状态</th>
+                  <th class="pb-3 pl-2 text-right">操作</th>
                 </tr>
               </thead>
               <tbody id="deposit-ledger-rows" class="divide-y divide-[#3E2A1E]/10 text-zinc-700 font-fredoka">
@@ -236,12 +236,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </button>
 
       <div class="space-y-1 text-left border-b border-[#3E2A1E]/10 pb-4">
-        <span class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest font-mono" id="modal-order-id">ORDER REFERENCE</span>
-        <h3 class="text-lg font-bold text-[#3E2A1E] font-fredoka" id="modal-order-email">Customer Details</h3>
+        <span class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest font-mono" id="modal-order-id">订单参考信息</span>
+        <h3 class="text-lg font-bold text-[#3E2A1E] font-fredoka" id="modal-order-email">客户明细</h3>
       </div>
 
       <div class="space-y-3 text-left">
-        <h4 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-fredoka">Ordered Items</h4>
+        <h4 class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest font-fredoka">已购商品</h4>
         <div id="modal-order-items" class="max-h-[160px] overflow-y-auto space-y-2 pr-2 border-y border-[#3E2A1E]/10 py-3 font-fredoka">
           <!-- Dyn injected -->
         </div>
@@ -249,11 +249,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <div class="grid grid-cols-2 gap-4 text-left">
         <div>
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Payment Channel</span>
+          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">支付通道</span>
           <p class="text-xs text-[#3E2A1E] font-semibold mt-0.5" id="modal-payment-method">-</p>
         </div>
         <div>
-          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">Reference / Hash</span>
+          <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest block font-fredoka">交易单号 / 哈希</span>
           <p class="text-xs text-[#3E2A1E] font-mono font-semibold mt-0.5 select-all break-all" id="modal-payment-hash">-</p>
         </div>
       </div>
@@ -383,7 +383,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     if (statRevUsd) statRevUsd.textContent = `$${totalRevUsd.toFixed(2)}`;
     if (statRevCny) statRevCny.textContent = `¥${totalRevCny} CNY`;
     if (statOrdCompleted) statOrdCompleted.textContent = completedCount.toString();
-    if (statOrdTotal) statOrdTotal.textContent = `Total Orders: ${orders.length}`;
+    if (statOrdTotal) statOrdTotal.textContent = `订单总数: ${orders.length}`;
     if (statOrdPending) statOrdPending.textContent = pendingCount.toString();
 
     // 2. Calculate mix distribution
@@ -406,23 +406,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     const apparelPct = mixTotal > 0 ? Math.round((apparelRevenue / mixTotal) * 100) : 0;
 
     if (mixDigitalPct) mixDigitalPct.textContent = `${digitalPct}%`;
-    if (mixDigitalVal) mixDigitalVal.textContent = `$${digitalRevenue.toFixed(2)} sales`;
+    if (mixDigitalVal) mixDigitalVal.textContent = `销售额 $${digitalRevenue.toFixed(2)}`;
     if (mixDigitalFill) mixDigitalFill.style.width = `${digitalPct}%`;
 
     if (mixApparelPct) mixApparelPct.textContent = `${apparelPct}%`;
-    if (mixApparelVal) mixApparelVal.textContent = `$${apparelRevenue.toFixed(2)} sales`;
+    if (mixApparelVal) mixApparelVal.textContent = `销售额 $${apparelRevenue.toFixed(2)}`;
     if (mixApparelFill) mixApparelFill.style.width = `${apparelPct}%`;
   }
 
   function renderTable(orders: any[]) {
     if (!ledgerRows) return;
 
-    if (ledgerCount) ledgerCount.textContent = `Total Rows: ${orders.length}`;
+    const statusMap: Record<string, string> = {
+      'pending': '待审核',
+      'completed': '已完成',
+      'paid': '已支付',
+      'cancelled': '已取消'
+    };
+
+    if (ledgerCount) ledgerCount.textContent = `总行数: ${orders.length}`;
 
     if (orders.length === 0) {
       ledgerRows.innerHTML = `
         <tr>
-          <td colspan="6" class="py-12 text-center text-zinc-500">No orders registered in queue yet.</td>
+          <td colspan="6" class="py-12 text-center text-zinc-500">当前订单队列中暂无任何订单。</td>
         </tr>
       `;
       return;
@@ -437,6 +444,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       }
 
       const cleanId = order.id.substring(0, 10) + '...';
+      const displayStatus = statusMap[order.status] || order.status;
 
       return `
         <tr class="hover:bg-[#FFF5F7]/30 border-b border-[#3E2A1E]/5 transition-colors cursor-pointer" onclick="window.viewOrderDetails('${order.id}')">
@@ -449,7 +457,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <td class="py-3.5 px-2 uppercase text-[10px] text-[#3E2A1E]/80">${order.paymentMethod}</td>
           <td class="py-3.5 px-2">
             <span class="px-2 py-0.5 rounded-full border text-[9px] font-bold ${statusClass}">
-              ${order.status}
+              ${displayStatus}
             </span>
           </td>
           <td class="py-3.5 pl-2 text-right">
@@ -458,7 +466,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
               class="px-2.5 py-1 bg-white border-2 border-[#3E2A1E] hover:bg-[#FFF5F7] text-[10px] font-bold uppercase rounded-lg shadow-[2px_2px_0px_#3E2A1E] text-[#3E2A1E] transition font-fredoka hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E]"
               onclick="event.stopPropagation(); window.viewOrderDetails('${order.id}')"
             >
-              Review
+              审核
             </button>
           </td>
         </tr>
@@ -476,12 +484,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   function openOrderDetails(order) {
     selectedOrder = order;
 
-    if (modalOrderId) modalOrderId.textContent = `ORDER ID: ${order.id}`;
+    if (modalOrderId) modalOrderId.textContent = `订单 ID: ${order.id}`;
     if (modalOrderEmail) {
       modalOrderEmail.innerHTML = order.username ? `${order.username} <span class="text-xs text-zinc-500 font-normal">(${order.email})</span>` : order.email;
     }
-    if (modalPaymentMethod) modalPaymentMethod.textContent = order.paymentMethod || 'Cryptocurrency';
+    if (modalPaymentMethod) modalPaymentMethod.textContent = order.paymentMethod || '加密货币';
     if (modalPaymentHash) modalPaymentHash.textContent = order.txId;
+
+    const statusMap: Record<string, string> = {
+      'pending': '待审核',
+      'completed': '已完成',
+      'paid': '已支付',
+      'cancelled': '已取消'
+    };
 
     // Items compilation
     if (modalOrderItems) {
@@ -490,7 +505,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <div>
             <p class="font-bold text-[#3E2A1E]">${item.name}</p>
             <p class="text-[10px] text-zinc-500 mt-0.5">
-              ${item.type === 'digital' ? 'Digital Key' : `Clothing Size: ${item.size || 'M'}`} × ${item.quantity}
+              ${item.type === 'digital' ? '卡密商品' : `服饰尺码: ${item.size || 'M'}`} × ${item.quantity}
             </p>
           </div>
           <span class="font-mono text-[#3E2A1E] font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
@@ -507,19 +522,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             onclick="window.updateOrderStatus('${order.id}', 'cancelled')"
             class="px-4 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 border-2 border-[#3E2A1E] text-rose-700 text-xs font-bold font-fredoka transition active:scale-95 uppercase shadow-[2px_2px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E]"
           >
-            Cancel Order
+            取消订单
           </button>
           <button 
             type="button"
             onclick="window.updateOrderStatus('${order.id}', 'completed')"
             class="px-5 py-2.5 rounded-xl bg-[#FF9EAF] hover:bg-[#FF6B8B] border-2 border-[#3E2A1E] text-white font-bold text-xs font-fredoka transition active:scale-95 uppercase shadow-[2px_2px_0px_#3E2A1E] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#3E2A1E]"
           >
-            Approve & Mark Completed
+            审核通过并完成发货
           </button>
         `;
       } else {
+        const displayStatus = statusMap[order.status] || order.status;
         modalActionsContainer.innerHTML = `
-          <span class="text-zinc-600 text-xs font-bold uppercase tracking-wider font-fredoka">Final State: ${order.status}</span>
+          <span class="text-zinc-600 text-xs font-bold uppercase tracking-wider font-fredoka">最终状态: ${displayStatus}</span>
         `;
       }
     }
@@ -546,7 +562,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   // Update Status handler
   window.updateOrderStatus = async function(id, status) {
-    if (!confirm(`Are you sure you want to change order status to ${status.toUpperCase()}?`)) return;
+    const actionLabel = status === 'completed' ? '已完成' : '已取消';
+    if (!confirm(`确定要将订单状态更改为 ${actionLabel} 吗？`)) return;
     
     try {
       const docRef = doc(dbInstance, 'orders', id);
@@ -576,7 +593,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         }
       }
       
-      alert(`Order status updated successfully.`);
+      alert(`订单状态更新成功。`);
 
       // If completed, trigger Bot 1 dispatch webhook
       if (status === 'completed' && selectedOrder) {
@@ -604,7 +621,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     } catch (err) {
       console.error("Failed to update status:", err);
-      alert("Failed to update status in database.");
+      alert("更新状态失败，请检查数据库。");
     }
   };
 
@@ -668,16 +685,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   function renderDepositsTable(deposits: any[]) {
     if (!depositLedgerRows) return;
-    if (depositsCount) depositsCount.textContent = `Total Requests: ${deposits.length}`;
+    if (depositsCount) depositsCount.textContent = `充值申请总数: ${deposits.length}`;
 
     if (deposits.length === 0) {
       depositLedgerRows.innerHTML = `
         <tr>
-          <td colspan="6" class="py-12 text-center text-zinc-500">暂无充值申请记录 / No deposit requests.</td>
+          <td colspan="6" class="py-12 text-center text-zinc-500">暂无充值申请记录。</td>
         </tr>
       `;
       return;
     }
+
+    const depositStatusMap: Record<string, string> = {
+      'pending': '待审核',
+      'approved': '已通过',
+      'rejected': '已拒绝'
+    };
 
     depositLedgerRows.innerHTML = deposits.map(dep => {
       let statusClass = 'text-amber-700 bg-amber-50 border border-amber-300';
@@ -693,16 +716,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           class="px-2.5 py-1 bg-emerald-100 hover:bg-emerald-200 border-2 border-[#3E2A1E] text-emerald-800 text-[10px] font-bold rounded-lg shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-1px] cursor-pointer font-fredoka"
           onclick="window.approveDeposit('${dep.id}', '${dep.uid}', ${dep.amount})"
         >
-          Approve
+          审核通过
         </button>
         <button 
           type="button" 
           class="px-2.5 py-1 bg-rose-100 hover:bg-rose-200 border-2 border-[#3E2A1E] text-rose-800 text-[10px] font-bold rounded-lg shadow-[2px_2px_0px_#3E2A1E] transition hover:translate-y-[-1px] cursor-pointer font-fredoka"
           onclick="window.rejectDeposit('${dep.id}')"
         >
-          Reject
+          拒绝申请
         </button>
-      ` : `<span class="text-zinc-500 font-bold uppercase tracking-wider text-[9px]">${dep.status}</span>`;
+      ` : `<span class="text-zinc-500 font-bold uppercase tracking-wider text-[9px]">${depositStatusMap[dep.status] || dep.status}</span>`;
 
       return `
         <tr class="hover:bg-[#FFF5F7]/30 border-b border-[#3E2A1E]/5 transition-colors">
