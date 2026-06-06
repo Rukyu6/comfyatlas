@@ -364,7 +364,7 @@
         translate.execute();
         
         // Auto translate on load if a language was previously saved
-        if (currentLang && currentLang !== 'zh-CN') {
+        if (currentLang) {
           const translateJsLang = isoToTranslateJs(currentLang);
           setTimeout(() => {
             translate.changeLanguage(translateJsLang);
