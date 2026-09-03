@@ -4,7 +4,6 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CartDrawer from '../../components/CartDrawer.astro';
 
-// Dynamic route paths generator for all 716 products
 export async function getStaticPaths() {
   const data = (await import('../../data/products.json')).default;
   return data.products.map((p) => {
@@ -18,133 +17,168 @@ export async function getStaticPaths() {
 
 const { product } = Astro.props;
 const cleanId = product.id.replace('pid_', '');
+
+// 净化商品原始 HTML：彻底剥离硬编码的白底与刺眼色块，剥离自带的各种Emoji
+const rawIntroduce = product.introduce || '';
+const cleanIntroduce = rawIntroduce
+  .replace(/background(-color)?:\s*(#fff(fff)?|rgb\(255,\s*255,\s*255\)|white)[^;"]*;?/gi, '')
+  .replace(/color:\s*(#243042|#000|#333|black)[^;"]*;?/gi, '')
+  .replace(/📦|✅|⭐️|🔥|⚡|🐾|💎|🗡️|👑|💰/g, '');
 ---
+
 <BaseLayout 
-  title={`${product.name} — Digital Account Vault`} 
-  description={`Purchase ${product.name} from WorldMarket. Safe delivery, manual blockchain validation, premium digital account vault.`}
+  title={`${product.name} — Soul Society`} 
+  description={`在 Soul Society 平台购买 ${product.name}，独享质保，秒级自动发卡。`}
 >
-  <!-- Global navigation Header -->
   <Header />
 
-  <!-- Hidden context element to pass server-side product data to client script safely -->
+  <!-- 苍蓝灵压背景漫射光晕 -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-[#0284C7]/20 via-[#38BDF8]/10 to-transparent rounded-full filter blur-[140px] pointer-events-none z-0"></div>
+
   <div id="product-page-context" class="hidden" data-product={JSON.stringify(product)}></div>
 
-  <div class="relative min-h-screen pt-28 pb-16 overflow-hidden bg-black text-white">
-    <!-- Ambient Background Glows -->
-    <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#E7AC08]/5 rounded-full filter blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[400px] h-[400px] bg-[#E7AC08]/5 rounded-full filter blur-[100px] pointer-events-none"></div>
-
+  <div class="relative min-h-screen pt-28 pb-16 overflow-hidden bg-[#06080F] text-white font-outfit">
+    
+    <!-- 返回商品库面包屑 -->
     <div class="max-w-7xl mx-auto px-6 mb-8 relative z-10">
       <a 
         href="/#digital" 
-        class="inline-flex items-center gap-2 text-zinc-400 hover:text-[#E7AC08] font-sora text-sm font-semibold transition-colors group"
+        class="inline-flex items-center gap-2 text-slate-400 hover:text-[#38BDF8] text-xs font-bold transition-colors group"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        Back to digital vault
+        <span>返回数字商品库</span>
       </a>
     </div>
 
-    <!-- Product Grid Content -->
+    <!-- 商品主体内容双栏布局 -->
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative z-10">
       
-      <!-- Left Side: Product Image & Buying Panel -->
+      <!-- 左栏：商品规格与购买面板 -->
       <div class="lg:col-span-5 space-y-6">
         
-        <!-- Premium Product Panel -->
-        <div class="glass-card p-6 md:p-8 rounded-[2rem] border border-[#292929] bg-[#1C1917]/50 backdrop-blur-xl relative space-y-6">
+        <div class="glass-card p-6 md:p-8 rounded-3xl border border-[#38BDF8]/25 bg-[#0B0F1A]/90 shadow-2xl relative space-y-6">
           
-          <!-- Category & Title -->
           <div>
-            <span class="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full bg-indigo-950/40 text-indigo-400 border border-indigo-900 font-sora">
+            <span class="px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-full bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40">
               {product.category}
             </span>
-            <h1 class="text-2xl md:text-3xl font-bold font-sora text-white tracking-tight leading-tight mt-4">
+            <h1 class="text-2xl md:text-3xl font-black text-white tracking-tight leading-tight mt-4">
               {product.name}
             </h1>
-            <div class="flex items-center gap-4 mt-3 font-sora font-semibold">
-              <span class="text-xs text-zinc-500">ID: {cleanId}</span>
-              <span id="product-stock-badge" class="text-[10px] font-bold uppercase tracking-wider bg-stone-900 text-zinc-450 px-2 py-0.5 rounded-lg border border-[#292929]">
-                Stock: {product.stock}
+            <div class="flex items-center gap-4 mt-3 font-mono">
+              <span class="text-xs text-slate-500">ID: {cleanId}</span>
+              <span id="product-stock-badge" class="text-[10px] font-bold uppercase tracking-wider bg-[#0284C7]/20 text-[#38BDF8] px-2.5 py-0.5 rounded-full border border-[#38BDF8]/30">
+                现货库存: {product.stock}
               </span>
             </div>
           </div>
 
-          <!-- SKU Selection Grid -->
+          <!-- SKU 规格选择区 -->
           <div class="space-y-3">
-            <span class="text-xs uppercase text-zinc-400 tracking-wider font-bold font-sora block">Select Option / Package</span>
-            <div class="grid grid-cols-1 gap-3" id="sku-options-container">
-              <!-- Dynamically generated via JS -->
+            <span class="text-xs uppercase text-slate-400 tracking-wider font-bold block font-mono">选择套餐规格 / SPECIFICATION</span>
+            <div class="grid grid-cols-1 gap-2.5" id="sku-options-container">
             </div>
           </div>
 
-          <!-- Quantity Selector -->
-          <div class="flex items-center justify-between bg-[#090909]/80 p-4 rounded-2xl border border-[#292929]">
+          <!-- 数量选择器 -->
+          <div class="flex items-center justify-between bg-[#06080F] p-4 rounded-2xl border border-white/10">
             <div>
-              <span class="text-sm font-bold text-white block font-sora">Quantity</span>
-              <span id="sku-stock-display" class="text-xs text-zinc-500 font-sans font-semibold">In stock: -</span>
+              <span class="text-xs font-bold text-white block">购买数量</span>
+              <span id="sku-stock-display" class="text-[11px] text-slate-400 font-mono">可拍件数: -</span>
             </div>
-            <div class="flex items-center border border-[#292929] rounded-xl overflow-hidden bg-black text-sm font-sora font-bold">
-              <button type="button" id="qty-minus" class="px-4 py-2 hover:bg-white/5 text-white font-bold select-none">-</button>
-              <input type="number" id="qty-input" class="w-12 text-center bg-transparent border-none text-white focus:outline-none" value="1" min="1" readonly />
-              <button type="button" id="qty-plus" class="px-4 py-2 hover:bg-white/5 text-white font-bold select-none">+</button>
+            <div class="flex items-center border border-white/15 rounded-xl overflow-hidden bg-[#0B0F1A] text-sm font-bold">
+              <button type="button" id="qty-minus" class="px-3.5 py-1.5 hover:bg-white/10 text-white font-bold select-none cursor-pointer">-</button>
+              <input type="number" id="qty-input" class="w-10 text-center bg-transparent border-none text-white focus:outline-none font-mono" value="1" min="1" readonly />
+              <button type="button" id="qty-plus" class="px-3.5 py-1.5 hover:bg-white/10 text-white font-bold select-none cursor-pointer">+</button>
             </div>
           </div>
 
-          <!-- Total price & Purchase Button -->
-          <div class="pt-6 border-t border-[#292929] flex items-center justify-between gap-4">
+          <!-- 价格与加购按钮 (苍蓝灵压高光) -->
+          <div class="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
             <div class="flex flex-col">
-              <span class="text-xs text-zinc-500 uppercase font-bold font-sora">Total price</span>
+              <span class="text-[10px] text-slate-400 uppercase font-mono font-bold">合计结算</span>
               <div class="flex items-baseline gap-2">
-                <span id="total-usd" class="text-3xl font-bold text-[#E7AC08] font-sora">$0.00</span>
-                <span id="total-cny" class="text-xs text-zinc-400 font-sans font-bold">¥0 CNY</span>
+                <span id="total-usd" class="text-2xl md:text-3xl font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">$0.00</span>
+                <span id="total-cny" class="text-xs text-slate-400 font-mono">¥0 CNY</span>
               </div>
             </div>
             <button 
               id="add-to-bag-btn" 
               type="button" 
-              class="flex-grow sm:flex-grow-0 px-8 py-4 rounded-xl bg-[#E7AC08] border border-[#FAC514] text-[#080808] hover:bg-[#FAC514] font-bold uppercase tracking-wider text-sm font-sora transition-all duration-300 shadow-md active:scale-95 flex items-center justify-center gap-2"
+              class="flex-grow sm:flex-grow-0 px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold uppercase tracking-wider text-xs shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer"
             >
-              Add to Cart ⚡
+              <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              <span>加入结算清单</span>
             </button>
           </div>
 
         </div>
-
       </div>
 
-      <!-- Right Side: Rich Description tab -->
+      <!-- 右栏：商品富文本图文说明 (全量洗掉突兀白块，融入深曜石暗晶) -->
       <div class="lg:col-span-7 space-y-6">
-        
-        <!-- Product Details Display -->
-        <div class="glass-card p-6 md:p-10 rounded-[2rem] border border-[#292929] bg-[#1C1917]/50 backdrop-blur-xl relative min-h-[400px]">
-          <h2 class="text-sm font-bold text-white font-sora border-b border-[#292929] pb-3 mb-6">
-            Product Details & Instructions
+        <div class="glass-card p-6 md:p-8 rounded-3xl border border-[#38BDF8]/25 bg-[#0B0F1A]/90 shadow-2xl relative min-h-[450px]">
+          <h2 class="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-3 mb-6 flex items-center gap-2 font-mono">
+            <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>商品详情与使用须知</span>
           </h2>
-          <div class="text-zinc-300 leading-relaxed space-y-4 select-text prose-dark text-sm max-w-none break-words" id="product-description-content">
-            <Fragment set:html={product.introduce || '<p class="text-zinc-500 italic">No instructions or description details are available for this product.</p>'} />
+          
+          <!-- 深度净化后的详情展示区 -->
+          <div class="text-slate-200 leading-relaxed space-y-4 select-text text-xs md:text-sm max-w-none break-words custom-product-content" id="product-description-content">
+            <Fragment set:html={cleanIntroduce || '<p class="text-slate-500">该商品暂无额外使用说明，购买后凭卡密直接登录使用。</p>'} />
           </div>
         </div>
-
       </div>
 
     </div>
   </div>
 
-  <!-- Global shopping cart slide-over -->
   <CartDrawer />
-
-  <!-- Global Footer -->
   <Footer />
 </BaseLayout>
 
+<style is:global>
+  /* 强行清洗任何富文本内的突兀白底，统一为苍蓝暗夜高奢调 */
+  .custom-product-content,
+  .custom-product-content * {
+    background-color: transparent !important;
+    color: #E2E8F0 !important;
+    border-color: rgba(56, 189, 248, 0.18) !important;
+  }
+  .custom-product-content div,
+  .custom-product-content section {
+    background-color: rgba(6, 8, 15, 0.6) !important;
+    border: 1px solid rgba(56, 189, 248, 0.18) !important;
+    border-radius: 1rem !important;
+    padding: 1rem !important;
+    margin-bottom: 0.85rem !important;
+  }
+  .custom-product-content h1,
+  .custom-product-content h2,
+  .custom-product-content h3,
+  .custom-product-content h4,
+  .custom-product-content strong,
+  .custom-product-content b {
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+  }
+  .custom-product-content a {
+    color: #38BDF8 !important;
+    text-decoration: underline !important;
+  }
+</style>
+
 <script>
-  let product = null;
-  let selectedSku = null;
+  let product: any = null;
+  let selectedSku: any = null;
   let selectedQuantity = 1;
 
-  // DOM elements
   const skuContainer = document.getElementById('sku-options-container');
   const qtyInput = document.getElementById('qty-input') as HTMLInputElement;
   const qtyMinus = document.getElementById('qty-minus');
@@ -155,7 +189,6 @@ const cleanId = product.id.replace('pid_', '');
   const stockBadge = document.getElementById('product-stock-badge');
   const addToBagBtn = document.getElementById('add-to-bag-btn');
 
-  // Returns 'cny' for CJK languages, 'usd' for everything else
   function getCurrencyMode(): 'cny' | 'usd' {
     const lang = localStorage.getItem('active_language') || 'en';
     return ['zh-CN', 'zh-TW', 'ja', 'ko'].includes(lang) ? 'cny' : 'usd';
@@ -167,20 +200,15 @@ const cleanId = product.id.replace('pid_', '');
 
     try {
       product = JSON.parse(contextEl.getAttribute('data-product') || '{}');
-    } catch (e) {
-      console.error('Failed to parse product data', e);
+    } catch {
       return;
     }
 
     if (!product) return;
 
-    // Load SKUs list
     const skusList = getSkusList();
-
-    // Render SKU options
     renderSkus();
 
-    // Auto-select first active SKU
     if (skuContainer) {
       const availableBtns = skuContainer.querySelectorAll('.sku-select-btn');
       if (availableBtns.length > 0) {
@@ -189,7 +217,6 @@ const cleanId = product.id.replace('pid_', '');
       }
     }
 
-    // Hook quantity handlers
     qtyMinus?.addEventListener('click', () => {
       if (selectedQuantity > 1) {
         selectedQuantity -= 1;
@@ -208,25 +235,39 @@ const cleanId = product.id.replace('pid_', '');
       }
     });
 
-    // Add to cart click
     addToBagBtn?.addEventListener('click', () => {
       if (!product || !selectedSku) return;
 
       const size = selectedSku.name !== 'Default Option' ? selectedSku.name : '';
       const cartItemId = `${product.id}_${selectedSku.id}`;
 
-      window.dispatchEvent(new CustomEvent('cart:add', {
-        detail: {
+      let currentCart: any[] = [];
+      try {
+        currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
+      } catch {
+        currentCart = [];
+      }
+
+      const existingIndex = currentCart.findIndex((i: any) => i.cartItemId === cartItemId);
+      if (existingIndex > -1) {
+        currentCart[existingIndex].quantity += selectedQuantity;
+      } else {
+        currentCart.push({
           cartItemId,
           id: product.id,
           name: product.name,
           price: selectedSku.price_usd,
+          priceCny: selectedSku.price_cny,
           image: selectedSku.picture || product.image,
           type: 'digital',
           size: size,
           quantity: selectedQuantity
-        }
-      }));
+        });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(currentCart));
+      window.dispatchEvent(new CustomEvent('cart-updated'));
+      window.dispatchEvent(new CustomEvent('open-cart'));
     });
   }
 
@@ -236,7 +277,7 @@ const cleanId = product.id.replace('pid_', '');
     if (list.length === 0) {
       list = [{
         id: 'sku_default',
-        name: 'Default Option',
+        name: '默认标准配置',
         price_cny: product.price_cny,
         price_usd: product.price_usd,
         stock: product.stock,
@@ -251,45 +292,40 @@ const cleanId = product.id.replace('pid_', '');
     const skusList = getSkusList();
     const mode = getCurrencyMode();
 
-    skuContainer.innerHTML = skusList.map((sku, index) => {
+    skuContainer.innerHTML = skusList.map((sku: any, index: number) => {
       const isOutOfStock = sku.stock === '0' || sku.stock === '缺货';
       const isSelected = selectedSku && selectedSku.id === sku.id;
       const priceLabel = mode === 'cny'
-        ? `¥${sku.price_cny} CNY`
+        ? `¥${sku.price_cny}`
         : `$${sku.price_usd.toFixed(2)}`;
       const secondaryPriceLabel = mode === 'cny'
         ? `$${sku.price_usd.toFixed(2)} USD`
         : `¥${sku.price_cny} CNY`;
 
-      const activeTextClass = isSelected ? 'text-[#080808]' : 'text-white group-hover:text-[#FAC514]';
-      const activeSubTextClass = isSelected ? 'text-[#080808]/90' : 'text-[#E7AC08]';
-      const activeMutedTextClass = isSelected ? 'text-[#080808]/70' : 'text-zinc-400';
-
       return `
         <button
           type="button"
-          class="sku-select-btn p-4 rounded-2xl border text-left flex flex-col justify-between transition-all duration-300 font-sora group ${
+          class="sku-select-btn p-3.5 rounded-2xl border text-left flex items-center justify-between transition-all duration-200 group cursor-pointer ${
             isOutOfStock 
-              ? 'opacity-40 pointer-events-none border-[#292929] bg-stone-900' 
+              ? 'opacity-40 pointer-events-none border-white/10 bg-black/40' 
               : isSelected
-                ? 'bg-[#E7AC08] border-[#FAC514] text-[#080808] shadow-md font-bold'
-                : 'border-[#292929] bg-[#1C1917]/70 text-white hover:bg-white/5'
+                ? 'bg-[#0284C7]/25 border-[#38BDF8] text-white shadow-[0_0_15px_rgba(56,189,248,0.2)]'
+                : 'border-white/10 bg-[#06080F] text-slate-300 hover:border-white/30 hover:bg-white/[0.03]'
           }"
           data-sku-index="${index}"
         >
-          <span class="text-sm font-bold leading-tight mb-2 ${activeTextClass}">${sku.name}</span>
-          <div class="flex items-baseline justify-between w-full mt-auto font-sans font-bold gap-2 flex-wrap">
-            <div class="flex items-baseline gap-1.5 flex-wrap">
-              <span class="text-xs ${activeSubTextClass}">${priceLabel}</span>
-              <span class="text-[9px] font-medium ${activeMutedTextClass}">${secondaryPriceLabel}</span>
-            </div>
-            <span class="text-[9px] ${activeMutedTextClass}">Stock: ${sku.stock}</span>
+          <div>
+            <span class="text-xs font-bold ${isSelected ? 'text-[#38BDF8]' : 'text-white'} block">${sku.name}</span>
+            <span class="text-[10px] text-slate-500 font-mono">库存: ${sku.stock} 件</span>
+          </div>
+          <div class="text-right">
+            <span class="text-sm font-black font-mono ${isSelected ? 'text-[#38BDF8]' : 'text-white'}">${priceLabel}</span>
+            <span class="text-[9px] text-slate-500 block font-mono">${secondaryPriceLabel}</span>
           </div>
         </button>
       `;
     }).join('');
 
-    // Hook click listeners
     const btnElements = skuContainer.querySelectorAll('.sku-select-btn');
     btnElements.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -299,16 +335,11 @@ const cleanId = product.id.replace('pid_', '');
     });
   }
 
-  function selectSku(sku) {
+  function selectSku(sku: any) {
     selectedSku = sku;
-    
-    // Highlight the selected option button and redraw list
     renderSkus();
-
-    // Update Stock Display
-    if (stockDisplay) stockDisplay.textContent = `In stock: ${sku.stock}`;
-    if (stockBadge) stockBadge.textContent = `Stock: ${sku.stock}`;
-
+    if (stockDisplay) stockDisplay.textContent = `现货库存: ${sku.stock} 件`;
+    if (stockBadge) stockBadge.textContent = `现货库存: ${sku.stock}`;
     updateQtyDisplay();
   }
 
@@ -328,12 +359,6 @@ const cleanId = product.id.replace('pid_', '');
       totalCny.textContent = `¥${cnyPrice.toFixed(0)} CNY`;
     }
   }
-
-  // Listen for language switcher changes to update display instantly
-  window.addEventListener('language:change', () => {
-    renderSkus();
-    updateQtyDisplay();
-  });
 
   initPage();
 </script>

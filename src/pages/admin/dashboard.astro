@@ -2,188 +2,249 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="商家管理后台 — Puppy Shop">
-  <!-- Security Error Overlay (Hidden initially) -->
+<BaseLayout title="管理控制台 — Soul Society">
+  <!-- 苍蓝灵压背景漫射冷焰 -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-[#0284C7]/20 via-[#38BDF8]/10 to-transparent rounded-full filter blur-[140px] pointer-events-none z-0"></div>
+
+  <!-- 安全拦截层 (未授权时显示) -->
   <div 
     id="admin-security-overlay" 
-    class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-6 text-center select-none"
+    class="hidden fixed inset-0 z-50 bg-[#06080F]/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center select-none font-outfit"
   >
-    <div class="glass-card p-8 max-w-md w-full text-center space-y-6 bg-[#1C1917]/80 border border-[#292929] backdrop-blur-xl text-white">
-      <div class="w-16 h-16 rounded-full bg-rose-950/20 border border-rose-500/30 flex items-center justify-center mx-auto text-rose-400">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m0-6v2m0-8h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    <div class="glass-card p-8 max-w-md w-full text-center space-y-6 bg-[#0B0F1A] border border-[#38BDF8]/30 rounded-3xl shadow-2xl">
+      <div class="w-14 h-14 rounded-2xl bg-[#0284C7]/20 border border-[#38BDF8]/40 flex items-center justify-center mx-auto text-[#38BDF8]">
+        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
       </div>
       <div class="space-y-2">
-        <h2 class="text-xl font-extrabold text-white font-fredoka">拒绝访问</h2>
-        <p class="text-xs text-zinc-400 leading-relaxed" id="admin-security-msg">
-          您无权查看商家后台。请使用管理员账户登录。
+        <h2 class="text-xl font-black text-white">需要管理员席位权限</h2>
+        <p class="text-xs text-slate-400 leading-relaxed" id="admin-security-msg">
+          您当前登录的账户暂无权访问后台工作台，请切换为管理员账号。
         </p>
       </div>
-      <div class="pt-4 flex gap-3 justify-center">
+      <div class="pt-2 flex gap-3 justify-center">
         <a 
           href="/login?redirect=/admin/dashboard" 
-          class="px-5 py-2.5 bg-[#E7AC08] text-black hover:bg-[#FAC514] font-bold text-xs uppercase tracking-wider rounded-xl border border-[#FAC514] transition active:scale-95 font-fredoka"
+          class="px-5 py-2.5 bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(56,189,248,0.4)] transition active:scale-95"
         >
-          登录账户
+          登录管理员账号
         </a>
         <a 
           href="/" 
-          class="px-5 py-2.5 bg-transparent border border-[#292929] text-white hover:bg-white/5 font-bold text-xs uppercase tracking-wider rounded-xl transition active:scale-95 font-fredoka"
+          class="px-5 py-2.5 bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 font-bold text-xs uppercase tracking-wider rounded-xl transition active:scale-95"
         >
-          返回商城
+          返回商城前台
         </a>
       </div>
     </div>
   </div>
 
-  <!-- Main Dashboard View -->
-  <div class="min-h-screen pt-28 pb-20 px-6 max-w-7xl mx-auto w-full relative z-10" id="admin-main-view">
+  <!-- 管理后台主界面 -->
+  <div class="min-h-screen pt-28 pb-20 px-6 max-w-7xl mx-auto w-full relative z-10 font-outfit" id="admin-main-view">
     <div class="space-y-8">
       
-      <!-- Top header layout -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#292929] pb-6">
+      <!-- 顶栏标题与快捷操作 -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6 gap-4">
         <div class="space-y-1">
-          <span class="text-[#E7AC08] uppercase tracking-widest text-[10px] font-bold font-fredoka block">运营管理室</span>
-          <h1 class="text-3xl font-extrabold font-fredoka text-white">商家后台管理</h1>
+          <div class="flex items-center gap-2">
+            <span class="text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 uppercase tracking-widest text-[10px] font-mono font-extrabold px-2.5 py-0.5 rounded-full">
+              COMMAND HUB • SOUL SOCIETY
+            </span>
+            <span class="text-xs text-slate-400 font-bold">全自动发卡与资产调度控制台</span>
+          </div>
+          <h1 class="text-3xl font-black text-white tracking-tight flex items-center gap-3">
+            <span>管理工作台</span>
+            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>实时数据库同步中</span>
+            </span>
+          </h1>
         </div>
-        <div class="flex gap-3 mt-4 md:mt-0">
+        <div class="flex gap-3">
           <a 
             href="/" 
-            class="px-4 py-2 bg-transparent border border-[#292929] text-white hover:bg-white/5 text-xs font-bold font-fredoka uppercase tracking-wider rounded-xl transition flex items-center gap-2 active:scale-95"
+            class="px-4 py-2 bg-white/5 border border-white/10 hover:border-[#38BDF8]/50 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold rounded-xl transition flex items-center gap-2 shadow-xs active:scale-95"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
-            商城首页
+            <span>预览商城前台</span>
           </a>
         </div>
       </div>
 
-      <!-- Navigation Tabs -->
-      <div class="flex border-b border-[#292929] gap-6">
+      <!-- 四大导航标签页 (纯矢量SVG，零Emoji) -->
+      <div class="flex flex-wrap border-b border-white/10 gap-2 sm:gap-6 text-sm">
         <button 
           id="tab-btn-orders" 
           type="button" 
-          class="pb-3 border-b-2 border-[#E7AC08] text-[#E7AC08] font-bold text-sm font-fredoka transition-all cursor-pointer"
+          class="pb-3 border-b-2 border-[#38BDF8] text-[#38BDF8] font-extrabold text-sm transition-all cursor-pointer flex items-center gap-2"
         >
-          📦 订单队列
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+          </svg>
+          <span>订单处理队列</span>
+          <span id="tab-badge-pending" class="hidden text-[10px] px-2 py-0.2 rounded-full bg-rose-500 text-white font-black animate-pulse">0</span>
+        </button>
+        <button 
+          id="tab-btn-cardpool" 
+          type="button" 
+          class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-white font-bold text-sm transition-all cursor-pointer flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+          </svg>
+          <span>预存卡密库存池</span>
+          <span class="text-[10px] text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 px-2 py-0.5 rounded-full font-mono">STOCK VAULT</span>
         </button>
         <button 
           id="tab-btn-deposits" 
           type="button" 
-          class="pb-3 border-b-2 border-transparent text-zinc-500 hover:text-white font-bold text-sm font-fredoka transition-all cursor-pointer"
+          class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-white font-bold text-sm transition-all cursor-pointer flex items-center gap-2"
         >
-          💰 充值审核
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+          </svg>
+          <span>充值凭据审核</span>
         </button>
         <button 
           id="tab-btn-customers" 
           type="button" 
-          class="pb-3 border-b-2 border-transparent text-zinc-500 hover:text-white font-bold text-sm font-fredoka transition-all cursor-pointer"
+          class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-white font-bold text-sm transition-all cursor-pointer flex items-center gap-2"
         >
-          👥 客户管理
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span>客户与会员库</span>
         </button>
       </div>
 
-      <!-- Tab View: Orders -->
+      <!-- TAB 1: 订单队列主视图 -->
       <div id="view-orders" class="space-y-8">
-        <!-- ANALYTICS HIGHLIGHTS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          <!-- Total Revenue USD -->
-          <div class="glass-card p-6 space-y-2 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
-            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">总营收 (USD)</span>
-            <p class="text-2xl font-black text-[#E7AC08] font-fredoka" id="stat-revenue-usd">$0.00</p>
-            <span class="text-[10px] text-emerald-400 flex items-center gap-1 font-fredoka font-bold">● 实时同步</span>
+        
+        <!-- 四大核心数据汇总卡片 (深曜石晶核，高对比度白字与亮青蓝数值) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="glass-card p-6 space-y-2 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl">
+            <span class="text-xs font-bold text-slate-400 block uppercase font-mono">累计总营业额 (USD)</span>
+            <p class="text-3xl font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]" id="stat-revenue-usd">$0.00</p>
+            <span class="text-[11px] text-emerald-400 font-mono font-bold flex items-center gap-1">实收入账数据</span>
           </div>
 
-          <!-- Total Revenue CNY -->
-          <div class="glass-card p-6 space-y-2 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
-            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">总营收 (CNY)</span>
-            <p class="text-2xl font-black text-white font-fredoka" id="stat-revenue-cny">¥0 CNY</p>
-            <span class="text-[10px] text-zinc-500 font-fredoka">按约 6.8 汇率换算</span>
+          <div class="glass-card p-6 space-y-2 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl">
+            <span class="text-xs font-bold text-slate-400 block uppercase font-mono">人民币折算 (CNY)</span>
+            <p class="text-3xl font-black text-white font-mono" id="stat-revenue-cny">¥0 CNY</p>
+            <span class="text-[11px] text-slate-400 font-mono">实时汇率换算</span>
           </div>
 
-          <!-- Completed Orders -->
-          <div class="glass-card p-6 space-y-2 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
-            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">已完成订单</span>
-            <p class="text-2xl font-black text-[#E7AC08] font-fredoka" id="stat-orders-completed">0</p>
-            <span class="text-[10px] text-zinc-500 font-fredoka" id="stat-orders-total">订单总数: 0</span>
+          <div class="glass-card p-6 space-y-2 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl">
+            <span class="text-xs font-bold text-slate-400 block uppercase font-mono">已成功交付订单</span>
+            <p class="text-3xl font-black text-emerald-400 font-mono" id="stat-orders-completed">0</p>
+            <span class="text-[11px] text-slate-400 font-mono" id="stat-orders-total">总成交率 100%</span>
           </div>
 
-          <!-- Pending Verification -->
-          <div class="glass-card p-6 space-y-2 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
-            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">待审核订单</span>
-            <p class="text-2xl font-black text-amber-500 font-fredoka" id="stat-orders-pending">0</p>
-            <span class="text-[10px] text-zinc-500 font-fredoka">等待支付凭证核对</span>
+          <div class="glass-card p-6 space-y-2 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl">
+            <span class="text-xs font-bold text-slate-400 block uppercase font-mono">待审核 / 待发货</span>
+            <p class="text-3xl font-black text-amber-400 font-mono" id="stat-orders-pending">0</p>
+            <span class="text-[11px] text-slate-400 font-mono" id="stat-pending-tip">无积压订单</span>
           </div>
-
         </div>
 
-        <!-- ANALYTICS SPLIT CHART & ORDERS HEADER -->
+        <!-- 真实热卖分类销售排行 + 订单主表格 -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          <!-- Category Sales Mix -->
-          <div class="lg:col-span-1 glass-card p-6 space-y-6 flex flex-col justify-between bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
+          <!-- 热卖分类真实排行 -->
+          <div class="lg:col-span-1 glass-card p-6 space-y-5 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl flex flex-col justify-between">
             <div class="space-y-1">
-              <h3 class="text-sm font-bold text-white uppercase tracking-wider font-fredoka">销售占比分析</h3>
-              <p class="text-xs text-zinc-400 font-fredoka">各个商品分类的营收分布占比</p>
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-extrabold text-white flex items-center gap-2">
+                  <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                  <span>热卖分类销售排行</span>
+                </h3>
+                <span class="text-[10px] text-[#38BDF8] bg-[#0284C7]/20 font-bold px-2 py-0.5 rounded-full font-mono">DYNAMIC</span>
+              </div>
+              <p class="text-xs text-slate-400">按已成交订单金额实时计算各分类权重</p>
             </div>
 
-            <div class="space-y-4">
-              <!-- Digital accounts split bar -->
-              <div class="space-y-1.5 text-left">
-                <div class="flex justify-between text-xs font-semibold">
-                  <span class="text-emerald-400 font-fredoka">数字商品库</span>
-                  <span class="text-white font-fredoka" id="stat-mix-digital-pct">0%</span>
-                </div>
-                <div class="w-full h-3.5 bg-black border border-[#292929] rounded-full overflow-hidden">
-                  <div id="stat-mix-digital-fill" class="h-full bg-emerald-500 transition-all duration-500 w-0"></div>
-                </div>
-                <span class="text-[10px] text-zinc-400 block" id="stat-mix-digital-val">销售额 $0.00</span>
-              </div>
-
-              <!-- Apparel/Physical accounts split bar -->
-              <div class="space-y-1.5 text-left">
-                <div class="flex justify-between text-xs font-semibold">
-                  <span class="text-[#E7AC08] font-fredoka">潮流服饰</span>
-                  <span class="text-white font-fredoka" id="stat-mix-apparel-pct">0%</span>
-                </div>
-                <div class="w-full h-3.5 bg-black border border-[#292929] rounded-full overflow-hidden">
-                  <div id="stat-mix-apparel-fill" class="h-full bg-[#E7AC08] transition-all duration-500 w-0"></div>
-                </div>
-                <span class="text-[10px] text-zinc-400 block" id="stat-mix-apparel-val">销售额 $0.00</span>
-              </div>
-
+            <div id="category-rankings-container" class="space-y-3.5">
+              <div class="text-center py-8 text-slate-400 text-xs">正在分析销售构成...</div>
             </div>
 
-            <div class="text-[10px] text-zinc-500 border-t border-[#292929] pt-4 font-fredoka">
-              提示：调整商品价格会更新未来的订单统计。
+            <div class="text-[11px] text-slate-400 border-t border-white/10 pt-3 flex items-center gap-1.5">
+              <span class="text-[#38BDF8]">●</span> 提示：根据排行可及时调整卡密备货与首页主推位。
             </div>
           </div>
 
-          <!-- Ledger logs table container -->
-          <div class="lg:col-span-2 glass-card p-6 space-y-6 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
-            <div class="flex items-center justify-between border-b border-[#292929] pb-4">
-              <h3 class="text-sm font-bold text-white uppercase tracking-wider font-fredoka">交易账目明细</h3>
-              <span class="text-[10px] font-bold text-zinc-400 font-mono" id="stat-ledger-count">总行数: 0</span>
+          <!-- 订单检索、过滤与主数据表格 -->
+          <div class="lg:col-span-2 glass-card p-6 space-y-5 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl">
+            
+            <!-- 搜索框与状态过滤胶囊 -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+              <div class="relative flex-1 max-w-sm">
+                <input 
+                  type="text" 
+                  id="admin-search-orders" 
+                  placeholder="搜索客户邮箱 / 订单号 / TxID / 商品..." 
+                  class="w-full bg-[#06080F] border border-[#38BDF8]/30 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/40 transition"
+                />
+                <span class="absolute left-3 top-2.5 text-[#38BDF8]">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </span>
+              </div>
+
+              <!-- 状态胶囊 -->
+              <div class="flex gap-1.5 overflow-x-auto text-[11px]">
+                <button 
+                  type="button" 
+                  class="filter-status-btn px-3 py-1.5 rounded-xl font-bold transition bg-[#0284C7]/30 border border-[#38BDF8]/60 text-[#38BDF8] shadow-xs" 
+                  data-status="all"
+                >
+                  全部
+                </button>
+                <button 
+                  type="button" 
+                  class="filter-status-btn px-3 py-1.5 rounded-xl font-bold transition bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10" 
+                  data-status="pending"
+                >
+                  待发货
+                </button>
+                <button 
+                  type="button" 
+                  class="filter-status-btn px-3 py-1.5 rounded-xl font-bold transition bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10" 
+                  data-status="completed"
+                >
+                  已完成
+                </button>
+                <button 
+                  type="button" 
+                  class="filter-status-btn px-3 py-1.5 rounded-xl font-bold transition bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10" 
+                  data-status="cancelled"
+                >
+                  已取消
+                </button>
+              </div>
             </div>
 
+            <!-- 订单表格 (暗黑深底，极高对比白字) -->
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr class="border-b border-[#292929] text-zinc-400 uppercase tracking-widest text-[9px] font-bold font-fredoka">
-                    <th class="pb-3 pr-2">订单 ID</th>
-                    <th class="pb-3 px-2">客户</th>
-                    <th class="pb-3 px-2">总计 (USD)</th>
-                    <th class="pb-3 px-2">支付方式</th>
+                  <tr class="border-b border-white/10 text-slate-400 uppercase tracking-wider text-[10px] font-bold font-mono">
+                    <th class="pb-3 pr-2">订单编号</th>
+                    <th class="pb-3 px-2">顾客信息</th>
+                    <th class="pb-3 px-2">订单金额</th>
+                    <th class="pb-3 px-2">支付通道</th>
                     <th class="pb-3 px-2">状态</th>
                     <th class="pb-3 pl-2 text-right">操作</th>
                   </tr>
                 </thead>
-                <tbody id="ledger-rows" class="divide-y divide-[#292929] text-zinc-300 font-fredoka">
+                <tbody id="ledger-rows" class="divide-y divide-white/5 text-slate-200">
                   <tr>
-                    <td colspan="6" class="py-12 text-center text-zinc-500">Initializing transaction log...</td>
+                    <td colspan="6" class="py-12 text-center text-slate-400">正在同步订单记录库...</td>
                   </tr>
                 </tbody>
               </table>
@@ -194,29 +255,91 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <!-- Tab View: Deposits -->
+      <!-- TAB 2: 预存卡密库存池 -->
+      <div id="view-cardpool" class="hidden space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- 批量导入卡密卡片 -->
+          <div class="glass-card p-6 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl space-y-4">
+            <div>
+              <h3 class="text-base font-black text-white flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>批量导入商品卡密</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-1">预存卡密可在审核订单时一键自动提取发货！</p>
+            </div>
+
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">绑定对应商品名称关键词</label>
+                <input 
+                  type="text" 
+                  id="pool-product-keyword" 
+                  placeholder="例如：ChatGPT、Telegram、Apple ID" 
+                  class="w-full bg-[#06080F] border border-[#38BDF8]/30 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8]"
+                />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">卡密明细（一行一条记录）</label>
+                <textarea 
+                  id="pool-card-content" 
+                  rows="6" 
+                  placeholder="卡密一: user1@mail.com----password123&#10;卡密二: user2@mail.com----password456&#10;卡密三: TGY-8849-2910-KLPQ"
+                  class="w-full bg-[#06080F] border border-[#38BDF8]/30 rounded-xl p-3 text-xs text-white font-mono focus:outline-none focus:border-[#38BDF8]"
+                ></textarea>
+              </div>
+
+              <button 
+                type="button" 
+                id="btn-import-cardpool"
+                class="w-full py-2.5 bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-bold text-xs rounded-xl shadow-[0_0_20px_rgba(56,189,248,0.35)] transition active:scale-98"
+              >
+                存入卡密池
+              </button>
+            </div>
+          </div>
+
+          <!-- 卡密库存列表展示 -->
+          <div class="lg:col-span-2 glass-card p-6 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <h3 class="text-base font-black text-white">现有卡密库存明细</h3>
+              <span class="text-xs font-mono font-bold text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 px-3 py-1 rounded-full" id="pool-total-keys-count">
+                总可用卡密: 0 件
+              </span>
+            </div>
+
+            <div id="pool-stock-list" class="space-y-3">
+              <div class="text-center py-12 text-slate-400 text-xs">暂无预存卡密，请在左侧批量添加</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: 充值凭证审核 -->
       <div id="view-deposits" class="hidden space-y-6">
-        <div class="glass-card p-6 space-y-6 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
-          <div class="flex items-center justify-between border-b border-[#292929] pb-4">
-            <h3 class="text-sm font-bold text-white uppercase tracking-wider font-fredoka">充值审核管理</h3>
-            <span class="text-[10px] font-bold text-zinc-400 font-mono" id="stat-deposits-count">充值申请总数: 0</span>
+        <div class="glass-card p-6 space-y-4 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl">
+          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+            <h3 class="text-base font-black text-white">充值转账申请列表</h3>
+            <span class="text-xs font-mono font-bold text-slate-400" id="stat-deposits-count">申请总数: 0</span>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse text-xs">
               <thead>
-                <tr class="border-b border-[#292929] text-zinc-400 uppercase tracking-widest text-[9px] font-bold font-fredoka">
-                  <th class="pb-3 pr-2">申请 ID</th>
+                <tr class="border-b border-white/10 text-slate-400 uppercase tracking-wider text-[10px] font-bold font-mono">
+                  <th class="pb-3 pr-2">申请单号</th>
                   <th class="pb-3 px-2">客户邮箱</th>
                   <th class="pb-3 px-2">充值金额</th>
-                  <th class="pb-3 px-2">转账凭证</th>
+                  <th class="pb-3 px-2">转账凭证 TxID</th>
                   <th class="pb-3 px-2">状态</th>
                   <th class="pb-3 pl-2 text-right">操作</th>
                 </tr>
               </thead>
-              <tbody id="deposit-ledger-rows" class="divide-y divide-[#292929] text-zinc-300 font-fredoka">
+              <tbody id="deposit-ledger-rows" class="divide-y divide-white/5 text-slate-200">
                 <tr>
-                  <td colspan="6" class="py-12 text-center text-zinc-500">正在加载充值申请列表中...</td>
+                  <td colspan="6" class="py-12 text-center text-slate-400">正在同步充值申请列表...</td>
                 </tr>
               </tbody>
             </table>
@@ -224,27 +347,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <!-- Tab View: Customers -->
+      <!-- TAB 4: 客户管理 -->
       <div id="view-customers" class="hidden space-y-6">
-        <div class="glass-card p-6 space-y-6 bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl text-white">
-          <div class="flex items-center justify-between border-b border-[#292929] pb-4">
-            <h3 class="text-sm font-bold text-white uppercase tracking-wider font-fredoka">客户/会员管理</h3>
-            <span class="text-[10px] font-bold text-zinc-400 font-mono" id="stat-customers-count">客户总数: 0</span>
+        <div class="glass-card p-6 space-y-4 bg-[#0B0F1A]/95 border border-[#38BDF8]/20 rounded-3xl shadow-xl">
+          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+            <h3 class="text-base font-black text-white">会员与客户库</h3>
+            <span class="text-xs font-mono font-bold text-slate-400" id="stat-customers-count">客户总数: 0</span>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse text-xs">
               <thead>
-                <tr class="border-b border-[#292929] text-zinc-400 uppercase tracking-widest text-[9px] font-bold font-fredoka">
-                  <th class="pb-3 pr-2">用户 ID (UID)</th>
+                <tr class="border-b border-white/10 text-slate-400 uppercase tracking-wider text-[10px] font-bold font-mono">
+                  <th class="pb-3 pr-2">用户 UID</th>
                   <th class="pb-3 px-2">客户邮箱</th>
-                  <th class="pb-3 px-2">会员余额</th>
+                  <th class="pb-3 px-2">钱包余额</th>
                   <th class="pb-3 pl-2 text-right">操作</th>
                 </tr>
               </thead>
-              <tbody id="customer-ledger-rows" class="divide-y divide-[#292929] text-zinc-300 font-fredoka">
+              <tbody id="customer-ledger-rows" class="divide-y divide-white/5 text-slate-200">
                 <tr>
-                  <td colspan="4" class="py-12 text-center text-zinc-500">正在加载客户列表中...</td>
+                  <td colspan="4" class="py-12 text-center text-slate-400">正在同步客户列表...</td>
                 </tr>
               </tbody>
             </table>
@@ -255,58 +378,80 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </div>
 
-  <!-- ORDER REVIEW DETAIL MODAL (Hidden initially) -->
-  <div id="order-details-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-6">
-    <div class="glass-card max-w-xl w-full p-8 relative space-y-6 bg-[#1C1917] border border-[#292929] backdrop-blur-xl text-white">
+  <!-- 订单审核与详情弹窗 (暗黑曜石高对比度晶体) -->
+  <div id="order-details-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 font-outfit">
+    <div class="glass-card max-w-xl w-full p-6 sm:p-8 relative space-y-5 bg-[#0B0F1A] border border-[#38BDF8]/40 rounded-3xl shadow-2xl text-white">
       
-      <!-- Close button -->
+      <!-- 关闭按钮 -->
       <button 
         id="modal-close-btn" 
         type="button" 
-        class="absolute top-4 right-4 p-2 text-zinc-400 hover:text-white rounded-full hover:bg-white/5 transition"
+        class="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-full hover:bg-white/10 transition cursor-pointer"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
+        ✕
       </button>
 
-      <div class="space-y-1 text-left border-b border-[#292929] pb-4">
-        <span class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest font-mono" id="modal-order-id">订单参考信息</span>
-        <h3 class="text-lg font-bold text-white font-fredoka" id="modal-order-email">客户明细</h3>
-      </div>
-
-      <div class="space-y-3 text-left">
-        <h4 class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest font-fredoka">已购商品</h4>
-        <div id="modal-order-items" class="max-h-[160px] overflow-y-auto space-y-2 pr-2 border-y border-[#292929] py-3 font-fredoka">
-          <!-- Dyn injected -->
+      <!-- 订单客户信息 -->
+      <div class="space-y-1 text-left border-b border-white/10 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono font-bold text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 px-2 py-0.5 rounded" id="modal-order-id">订单编号</span>
+          <button type="button" id="btn-copy-order-id" class="text-[11px] text-[#38BDF8] hover:underline font-bold">复制单号</button>
+        </div>
+        <div class="flex items-center gap-2 mt-1">
+          <h3 class="text-base font-extrabold text-white" id="modal-order-email">客户邮箱</h3>
+          <button type="button" id="btn-copy-customer-email" class="text-[11px] text-[#38BDF8] hover:underline font-bold">复制邮箱</button>
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-4 text-left">
+      <!-- 已购商品明细 -->
+      <div class="space-y-2 text-left">
+        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">已购商品清单</h4>
+        <div id="modal-order-items" class="max-h-[140px] overflow-y-auto space-y-2 pr-2 border-y border-white/10 py-3">
+        </div>
+      </div>
+
+      <!-- 支付详情 -->
+      <div class="grid grid-cols-2 gap-4 text-left p-3.5 bg-[#06080F] rounded-2xl border border-white/10">
         <div>
-          <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">支付通道</span>
-          <p class="text-xs text-white font-semibold mt-0.5" id="modal-payment-method">-</p>
+          <span class="text-[10px] font-bold text-slate-400 uppercase block font-mono">支付通道</span>
+          <p class="text-xs text-white font-bold mt-0.5" id="modal-payment-method">-</p>
         </div>
         <div>
-          <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">交易单号 / 哈希</span>
-          <p class="text-xs text-white font-mono font-semibold mt-0.5 select-all break-all" id="modal-payment-hash">-</p>
+          <span class="text-[10px] font-bold text-slate-400 uppercase block font-mono">交易凭证 TxID</span>
+          <div class="flex items-center gap-1.5 mt-0.5">
+            <p class="text-xs text-[#38BDF8] font-mono font-bold truncate max-w-[140px]" id="modal-payment-hash">-</p>
+            <button type="button" id="btn-copy-payment-hash" class="text-[10px] text-slate-400 hover:text-white underline shrink-0">复制</button>
+          </div>
         </div>
       </div>
 
-      <!-- Card Key Input / Dispatch Content Section -->
-      <div id="modal-dispatch-section" class="space-y-1.5 text-left hidden">
-        <label for="modal-dispatch-input" class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-fredoka">发货卡密内容 (Card Credentials)</label>
+      <!-- 发货卡密填写区（支持一键从库存提取） -->
+      <div id="modal-dispatch-section" class="space-y-2 text-left">
+        <div class="flex items-center justify-between">
+          <label for="modal-dispatch-input" class="text-xs font-bold text-white flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+            </svg>
+            <span>发货卡密凭据 (CARD CREDENTIALS)</span>
+          </label>
+          <button 
+            type="button" 
+            id="btn-autofill-from-pool" 
+            class="text-[11px] font-bold text-[#38BDF8] bg-[#0284C7]/20 hover:bg-[#0284C7]/40 border border-[#38BDF8]/40 px-2.5 py-0.5 rounded-full transition flex items-center gap-1 cursor-pointer"
+          >
+            <span>一键提取预存卡密</span>
+          </button>
+        </div>
         <textarea 
           id="modal-dispatch-input" 
-          rows="2"
-          placeholder="输入您代购的卡密或账号信息 (例如: GGG-F4PK1Q3IWZ704T4L)..."
-          class="w-full bg-black border border-[#292929] rounded-xl px-4 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08]"
+          rows="3"
+          placeholder="输入准备发放给顾客的账号信息或卡密 (格式: 账号----密码----辅助码)..."
+          class="w-full bg-[#06080F] border border-[#38BDF8]/30 rounded-2xl p-3 text-xs text-[#38BDF8] font-mono focus:outline-none focus:border-[#38BDF8]"
         ></textarea>
       </div>
 
-      <!-- Actions -->
-      <div class="pt-4 border-t border-[#292929] flex gap-3 justify-end" id="modal-actions-container">
-        <!-- Dyn actions based on status -->
+      <!-- 底部操作按钮 -->
+      <div class="pt-3 border-t border-white/10 flex flex-wrap gap-2.5 justify-end" id="modal-actions-container">
       </div>
 
     </div>
@@ -314,34 +459,33 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <script>
-  import { authInstance, onAuthStateChanged, collection, dbInstance, onSnapshot, doc, updateDoc, getDoc, setDoc } from '../../lib/firebase.js';
+  import { 
+    authInstance, 
+    onAuthStateChanged, 
+    collection, 
+    dbInstance, 
+    onSnapshot, 
+    doc, 
+    updateDoc 
+  } from '../../lib/firebase.js';
 
-  // Configured admin email address
   const adminEmail = import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com';
 
-  // DOM Elements
   const securityOverlay = document.getElementById('admin-security-overlay');
   const mainView = document.getElementById('admin-main-view');
 
-  // Stats Elements
   const statRevUsd = document.getElementById('stat-revenue-usd');
   const statRevCny = document.getElementById('stat-revenue-cny');
   const statOrdCompleted = document.getElementById('stat-orders-completed');
   const statOrdTotal = document.getElementById('stat-orders-total');
   const statOrdPending = document.getElementById('stat-orders-pending');
+  const statPendingTip = document.getElementById('stat-pending-tip');
 
-  const mixDigitalPct = document.getElementById('stat-mix-digital-pct');
-  const mixDigitalVal = document.getElementById('stat-mix-digital-val');
-  const mixDigitalFill = document.getElementById('stat-mix-digital-fill');
-
-  const mixApparelPct = document.getElementById('stat-mix-apparel-pct');
-  const mixApparelVal = document.getElementById('stat-mix-apparel-val');
-  const mixApparelFill = document.getElementById('stat-mix-apparel-fill');
-
-  const ledgerCount = document.getElementById('stat-ledger-count');
   const ledgerRows = document.getElementById('ledger-rows');
+  const categoryRankingsContainer = document.getElementById('category-rankings-container');
+  const searchInput = document.getElementById('admin-search-orders') as HTMLInputElement;
+  const statusFilterBtns = document.querySelectorAll('.filter-status-btn');
 
-  // Modal Elements
   const detailsModal = document.getElementById('order-details-modal');
   const modalCloseBtn = document.getElementById('modal-close-btn');
   const modalOrderId = document.getElementById('modal-order-id');
@@ -353,72 +497,82 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const modalDispatchSection = document.getElementById('modal-dispatch-section');
   const modalDispatchInput = document.getElementById('modal-dispatch-input') as HTMLTextAreaElement;
 
-  // Customers Elements
+  const btnCopyOrderId = document.getElementById('btn-copy-order-id');
+  const btnCopyCustomerEmail = document.getElementById('btn-copy-customer-email');
+  const btnCopyPaymentHash = document.getElementById('btn-copy-payment-hash');
+  const btnAutofillFromPool = document.getElementById('btn-autofill-from-pool');
+
+  const tabBtnOrders = document.getElementById('tab-btn-orders');
+  const tabBtnCardpool = document.getElementById('tab-btn-cardpool');
+  const tabBtnDeposits = document.getElementById('tab-btn-deposits');
   const tabBtnCustomers = document.getElementById('tab-btn-customers');
+
+  const viewOrders = document.getElementById('view-orders');
+  const viewCardpool = document.getElementById('view-cardpool');
+  const viewDeposits = document.getElementById('view-deposits');
   const viewCustomers = document.getElementById('view-customers');
-  const customerLedgerRows = document.getElementById('customer-ledger-rows');
-  const customersCount = document.getElementById('stat-customers-count');
 
   let activeOrders: any[] = [];
   let selectedOrder: any = null;
-  let activeCustomers: any[] = [];
+  let currentSearchQuery = '';
+  let currentStatusFilter = 'all';
 
-  // Protect Admin Route client-side
   onAuthStateChanged(authInstance, (user) => {
     if (!user) {
-      // Redirect to signin
       window.location.href = `/login?redirect=${encodeURIComponent(window.location.pathname)}`;
       return;
     }
-
     if (user.email !== adminEmail) {
-      // Display Security overlay
       securityOverlay?.classList.remove('hidden');
       mainView?.classList.add('hidden');
       return;
     }
-
-    // Success -> Hide overlay and listen to database updates in real-time
     securityOverlay?.classList.add('hidden');
     mainView?.classList.remove('hidden');
     
     syncLedger();
-    syncDeposits();
-    syncCustomers();
+    initCardPoolUI();
   });
 
-  // Listen to orders updates in real-time
+  const allTabs = [
+    { btn: tabBtnOrders, view: viewOrders },
+    { btn: tabBtnCardpool, view: viewCardpool },
+    { btn: tabBtnDeposits, view: viewDeposits },
+    { btn: tabBtnCustomers, view: viewCustomers },
+  ];
+
+  allTabs.forEach(item => {
+    item.btn?.addEventListener('click', () => {
+      allTabs.forEach(t => {
+        t.btn?.classList.remove('border-[#38BDF8]', 'text-[#38BDF8]', 'font-extrabold');
+        t.btn?.classList.add('border-transparent', 'text-slate-400');
+        t.view?.classList.add('hidden');
+      });
+      item.btn?.classList.add('border-[#38BDF8]', 'text-[#38BDF8]', 'font-extrabold');
+      item.btn?.classList.remove('border-transparent', 'text-slate-400');
+      item.view?.classList.remove('hidden');
+    });
+  });
+
   function syncLedger() {
     const collRef = collection(dbInstance, 'orders');
-    
-    // Setup listener
     onSnapshot(collRef, (snapshot) => {
       const orders: any[] = [];
       snapshot.docs.forEach((doc) => {
         orders.push({ id: doc.id, ...doc.data() });
       });
 
-      // Sort desc by timestamp
       activeOrders = orders.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-
+      
       renderAnalytics(activeOrders);
-      renderTable(activeOrders);
-
-      // Refresh modal details if currently open
-      if (selectedOrder && detailsModal && !detailsModal.classList.contains('hidden')) {
-        const refreshed = activeOrders.find(o => o.id === selectedOrder.id);
-        if (refreshed) {
-          openOrderDetails(refreshed);
-        }
-      }
+      applyFilterAndRenderTable();
     });
   }
 
   function renderAnalytics(orders: any[]) {
-    // 1. Calculate general figures (only count completed or paid orders)
     const approvedOrders = orders.filter(o => o.status === 'completed' || o.status === 'paid');
-    const totalRevUsd = approvedOrders.reduce((sum, o) => sum + o.totalUsd, 0);
-    const totalRevCny = approvedOrders.reduce((sum, o) => sum + o.totalCny, 0);
+    const totalRevUsd = approvedOrders.reduce((sum, o) => sum + (o.totalUsd || o.totalPrice || 0), 0);
+    const totalRevCny = Math.round(totalRevUsd * 7.1);
     
     const completedCount = approvedOrders.length;
     const pendingCount = orders.filter(o => o.status === 'pending').length;
@@ -426,90 +580,143 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     if (statRevUsd) statRevUsd.textContent = `$${totalRevUsd.toFixed(2)}`;
     if (statRevCny) statRevCny.textContent = `¥${totalRevCny} CNY`;
     if (statOrdCompleted) statOrdCompleted.textContent = completedCount.toString();
-    if (statOrdTotal) statOrdTotal.textContent = `订单总数: ${orders.length}`;
+    if (statOrdTotal) statOrdTotal.textContent = `历史总成交: ${completedCount} 单`;
     if (statOrdPending) statOrdPending.textContent = pendingCount.toString();
+    
+    if (statPendingTip) {
+      statPendingTip.textContent = pendingCount > 0 ? `需核销发货 (${pendingCount} 单)` : '全部订单已发完';
+    }
 
-    // 2. Calculate mix distribution
-    let digitalRevenue = 0;
-    let apparelRevenue = 0;
+    const badgePending = document.getElementById('tab-badge-pending');
+    if (badgePending) {
+      if (pendingCount > 0) {
+        badgePending.textContent = pendingCount.toString();
+        badgePending.classList.remove('hidden');
+      } else {
+        badgePending.classList.add('hidden');
+      }
+    }
+
+    renderRealCategoryRankings(approvedOrders);
+  }
+
+  function renderRealCategoryRankings(approvedOrders: any[]) {
+    if (!categoryRankingsContainer) return;
+
+    const catSalesMap: Record<string, number> = {};
+    let grandTotal = 0;
 
     approvedOrders.forEach(o => {
-      o.items.forEach((item: any) => {
-        const itemTotal = item.price * item.quantity;
-        if (item.type === 'digital') {
-          digitalRevenue += itemTotal;
-        } else {
-          apparelRevenue += itemTotal;
-        }
+      (o.items || []).forEach((item: any) => {
+        const itemSales = (item.price || 0) * (item.quantity || 1);
+        const catName = item.category || (item.name ? item.name.split(' ')[0] : '其他商品');
+        catSalesMap[catName] = (catSalesMap[catName] || 0) + itemSales;
+        grandTotal += itemSales;
       });
     });
 
-    const mixTotal = digitalRevenue + apparelRevenue;
-    const digitalPct = mixTotal > 0 ? Math.round((digitalRevenue / mixTotal) * 100) : 0;
-    const apparelPct = mixTotal > 0 ? Math.round((apparelRevenue / mixTotal) * 100) : 0;
+    const sortedCategories = Object.entries(catSalesMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
 
-    if (mixDigitalPct) mixDigitalPct.textContent = `${digitalPct}%`;
-    if (mixDigitalVal) mixDigitalVal.textContent = `销售额 $${digitalRevenue.toFixed(2)}`;
-    if (mixDigitalFill) mixDigitalFill.style.width = `${digitalPct}%`;
+    if (sortedCategories.length === 0) {
+      categoryRankingsContainer.innerHTML = `
+        <div class="text-center py-6 text-slate-400 text-xs">
+          暂无已结算订单数据
+        </div>
+      `;
+      return;
+    }
 
-    if (mixApparelPct) mixApparelPct.textContent = `${apparelPct}%`;
-    if (mixApparelVal) mixApparelVal.textContent = `销售额 $${apparelRevenue.toFixed(2)}`;
-    if (mixApparelFill) mixApparelFill.style.width = `${apparelPct}%`;
+    categoryRankingsContainer.innerHTML = sortedCategories.map(([cat, amount], idx) => {
+      const pct = grandTotal > 0 ? Math.round((amount / grandTotal) * 100) : 0;
+
+      return `
+        <div class="space-y-1.5 text-left">
+          <div class="flex justify-between items-center text-xs font-bold">
+            <span class="text-white flex items-center gap-1.5">
+              <span class="text-[10px] font-mono text-[#38BDF8]">0${idx + 1}.</span>
+              <span class="truncate max-w-[130px]">${cat}</span>
+            </span>
+            <span class="text-[#38BDF8] font-mono">$${amount.toFixed(2)} (${pct}%)</span>
+          </div>
+          <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/10">
+            <div class="h-full bg-gradient-to-r from-[#0284C7] to-[#38BDF8] rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
-  function renderTable(orders: any[]) {
+  function applyFilterAndRenderTable() {
     if (!ledgerRows) return;
 
-    const statusMap: Record<string, string> = {
-      'pending': '待审核',
-      'completed': '已完成',
-      'paid': '已支付',
-      'cancelled': '已取消'
-    };
+    let filtered = activeOrders;
 
-    if (ledgerCount) ledgerCount.textContent = `总行数: ${orders.length}`;
+    if (currentStatusFilter !== 'all') {
+      filtered = filtered.filter(o => o.status === currentStatusFilter);
+    }
 
-    if (orders.length === 0) {
+    if (currentSearchQuery.trim() !== '') {
+      const q = currentSearchQuery.toLowerCase();
+      filtered = filtered.filter(o => 
+        (o.id && o.id.toLowerCase().includes(q)) ||
+        (o.email && o.email.toLowerCase().includes(q)) ||
+        (o.txId && o.txId.toLowerCase().includes(q)) ||
+        (o.items && o.items.some((i: any) => i.name && i.name.toLowerCase().includes(q)))
+      );
+    }
+
+    if (filtered.length === 0) {
       ledgerRows.innerHTML = `
         <tr>
-          <td colspan="6" class="py-12 text-center text-zinc-500">当前订单队列中暂无任何订单。</td>
+          <td colspan="6" class="py-12 text-center text-slate-400">
+            没有找到匹配的订单记录
+          </td>
         </tr>
       `;
       return;
     }
 
-    ledgerRows.innerHTML = orders.map(order => {
-      let statusClass = 'text-amber-400 bg-amber-500/10 border border-amber-500/20';
+    ledgerRows.innerHTML = filtered.map(order => {
+      let statusClass = 'text-amber-400 bg-amber-500/15 border border-amber-500/30';
+      let statusText = '待发货';
       if (order.status === 'completed' || order.status === 'paid') {
-        statusClass = 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20';
+        statusClass = 'text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 shadow-xs';
+        statusText = '已完成';
       } else if (order.status === 'cancelled') {
-        statusClass = 'text-rose-400 bg-rose-500/10 border border-rose-500/20';
+        statusClass = 'text-slate-400 bg-white/5 border border-white/10';
+        statusText = '已取消';
       }
 
-      const cleanId = order.id.substring(0, 10) + '...';
-      const displayStatus = statusMap[order.status] || order.status;
+      const shortId = order.id ? order.id.substring(0, 8) + '...' : '-';
+      const orderPrice = order.totalUsd || order.totalPrice || 0;
 
       return `
-        <tr class="hover:bg-white/5 border-b border-[#292929] transition-colors cursor-pointer" onclick="window.viewOrderDetails('${order.id}')">
-          <td class="py-3.5 pr-2 font-mono text-[10px] text-zinc-500 font-bold">${cleanId}</td>
-          <td class="py-3.5 px-2 truncate max-w-[150px]">
-            <span class="font-semibold block text-white">${order.username || '游客'}</span>
-            <span class="text-[10px] text-zinc-500 font-normal block">${order.email}</span>
+        <tr class="hover:bg-white/[0.02] transition-colors cursor-pointer" onclick="window.viewOrderDetails('${order.id}')">
+          <td class="py-3.5 pr-2 font-mono text-xs font-bold text-[#38BDF8]">
+            ${shortId}
           </td>
-          <td class="py-3.5 px-2 font-bold font-mono text-white">$${order.totalUsd.toFixed(2)}</td>
-          <td class="py-3.5 px-2 uppercase text-[10px] text-zinc-400">${order.paymentMethod}</td>
+          <td class="py-3.5 px-2 max-w-[170px] truncate">
+            <div class="font-bold text-white">${order.username || '顾客'}</div>
+            <div class="text-[11px] text-slate-400 font-mono truncate">${order.email || '-'}</div>
+          </td>
+          <td class="py-3.5 px-2 font-black text-white font-mono">
+            $${Number(orderPrice).toFixed(2)}
+          </td>
+          <td class="py-3.5 px-2 uppercase text-[10px] font-mono text-slate-400">
+            ${order.paymentMethod || '加密/在线'}
+          </td>
           <td class="py-3.5 px-2">
-            <span class="px-2 py-0.5 rounded-full border text-[9px] font-bold ${statusClass}">
-              ${displayStatus}
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${statusClass}">
+              ${statusText}
             </span>
           </td>
           <td class="py-3.5 pl-2 text-right">
             <button 
               type="button" 
-              class="px-2.5 py-1 bg-transparent border border-[#292929] hover:bg-white/5 text-[10px] font-bold uppercase rounded-lg text-white transition hover:border-white"
+              class="px-3 py-1.5 ${order.status === 'pending' ? 'bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white shadow-sm' : 'bg-white/5 border border-white/10 text-slate-200 hover:text-white'} text-[11px] font-bold rounded-xl transition"
               onclick="event.stopPropagation(); window.viewOrderDetails('${order.id}')"
             >
-              审核
+              ${order.status === 'pending' ? '审核发货' : '详情'}
             </button>
           </td>
         </tr>
@@ -517,129 +724,122 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }).join('');
   }
 
-  // Handle detailed modal opening
-  window.viewOrderDetails = function(id) {
+  searchInput?.addEventListener('input', (e) => {
+    currentSearchQuery = (e.target as HTMLInputElement).value;
+    applyFilterAndRenderTable();
+  });
+
+  statusFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      statusFilterBtns.forEach(b => {
+        b.classList.remove('bg-[#0284C7]/30', 'border-[#38BDF8]/60', 'text-[#38BDF8]', 'shadow-xs');
+        b.classList.add('bg-white/5', 'border-white/10', 'text-slate-400');
+      });
+      btn.classList.add('bg-[#0284C7]/30', 'border-[#38BDF8]/60', 'text-[#38BDF8]', 'shadow-xs');
+      btn.classList.remove('bg-white/5', 'border-white/10', 'text-slate-400');
+
+      currentStatusFilter = btn.getAttribute('data-status') || 'all';
+      applyFilterAndRenderTable();
+    });
+  });
+
+  (window as any).viewOrderDetails = function(id: string) {
     const order = activeOrders.find(o => o.id === id);
     if (!order) return;
     openOrderDetails(order);
   };
 
-  function openOrderDetails(order) {
+  function openOrderDetails(order: any) {
     selectedOrder = order;
 
-    if (modalOrderId) modalOrderId.textContent = `订单 ID: ${order.id}`;
-    if (modalOrderEmail) {
-      modalOrderEmail.innerHTML = order.username ? `${order.username} <span class="text-xs text-zinc-500 font-normal">(${order.email})</span>` : order.email;
-    }
-    if (modalPaymentMethod) modalPaymentMethod.textContent = order.paymentMethod || '加密货币';
-    if (modalPaymentHash) modalPaymentHash.textContent = order.txId;
+    if (modalOrderId) modalOrderId.textContent = `单号: ${order.id}`;
+    if (modalOrderEmail) modalOrderEmail.textContent = order.email || '无邮箱';
+    if (modalPaymentMethod) modalPaymentMethod.textContent = order.paymentMethod || '在线支付';
+    if (modalPaymentHash) modalPaymentHash.textContent = order.txId || '无转账哈希';
 
-    const statusMap: Record<string, string> = {
-      'pending': '待审核',
-      'completed': '已完成',
-      'paid': '已支付',
-      'cancelled': '已取消'
-    };
-
-    // Items compilation
     if (modalOrderItems) {
-      modalOrderItems.innerHTML = order.items.map((item: any) => `
-        <div class="flex justify-between items-center text-xs py-1.5 border-b border-[#292929] last:border-0">
+      modalOrderItems.innerHTML = (order.items || []).map((item: any) => `
+        <div class="flex justify-between items-center text-xs py-2 border-b border-white/5 last:border-0">
           <div>
             <p class="font-bold text-white">${item.name}</p>
-            <p class="text-[10px] text-zinc-400 mt-0.5">
-              ${item.type === 'digital' ? '卡密商品' : `服饰尺码: ${item.size || 'M'}`} × ${item.quantity}
-            </p>
+            <p class="text-[11px] text-slate-400">数量: ${item.quantity || 1} ${item.size ? `| 规格: ${item.size}` : ''}</p>
           </div>
-          <span class="font-mono text-[#E7AC08] font-bold">$${(item.price * item.quantity).toFixed(2)}</span>
+          <span class="font-bold text-[#38BDF8] font-mono">$${Number(item.price * (item.quantity || 1)).toFixed(2)}</span>
         </div>
       `).join('');
     }
 
-    // Modal Operations Action Buttons
+    if (modalDispatchSection && modalDispatchInput) {
+      if (order.status === 'pending') {
+        modalDispatchSection.classList.remove('hidden');
+        modalDispatchInput.disabled = false;
+        modalDispatchInput.value = '';
+        modalDispatchInput.placeholder = "输入准备发放给顾客的卡密，也可点击右上角「一键提取预存卡密」...";
+      } else {
+        modalDispatchSection.classList.remove('hidden');
+        modalDispatchInput.value = order.dispatchContent || '已自动核销或人工交付';
+        modalDispatchInput.disabled = true;
+      }
+    }
+
     if (modalActionsContainer) {
       if (order.status === 'pending') {
         modalActionsContainer.innerHTML = `
           <button 
-            type="button"
-            onclick="window.updateOrderStatus('${order.id}', 'cancelled')"
-            class="px-4 py-2 rounded-xl bg-transparent border border-rose-500/30 text-rose-400 text-xs font-bold font-fredoka transition active:scale-95 uppercase hover:bg-rose-500/10"
+            type="button" 
+            onclick="window.updateOrderStatus('${order.id}', 'cancelled')" 
+            class="px-4 py-2 border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-bold rounded-xl transition cursor-pointer"
           >
             取消订单
           </button>
           <button 
-            type="button"
-            onclick="window.updateOrderStatus('${order.id}', 'completed')"
-            class="px-5 py-2.5 rounded-xl bg-[#E7AC08] hover:bg-[#FAC514] border border-[#FAC514] text-black font-bold text-xs font-fredoka transition active:scale-95 uppercase"
+            type="button" 
+            onclick="window.updateOrderStatus('${order.id}', 'completed')" 
+            class="px-5 py-2 bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white text-xs font-extrabold rounded-xl shadow-md transition cursor-pointer active:scale-95"
           >
-            审核通过并完成发货
+            审核通过并立即发货
           </button>
         `;
       } else {
-        const displayStatus = statusMap[order.status] || order.status;
         modalActionsContainer.innerHTML = `
-          <span class="text-zinc-400 text-xs font-bold uppercase tracking-wider font-fredoka">最终状态: ${displayStatus}</span>
+          <button 
+            type="button" 
+            onclick="window.resendDispatchNotification('${order.id}')" 
+            class="px-4 py-2 bg-white/5 border border-white/10 text-[#38BDF8] hover:bg-[#0284C7]/20 text-xs font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer"
+          >
+            <span>补发 Telegram 通知</span>
+          </button>
+          <span class="text-xs font-bold text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 px-3 py-1.5 rounded-xl">状态: 已完成交付</span>
         `;
-      }
-    }
-
-    // Toggle dispatch credentials input based on items type and status
-    const hasDigital = order.items.some((i: any) => i.type === 'digital');
-    if (modalDispatchSection && modalDispatchInput) {
-      if (hasDigital && order.status === 'pending') {
-        modalDispatchSection.classList.remove('hidden');
-        modalDispatchInput.value = '';
-        modalDispatchInput.disabled = false;
-        modalDispatchInput.placeholder = "输入您代购的卡密或账号信息 (例如: GGG-F4PK1Q3IWZ704T4L)...";
-      } else if (hasDigital && (order.status === 'completed' || order.status === 'paid')) {
-        modalDispatchSection.classList.remove('hidden');
-        modalDispatchInput.value = order.dispatchContent || '无卡密明细';
-        modalDispatchInput.disabled = true;
-      } else {
-        modalDispatchSection.classList.add('hidden');
       }
     }
 
     detailsModal?.classList.remove('hidden');
   }
 
-  // Update Status handler
-  window.updateOrderStatus = async function(id, status) {
-    const actionLabel = status === 'completed' ? '已完成' : '已取消';
-    if (!confirm(`确定要将订单状态更改为 ${actionLabel} 吗？`)) return;
-    
+  (window as any).updateOrderStatus = async function(id: string, status: string) {
+    const isCompleted = status === 'completed';
+    const confirmMsg = isCompleted ? '确认审核通过并发货给客户吗？' : '确认取消此笔订单吗？';
+    if (!confirm(confirmMsg)) return;
+
     try {
       const docRef = doc(dbInstance, 'orders', id);
       const updateData: any = { status };
-      
+
       let dispatchVal = '';
-      if (status === 'completed' && selectedOrder) {
-        const hasDigital = selectedOrder.items.some((i: any) => i.type === 'digital');
-        if (hasDigital && modalDispatchInput) {
-          dispatchVal = modalDispatchInput.value.trim();
-          if (!dispatchVal) {
-            if (!confirm('提示：发货卡密内容为空。确定直接发货吗？')) {
-              return;
-            }
+      if (isCompleted && modalDispatchInput) {
+        dispatchVal = modalDispatchInput.value.trim();
+        if (!dispatchVal) {
+          if (!confirm('提示：当前发货卡密内容为空，确定直接放行发货吗？')) {
+            return;
           }
-          updateData.dispatchContent = dispatchVal;
         }
+        updateData.dispatchContent = dispatchVal;
       }
 
       await updateDoc(docRef, updateData);
-      
-      // Update selected order cached state
-      if (selectedOrder && selectedOrder.id === id) {
-        selectedOrder.status = status;
-        if (dispatchVal) {
-          selectedOrder.dispatchContent = dispatchVal;
-        }
-      }
-      
-      alert(`订单状态更新成功。`);
 
-      // If completed, trigger Bot 1 dispatch webhook
-      if (status === 'completed' && selectedOrder) {
+      if (isCompleted && selectedOrder) {
         try {
           await fetch('/api/dispatch-notify', {
             method: 'POST',
@@ -654,340 +854,172 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             })
           });
         } catch (webhookErr) {
-          console.error("Failed to trigger Telegram dispatch notification:", webhookErr);
+          console.error(webhookErr);
         }
       }
 
-      // Close modal on success
-      if (detailsModal) detailsModal.classList.add('hidden');
+      alert('订单状态已成功更新！');
+      detailsModal?.classList.add('hidden');
       selectedOrder = null;
-
     } catch (err) {
-      console.error("Failed to update status:", err);
-      alert("更新状态失败，请检查数据库。");
+      console.error(err);
+      alert('更新数据库失败，请检查网络。');
     }
   };
 
-  // Close Modal triggers
+  (window as any).resendDispatchNotification = async function(id: string) {
+    if (!selectedOrder) return;
+    try {
+      await fetch('/api/dispatch-notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderId: id,
+          email: selectedOrder.email,
+          createdAt: selectedOrder.createdAt || new Date().toISOString(),
+          items: selectedOrder.items,
+          dispatchContent: selectedOrder.dispatchContent || '',
+          username: selectedOrder.username || ''
+        })
+      });
+      alert('已成功重新推送发货通知至 Telegram 机器人！');
+    } catch (err) {
+      alert('通知推送失败，请稍后重试。');
+    }
+  };
+
+  btnCopyOrderId?.addEventListener('click', () => {
+    if (selectedOrder) {
+      navigator.clipboard.writeText(selectedOrder.id);
+      alert('已复制订单号：' + selectedOrder.id);
+    }
+  });
+
+  btnCopyCustomerEmail?.addEventListener('click', () => {
+    if (selectedOrder && selectedOrder.email) {
+      navigator.clipboard.writeText(selectedOrder.email);
+      alert('已复制客户邮箱：' + selectedOrder.email);
+    }
+  });
+
+  btnCopyPaymentHash?.addEventListener('click', () => {
+    if (selectedOrder && selectedOrder.txId) {
+      navigator.clipboard.writeText(selectedOrder.txId);
+      alert('已复制转账凭证哈希！');
+    }
+  });
+
   modalCloseBtn?.addEventListener('click', () => {
     detailsModal?.classList.add('hidden');
     selectedOrder = null;
   });
 
-  detailsModal?.addEventListener('click', (e) => {
-    if (e.target === detailsModal) {
-      detailsModal?.classList.add('hidden');
-      selectedOrder = null;
-    }
-  });
+  function initCardPoolUI() {
+    const importBtn = document.getElementById('btn-import-cardpool');
+    const keywordInput = document.getElementById('pool-product-keyword') as HTMLInputElement;
+    const contentTextarea = document.getElementById('pool-card-content') as HTMLTextAreaElement;
+    const stockList = document.getElementById('pool-stock-list');
+    const totalKeysCount = document.getElementById('pool-total-keys-count');
 
-  // Tab navigation bindings
-  const tabBtnOrders = document.getElementById('tab-btn-orders');
-  const tabBtnDeposits = document.getElementById('tab-btn-deposits');
-  const viewOrders = document.getElementById('view-orders');
-  const viewDeposits = document.getElementById('view-deposits');
-
-  tabBtnOrders?.addEventListener('click', () => {
-    tabBtnOrders.classList.add('border-[#E7AC08]', 'text-[#E7AC08]');
-    tabBtnOrders.classList.remove('border-transparent', 'text-zinc-500');
-    tabBtnDeposits?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
-    tabBtnDeposits?.classList.add('border-transparent', 'text-zinc-500');
-    tabBtnCustomers?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
-    tabBtnCustomers?.classList.add('border-transparent', 'text-zinc-500');
-
-    viewOrders?.classList.remove('hidden');
-    viewDeposits?.classList.add('hidden');
-    viewCustomers?.classList.add('hidden');
-  });
-
-  tabBtnDeposits?.addEventListener('click', () => {
-    tabBtnDeposits.classList.add('border-[#E7AC08]', 'text-[#E7AC08]');
-    tabBtnDeposits.classList.remove('border-transparent', 'text-zinc-500');
-    tabBtnOrders?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
-    tabBtnOrders?.classList.add('border-transparent', 'text-zinc-500');
-    tabBtnCustomers?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
-    tabBtnCustomers?.classList.add('border-transparent', 'text-zinc-500');
-
-    viewOrders?.classList.add('hidden');
-    viewDeposits?.classList.remove('hidden');
-    viewCustomers?.classList.add('hidden');
-  });
-
-  tabBtnCustomers?.addEventListener('click', () => {
-    tabBtnCustomers.classList.add('border-[#E7AC08]', 'text-[#E7AC08]');
-    tabBtnCustomers.classList.remove('border-transparent', 'text-zinc-500');
-    tabBtnOrders?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
-    tabBtnOrders?.classList.add('border-transparent', 'text-zinc-500');
-    tabBtnDeposits?.classList.remove('border-[#E7AC08]', 'text-[#E7AC08]');
-    tabBtnDeposits?.classList.add('border-transparent', 'text-zinc-500');
-
-    viewOrders?.classList.add('hidden');
-    viewDeposits?.classList.add('hidden');
-    viewCustomers?.classList.remove('hidden');
-  });
-
-  // Deposits sync logic
-  let activeDeposits: any[] = [];
-  const depositLedgerRows = document.getElementById('deposit-ledger-rows');
-  const depositsCount = document.getElementById('stat-deposits-count');
-
-  function syncDeposits() {
-    const collRef = collection(dbInstance, 'deposits');
-    
-    onSnapshot(collRef, (snapshot) => {
-      const deposits: any[] = [];
-      snapshot.docs.forEach((doc) => {
-        deposits.push({ id: doc.id, ...doc.data() });
-      });
-
-      activeDeposits = deposits.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-      renderDepositsTable(activeDeposits);
-    });
-  }
-
-  function renderDepositsTable(deposits: any[]) {
-    if (!depositLedgerRows) return;
-    if (depositsCount) depositsCount.textContent = `充值申请总数: ${deposits.length}`;
-
-    if (deposits.length === 0) {
-      depositLedgerRows.innerHTML = `
-        <tr>
-          <td colspan="6" class="py-12 text-center text-zinc-500">暂无充值申请记录。</td>
-        </tr>
-      `;
-      return;
+    function getStoredPool(): Record<string, string[]> {
+      return JSON.parse(localStorage.getItem('comfy_card_pool') || '{}');
     }
 
-    const depositStatusMap: Record<string, string> = {
-      'pending': '待审核',
-      'approved': '已通过',
-      'rejected': '已拒绝'
-    };
+    function savePool(pool: Record<string, string[]>) {
+      localStorage.setItem('comfy_card_pool', JSON.stringify(pool));
+      renderPoolStock();
+    }
 
-    depositLedgerRows.innerHTML = deposits.map(dep => {
-      let statusClass = 'text-amber-400 bg-amber-500/10 border border-amber-500/20';
-      if (dep.status === 'approved') {
-        statusClass = 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20';
-      } else if (dep.status === 'rejected') {
-        statusClass = 'text-rose-400 bg-rose-500/10 border border-rose-500/20';
+    function renderPoolStock() {
+      if (!stockList || !totalKeysCount) return;
+      const pool = getStoredPool();
+      const keys = Object.keys(pool);
+      let total = 0;
+
+      if (keys.length === 0) {
+        stockList.innerHTML = `<div class="text-center py-10 text-slate-400 text-xs">卡密库目前为空，请在左侧批量导入</div>`;
+        totalKeysCount.textContent = '总可用卡密: 0 件';
+        return;
       }
 
-      const actionsHtml = dep.status === 'pending' ? `
-        <button 
-          type="button" 
-          class="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-emerald-400 text-[10px] font-bold rounded-lg transition"
-          onclick="window.approveDeposit('${dep.id}', '${dep.uid}', ${dep.amount})"
-        >
-          审核通过
-        </button>
-        <button 
-          type="button" 
-          class="px-2.5 py-1 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 text-rose-400 text-[10px] font-bold rounded-lg transition"
-          onclick="window.rejectDeposit('${dep.id}')"
-        >
-          拒绝申请
-        </button>
-      ` : `<span class="text-zinc-500 font-bold uppercase tracking-wider text-[9px]">${depositStatusMap[dep.status] || dep.status}</span>`;
+      stockList.innerHTML = keys.map(keyword => {
+        const list = pool[keyword] || [];
+        total += list.length;
 
-      return `
-        <tr class="hover:bg-white/5 border-b border-[#292929] transition-colors">
-          <td class="py-3.5 pr-2 font-mono text-[10px] text-zinc-500 font-bold">${dep.id.substring(0, 10)}...</td>
-          <td class="py-3.5 px-2 font-semibold">
-            <span class="block truncate text-white">${dep.email}</span>
-            <span class="text-[10px] text-zinc-500 font-normal block">${dep.uid}</span>
-          </td>
-          <td class="py-3.5 px-2 font-bold font-mono text-[#E7AC08] font-sora">+$${Number(dep.amount).toFixed(2)} USDT</td>
-          <td class="py-3.5 px-2 font-mono text-[10px] max-w-[200px] truncate select-all text-zinc-300" title="${dep.txId}">${dep.txId}</td>
-          <td class="py-3.5 px-2">
-            <span class="px-2 py-0.5 rounded-full border text-[9px] font-bold ${statusClass}">
-              ${depositStatusMap[dep.status] || dep.status}
-            </span>
-          </td>
-          <td class="py-3.5 pl-2 text-right space-x-1 whitespace-nowrap">
-            ${actionsHtml}
-          </td>
-        </tr>
-      `;
-    }).join('');
-  }
-
-  // Bind approval/rejection operations to window context
-  (window as any).approveDeposit = async function(depId: string, uid: string, amount: number) {
-    if (!confirm(`确定通过该充值申请，为该会员账户充值 $${amount} USDT 吗？`)) return;
-
-    try {
-      // 1. Fetch current balance
-      const userDocRef = doc(dbInstance, 'users', uid);
-      const userDocSnap = await getDoc(userDocRef);
-      let currentBalanceUsd = 0;
-      let email = '';
-      if (userDocSnap.exists()) {
-        currentBalanceUsd = userDocSnap.data()?.balance_usd || 0;
-        email = userDocSnap.data()?.email || '';
-      }
-
-      // 2. Increment user balance
-      const newBalanceUsd = currentBalanceUsd + Number(amount);
-      await setDoc(userDocRef, {
-        balance_usd: newBalanceUsd,
-        email: email
-      });
-
-      // 3. Mark deposit as approved
-      const depDocRef = doc(dbInstance, 'deposits', depId);
-      await updateDoc(depDocRef, { status: 'approved' });
-
-      alert(`充值申请已通过！会员账户已成功入账 $${amount.toFixed(2)} USD (USDT)。`);
-    } catch (err) {
-      console.error("Failed to approve deposit:", err);
-      alert("通过审核失败，请检查网络连接或数据库。");
-    }
-  };
-
-  (window as any).rejectDeposit = async function(depId: string) {
-    if (!confirm("确定要拒绝该充值申请吗？")) return;
-
-    try {
-      const depDocRef = doc(dbInstance, 'deposits', depId);
-      await updateDoc(depDocRef, { status: 'rejected' });
-      alert("充值申请已被拒绝。");
-    } catch (err) {
-      console.error("Failed to reject deposit:", err);
-      alert("拒绝审核失败。");
-    }
-  };
-
-  // Customers sync and balance adjustment logic
-  function syncCustomers() {
-    const collRef = collection(dbInstance, 'users');
-    
-    onSnapshot(collRef, (snapshot) => {
-      const customers: any[] = [];
-      snapshot.docs.forEach((doc) => {
-        customers.push({ id: doc.id, ...doc.data() });
-      });
-
-      // Sort by email or balance or default
-      activeCustomers = customers.sort((a, b) => (a.email || '').localeCompare(b.email || ''));
-      renderCustomersTable(activeCustomers);
-    }, (err) => {
-      console.error("Failed to sync customers:", err);
-      if (customerLedgerRows) {
-        customerLedgerRows.innerHTML = `
-          <tr>
-            <td colspan="4" class="py-12 text-center text-rose-400 bg-rose-500/5 font-bold">
-              加载客户列表失败，请在 Firebase 控制台检查安全规则配置！<br/>
-              <span class="text-[10px] font-normal text-zinc-550">错误信息: ${err.message}</span>
-            </td>
-          </tr>
-        `;
-      }
-    });
-  }
-
-  function renderCustomersTable(customers: any[]) {
-    if (!customerLedgerRows) return;
-    if (customersCount) customersCount.textContent = `客户总数: ${customers.length}`;
-
-    if (customers.length === 0) {
-      customerLedgerRows.innerHTML = `
-        <tr>
-          <td colspan="4" class="py-12 text-center text-zinc-500">暂无注册客户记录。</td>
-        </tr>
-      `;
-      return;
-    }
-
-    customerLedgerRows.innerHTML = customers.map(cust => {
-      const balance = typeof cust.balance_usd === 'number' ? cust.balance_usd : parseFloat(cust.balance_usd || 0);
-      return `
-        <tr class="hover:bg-white/5 border-b border-[#292929] transition-colors">
-          <td class="py-3.5 pr-2 font-mono text-[10px] text-zinc-500 font-bold select-all">${cust.id}</td>
-          <td class="py-3.5 px-2 font-semibold">
-            <span class="block text-white truncate max-w-[250px]">${cust.email || '无邮箱'}</span>
-          </td>
-          <td class="py-3.5 px-2 font-bold font-mono text-[#E7AC08]">$${balance.toFixed(2)} USDT</td>
-          <td class="py-3.5 pl-2 text-right space-x-1 whitespace-nowrap">
+        return `
+          <div class="p-4 bg-[#06080F] border border-[#38BDF8]/20 rounded-2xl flex items-center justify-between">
+            <div>
+              <h4 class="font-extrabold text-white text-xs flex items-center gap-2">
+                <span class="text-[#38BDF8]">${keyword}</span>
+                <span class="text-[10px] bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] px-2 py-0.5 rounded-full font-mono">现货 ${list.length} 件</span>
+              </h4>
+              <p class="text-[11px] text-slate-400 font-mono mt-1">首条预览: ${list[0] ? list[0].substring(0, 25) + '...' : '已耗尽'}</p>
+            </div>
             <button 
               type="button" 
-              class="px-2.5 py-1 bg-[#E7AC08]/10 border border-[#E7AC08]/30 hover:bg-[#E7AC08]/20 text-[#E7AC08] text-[10px] font-bold rounded-lg transition active:scale-95"
-              onclick="window.adjustCustomerBalance('${cust.id}', ${balance})"
+              onclick="window.clearPoolKeyword('${keyword}')" 
+              class="text-xs text-rose-400 hover:text-rose-300 font-bold cursor-pointer"
             >
-              调整余额
+              清空此类
             </button>
-          </td>
-        </tr>
-      `;
-    }).join('');
-  }
+          </div>
+        `;
+      }).join('');
 
-  (window as any).adjustCustomerBalance = async function(uid: string, currentBalance: number) {
-    const newBalanceStr = prompt(`当前余额为: $${currentBalance.toFixed(2)} USDT\n请输入新的账户余额 (USDT 纯数字，如 100):`, currentBalance.toString());
-    if (newBalanceStr === null) return;
-
-    const newBalance = parseFloat(newBalanceStr);
-    if (isNaN(newBalance) || newBalance < 0) {
-      alert("请输入有效的账户余额！");
-      return;
+      totalKeysCount.textContent = `总可用卡密: ${total} 件`;
     }
 
-    if (!confirm(`确定要将该客户 (UID: ${uid}) 的余额调整为 $${newBalance.toFixed(2)} USDT 吗？`)) return;
+    importBtn?.addEventListener('click', () => {
+      const kw = keywordInput.value.trim();
+      const lines = contentTextarea.value.split('\n').map(l => l.trim()).filter(Boolean);
 
-    try {
-      const userDocRef = doc(dbInstance, 'users', uid);
-      await updateDoc(userDocRef, {
-        balance_usd: newBalance
-      });
-      alert("账户余额调整成功！");
-    } catch (err) {
-      console.error("Failed to update user balance:", err);
-      alert("更新余额失败，请检查网络连接或权限规则。");
-    }
-  };
-
-  // --- Translation client-side integration ---
-  function isoToTranslateJs(iso: string) {
-    const map: Record<string, string> = {
-      'en': 'english',
-      'zh-CN': 'chinese_simplified',
-      'zh-TW': 'chinese_traditional',
-      'fr': 'french',
-      'de': 'german',
-      'es': 'spanish',
-      'ja': 'japanese',
-      'ru': 'russian',
-      'ko': 'korean',
-      'it': 'italian',
-      'hi': 'hindi',
-      'pt': 'portuguese'
-    };
-    return map[iso] || iso;
-  }
-
-  // Inject translate.js script dynamically in background (works inside China!)
-  if (!document.getElementById('translate_js_script') && typeof window !== 'undefined') {
-    const script = document.createElement('script');
-    script.id = 'translate_js_script';
-    script.src = 'https://cdn.staticfile.net/translate.js/3.18.66/translate.js';
-    script.onload = () => {
-      const translate = (window as any).translate;
-      if (translate) {
-        translate.language.setLocal('chinese_simplified');
-        translate.service.use('client.edge');
-        translate.selectLanguageTag.show = false;
-        translate.listener.start();
-        translate.execute();
-        
-        // Auto translate on load if a language was previously saved
-        const currentLang = localStorage.getItem('active_language') || 'zh-CN';
-        if (currentLang) {
-          const translateJsLang = isoToTranslateJs(currentLang);
-          setTimeout(() => {
-            translate.changeLanguage(translateJsLang);
-          }, 150);
-        }
+      if (!kw || lines.length === 0) {
+        alert('请填写商品关键词并至少粘贴一条卡密记录！');
+        return;
       }
+
+      const pool = getStoredPool();
+      pool[kw] = (pool[kw] || []).concat(lines);
+      savePool(pool);
+
+      keywordInput.value = '';
+      contentTextarea.value = '';
+      alert(`成功导入 ${lines.length} 条卡密至【${kw}】库存中！`);
+    });
+
+    (window as any).clearPoolKeyword = function(keyword: string) {
+      if (!confirm(`确认清空【${keyword}】下的所有卡密吗？`)) return;
+      const pool = getStoredPool();
+      delete pool[keyword];
+      savePool(pool);
     };
-    document.body.appendChild(script);
+
+    btnAutofillFromPool?.addEventListener('click', () => {
+      if (!selectedOrder) return;
+      const pool = getStoredPool();
+      const items = selectedOrder.items || [];
+      const itemTitle = items[0]?.name || '';
+
+      let matchedKw = Object.keys(pool).find(kw => itemTitle.toLowerCase().includes(kw.toLowerCase()));
+      
+      if (!matchedKw || !pool[matchedKw] || pool[matchedKw].length === 0) {
+        const firstAvailable = Object.keys(pool).find(kw => pool[kw] && pool[kw].length > 0);
+        if (!firstAvailable) {
+          alert('卡密库存池中暂无任何现货可用，请在「卡密库存池」标签中补充库存！');
+          return;
+        }
+        matchedKw = firstAvailable;
+      }
+
+      const keyToDispatch = pool[matchedKw].shift();
+      savePool(pool);
+
+      if (modalDispatchInput && keyToDispatch) {
+        modalDispatchInput.value = keyToDispatch;
+        alert(`已成功从【${matchedKw}】库存中提取 1 条卡密并填入！`);
+      }
+    });
+
+    renderPoolStock();
   }
 </script>

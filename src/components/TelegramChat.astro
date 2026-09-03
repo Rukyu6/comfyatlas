@@ -1,39 +1,36 @@
 ---
-// Telegram Support Chat Widget Component
 const telegramLink = 'https://t.me/puppyshop2Bot';
 ---
-
-<!-- Fixed Container -->
-<div class="fixed bottom-6 right-6 z-50 select-none font-sora">
+<div class="fixed bottom-6 right-6 z-50 select-none font-outfit">
   
-  <!-- Chat Popup Window -->
+  <!-- 聊天弹窗窗口 -->
   <div 
     id="telegram-chat-window" 
-    class="hidden opacity-0 scale-95 origin-bottom-right transition-all duration-300 w-80 sm:w-96 rounded-3xl bg-[#090909] border border-[#292929] shadow-[0_12px_35px_rgba(0,0,0,0.85)] overflow-hidden mb-4 backdrop-blur-md"
+    class="hidden opacity-0 scale-95 origin-bottom-right transition-all duration-300 w-84 sm:w-96 rounded-3xl bg-[#0B0F1A]/95 border border-[#38BDF8]/30 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden mb-4 backdrop-blur-xl flex flex-col"
   >
-    <!-- Header -->
-    <div class="bg-gradient-to-r from-[#E7AC08] to-[#FAC514] p-4 text-[#080808] flex items-center justify-between border-b border-[#FAC514]/30">
-      <div class="flex items-center gap-3">
-        <!-- Bot Avatar indicator -->
+    <!-- 顶栏：苍蓝灵压渐变，纯矢量SVG -->
+    <div class="bg-gradient-to-r from-[#0284C7] to-[#38BDF8] p-3.5 text-white flex items-center justify-between border-b border-[#38BDF8]/30 shrink-0">
+      <div class="flex items-center gap-2.5">
         <div class="relative">
-          <div class="w-10 h-10 rounded-full bg-black flex items-center justify-center font-bold text-sm border border-[#FAC514] shadow-md">
-            ⚡
+          <div class="w-8 h-8 rounded-full bg-[#06080F] flex items-center justify-center border border-[#38BDF8]/60 shadow-md">
+            <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
           </div>
-          <!-- Online status dot -->
-          <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-black rounded-full"></span>
+          <span class="absolute bottom-0 right-0 w-2 h-2 bg-emerald-400 border-2 border-[#06080F] rounded-full"></span>
         </div>
-        <div class="text-left font-sora">
-          <h4 class="text-sm font-bold text-black">System Support</h4>
-          <span class="text-[10px] text-black/80 flex items-center gap-1 font-semibold">
-            Online: 10:00 - 23:00
+        <div class="text-left">
+          <h4 class="text-xs font-bold text-white tracking-wide">Soul Society 专席支持</h4>
+          <span class="text-[9px] text-white/80 font-mono">
+            ONLINE: 24/7 实时对接
           </span>
         </div>
       </div>
-      <!-- Close trigger -->
       <button 
         type="button" 
         id="telegram-close-btn" 
-        class="text-black hover:bg-black/10 p-1.5 rounded-full transition"
+        class="text-white hover:bg-white/10 p-1 rounded-full transition cursor-pointer"
+        aria-label="关闭"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -41,84 +38,69 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
       </button>
     </div>
 
-    <!-- Message Body -->
-    <div id="telegram-chat-messages" class="p-4 space-y-4 h-[250px] overflow-y-auto bg-black/40 border-b border-[#292929]">
-      
-      <!-- Bot welcome bubble -->
-      <div class="flex items-start gap-2.5 max-w-[85%] text-left">
-        <div class="w-6 h-6 rounded-full bg-stone-900 border border-white/10 text-white flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-        <div class="bg-stone-900/60 border border-[#292929] rounded-2xl rounded-tl-none p-3 text-[11px] text-zinc-300 leading-relaxed font-sans">
-          账号使用遇到困难或问题，请先查看帮助教程，大概率可以解决您的问题。
-          <br/><br/>
-          ⭐️ 教程：<a href="/guide" class="text-[#FAC514] underline font-bold hover:text-[#E7AC08]">点击查看帮助教程</a>
+    <!-- 消息对话区域 (支持动态追加与自动滚动) -->
+    <div id="telegram-chat-messages" class="p-3.5 space-y-3 h-[240px] overflow-y-auto bg-[#06080F]/70 border-b border-[#38BDF8]/15 text-xs">
+      <!-- 官方系统欢迎引导 -->
+      <div class="flex items-start gap-2 max-w-[90%] text-left">
+        <div class="w-6 h-6 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] flex items-center justify-center text-[9px] font-mono shrink-0">
+          SYS
+        </div>
+        <div class="bg-[#0B0F1A] border border-[#38BDF8]/25 rounded-2xl rounded-tl-none p-3 text-[11px] text-slate-300 leading-relaxed shadow-sm">
+          欢迎光临。如需咨询账号现货、提取卡密或技术协助，可直接在下方输入框打字发送，或点击下方按钮直连 Telegram 私聊。
         </div>
       </div>
-
-      <!-- Instruction bubble -->
-      <div class="flex items-start gap-2.5 max-w-[85%] text-left">
-        <div class="w-6 h-6 rounded-full bg-stone-900 border border-white/10 text-white flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-        <div class="bg-stone-900/60 border border-[#292929] rounded-2xl rounded-tl-none p-3 text-[11px] text-zinc-300 leading-relaxed font-sans">
-          <strong>开始对话：</strong>请一次性发送 订单号 + 问题截图。
-        </div>
-      </div>
-
     </div>
 
-    <!-- Input Area -->
-    <div class="p-3 bg-[#090909] text-left space-y-2">
-      <!-- Decorative Input -->
-      <div class="relative">
-        <textarea 
-          id="telegram-chat-input"
-          placeholder="请输入您的问题（例如：订单号 + 问题描述）..."
-          rows="2"
-          class="w-full bg-black border border-[#292929] rounded-2xl pl-3 pr-10 py-2.5 text-[11px] text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition-all duration-300 resize-none font-sans"
-        ></textarea>
+    <!-- 底部双通道交互区 (既可直接网页留言发送，也可直连TG) -->
+    <div class="p-3 bg-[#06080F]/95 space-y-2.5 shrink-0">
+      
+      <!-- 网页在线直接发送输入框 -->
+      <form id="telegram-send-form" class="flex items-center gap-2">
+        <input 
+          type="text" 
+          id="telegram-chat-input" 
+          placeholder="在此输入问题，按回车直接发送..." 
+          class="flex-1 bg-[#0B0F1A] border border-[#38BDF8]/30 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/40 transition"
+          autocomplete="off"
+        />
         <button 
-          type="button" 
-          id="telegram-send-btn"
-          class="absolute right-2.5 bottom-3.5 text-[#E7AC08] hover:text-[#FAC514] p-1 rounded-lg hover:bg-[#E7AC08]/10 active:scale-95 transition"
+          type="submit" 
+          id="telegram-send-btn" 
+          class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white hover:brightness-110 active:scale-95 transition shadow-sm cursor-pointer shrink-0 flex items-center justify-center"
+          title="发送消息"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 transform rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+          <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </button>
-      </div>
+      </form>
 
-      <!-- Action Button -->
+      <!-- 一键直达 Telegram 私聊按钮 -->
       <a 
-        href={telegramLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        id="telegram-direct-btn"
-        class="w-full py-2.5 bg-[#E7AC08] hover:bg-[#FAC514] text-[#080808] font-bold rounded-2xl text-[11px] font-sans transition duration-300 flex items-center justify-center gap-2 border border-[#FAC514] shadow-md hover:scale-[1.01] decoration-none"
+        href={telegramLink} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="w-full py-2 rounded-xl bg-white/5 hover:bg-[#0284C7]/20 border border-[#38BDF8]/30 text-[#38BDF8] hover:text-white font-bold text-[11px] shadow-xs flex items-center justify-center gap-2 transition active:scale-98"
       >
-        <!-- Mini Telegram Icon -->
-        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.27-2.03-.49-.82-.27-1.47-.42-1.42-.88.03-.24.36-.49.99-.74 3.89-1.69 6.48-2.8 7.78-3.33 3.69-1.52 4.45-1.78 4.95-1.79.11 0 .36.03.52.16.13.11.17.27.19.38.02.13.02.38-.01.52z"/>
+        <svg class="w-3.5 h-3.5 text-[#38BDF8]" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.29-.27-1.95-.49-.82-.27-1.47-.42-1.42-.88.03-.24.36-.49.99-.74 3.89-1.69 6.48-2.8 7.78-3.33 3.69-1.52 4.45-1.78 4.95-1.79.11 0 .36.03.52.16.13.11.17.27.19.38.02.13.02.38-.01.52z"/>
         </svg>
-        直接在 Telegram 联系客服
+        <span>在 Telegram 直连专席客服 (@puppyshop2Bot)</span>
       </a>
     </div>
 
   </div>
 
-  <!-- Pulse Floating Circle Button -->
+  <!-- 苍蓝灵压浮空圆钮 -->
   <button 
     id="telegram-widget-trigger" 
     type="button" 
-    class="relative w-14 h-14 rounded-full bg-[#E7AC08] border border-[#FAC514] hover:bg-[#FAC514] text-[#080808] shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group"
+    class="relative w-13 h-13 rounded-full bg-gradient-to-tr from-[#0284C7] to-[#38BDF8] border border-[#38BDF8]/60 text-white shadow-[0_0_25px_rgba(56,189,248,0.45)] flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer"
+    aria-label="打开在线客服"
   >
-    <!-- Background pulse indicator -->
-    <span class="absolute -inset-1.5 bg-[#E7AC08]/25 rounded-full filter blur-md animate-ping opacity-60 pointer-events-none"></span>
+    <span class="absolute -inset-1 bg-[#38BDF8]/25 rounded-full filter blur-md animate-ping opacity-75 pointer-events-none"></span>
 
-    <!-- Message count indicator -->
-    <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#080808] text-[9px] font-black text-white flex items-center justify-center border border-[#FAC514] shadow-md animate-bounce">
-      1
-    </span>
-
-    <!-- TG Icon SVG -->
-    <svg class="h-6 w-6 transform group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <svg class="h-5 w-5 transform group-hover:scale-110 transition-transform duration-300 text-white" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.29-.27-1.95-.49-.82-.27-1.47-.42-1.42-.88.03-.24.36-.49.99-.74 3.89-1.69 6.48-2.8 7.78-3.33 3.69-1.52 4.45-1.78 4.95-1.79.11 0 .36.03.52.16.13.11.17.27.19.38.02.13.02.38-.01.52z"/>
     </svg>
   </button>
@@ -130,140 +112,89 @@ const telegramLink = 'https://t.me/puppyshop2Bot';
   const trigger = document.getElementById('telegram-widget-trigger');
   const windowBox = document.getElementById('telegram-chat-window');
   const closeBtn = document.getElementById('telegram-close-btn');
-  const sendBtn = document.getElementById('telegram-send-btn');
-  const textarea = document.getElementById('telegram-chat-input');
-  const messagesContainer = document.getElementById('telegram-chat-messages');
+  const sendForm = document.getElementById('telegram-send-form') as HTMLFormElement;
+  const chatInput = document.getElementById('telegram-chat-input') as HTMLInputElement;
+  const messagesBox = document.getElementById('telegram-chat-messages');
 
-  let isSending = false;
-  let currentUsername = '';
   let currentUserEmail = '';
+  let currentUsername = '';
 
-  // Track authentication state
   onAuthStateChanged(authInstance, (user) => {
     if (user) {
-      currentUsername = user.displayName || '';
       currentUserEmail = user.email || '';
-    } else {
-      currentUsername = '';
-      currentUserEmail = '';
+      currentUsername = user.displayName || user.email?.split('@')[0] || '';
     }
   });
 
   function toggleWidget() {
     if (!windowBox) return;
     if (windowBox.classList.contains('hidden')) {
-      // Open
       windowBox.classList.remove('hidden');
       setTimeout(() => {
         windowBox.classList.remove('opacity-0', 'scale-95');
-      }, 50);
+        chatInput?.focus();
+      }, 30);
     } else {
-      // Close
       windowBox.classList.add('opacity-0', 'scale-95');
       setTimeout(() => {
         windowBox.classList.add('hidden');
-      }, 300);
+      }, 250);
     }
   }
 
-  async function handleSend() {
-    if (!textarea || !messagesContainer || !sendBtn) return;
-    const text = textarea.value.trim();
-    if (!text || isSending) return;
-    
-    isSending = true;
-    textarea.disabled = true;
-    sendBtn.disabled = true;
-    
-    // 1. Add User Bubble
-    const userBubble = document.createElement('div');
-    userBubble.className = 'flex items-start gap-2.5 max-w-[85%] text-right ml-auto justify-end';
-    userBubble.innerHTML = `
-      <div class="bg-[#E7AC08]/15 border border-[#FAC514]/30 rounded-2xl rounded-tr-none p-3 text-[11px] text-zinc-200 leading-relaxed font-sans">
-        ${escapeHtml(text)}
-      </div>
-      <div class="w-6 h-6 rounded-full bg-[#E7AC08] flex items-center justify-center text-xs shrink-0 select-none border border-[#FAC514] text-black">👤</div>
-    `;
-    messagesContainer.appendChild(userBubble);
-    textarea.value = '';
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-    try {
-      // 2. Post to our API support-notify
-      const response = await fetch('/api/support-notify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ 
-          message: text,
-          username: currentUsername,
-          email: currentUserEmail
-        })
-      });
-      
-      const result = await response.json();
-
-      // 3. Add Response Bubble
-      const replyBubble = document.createElement('div');
-      replyBubble.className = 'flex items-start gap-2.5 max-w-[85%] text-left';
-      
-      if (response.ok && result.success) {
-        replyBubble.innerHTML = `
-          <div class="w-6 h-6 rounded-full bg-stone-900 border border-white/10 text-white flex items-center justify-center text-xs shrink-0 select-none">🤖</div>
-          <div class="bg-stone-900/60 border border-[#292929] rounded-2xl rounded-tl-none p-3 text-[11px] text-zinc-300 leading-relaxed font-sans">
-            您的留言已成功发送给博主！博主会尽快通过 TG 回复您。 ⚡<br/>
-            Your message has been sent to the blogger! We will contact you soon.
-          </div>
-        `;
-      } else {
-        replyBubble.innerHTML = `
-          <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs shrink-0 select-none">⚠️</div>
-          <div class="bg-red-950/20 border border-red-900 rounded-2xl rounded-tl-none p-3 text-[11px] text-red-400 leading-relaxed font-sans">
-            发送失败。请点击下方按钮直接在 Telegram 联系博主。<br/>
-            Sending failed. Please use the button below to message directly.
-          </div>
-        `;
-      }
-      messagesContainer.appendChild(replyBubble);
-    } catch (e) {
-      const replyBubble = document.createElement('div');
-      replyBubble.className = 'flex items-start gap-2.5 max-w-[85%] text-left';
-      replyBubble.innerHTML = `
-        <div class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs shrink-0 select-none">⚠️</div>
-        <div class="bg-red-950/20 border border-red-900 rounded-2xl rounded-tl-none p-3 text-[11px] text-red-400 leading-relaxed font-sans">
-          网络连接错误，请点击下方按钮直接跳转联系博主。<br/>
-          Connection error. Please contact the blogger directly using the button below.
-        </div>
-      `;
-      messagesContainer.appendChild(replyBubble);
-    } finally {
-      isSending = false;
-      textarea.disabled = false;
-      sendBtn.disabled = false;
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      textarea.focus();
-    }
-  }
-
-  function escapeHtml(string) {
-    return String(string)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
-  // Event handlers
   trigger?.addEventListener('click', toggleWidget);
   closeBtn?.addEventListener('click', toggleWidget);
 
-  sendBtn?.addEventListener('click', handleSend);
-  textarea?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
+  // 处理直接在线发送留言
+  sendForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text || !messagesBox) return;
+
+    // 1. 立即在界面上追加用户的消息气泡
+    const userBubble = document.createElement('div');
+    userBubble.className = 'flex items-start justify-end gap-2 max-w-[90%] ml-auto text-right';
+    userBubble.innerHTML = `
+      <div class="bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white rounded-2xl rounded-tr-none p-3 text-[11px] leading-relaxed shadow-sm break-all">
+        ${text}
+      </div>
+      <div class="w-6 h-6 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center text-[9px] font-mono shrink-0">
+        ME
+      </div>
+    `;
+    messagesBox.appendChild(userBubble);
+    chatInput.value = '';
+    messagesBox.scrollTop = messagesBox.scrollHeight;
+
+    // 2. 将消息秒级推送到后台 Telegram 机器人
+    try {
+      await fetch('/api/support-notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          email: currentUserEmail || undefined,
+          username: currentUsername || undefined
+        })
+      });
+
+      // 3. 模拟即时确认回复
+      setTimeout(() => {
+        const botReply = document.createElement('div');
+        botReply.className = 'flex items-start gap-2 max-w-[90%] text-left animate-fadeIn';
+        botReply.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] flex items-center justify-center text-[9px] font-mono shrink-0">
+            SYS
+          </div>
+          <div class="bg-[#0B0F1A] border border-[#38BDF8]/25 rounded-2xl rounded-tl-none p-3 text-[11px] text-slate-300 leading-relaxed shadow-sm">
+            您的咨询已即时推送至管理员席位！客服将尽快接入，您也可以点击下方按钮直连 Telegram 私聊。
+          </div>
+        `;
+        messagesBox.appendChild(botReply);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+      }, 600);
+    } catch (err) {
+      console.error("Message dispatch failed:", err);
     }
   });
 </script>

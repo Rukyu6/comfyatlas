@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import TelegramChat from '../components/TelegramChat.astro';
 
-
 export interface Props {
   title: string;
   description?: string;
@@ -11,96 +10,36 @@ export interface Props {
 
 const {
   title,
-  description = "WorldMarket — Pay with USD or lock tokens to get competitive account plans and AI credentials.",
-  ogImage = "/images/worldclaw_hero_core.png",
+  description = "Soul Society — 全球顶级 AI 订阅与高权数字特权专供平台，秒级自动发卡。",
+  ogImage = "/images/aizen_welcome.jpg",
 } = Astro.props;
 
-const siteName = "WorldMarket";
+const siteName = "Soul Society";
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 ---
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#06080F" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
-    <!-- Primary Meta Tags -->
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300..800&family=Plus+Jakarta+Sans:wght@300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content="https://comfyatlas.com" />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:image" content={ogImage} />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-
-    <!-- Google Analytics 4 -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-4RBFJ76E2B"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4RBFJ76E2B');
-    </script>
-
-    <!-- System Language Detection -->
-    <script is:inline>
-      (function() {
-        const langMap = {
-          'en': true, 'zh-CN': true, 'fr': true, 'de': true, 'es': true,
-          'zh-TW': true, 'ja': true, 'ru': true, 'ko': true, 'it': true,
-          'hi': true, 'pt': true
-        };
-        
-        function getSystemLanguage() {
-          const sysLang = navigator.language || navigator.userLanguage || '';
-          if (!sysLang) return 'zh-CN';
-          if (langMap[sysLang]) return sysLang;
-          
-          const base = sysLang.split('-')[0];
-          if (langMap[base]) return base;
-          
-          if (sysLang.startsWith('zh')) {
-            if (sysLang.includes('TW') || sysLang.includes('HK') || sysLang.includes('MO') || sysLang.includes('Hant')) {
-              return 'zh-TW';
-            }
-            return 'zh-CN';
-          }
-          return 'en';
-        }
-        
-        const isManual = localStorage.getItem('active_language_manual') === 'true';
-        const saved = localStorage.getItem('active_language');
-        
-        let resolved = 'zh-CN';
-        if (isManual && saved && langMap[saved]) {
-          resolved = saved;
-        } else {
-          resolved = getSystemLanguage();
-        }
-        
-        window.__activeLanguage = resolved;
-        localStorage.setItem('active_language', resolved);
-      })();
-    </script>
   </head>
-  <body class="min-h-screen flex flex-col bg-black text-[#F8FAFC] selection:bg-[#E7AC08]/30 selection:text-white">
+  <body class="bg-[#06080F] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#0284C7]/30 selection:text-[#38BDF8]">
     <slot />
     <TelegramChat />
   </body>
