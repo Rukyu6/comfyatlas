@@ -8,92 +8,42 @@ import CartDrawer from '../components/CartDrawer.astro';
 
   <Header />
 
-  <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-black text-white">
-    <!-- Ambient Background Glows -->
-    <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#E7AC08]/3 rounded-full filter blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[400px] h-[400px] bg-[#E7AC08]/3 rounded-full filter blur-[100px] pointer-events-none"></div>
-    
-    <div class="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10 w-full animate-fadeIn">
-      <!-- Left side: Text & Buttons -->
-      <div class="lg:col-span-7 text-left space-y-8">
-        <span class="inline-block px-3.5 py-1 rounded-full bg-[#E7AC08]/10 border border-[#E7AC08]/20 text-[10px] font-bold uppercase tracking-widest text-[#E7AC08] font-sora">
-          系统已激活
-        </span>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-sora text-white tracking-tight leading-tight">
-          在一个操作系统上 <br />
-          运行 <span class="text-gradient-gold">数百个账号</span>
-        </h1>
-        <p class="text-base sm:text-lg text-zinc-400 font-sans leading-relaxed max-w-xl">
-          为您的高级数字账号提供统一访问 300+ 平台的操作系统。全自动 24/7 交付，安全的区块链验证，零交易手续费！
-        </p>
-        
-        <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
-          <a 
-            href="#digital" 
-            class="w-full sm:w-auto px-8 py-4 bg-[#E7AC08] hover:bg-[#FAC514] border border-[#FAC514] text-[#080808] font-bold uppercase tracking-wider rounded-full shadow-lg active:scale-95 transition-all duration-300 text-sm font-sora text-center cursor-pointer"
-          >
-            获取您的账号方案 ⚡
-          </a>
-        </div>
-      </div>
+  <!-- Ambient Background Glows -->
+  <div class="fixed top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#E7AC08]/5 rounded-full filter blur-[150px] pointer-events-none z-0"></div>
 
-      <!-- Right side: Cyber Core Art -->
-      <div class="lg:col-span-5 flex justify-center lg:justify-end">
-        <div 
-          id="hero-art-container"
-          class="relative w-full max-w-[400px] aspect-square rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl transition-all duration-300 ease-out cursor-pointer group bg-[#1C1917]/70 backdrop-blur-xl"
-        >
-          <!-- Glowing border indicator on hover -->
-          <div class="absolute inset-0 bg-gradient-to-tr from-[#E7AC08]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
-          
-          <!-- Image -->
-          <img 
-            src="/images/worldclaw_hero_core.png" 
-            alt="WorldMarket Core" 
-            class="w-full h-full object-cover scale-105 group-hover:scale-108 transition-transform duration-500 ease-out select-none"
-            draggable="false"
-          />
-
-          <!-- Overlay Glass Plate -->
-          <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-[#090909]/90 backdrop-blur-md border border-white/10 shadow-xl z-20 text-left space-y-1 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-            <span class="text-[9px] font-black uppercase tracking-widest text-[#E7AC08] font-sora">安全核心已激活</span>
-            <h3 class="text-sm font-bold text-white font-sora">智能助手核心 v1.0</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Digital Vault Section -->
-  <section id="digital" class="py-24 border-t border-[#1C1917] relative min-h-[800px] bg-black text-white">
+  <!-- Digital Vault Section (Direct Start) -->
+  <section id="digital" class="pt-24 md:pt-28 pb-20 relative min-h-[800px] bg-black text-white z-10 animate-fadeIn">
     <div class="max-w-7xl mx-auto px-6">
       
       <!-- Announcement Board -->
-      <div class="glass-card p-6 md:p-8 rounded-[2rem] bg-[#1C1917]/35 backdrop-blur-xl border border-[#292929] mb-12 text-left space-y-6">
-        <h3 class="text-lg font-bold font-sora text-[#FAC514] flex items-center gap-2 select-none uppercase tracking-wider">
-          📢 System Alerts & Notifications / 系统公告
+      <div class="glass-card p-6 md:p-8 bg-[#12100F]/65 border border-white/5 rounded-2xl mb-12 text-left relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 font-mono text-[9px] text-zinc-700 select-none uppercase">
+          Status: Online
+        </div>
+        <h3 class="text-sm font-bold font-sora text-[#FAC514] flex items-center gap-2 select-none uppercase tracking-widest mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#E7AC08] animate-pulse"></span>
+          系统通知 / Announcement Board
         </h3>
         
-        <div class="space-y-4 font-sora text-sm md:text-[15px] text-zinc-300 leading-relaxed border-t border-[#292929] pt-5">
-          <div class="flex items-start gap-3">
-            <span class="text-[#FAC514] select-none text-xs mt-1">▶</span>
+        <div class="space-y-4 font-sora text-xs md:text-sm text-zinc-400 leading-relaxed border-t border-white/5 pt-5">
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-[10px] text-[#E7AC08] bg-[#E7AC08]/10 px-2 py-0.5 rounded border border-[#E7AC08]/20 select-none shrink-0 min-w-[75px] text-center">TERMS</span>
             <p>本站商品仅供学习测试使用，请勿用于非法用途，否则后果自负。</p>
           </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#FAC514] select-none text-xs mt-1">▶</span>
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-[10px] text-[#E7AC08] bg-[#E7AC08]/10 px-2 py-0.5 rounded border border-[#E7AC08]/20 select-none shrink-0 min-w-[75px] text-center">DELIVERY</span>
             <p>付款完成后请在浏览器自动跳转或前台“订单查询”自行提取卡密凭证。</p>
           </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#FAC514] select-none text-xs mt-1">▶</span>
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-[10px] text-[#E7AC08] bg-[#E7AC08]/10 px-2 py-0.5 rounded border border-[#E7AC08]/20 select-none shrink-0 min-w-[75px] text-center">PRIVACY</span>
             <p>账号均为独享发售，售出后自动删档。平台不留存任何卡密备份，请妥善保存。</p>
           </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#FAC514] select-none text-xs mt-1">▶</span>
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-[10px] text-[#E7AC08] bg-[#E7AC08]/10 px-2 py-0.5 rounded border border-[#E7AC08]/20 select-none shrink-0 min-w-[75px] text-center">PAYMENT</span>
             <p>支持支付宝、微信及 USDT 付款。充值余额可享受 0 手续费便捷下单。</p>
           </div>
-          <div class="flex items-start gap-3">
-            <span class="text-[#FAC514] select-none text-xs mt-1">▶</span>
+          <div class="flex items-start gap-4">
+            <span class="font-mono text-[10px] text-[#E7AC08] bg-[#E7AC08]/10 px-2 py-0.5 rounded border border-[#E7AC08]/20 select-none shrink-0 min-w-[75px] text-center">SUPPORT</span>
             <p>如遇异常请参考使用教程。售后请于前台发起的对话附带订单号与截图，我们将尽快处理。</p>
           </div>
         </div>
@@ -101,7 +51,6 @@ import CartDrawer from '../components/CartDrawer.astro';
 
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
         <div>
-          <span class="text-[#E7AC08] uppercase tracking-widest text-xs font-bold font-sora block mb-2">⚡ 自动分发</span>
           <h2 class="text-3xl md:text-5xl font-bold font-sora text-white">数字商品库</h2>
         </div>
         <!-- Search Input -->
@@ -111,9 +60,9 @@ import CartDrawer from '../components/CartDrawer.astro';
               type="text" 
               id="search-bar" 
               placeholder="搜索 700+ 高级账号..." 
-              class="w-full bg-[#1C1917]/70 border border-[#292929] rounded-2xl pl-11 pr-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition-all duration-300 font-sora font-semibold"
+              class="w-full bg-[#12100F]/70 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#E7AC08] focus:ring-1 focus:ring-[#E7AC08] transition-all duration-300 font-sora font-semibold"
             />
-            <div class="absolute left-4 top-4.5 text-zinc-500">
+            <div class="absolute left-4 top-4 text-zinc-500">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -153,47 +102,67 @@ import CartDrawer from '../components/CartDrawer.astro';
 
   <!-- How It Works Section -->
   <section id="how-it-works" class="py-24 border-t border-[#1C1917] bg-[#090909]">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <span class="text-[#E7AC08] uppercase tracking-widest text-xs font-bold font-sora block mb-2">⚡ 激活协议</span>
-        <h2 class="text-3xl md:text-4xl font-bold font-sora text-white">如何购买</h2>
-        <p class="text-zinc-400 mt-4 text-sm font-sora font-medium">
-          我们采用无中间商的支付处理模式，以规避高昂的手续费。
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Step 1 -->
-        <div class="glass-card p-8 rounded-[2rem] relative bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl">
-          <div class="w-12 h-12 rounded-xl bg-stone-900 border border-[#292929] flex items-center justify-center font-sora font-bold text-xl text-[#E7AC08] mb-6">
-            01
-          </div>
-          <h3 class="text-lg font-bold text-white font-sora mb-2">选择账号方案</h3>
-          <p class="text-zinc-400 text-sm leading-relaxed font-sans font-medium">
-            在您的活动结账购物车中选择所需的数字账号和对应服务选项。
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Left Side: Title and Value Prop -->
+        <div class="lg:col-span-4 space-y-4">
+          <h2 class="text-3xl md:text-4xl font-bold font-sora text-white tracking-tight">
+            极简激活协议
+          </h2>
+          <p class="text-zinc-400 text-sm leading-relaxed max-w-sm">
+            我们采用无中间商的直连支付模式，规避传统平台高昂的手续费，保障交易秒级交付。
           </p>
         </div>
 
-        <!-- Step 2 -->
-        <div class="glass-card p-8 rounded-[2rem] relative bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl">
-          <div class="w-12 h-12 rounded-xl bg-stone-900 border border-[#292929] flex items-center justify-center font-sora font-bold text-xl text-[#E7AC08] mb-6">
-            02
+        <!-- Right Side: Timeline Steps -->
+        <div class="lg:col-span-8 relative pl-8 border-l border-white/5 space-y-12">
+          <!-- Step 1 -->
+          <div class="relative group">
+            <!-- Timeline dot -->
+            <div class="absolute -left-[41px] top-1.5 w-5 h-5 rounded-full bg-black border-2 border-zinc-700 group-hover:border-[#FAC514] group-hover:bg-[#E7AC08]/20 transition-all duration-300 flex items-center justify-center">
+              <div class="w-1.5 h-1.5 rounded-full bg-zinc-500 group-hover:bg-[#FAC514]"></div>
+            </div>
+            
+            <div class="glass-card p-6 bg-[#12100F]/45 border border-white/5 backdrop-blur-md rounded-2xl group-hover:border-zinc-700 transition-all">
+              <span class="text-[10px] font-mono text-[#E7AC08] uppercase tracking-widest block mb-1">01 / SELECT</span>
+              <h3 class="text-base font-bold text-white font-sora mb-2">选择账号方案</h3>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                在您的活动结账购物车中选择所需的数字账号和对应服务选项。
+              </p>
+            </div>
           </div>
-          <h3 class="text-lg font-bold text-white font-sora mb-2">USDT 账本转账</h3>
-          <p class="text-zinc-400 text-sm leading-relaxed font-sans font-medium">
-            使用我们提供的网络地址，转入准确的加密货币金额（USDT / BTC / ETH）。
-          </p>
-        </div>
 
-        <!-- Step 3 -->
-        <div class="glass-card p-8 rounded-[2rem] relative bg-[#1C1917]/50 border border-[#292929] backdrop-blur-xl">
-          <div class="w-12 h-12 rounded-xl bg-stone-900 border border-[#292929] flex items-center justify-center font-sora font-bold text-xl text-[#E7AC08] mb-6">
-            03
+          <!-- Step 2 -->
+          <div class="relative group">
+            <!-- Timeline dot -->
+            <div class="absolute -left-[41px] top-1.5 w-5 h-5 rounded-full bg-black border-2 border-zinc-700 group-hover:border-[#FAC514] group-hover:bg-[#E7AC08]/20 transition-all duration-300 flex items-center justify-center">
+              <div class="w-1.5 h-1.5 rounded-full bg-zinc-500 group-hover:bg-[#FAC514]"></div>
+            </div>
+            
+            <div class="glass-card p-6 bg-[#12100F]/45 border border-white/5 backdrop-blur-md rounded-2xl group-hover:border-zinc-700 transition-all">
+              <span class="text-[10px] font-mono text-[#E7AC08] uppercase tracking-widest block mb-1">02 / DEPOSIT</span>
+              <h3 class="text-base font-bold text-white font-sora mb-2">USDT 账本转账</h3>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                使用我们提供的网络地址，转入准确的加密货币金额（USDT / BTC / ETH）。
+              </p>
+            </div>
           </div>
-          <h3 class="text-lg font-bold text-white font-sora mb-2">即时验证</h3>
-          <p class="text-zinc-400 text-sm leading-relaxed font-sans font-medium">
-            提交您的交易哈希（TxID）。我们核对账本后，立即发放您的数字商品，并交付至您的订单库。
-          </p>
+
+          <!-- Step 3 -->
+          <div class="relative group">
+            <!-- Timeline dot -->
+            <div class="absolute -left-[41px] top-1.5 w-5 h-5 rounded-full bg-black border-2 border-zinc-700 group-hover:border-[#FAC514] group-hover:bg-[#E7AC08]/20 transition-all duration-300 flex items-center justify-center">
+              <div class="w-1.5 h-1.5 rounded-full bg-zinc-500 group-hover:bg-[#FAC514]"></div>
+            </div>
+            
+            <div class="glass-card p-6 bg-[#12100F]/45 border border-white/5 backdrop-blur-md rounded-2xl group-hover:border-zinc-700 transition-all">
+              <span class="text-[10px] font-mono text-[#E7AC08] uppercase tracking-widest block mb-1">03 / VERIFY</span>
+              <h3 class="text-base font-bold text-white font-sora mb-2">即时验证交付</h3>
+              <p class="text-zinc-400 text-sm leading-relaxed">
+                提交您的交易哈希（TxID）。我们核对账本后，立即发放您的数字商品，并交付至您的订单库。
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -228,31 +197,6 @@ import CartDrawer from '../components/CartDrawer.astro';
       renderCategories();
       renderDigitalProducts();
     }
-    setupHeroParallax();
-  }
-
-  function setupHeroParallax() {
-    const container = document.getElementById('hero-art-container');
-    if (!container) return;
-
-    container.addEventListener('mousemove', (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const deltaX = (x - centerX) / centerX;
-      const deltaY = (y - centerY) / centerY;
-
-      const rotateY = deltaX * 15;
-      const rotateX = -deltaY * 15;
-
-      container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-
-    container.addEventListener('mouseleave', () => {
-      container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    });
   }
 
   function renderCategories() {
@@ -269,15 +213,15 @@ import CartDrawer from '../components/CartDrawer.astro';
       return `
         <button 
           type="button"
-          class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center justify-between group ${
+          class="w-full text-left px-4 py-3 rounded-lg text-xs font-semibold transition-all duration-300 flex items-center justify-between group border ${
             isActive 
-              ? 'bg-[#E7AC08] text-[#080808] border border-[#FAC514] shadow-md font-sora font-bold' 
-              : 'text-zinc-400 hover:text-white hover:bg-white/5 border border-transparent font-sora font-semibold'
+              ? 'bg-[#E7AC08]/15 text-[#FAC514] border-[#E7AC08]/40 shadow-sm font-sora font-bold' 
+              : 'text-zinc-400 hover:text-white hover:bg-white/5 border-transparent font-sora font-semibold'
           }"
           data-category-id="${cat.cid}"
         >
           <span class="truncate pr-2">${cat.name}</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] bg-stone-900 text-zinc-500 group-hover:bg-white/10 group-hover:text-white font-mono transition">
+          <span class="px-2 py-0.5 rounded text-[9px] bg-stone-900 text-zinc-500 group-hover:bg-white/10 group-hover:text-white font-mono transition">
             ${count}
           </span>
         </button>
@@ -290,10 +234,10 @@ import CartDrawer from '../components/CartDrawer.astro';
       return `
         <button 
           type="button"
-          class="shrink-0 px-4 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+          class="shrink-0 px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-wider transition-all duration-300 border ${
             isActive 
-              ? 'bg-[#E7AC08] text-[#080808] border border-[#FAC514] shadow-md font-sora font-bold' 
-              : 'bg-[#1C1917]/70 text-zinc-400 border border-[#292929] font-sora font-semibold hover:bg-white/5'
+              ? 'bg-[#E7AC08]/15 text-[#FAC514] border-[#E7AC08]/40 shadow-sm font-sora font-bold' 
+              : 'bg-[#12100F]/70 text-zinc-400 border-white/5 font-sora font-semibold hover:bg-white/5'
           }"
           data-category-id="${cat.cid}"
         >
@@ -336,7 +280,7 @@ import CartDrawer from '../components/CartDrawer.astro';
     if (filtered.length === 0) {
       productsGrid.innerHTML = `
         <div class="col-span-full text-center py-24 text-zinc-500 font-sans">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-zinc-650 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-zinc-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <p>No products found matching your criteria.</p>
@@ -370,25 +314,30 @@ import CartDrawer from '../components/CartDrawer.astro';
         ? `$${displayPriceUsd.toFixed(2)} USD`
         : `¥${displayPriceCny} CNY`;
 
+      const statusLight = isOutOfStock
+        ? '<span class="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>'
+        : '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 animate-pulse"></span>';
+
       return `
         <a 
           href="/item/${cleanId}/"
-          class="glass-card hover-lift rounded-2xl p-4 flex flex-row items-center justify-between border border-[#292929] cursor-pointer block text-left decoration-none bg-[#1C1917]/60 backdrop-blur-md gap-4 group transition-all duration-300"
+          class="glass-card hover-lift rounded-xl p-4 sm:p-5 flex flex-row items-center justify-between border cursor-pointer block text-left decoration-none bg-[#12100F]/65 gap-4 group transition-all duration-300 active:scale-[0.99]"
         >
           <div class="flex items-center gap-4 min-w-0 flex-1">
             <img 
               src="${p.image || '/favicon.ico'}" 
-              class="w-10 h-10 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-stone-900 shadow-md" 
+              class="w-10 h-10 md:w-11 md:h-11 rounded-lg border border-white/5 shrink-0 object-cover bg-stone-950 shadow-md" 
               alt="${p.name}"
               onerror="this.src='/favicon.ico'"
             />
             
             <div class="min-w-0 flex-1">
               <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full bg-indigo-950/40 text-indigo-400 border border-indigo-900 font-sora select-none">
+                <span class="px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider rounded bg-indigo-950/30 text-indigo-400 border border-indigo-900/40 font-sora select-none">
                   ${p.category.split(' ')[0]}
                 </span>
-                <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full ${isOutOfStock ? 'bg-red-950/40 text-red-400 border border-red-900' : 'bg-stone-800 text-stone-400 border border-stone-700'} font-mono select-none">
+                <span class="px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider rounded flex items-center gap-1.5 ${isOutOfStock ? 'bg-red-950/30 text-red-400 border border-red-900/40' : 'bg-stone-900 text-stone-400 border border-stone-800'} font-mono select-none">
+                  ${statusLight}
                   ${cleanStock}
                 </span>
               </div>
@@ -401,7 +350,7 @@ import CartDrawer from '../components/CartDrawer.astro';
 
           <div class="flex items-center gap-3 md:gap-4 shrink-0">
             <div class="flex flex-col items-end text-right min-w-[70px]">
-              <span class="text-sm md:text-lg font-black text-[#E7AC08] font-sora">
+              <span class="text-sm md:text-base font-black text-[#E7AC08] font-sora">
                 ${primaryPrice}
               </span>
               <span class="text-[9px] text-zinc-400 font-sora font-semibold">
@@ -410,7 +359,7 @@ import CartDrawer from '../components/CartDrawer.astro';
             </div>
 
             <span 
-              class="px-3 py-1.5 md:px-4 md:py-2.5 rounded-xl bg-transparent border border-white/10 text-white group-hover:bg-[#E7AC08] group-hover:text-[#080808] group-hover:border-[#FAC514] font-sora font-bold text-[10px] md:text-xs uppercase tracking-wider transition-all duration-300 inline-block text-center"
+              class="px-4 py-2 rounded-lg bg-transparent border border-white/10 text-white group-hover:bg-[#E7AC08] group-hover:text-[#080808] group-hover:border-[#FAC514] font-sora font-bold text-[10px] md:text-xs uppercase tracking-wider transition-all duration-300 inline-block text-center active:scale-95 shrink-0"
             >
               ${isMultiOption ? 'Select' : 'Buy'}
             </span>
