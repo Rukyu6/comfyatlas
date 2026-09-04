@@ -442,5 +442,19 @@ export const setDoc = async (docRef, data) => {
 };
 
 // Export active auth/db instances
-export const authInstance = isFirebaseConfigured ? auth : {};
-export const dbInstance = isFirebaseConfigured ? db : {};
+export const getAuthInstance = () => {
+  if (isFirebaseConfigured && typeof window !== 'undefined' && auth) {
+    return auth;
+  }
+  return mockAuthInstance;
+};
+
+export const getDbInstance = () => {
+  if (isFirebaseConfigured && typeof window !== 'undefined' && db) {
+    return db;
+  }
+  return {};
+};
+
+export const authInstance = typeof window !== 'undefined' && isFirebaseConfigured ? (auth || mockAuthInstance) : mockAuthInstance;
+export const dbInstance = typeof window !== 'undefined' && isFirebaseConfigured ? (db || {}) : {};

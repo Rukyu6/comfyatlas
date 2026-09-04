@@ -276,10 +276,12 @@ import Footer from '../components/Footer.astro';
 
     try {
       if (currentTab === 'signin') {
-        await signInWithEmailAndPassword(authInstance, email, password);
+        const activeAuth = (typeof getAuthInstance === 'function' ? getAuthInstance() : authInstance);
+      await signInWithEmailAndPassword(activeAuth, email, password);
       } else {
         const username = usernameInput.value.trim();
-        const cred = await createUserWithEmailAndPassword(authInstance, email, password);
+        const activeAuth = (typeof getAuthInstance === 'function' ? getAuthInstance() : authInstance);
+      const cred = await createUserWithEmailAndPassword(activeAuth, email, password);
         if (cred && cred.user) {
           await updateProfile(cred.user, { displayName: username });
         }
