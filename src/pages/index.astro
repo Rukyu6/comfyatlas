@@ -16,17 +16,11 @@ const initialProducts = database.products.filter(p => {
 
   <Header />
 
-  <!-- 蓝染降临专属原声 (入站自动播放，无需任何点击) -->
-  
-
-
   <!-- 灵压烈焰动态聚光交互层 -->
   <div id="reiatsu-spotlight" class="fixed inset-0 pointer-events-none z-0 transition-opacity duration-500 opacity-60"></div>
 
-  <!-- Hero 全景 60FPS 极滑动态巨幕 (双层 1.2 秒柔光溶解) -->
+  <!-- Hero 全景巨幕 -->
   <section id="hero-stage-section" class="relative w-full min-h-[580px] lg:min-h-[660px] pt-32 md:pt-40 pb-20 flex flex-col justify-between overflow-hidden font-outfit select-none">
-    
-        <!-- 100% 纯正向 60FPS 无缝循环视频 (无倒放、无黑屏、无跳帧) -->
     <div 
       id="hero-bg-parallax" 
       class="absolute inset-0 w-full h-full pointer-events-none transition-transform duration-300 ease-out z-0 overflow-hidden"
@@ -34,7 +28,6 @@ const initialProducts = database.products.filter(p => {
     >
       <video 
         src="/images/aizen_natural_loop.mp4" 
-        
         autoplay 
         muted 
         loop
@@ -42,8 +35,6 @@ const initialProducts = database.products.filter(p => {
         preload="auto"
         class="absolute inset-0 w-full h-full object-cover object-center filter contrast-105 brightness-100 will-change-transform"
       ></video>
-
-      <!-- 边缘自然暗夜羽化 -->
       <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#06080F] via-[#06080F]/60 to-transparent"></div>
       <div class="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#06080F] via-[#06080F]/70 to-transparent"></div>
       <div class="absolute inset-0 bg-radial from-transparent via-transparent to-[#06080F]/20"></div>
@@ -52,24 +43,18 @@ const initialProducts = database.products.filter(p => {
     <!-- 前景悬浮操作控制区 -->
     <div class="max-w-7xl mx-auto px-6 w-full relative z-10 my-auto cursor-default">
       <div class="max-w-xl p-6 md:p-8 rounded-3xl bg-[#06080F]/75 border border-[#38BDF8]/30 backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.8)] space-y-4">
-        
         <div class="flex items-center gap-2">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0284C7]/30 border border-[#38BDF8]/50 text-[#38BDF8] text-xs font-bold font-mono">
             <span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-ping"></span>
             <span>24/7自助下单发卡</span>
           </span>
-          
-          
         </div>
-
         <h1 class="text-2xl md:text-4xl font-black text-white tracking-tight leading-tight drop-shadow-md">
           全球顶级 AI 订阅与海外特权凭证
         </h1>
         <p class="text-xs md:text-sm text-slate-200 leading-relaxed drop-shadow">
           精选 ChatGPT / Claude / Gemini / Grok 官方订阅，独享美区 Apple ID 与 Telegram 高权老号。纯净风控环境，自动秒级发卡，独享质保。
         </p>
-
-        <!-- 凭据提取与现货直达按钮 -->
         <div class="flex flex-wrap items-center gap-3 pt-2">
           <a 
             href="/query" 
@@ -88,65 +73,8 @@ const initialProducts = database.products.filter(p => {
             <span>↓</span>
           </a>
         </div>
-
       </div>
     </div>
-
-    <!-- 底部四大商业保障栏 -->
-    <div class="max-w-7xl mx-auto px-6 w-full relative z-10 mt-12 cursor-default">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-        
-        <div class="flex items-start gap-3.5 p-4 rounded-2xl bg-[#0B0F1A]/90 border border-[#38BDF8]/25 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transition group shadow-xl backdrop-blur-md">
-          <div class="w-9 h-9 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] shrink-0 group-hover:scale-110 transition">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <div>
-            <h4 class="font-extrabold text-white text-xs mb-0.5">全自动秒级发卡</h4>
-            <p class="text-[11px] text-slate-400 leading-snug">付款成功后系统秒级发放卡密凭据</p>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-3.5 p-4 rounded-2xl bg-[#0B0F1A]/90 border border-[#38BDF8]/25 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transition group shadow-xl backdrop-blur-md">
-          <div class="w-9 h-9 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] shrink-0 group-hover:scale-110 transition">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-          </div>
-          <div>
-            <h4 class="font-extrabold text-white text-xs mb-0.5">正规独享质保</h4>
-            <p class="text-[11px] text-slate-400 leading-snug">一客一号独立删档，纯净风控保障</p>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-3.5 p-4 rounded-2xl bg-[#0B0F1A]/90 border border-[#38BDF8]/25 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transition group shadow-xl backdrop-blur-md">
-          <div class="w-9 h-9 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] shrink-0 group-hover:scale-110 transition">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-            </svg>
-          </div>
-          <div>
-            <h4 class="font-extrabold text-white text-xs mb-0.5">全币种快捷结算</h4>
-            <p class="text-[11px] text-slate-400 leading-snug">支持支付宝、微信与 USDT 直付</p>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-3.5 p-4 rounded-2xl bg-[#0B0F1A]/90 border border-[#38BDF8]/25 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transition group shadow-xl backdrop-blur-md">
-          <div class="w-9 h-9 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] shrink-0 group-hover:scale-110 transition">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-            </svg>
-          </div>
-          <div>
-            <h4 class="font-extrabold text-white text-xs mb-0.5">专席在线客服</h4>
-            <p class="text-[11px] text-slate-400 leading-snug">Telegram 官方专人答疑即时响应</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
   </section>
 
   <!-- 数字商品现货库商品阵列区 -->
@@ -183,29 +111,196 @@ const initialProducts = database.products.filter(p => {
       </div>
 
       <!-- 移动端分类条 -->
-      <div class="flex md:hidden overflow-x-auto gap-2 pb-3 mb-6 -mx-6 px-6 no-scrollbar" id="mobile-categories-bar">
-      </div>
+      <div class="flex md:hidden overflow-x-auto gap-2 pb-3 mb-6 -mx-6 px-6 no-scrollbar" id="mobile-categories-bar"></div>
 
       <!-- 主双栏布局 -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="hidden md:block col-span-1 space-y-1.5 max-h-[750px] overflow-y-auto pr-3 scrollbar sticky top-24" id="desktop-categories-sidebar">
-        </div>
+        <div class="hidden md:block col-span-1 space-y-1.5 max-h-[750px] overflow-y-auto pr-3 scrollbar sticky top-24" id="desktop-categories-sidebar"></div>
 
         <div class="md:col-span-3">
           <div id="digital-products-grid" class="flex flex-col gap-3.5">
             {initialProducts.map(p => {
               let displayPriceCny = p.price_cny;
+              if (p.skus && p.skus.length > 0) {
+                const pricesCny = p.skus.map((s) => s.price_cny);
+                displayPriceCny = Math.min(...pricesCny);
+              }
+              const cleanStock = p.stock === '0' || p.stock === '缺货' ? '暂时缺货' : `现货 ${p.stock} 件`;
+              const isMultiOption = p.skus && p.skus.length > 1;
+              const cleanId = p.id.replace('pid_', '');
+              const prefix = isMultiOption ? '起售价 ' : '';
+              const primaryPrice = `${prefix}¥${Math.round(displayPriceCny)}`;
+
+              return (
+                <a 
+                  href={`/item/${cleanId}/`}
+                  class="glass-card rounded-2xl p-4 sm:p-5 flex flex-row items-center justify-between border cursor-pointer block text-left gap-4 group transition-all duration-300 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]"
+                >
+                  <div class="flex items-center gap-4 min-w-0 flex-1">
+                    <img 
+                      src={p.image || '/images/default_product.jpg'} 
+                      class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md" 
+                      alt={p.name}
+                      onerror="this.src='/images/default_product.jpg'"
+                    />
+                    <div class="min-w-0 flex-1">
+                      <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                        <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40 select-none">
+                          自动发卡
+                        </span>
+                        <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/10 text-white border border-white/20 select-none">
+                          {p.category.split(' ')[0]}
+                        </span>
+                        <span class="px-2.5 py-0.5 text-[10px] font-medium rounded-full bg-white/5 text-slate-300 select-none font-mono">
+                          {cleanStock}
+                        </span>
+                      </div>
+                      <h4 class="text-xs md:text-sm font-bold text-white leading-snug group-hover:text-[#38BDF8] transition-colors line-clamp-2 pr-2">
+                        {p.name}
+                      </h4>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-3 md:gap-5 shrink-0">
+                    <div class="flex flex-col items-end text-right min-w-[75px]">
+                      <span class="text-base md:text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
+                        {primaryPrice}
+                      </span>
+                    </div>
+
+                    <span 
+                      class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-[11px] md:text-xs inline-block text-center shadow-[0_0_15px_rgba(56,189,248,0.3)] group-hover:brightness-115 active:scale-95 shrink-0"
+                    >
+                      {isMultiOption ? '选择规格' : '立即购买'}
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CartDrawer />
+  <Footer />
+
+</BaseLayout>
+
+<script>
+  import database from '../data/products.json';
+
+  let activeCategoryId = '';
+  let searchQuery = '';
+
+  const desktopSidebar = document.getElementById('desktop-categories-sidebar');
+  const mobileBar = document.getElementById('mobile-categories-bar');
+  const productsGrid = document.getElementById('digital-products-grid');
+  const searchInput = document.getElementById('search-bar') as HTMLInputElement;
+
+  function init() {
+    if (database.categories && database.categories.length > 0) {
+      activeCategoryId = database.categories[0].cid;
+      renderCategories();
+      renderDigitalProducts();
+    }
+  }
+
+  function renderCategories() {
+    if (!desktopSidebar || !mobileBar) return;
+    const countMap: Record<string, number> = {};
+    database.products.forEach(p => {
+      countMap[p.cid] = (countMap[p.cid] || 0) + 1;
+    });
+
+    desktopSidebar.innerHTML = database.categories.map(cat => {
+      const count = countMap[cat.cid] || 0;
+      const isActive = cat.cid === activeCategoryId;
+      return `
+        <button 
+          type="button"
+          class="w-full text-left px-4 py-3 rounded-2xl text-xs transition-all duration-200 flex items-center justify-between group border ${
+            isActive 
+              ? 'bg-[#0284C7]/25 text-[#38BDF8] border-[#38BDF8]/60 font-black shadow-[0_0_15px_rgba(56,189,248,0.2)]' 
+              : 'text-slate-400 hover:text-white hover:bg-white/[0.04] border-transparent font-medium'
+          }"
+          data-category-id="${cat.cid}"
+        >
+          <span class="truncate pr-2">${cat.name}</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] ${isActive ? 'bg-[#38BDF8] text-black font-black' : 'bg-white/5 text-slate-400 group-hover:bg-white/10 group-hover:text-white'} font-mono">
+            ${count}
+          </span>
+        </button>
+      `;
+    }).join('');
+
+    mobileBar.innerHTML = database.categories.map(cat => {
+      const count = countMap[cat.cid] || 0;
+      const isActive = cat.cid === activeCategoryId;
+      return `
+        <button 
+          type="button"
+          class="shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all border ${
+            isActive 
+              ? 'bg-[#38BDF8] text-black border-[#38BDF8] shadow-[0_0_10px_rgba(56,189,248,0.4)]' 
+              : 'bg-white/5 text-slate-300 border-white/10 font-medium hover:bg-white/10'
+          }"
+          data-category-id="${cat.cid}"
+        >
+          ${cat.name} (${count})
+        </button>
+      `;
+    }).join('');
+
+    const catButtons = document.querySelectorAll('[data-category-id]');
+    catButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCategoryId = btn.getAttribute('data-category-id') || '';
+        searchQuery = '';
+        if (searchInput) searchInput.value = '';
+        renderCategories();
+        renderDigitalProducts();
+      });
+    });
+  }
+
+  function renderDigitalProducts() {
+    if (!productsGrid) return;
+
+    let filtered = database.products;
+    if (searchQuery.trim() !== '') {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.name.toLowerCase().includes(q) || 
+        p.category.toLowerCase().includes(q)
+      );
+    } else {
+      filtered = filtered.filter(p => p.cid === activeCategoryId);
+    }
+
+    if (filtered.length === 0) {
+      productsGrid.innerHTML = `
+        <div class="col-span-full text-center py-24 text-slate-400 glass-card">
+          <p class="font-bold text-white">暂未检索到相关现货</p>
+        </div>
+      `;
+      return;
+    }
+
+    productsGrid.innerHTML = filtered.map(p => {
+      let displayPriceCny = p.price_cny;
       if (p.skus && p.skus.length > 0) {
         const pricesCny = p.skus.map((s: any) => s.price_cny);
         displayPriceCny = Math.min(...pricesCny);
       }
+
       const isOutOfStock = p.stock === '0' || p.stock === '缺货';
       const cleanStock = isOutOfStock ? '暂时缺货' : `现货 ${p.stock} 件`;
       const isMultiOption = p.skus && p.skus.length > 1;
       const cleanId = p.id.replace('pid_', '');
       const prefix = isMultiOption ? '起售价 ' : '';
       const primaryPrice = `${prefix}¥${Math.round(displayPriceCny)}`;
-      const strikedPrice = `$${intOrig}`;
 
       return `
         <a 
@@ -214,12 +309,11 @@ const initialProducts = database.products.filter(p => {
         >
           <div class="flex items-center gap-4 min-w-0 flex-1">
             <img 
-              src="${getCleanBrandImage(p)}" 
+              src="${p.image || '/images/default_product.jpg'}" 
               class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md" 
-              alt="${cleanTitle(p.name)}"
+              alt="${p.name}"
               onerror="this.src='/images/default_product.jpg'"
             />
-            
             <div class="min-w-0 flex-1">
               <div class="flex items-center gap-2 mb-1.5 flex-wrap">
                 <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40 select-none">
@@ -232,9 +326,8 @@ const initialProducts = database.products.filter(p => {
                   ${cleanStock}
                 </span>
               </div>
-              
               <h4 class="text-xs md:text-sm font-bold text-white leading-snug group-hover:text-[#38BDF8] transition-colors line-clamp-2 pr-2">
-                ${cleanTitle(p.name)}
+                ${p.name}
               </h4>
             </div>
           </div>
@@ -244,7 +337,6 @@ const initialProducts = database.products.filter(p => {
               <span class="text-base md:text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
                 ${primaryPrice}
               </span>
-              
             </div>
 
             <span 
@@ -263,73 +355,5 @@ const initialProducts = database.products.filter(p => {
     renderDigitalProducts();
   });
 
-
-      // ==========================================
-  // 3. 蓝染入场专属原声 (纯进入自动播放，无任何点击交互)
-  // ==========================================
-  const welcomeAudio = document.getElementById('aizen-welcome-audio') as HTMLAudioElement;
-  if (welcomeAudio) {
-    welcomeAudio.volume = 1.0;
-    welcomeAudio.play().catch(() => {
-      welcomeAudio.addEventListener('canplaythrough', () => {
-        welcomeAudio.play().catch(() => {});
-      }, { once: true });
-    });
-  }
-
   init();
-
-</script>
-
-
-<!-- Soul Society 进站音频（带 Cookie 记忆：仅首访播放一次） -->
-<audio id="soul-welcome-audio" preload="none">
-  <source src="/welcome.mp3" type="audio/mpeg">
-</audio>
-
-<script is:inline>
-  (function() {
-    var COOKIE_KEY = 'soul_welcome_played';
-    
-    // 检查 Cookie 或 localStorage 是否已有记录
-    function hasPlayed() {
-      var match = document.cookie.match(new RegExp('(^| )' + COOKIE_KEY + '=([^;]+)'));
-      if (match && match[2] === 'true') return true;
-      if (localStorage.getItem(COOKIE_KEY) === 'true') return true;
-      return false;
-    }
-
-    // 标记已播放过（写入 Cookie 保留 30 天，并同步写入 localStorage）
-    function markAsPlayed() {
-      var d = new Date();
-      d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
-      document.cookie = COOKIE_KEY + '=true; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
-      localStorage.setItem(COOKIE_KEY, 'true');
-    }
-
-    // 如果已经有记录，直接退出，绝不打扰用户
-    if (hasPlayed()) return;
-
-    // 首次进站：监听用户的首次任意交互（点击/滚动/触摸），触发唯一一次音频
-    function playOnce() {
-      if (hasPlayed()) return;
-      var audio = document.getElementById('soul-welcome-audio');
-      if (audio) {
-        audio.volume = 0.6; // 舒适音量
-        audio.play().then(function() {
-          markAsPlayed();
-        }).catch(function() {
-          // 浏览器若策略拦截，则等下一次交互
-        });
-      }
-      // 移除监听器，确保只执行一次
-      ['click', 'touchstart', 'keydown'].forEach(function(evt) {
-        document.removeEventListener(evt, playOnce);
-      });
-    }
-
-    ['click', 'touchstart', 'keydown'].forEach(function(evt) {
-      document.addEventListener(evt, playOnce, { once: true });
-    });
-  })();
 </script>
