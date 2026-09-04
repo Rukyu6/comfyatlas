@@ -40,7 +40,64 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:image" content={ogImage} />
-  </head>
+  
+  <!-- 全局神经翻译引擎: 解决动态商品、按钮及分类全量翻译 -->
+  <script src="https://cdn.jsdelivr.net/npm/translate.js/translate.min.js"></script>
+  <script>
+    (function() {
+      if (!window.translate) return;
+      translate.selectLanguageTag.show = false;
+      translate.service.use('client.edge');
+
+      var langMap = {
+        'zh-CN': 'chinese_simplified',
+        'zh': 'chinese_simplified',
+        'en': 'english',
+        'ja': 'japanese',
+        'ko': 'korean'
+      };
+
+      window.applySiteLanguage = function(lang) {
+        if (!lang) lang = localStorage.getItem('active_language') || 'zh-CN';
+        localStorage.setItem('active_language', lang);
+        var target = langMap[lang] || 'chinese_simplified';
+        if (target === 'chinese_simplified') {
+          if (translate.to && translate.to !== 'chinese_simplified') {
+            window.location.reload();
+          }
+        } else {
+          translate.to = target;
+          translate.listener.start();
+          translate.execute();
+        }
+      };
+
+      // 监听语言选择切换事件
+      document.addEventListener('change', function(e) {
+        if (e.target && (e.target.id === 'language-select' || e.target.classList.contains('lang-select') || e.target.name === 'language')) {
+          window.applySiteLanguage(e.target.value);
+        }
+      });
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest('[data-lang]');
+        if (btn) {
+          window.applySiteLanguage(btn.getAttribute('data-lang'));
+        }
+      });
+
+      // 初始化恢复语言状态
+      var saved = localStorage.getItem('active_language');
+      if (saved && saved !== 'zh-CN' && saved !== 'zh') {
+        window.addEventListener('DOMContentLoaded', function() {
+          setTimeout(function() {
+            window.applySiteLanguage(saved);
+          }, 150);
+        });
+      }
+    })();
+  </script>
+
+</head>
   <body class="bg-[#06080F] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#0284C7]/30 selection:text-[#38BDF8]">
     <slot />
     <TelegramChat />
