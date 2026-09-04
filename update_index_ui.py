@@ -1,121 +1,11 @@
----
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import CartDrawer from '../components/CartDrawer.astro';
-import database from '../data/products.json';
+with open("src/pages/index.astro", "r", encoding="utf-8") as f:
+    content = f.read()
 
-// 服务端首屏直出：过滤缺货与分类99
-const defaultCategory = database.categories && database.categories.length > 0 ? database.categories[0] : { cid: '289', name: 'chatGPT账号/会员号' };
-const initialProducts = database.products.filter(p => {
-  const isOut = p.stock === '0' || p.stock === '缺货';
-  return p.cid === defaultCategory.cid && !isOut && p.cid !== '99';
-});
----
-<BaseLayout title="Soul Society — 全球顶级 AI 订阅与高权数字特权专供平台">
+# 替换服务端侧边栏渲染模块
+sidebar_marker_start = 'id="desktop-categories-sidebar">'
+sidebar_marker_end = '</div>\n\n        <div class="md:col-span-3">'
 
-  <Header />
-
-  <!-- 灵压烈焰动态聚光交互层 -->
-  <div id="reiatsu-spotlight" class="fixed inset-0 pointer-events-none z-0 transition-opacity duration-500 opacity-60"></div>
-
-  <!-- Hero 全景巨幕 -->
-  <section id="hero-stage-section" class="relative w-full min-h-[580px] lg:min-h-[660px] pt-32 md:pt-40 pb-20 flex flex-col justify-between overflow-hidden font-outfit select-none">
-    <div 
-      id="hero-bg-parallax" 
-      class="absolute inset-0 w-full h-full pointer-events-none transition-transform duration-300 ease-out z-0 overflow-hidden"
-      style="transform: scale(1.05);"
-    >
-      <video 
-        src="/images/aizen_natural_loop.mp4" 
-        autoplay 
-        muted 
-        loop
-        playsinline
-        preload="auto"
-        class="absolute inset-0 w-full h-full object-cover object-center filter contrast-105 brightness-100 will-change-transform"
-      ></video>
-      <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#06080F] via-[#06080F]/60 to-transparent"></div>
-      <div class="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#06080F] via-[#06080F]/70 to-transparent"></div>
-      <div class="absolute inset-0 bg-radial from-transparent via-transparent to-[#06080F]/20"></div>
-    </div>
-
-    <!-- 前景悬浮操作控制区 -->
-    <div class="max-w-7xl mx-auto px-6 w-full relative z-10 my-auto cursor-default">
-      <div class="max-w-xl p-6 md:p-8 rounded-3xl bg-[#06080F]/75 border border-[#38BDF8]/30 backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.8)] space-y-4">
-        <div class="flex items-center gap-2">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0284C7]/30 border border-[#38BDF8]/50 text-[#38BDF8] text-xs font-bold font-mono">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-ping"></span>
-            <span>24/7自助下单发卡</span>
-          </span>
-        </div>
-        <h1 class="text-2xl md:text-4xl font-black text-white tracking-tight leading-tight drop-shadow-md">
-          全球顶级 AI 订阅与海外特权凭证
-        </h1>
-        <p class="text-xs md:text-sm text-slate-200 leading-relaxed drop-shadow">
-          精选 ChatGPT / Claude / Gemini / Grok 官方订阅，独享美区 Apple ID 与 Telegram 高权老号。纯净风控环境，自动秒级发卡，独享质保。
-        </p>
-        <div class="flex flex-wrap items-center gap-3 pt-2">
-          <a 
-            href="/query" 
-            class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-xs shadow-[0_0_20px_rgba(56,189,248,0.45)] hover:brightness-115 active:scale-95 transition flex items-center gap-2 cursor-pointer"
-          >
-            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-            </svg>
-            <span>提取已购卡密凭据</span>
-          </a>
-          <a 
-            href="#digital" 
-            class="px-4 py-2.5 rounded-xl bg-[#0B0F1A]/85 hover:bg-[#0B0F1A] border border-white/20 text-slate-200 text-xs font-bold transition flex items-center gap-1.5 backdrop-blur-md"
-          >
-            <span>选购数字现货</span>
-            <span>↓</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 数字商品现货库商品阵列区 -->
-  <section id="digital" class="py-12 relative z-10 font-outfit">
-    <div class="max-w-7xl mx-auto px-6">
-      
-      <!-- 检索与分类头部 -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-        <div>
-          <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight flex items-center gap-3">
-            <span>数字商品现货库</span>
-            <span class="text-xs font-mono font-bold text-[#38BDF8] bg-[#0284C7]/20 px-3 py-1 rounded-full border border-[#38BDF8]/40 shadow-[0_0_12px_rgba(56,189,248,0.2)]">700+ 现货储备</span>
-          </h2>
-          <p class="text-xs md:text-sm text-slate-400 mt-1.5">
-            严选海外纯净风控环境 • 自动秒级吐卡 • 独享质保包换
-          </p>
-        </div>
-
-        <div class="w-full max-w-md">
-          <div class="relative">
-            <input 
-              type="text" 
-              id="search-bar" 
-              placeholder="搜索商品名称 (如 ChatGPT, Claude, Telegram, Apple ID)..." 
-              class="w-full bg-[#06080F]/90 border border-[#38BDF8]/30 rounded-2xl pl-11 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/30 transition shadow-inner"
-            />
-            <div class="absolute left-4 top-3.5 text-[#38BDF8]">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 移动端分类条 -->
-      <div class="flex md:hidden overflow-x-auto gap-2 pb-3 mb-6 -mx-6 px-6 no-scrollbar" id="mobile-categories-bar"></div>
-
-      <!-- 主双栏布局 -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="hidden md:block col-span-1 space-y-1.5 max-h-[750px] overflow-y-auto pr-3 scrollbar sticky top-24" id="desktop-categories-sidebar">id="desktop-categories-sidebar">
+new_sidebar_jsx = '''id="desktop-categories-sidebar">
           {database.categories.map((cat, idx) => {
             const hasChildren = cat.children && cat.children.length > 0;
             const isFirst = idx === 0;
@@ -183,80 +73,17 @@ const initialProducts = database.products.filter(p => {
                 )}
               </div>
             );
-          })}</div>
+          })}'''
 
-        <div class="md:col-span-3">
-          <div id="digital-products-grid" class="flex flex-col gap-3.5">
-            {initialProducts.map(p => {
-              let displayPriceCny = p.price_cny;
-              if (p.skus && p.skus.length > 0) {
-                const pricesCny = p.skus.map((s) => s.price_cny);
-                displayPriceCny = Math.min(...pricesCny);
-              }
-              const cleanStock = p.stock === '0' || p.stock === '缺货' ? '暂时缺货' : `现货 ${p.stock} 件`;
-              const isMultiOption = p.skus && p.skus.length > 1;
-              const cleanId = p.id.replace('pid_', '');
-              const prefix = '';
-              const primaryPrice = `${prefix}¥${Math.round(displayPriceCny)}`;
+# 替换侧边栏与脚本控制
+if sidebar_marker_start in content:
+    start_pos = content.find(sidebar_marker_start) + len(sidebar_marker_start)
+    end_pos = content.find(sidebar_marker_end)
+    content = content[:start_pos] + new_sidebar_jsx + content[end_pos:]
 
-              return (
-                <a 
-                  href={`/item/${cleanId}/`}
-                  class="glass-card rounded-2xl p-4 sm:p-5 flex flex-row items-center justify-between border cursor-pointer block text-left gap-4 group transition-all duration-300 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]"
-                >
-                  <div class="flex items-center gap-4 min-w-0 flex-1">
-                    <img 
-                      src={p.image || '/images/default_product.jpg'} 
-                      class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md" 
-                      alt={p.name}
-                      onerror="this.src='/images/default_product.jpg'"
-                    />
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-                        <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40 select-none">
-                          自动发卡
-                        </span>
-                        <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/10 text-white border border-white/20 select-none">
-                          {p.category.split(' ')[0]}
-                        </span>
-                        <span class="px-2.5 py-0.5 text-[10px] font-medium rounded-full bg-white/5 text-slate-300 select-none font-mono">
-                          {cleanStock}
-                        </span>
-                      </div>
-                      <h4 class="text-xs md:text-sm font-bold text-white leading-snug group-hover:text-[#38BDF8] transition-colors line-clamp-2 pr-2">
-                        {p.name}
-                      </h4>
-                    </div>
-                  </div>
-
-                  <div class="flex items-center gap-3 md:gap-5 shrink-0">
-                    <div class="flex flex-col items-end text-right min-w-[75px]">
-                      <span class="text-base md:text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
-                        {primaryPrice}
-                      </span>
-                    </div>
-
-                    <span 
-                      class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-[11px] md:text-xs inline-block text-center shadow-[0_0_15px_rgba(56,189,248,0.3)] group-hover:brightness-115 active:scale-95 shrink-0"
-                    >
-                      {isMultiOption ? '选择规格' : '立即购买'}
-                    </span>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <CartDrawer />
-  <Footer />
-
-</BaseLayout>
-
-<script>
+# 替换客户端交互 script
+script_start = '<script>'
+script_replacement = '''<script>
   import database from '../data/products.json';
 
   let activeCategoryId = '';
@@ -412,4 +239,12 @@ const initialProducts = database.products.filter(p => {
   });
 
   init();
-</script>
+</script>'''
+
+content_before_script = content.split('<script>')[0]
+content = content_before_script + script_replacement
+
+with open("src/pages/index.astro", "w", encoding="utf-8") as f:
+    f.write(content)
+
+print(">>> index.astro 树状折叠交互升级完成！")

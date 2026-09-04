@@ -1,484 +1,673 @@
 {
   "categories": [
     {
+      "cid": "3",
+      "name": "AI订阅服务",
+      "slug": "ai-accounts",
+      "total_count": 14,
+      "children": [
+        {
+          "cid": "4",
+          "name": "ChatGPT账号",
+          "slug": "chatgpt-accounts",
+          "count": 6,
+          "sort_order": 10
+        },
+        {
+          "cid": "5",
+          "name": "Grok账号",
+          "slug": "grok-accounts",
+          "count": 3,
+          "sort_order": 9
+        },
+        {
+          "cid": "6",
+          "name": "Gemini账号",
+          "slug": "gemini-accounts",
+          "count": 1,
+          "sort_order": 8
+        },
+        {
+          "cid": "7",
+          "name": "Claude账号",
+          "slug": "claude-accounts",
+          "count": 0,
+          "sort_order": 7
+        },
+        {
+          "cid": "8",
+          "name": "AI三合一镜像",
+          "slug": "ai-3in1-mirror",
+          "count": 4,
+          "sort_order": 6
+        }
+      ]
+    },
+    {
+      "cid": "10",
+      "name": "Telegram账号A区",
+      "slug": "telegram-accounts",
+      "total_count": 266,
+      "children": [
+        {
+          "cid": "11",
+          "name": "【精养1~6月】",
+          "slug": "telegram-aged-accounts",
+          "count": 77,
+          "sort_order": 9
+        },
+        {
+          "cid": "12",
+          "name": "【精养半年号】",
+          "slug": "telegram-6month-accounts",
+          "count": 75,
+          "sort_order": 8
+        },
+        {
+          "cid": "1",
+          "name": "【精养1~10年】",
+          "slug": "telegram-aged-1-10y",
+          "count": 114,
+          "sort_order": 7
+        }
+      ]
+    },
+    {
+      "cid": "25",
+      "name": "Telegram账号B区",
+      "slug": "telegram-accounts-b",
+      "total_count": 1115,
+      "children": [
+        {
+          "cid": "26",
+          "name": "TG - 亚洲地区",
+          "slug": "telegram-asia-region",
+          "count": 38,
+          "sort_order": 12
+        },
+        {
+          "cid": "27",
+          "name": "TG - 欧美地区",
+          "slug": "telegram-europe-america",
+          "count": 69,
+          "sort_order": 11
+        },
+        {
+          "cid": "28",
+          "name": "TG - 非洲地区",
+          "slug": "telegram-africa-region",
+          "count": 32,
+          "sort_order": 10
+        },
+        {
+          "cid": "29",
+          "name": "TG - 2-5个月",
+          "slug": "telegram-2-5-months",
+          "count": 154,
+          "sort_order": 9
+        },
+        {
+          "cid": "30",
+          "name": "TG - 6-12月",
+          "slug": "telegram-6-12-months",
+          "count": 162,
+          "sort_order": 8
+        },
+        {
+          "cid": "31",
+          "name": "TG - 1至2年",
+          "slug": "telegram-1-2-years",
+          "count": 273,
+          "sort_order": 7
+        },
+        {
+          "cid": "32",
+          "name": "TG - 3至4年",
+          "slug": "telegram-3-4-years",
+          "count": 118,
+          "sort_order": 6
+        },
+        {
+          "cid": "33",
+          "name": "TG - 5年及以上",
+          "slug": "telegram-5-plus-years",
+          "count": 172,
+          "sort_order": 5
+        },
+        {
+          "cid": "34",
+          "name": "TG - 7年以上号",
+          "slug": "telegram-7-plus-years-main",
+          "count": 74,
+          "sort_order": 4
+        },
+        {
+          "cid": "35",
+          "name": "TG - VIP会员号 🔥",
+          "slug": "telegram-vip-mystery-box",
+          "count": 8,
+          "sort_order": 3
+        },
+        {
+          "cid": "36",
+          "name": "TG - 靓号专区",
+          "slug": "telegram-premium-numbers-4a-9a",
+          "count": 11,
+          "sort_order": 3
+        },
+        {
+          "cid": "37",
+          "name": "TG - 双向限制",
+          "slug": "shuangxianghao",
+          "count": 4,
+          "sort_order": 0
+        }
+      ]
+    },
+    {
+      "cid": "9",
+      "name": "Apple苹果ID",
+      "slug": "apple-id-accounts",
+      "total_count": 125,
+      "children": [
+        {
+          "cid": "38",
+          "name": "苹果下载号",
+          "slug": "apple-id-accounts-app-download",
+          "count": 61,
+          "sort_order": 9
+        },
+        {
+          "cid": "39",
+          "name": "苹果iCloud号",
+          "slug": "apple-icloud-accounts",
+          "count": 56,
+          "sort_order": 8
+        },
+        {
+          "cid": "40",
+          "name": "苹果小火箭号",
+          "slug": "apple-id-with-shadowrocket",
+          "count": 8,
+          "sort_order": 7
+        }
+      ]
+    },
+    {
+      "cid": "93",
+      "name": "Google 谷歌账户",
+      "slug": "google-accounts",
+      "total_count": 97,
+      "children": [
+        {
+          "cid": "94",
+          "name": "谷歌精品老号",
+          "slug": "premium-aged-google-accounts",
+          "count": 30,
+          "sort_order": 10
+        },
+        {
+          "cid": "96",
+          "name": "谷歌-随机国家老号 🔥",
+          "slug": "aged-google-accounts-random-countries",
+          "count": 45,
+          "sort_order": 10
+        },
+        {
+          "cid": "95",
+          "name": "收发/SMTP老号",
+          "slug": "aged-smtp-accounts-send-receive",
+          "count": 17,
+          "sort_order": 9
+        },
+        {
+          "cid": "97",
+          "name": "谷歌-新号-不稳定",
+          "slug": "new-google-accounts",
+          "count": 5,
+          "sort_order": 9
+        }
+      ]
+    },
+    {
       "cid": "14",
       "name": "YouTube 油管账号",
       "slug": "youtube-accounts",
-      "parent_id": 0
+      "total_count": 5,
+      "children": []
     },
     {
       "cid": "15",
       "name": "Twitter X 账号",
       "slug": "twitter-x-accounts",
-      "parent_id": 0
+      "total_count": 26,
+      "children": []
     },
     {
       "cid": "18",
       "name": "Instagram 精品号",
       "slug": "instagram-accounts",
-      "parent_id": 0
+      "total_count": 57,
+      "children": []
     },
     {
       "cid": "91",
       "name": "Instagram 新号",
       "slug": "instagram-new-accounts",
-      "parent_id": 0
+      "total_count": 14,
+      "children": []
     },
     {
       "cid": "92",
       "name": "Threads 账号",
       "slug": "Thread-accounts",
-      "parent_id": 0
+      "total_count": 39,
+      "children": []
+    },
+    {
+      "cid": "98",
+      "name": "LinkedIn 领英账户",
+      "slug": "linkedin-accounts",
+      "total_count": 21,
+      "children": [
+        {
+          "cid": "99",
+          "name": "领英-新号",
+          "slug": "new-linkedin-accounts",
+          "count": 6,
+          "sort_order": 9
+        },
+        {
+          "cid": "100",
+          "name": "领英-老号",
+          "slug": "aged-linkedin-accounts",
+          "count": 0,
+          "sort_order": 7
+        },
+        {
+          "cid": "101",
+          "name": "领英-带好友",
+          "slug": "linkedin-accounts-with-connections",
+          "count": 15,
+          "sort_order": 6
+        }
+      ]
     },
     {
       "cid": "102",
       "name": "Line 连我账号",
       "slug": "line-accounts-for-sale",
-      "parent_id": 0
+      "total_count": 6,
+      "children": []
+    },
+    {
+      "cid": "16",
+      "name": "Facebook 脸书账号",
+      "slug": "facebook-accounts",
+      "total_count": 311,
+      "children": [
+        {
+          "cid": "43",
+          "name": "【各国白号】🔥",
+          "slug": "baihao",
+          "count": 16,
+          "sort_order": 50
+        },
+        {
+          "cid": "53",
+          "name": "【FB新号】",
+          "slug": "fbxinhaofb",
+          "count": 10,
+          "sort_order": 49
+        },
+        {
+          "cid": "52",
+          "name": "【FB老号】",
+          "slug": "suijiguojiafbfb",
+          "count": 51,
+          "sort_order": 48
+        },
+        {
+          "cid": "42",
+          "name": "【亚洲国家】🔥",
+          "slug": "yazhou",
+          "count": 22,
+          "sort_order": 30
+        },
+        {
+          "cid": "45",
+          "name": "【欧洲国家】",
+          "slug": "ouzhou",
+          "count": 39,
+          "sort_order": 29
+        },
+        {
+          "cid": "47",
+          "name": "【美洲国家】",
+          "slug": "fbmeizhou",
+          "count": 1,
+          "sort_order": 27
+        },
+        {
+          "cid": "48",
+          "name": "【澳大利亚】",
+          "slug": "fbaodaliya",
+          "count": 2,
+          "sort_order": 27
+        },
+        {
+          "cid": "41",
+          "name": "【美国】🔥",
+          "slug": "meiguo",
+          "count": 35,
+          "sort_order": 25
+        },
+        {
+          "cid": "55",
+          "name": "【泰国】",
+          "slug": "taiguofb",
+          "count": 0,
+          "sort_order": 24
+        },
+        {
+          "cid": "50",
+          "name": "【菲律宾】",
+          "slug": "fbfeilvb",
+          "count": 10,
+          "sort_order": 23
+        },
+        {
+          "cid": "49",
+          "name": "【印度+印尼】",
+          "slug": "fbyindu",
+          "count": 11,
+          "sort_order": 22
+        },
+        {
+          "cid": "57",
+          "name": "【孟加拉国-巴基斯坦-尼泊尔】",
+          "slug": "mengjiala",
+          "count": 1,
+          "sort_order": 21
+        },
+        {
+          "cid": "44",
+          "name": "【随机国家】",
+          "slug": "suijiguojiafb",
+          "count": 99,
+          "sort_order": 20
+        },
+        {
+          "cid": "54",
+          "name": "【公共主页】🔥",
+          "slug": "gonggongzhuye",
+          "count": 14,
+          "sort_order": 1
+        }
+      ]
+    },
+    {
+      "cid": "21",
+      "name": "TikTok-白号专区",
+      "slug": "tiktok-accounts",
+      "total_count": 311,
+      "children": [
+        {
+          "cid": "58",
+          "name": "满月白号",
+          "slug": "tkmanyue",
+          "count": 136,
+          "sort_order": 50
+        },
+        {
+          "cid": "61",
+          "name": "满月白号-带邮箱令牌",
+          "slug": "tkmanyuebaihao",
+          "count": 36,
+          "sort_order": 49
+        },
+        {
+          "cid": "62",
+          "name": "满月白号-API链接接码",
+          "slug": "tkmanyuebaihaojiema",
+          "count": 26,
+          "sort_order": 48
+        },
+        {
+          "cid": "64",
+          "name": "满3月白号",
+          "slug": "tksanyuebaohao",
+          "count": 16,
+          "sort_order": 47
+        },
+        {
+          "cid": "63",
+          "name": "满3月白号-API链接接码",
+          "slug": "tksanyuebaihaojiema",
+          "count": 27,
+          "sort_order": 46
+        },
+        {
+          "cid": "65",
+          "name": "TikTok-满半年白号",
+          "slug": "tk6yuebaihao",
+          "count": 36,
+          "sort_order": 45
+        },
+        {
+          "cid": "66",
+          "name": "TikTok-满年白号",
+          "slug": "tkmannianbaihao",
+          "count": 34,
+          "sort_order": 43
+        }
+      ]
+    },
+    {
+      "cid": "60",
+      "name": "TikTok-千粉/直播号",
+      "slug": "tiktok-accountsdaifen",
+      "total_count": 67,
+      "children": [
+        {
+          "cid": "70",
+          "name": "TikTok 满月千粉",
+          "slug": "tkmanyueqianfen",
+          "count": 23,
+          "sort_order": 60
+        },
+        {
+          "cid": "71",
+          "name": "TikTok 满年千粉",
+          "slug": "tkmannianqiafen",
+          "count": 8,
+          "sort_order": 59
+        },
+        {
+          "cid": "72",
+          "name": "TikTok-满月千粉-带作品",
+          "slug": "tkmanyueqianfenzuopin",
+          "count": 16,
+          "sort_order": 55
+        },
+        {
+          "cid": "73",
+          "name": "TikTok-满年千粉-带作品",
+          "slug": "tkmanniandaizuopin",
+          "count": 14,
+          "sort_order": 55
+        },
+        {
+          "cid": "76",
+          "name": "TikTok-双端直播号-直播伴侣",
+          "slug": "tkshuangduanzhibaohao",
+          "count": 6,
+          "sort_order": 20
+        },
+        {
+          "cid": "77",
+          "name": "TikTok-单手机端直播号",
+          "slug": "tkdanshoujiduan",
+          "count": 0,
+          "sort_order": 1
+        }
+      ]
+    },
+    {
+      "cid": "59",
+      "name": "TikTok-带作品号",
+      "slug": "tiktok-accountszuopin",
+      "total_count": 94,
+      "children": [
+        {
+          "cid": "68",
+          "name": "TikTok-满月下机号",
+          "slug": "tkmanyuexiaji",
+          "count": 17,
+          "sort_order": 55
+        },
+        {
+          "cid": "67",
+          "name": "TikTok-满年下机号",
+          "slug": "tkmannianxiaji",
+          "count": 25,
+          "sort_order": 50
+        },
+        {
+          "cid": "69",
+          "name": "TikTok-满年高权重精品号",
+          "slug": "tkmanniangaoquanzong",
+          "count": 19,
+          "sort_order": 46
+        },
+        {
+          "cid": "74",
+          "name": "TikTok-各区本土号",
+          "slug": "tkgequbentuhao",
+          "count": 2,
+          "sort_order": 0
+        },
+        {
+          "cid": "75",
+          "name": "TikTok-带世界杯作品",
+          "slug": "tkshijiebei",
+          "count": 23,
+          "sort_order": 0
+        },
+        {
+          "cid": "103",
+          "name": "16-23年带随机粉丝号",
+          "slug": "16-23tiktok",
+          "count": 8,
+          "sort_order": 0
+        }
+      ]
     },
     {
       "cid": "19",
       "name": "Discord 账号",
       "slug": "discord-accounts",
-      "parent_id": 0
+      "total_count": 5,
+      "children": []
     },
     {
       "cid": "17",
       "name": "Email 邮箱账号",
       "slug": "email-accounts",
-      "parent_id": 0
+      "total_count": 5,
+      "children": []
     },
     {
-      "cid": "22",
-      "name": "代理与源码搭建",
-      "slug": "web-proxies",
-      "parent_id": 0
-    },
-    {
-      "cid": "70",
-      "name": "TikTok 满月千粉",
-      "slug": "tkmanyueqianfen",
-      "parent_id": 60
-    },
-    {
-      "cid": "71",
-      "name": "TikTok 满年千粉",
-      "slug": "tkmannianqiafen",
-      "parent_id": 60
-    },
-    {
-      "cid": "68",
-      "name": "TikTok-满月下机号",
-      "slug": "tkmanyuexiaji",
-      "parent_id": 59
-    },
-    {
-      "cid": "72",
-      "name": "TikTok-满月千粉-带作品",
-      "slug": "tkmanyueqianfenzuopin",
-      "parent_id": 60
-    },
-    {
-      "cid": "73",
-      "name": "TikTok-满年千粉-带作品",
-      "slug": "tkmanniandaizuopin",
-      "parent_id": 60
-    },
-    {
-      "cid": "43",
-      "name": "【各国白号】🔥",
-      "slug": "baihao",
-      "parent_id": 16
-    },
-    {
-      "cid": "58",
-      "name": "满月白号",
-      "slug": "tkmanyue",
-      "parent_id": 21
-    },
-    {
-      "cid": "67",
-      "name": "TikTok-满年下机号",
-      "slug": "tkmannianxiaji",
-      "parent_id": 59
+      "cid": "24",
+      "name": "Telegram 粉丝服务🔥",
+      "slug": "telegram-channel-members",
+      "total_count": 38,
+      "children": [
+        {
+          "cid": "82",
+          "name": "Telegram| 群/频道粉丝",
+          "slug": "Telegrampindaofensi",
+          "count": 6,
+          "sort_order": 50
+        },
+        {
+          "cid": "83",
+          "name": "Telegram丨高级会员粉丝",
+          "slug": "Telegramhuiyuan粉丝",
+          "count": 9,
+          "sort_order": 49
+        },
+        {
+          "cid": "86",
+          "name": "Telegram 在线粉",
+          "slug": "Telegramzaixian",
+          "count": 2,
+          "sort_order": 47
+        },
+        {
+          "cid": "85",
+          "name": "Telegram 机器人数据",
+          "slug": "Telegram-botshuafen",
+          "count": 4,
+          "sort_order": 46
+        },
+        {
+          "cid": "87",
+          "name": "Telegram 频道帖子浏览量",
+          "slug": "Telegramliulanliang",
+          "count": 8,
+          "sort_order": 45
+        },
+        {
+          "cid": "88",
+          "name": "Telegram 帖子表情回应",
+          "slug": "Telegrambiaoqinghuiying",
+          "count": 2,
+          "sort_order": 44
+        },
+        {
+          "cid": "84",
+          "name": "电报Ai 智能吵群 ",
+          "slug": "zhineng炒群",
+          "count": 4,
+          "sort_order": 40
+        },
+        {
+          "cid": "90",
+          "name": "Telegram 频道/群助力",
+          "slug": "telegram-channel-group-boosts",
+          "count": 3,
+          "sort_order": 0
+        }
+      ]
     },
     {
       "cid": "78",
       "name": "Twitter|× 粉丝服务🔥",
       "slug": "Twittershuafen",
-      "parent_id": 0
-    },
-    {
-      "cid": "82",
-      "name": "Telegram| 群/频道粉丝",
-      "slug": "Telegrampindaofensi",
-      "parent_id": 24
-    },
-    {
-      "cid": "53",
-      "name": "【FB新号】",
-      "slug": "fbxinhaofb",
-      "parent_id": 16
-    },
-    {
-      "cid": "61",
-      "name": "满月白号-带邮箱令牌",
-      "slug": "tkmanyuebaihao",
-      "parent_id": 21
+      "total_count": 4,
+      "children": []
     },
     {
       "cid": "79",
       "name": "Instagram 粉丝服务🔥",
       "slug": "Instagramshuafen",
-      "parent_id": 0
-    },
-    {
-      "cid": "83",
-      "name": "Telegram丨高级会员粉丝",
-      "slug": "Telegramhuiyuan粉丝",
-      "parent_id": 24
-    },
-    {
-      "cid": "52",
-      "name": "【FB老号】",
-      "slug": "suijiguojiafbfb",
-      "parent_id": 16
-    },
-    {
-      "cid": "62",
-      "name": "满月白号-API链接接码",
-      "slug": "tkmanyuebaihaojiema",
-      "parent_id": 21
+      "total_count": 4,
+      "children": []
     },
     {
       "cid": "80",
       "name": "TikTok 粉丝服务🔥",
       "slug": "tkshuafen",
-      "parent_id": 0
-    },
-    {
-      "cid": "64",
-      "name": "满3月白号",
-      "slug": "tksanyuebaohao",
-      "parent_id": 21
-    },
-    {
-      "cid": "86",
-      "name": "Telegram 在线粉",
-      "slug": "Telegramzaixian",
-      "parent_id": 24
+      "total_count": 3,
+      "children": []
     },
     {
       "cid": "23",
       "name": "YouTube 粉丝服务🔥",
       "slug": "YouTube-shuafen",
-      "parent_id": 0
-    },
-    {
-      "cid": "63",
-      "name": "满3月白号-API链接接码",
-      "slug": "tksanyuebaihaojiema",
-      "parent_id": 21
-    },
-    {
-      "cid": "69",
-      "name": "TikTok-满年高权重精品号",
-      "slug": "tkmanniangaoquanzong",
-      "parent_id": 59
-    },
-    {
-      "cid": "85",
-      "name": "Telegram 机器人数据",
-      "slug": "Telegram-botshuafen",
-      "parent_id": 24
-    },
-    {
-      "cid": "65",
-      "name": "TikTok-满半年白号",
-      "slug": "tk6yuebaihao",
-      "parent_id": 21
-    },
-    {
-      "cid": "87",
-      "name": "Telegram 频道帖子浏览量",
-      "slug": "Telegramliulanliang",
-      "parent_id": 24
-    },
-    {
-      "cid": "88",
-      "name": "Telegram 帖子表情回应",
-      "slug": "Telegrambiaoqinghuiying",
-      "parent_id": 24
-    },
-    {
-      "cid": "66",
-      "name": "TikTok-满年白号",
-      "slug": "tkmannianbaihao",
-      "parent_id": 21
-    },
-    {
-      "cid": "84",
-      "name": "电报Ai 智能吵群 ",
-      "slug": "zhineng炒群",
-      "parent_id": 24
-    },
-    {
-      "cid": "42",
-      "name": "【亚洲国家】🔥",
-      "slug": "yazhou",
-      "parent_id": 16
-    },
-    {
-      "cid": "45",
-      "name": "【欧洲国家】",
-      "slug": "ouzhou",
-      "parent_id": 16
-    },
-    {
-      "cid": "47",
-      "name": "【美洲国家】",
-      "slug": "fbmeizhou",
-      "parent_id": 16
-    },
-    {
-      "cid": "48",
-      "name": "【澳大利亚】",
-      "slug": "fbaodaliya",
-      "parent_id": 16
-    },
-    {
-      "cid": "41",
-      "name": "【美国】🔥",
-      "slug": "meiguo",
-      "parent_id": 16
-    },
-    {
-      "cid": "50",
-      "name": "【菲律宾】",
-      "slug": "fbfeilvb",
-      "parent_id": 16
-    },
-    {
-      "cid": "49",
-      "name": "【印度+印尼】",
-      "slug": "fbyindu",
-      "parent_id": 16
-    },
-    {
-      "cid": "57",
-      "name": "【孟加拉国-巴基斯坦-尼泊尔】",
-      "slug": "mengjiala",
-      "parent_id": 16
-    },
-    {
-      "cid": "44",
-      "name": "【随机国家】",
-      "slug": "suijiguojiafb",
-      "parent_id": 16
-    },
-    {
-      "cid": "76",
-      "name": "TikTok-双端直播号-直播伴侣",
-      "slug": "tkshuangduanzhibaohao",
-      "parent_id": 60
-    },
-    {
-      "cid": "26",
-      "name": "TG - 亚洲地区",
-      "slug": "telegram-asia-region",
-      "parent_id": 25
-    },
-    {
-      "cid": "27",
-      "name": "TG - 欧美地区",
-      "slug": "telegram-europe-america",
-      "parent_id": 25
-    },
-    {
-      "cid": "4",
-      "name": "ChatGPT账号",
-      "slug": "chatgpt-accounts",
-      "parent_id": 3
-    },
-    {
-      "cid": "28",
-      "name": "TG - 非洲地区",
-      "slug": "telegram-africa-region",
-      "parent_id": 25
-    },
-    {
-      "cid": "94",
-      "name": "谷歌精品老号",
-      "slug": "premium-aged-google-accounts",
-      "parent_id": 93
-    },
-    {
-      "cid": "96",
-      "name": "谷歌-随机国家老号 🔥",
-      "slug": "aged-google-accounts-random-countries",
-      "parent_id": 93
-    },
-    {
-      "cid": "5",
-      "name": "Grok账号",
-      "slug": "grok-accounts",
-      "parent_id": 3
-    },
-    {
-      "cid": "11",
-      "name": "【精养1~6月】",
-      "slug": "telegram-aged-accounts",
-      "parent_id": 10
-    },
-    {
-      "cid": "29",
-      "name": "TG - 2-5个月",
-      "slug": "telegram-2-5-months",
-      "parent_id": 25
-    },
-    {
-      "cid": "38",
-      "name": "苹果下载号",
-      "slug": "apple-id-accounts-app-download",
-      "parent_id": 9
-    },
-    {
-      "cid": "95",
-      "name": "收发/SMTP老号",
-      "slug": "aged-smtp-accounts-send-receive",
-      "parent_id": 93
-    },
-    {
-      "cid": "97",
-      "name": "谷歌-新号-不稳定",
-      "slug": "new-google-accounts",
-      "parent_id": 93
-    },
-    {
-      "cid": "99",
-      "name": "领英-新号",
-      "slug": "new-linkedin-accounts",
-      "parent_id": 98
-    },
-    {
-      "cid": "6",
-      "name": "Gemini账号",
-      "slug": "gemini-accounts",
-      "parent_id": 3
-    },
-    {
-      "cid": "12",
-      "name": "【精养半年号】",
-      "slug": "telegram-6month-accounts",
-      "parent_id": 10
-    },
-    {
-      "cid": "30",
-      "name": "TG - 6-12月",
-      "slug": "telegram-6-12-months",
-      "parent_id": 25
-    },
-    {
-      "cid": "39",
-      "name": "苹果iCloud号",
-      "slug": "apple-icloud-accounts",
-      "parent_id": 9
-    },
-    {
-      "cid": "1",
-      "name": "【精养1~10年】",
-      "slug": "telegram-aged-1-10y",
-      "parent_id": 10
-    },
-    {
-      "cid": "31",
-      "name": "TG - 1至2年",
-      "slug": "telegram-1-2-years",
-      "parent_id": 25
-    },
-    {
-      "cid": "40",
-      "name": "苹果小火箭号",
-      "slug": "apple-id-with-shadowrocket",
-      "parent_id": 9
-    },
-    {
-      "cid": "8",
-      "name": "AI三合一镜像",
-      "slug": "ai-3in1-mirror",
-      "parent_id": 3
-    },
-    {
-      "cid": "32",
-      "name": "TG - 3至4年",
-      "slug": "telegram-3-4-years",
-      "parent_id": 25
-    },
-    {
-      "cid": "101",
-      "name": "领英-带好友",
-      "slug": "linkedin-accounts-with-connections",
-      "parent_id": 98
-    },
-    {
-      "cid": "33",
-      "name": "TG - 5年及以上",
-      "slug": "telegram-5-plus-years",
-      "parent_id": 25
-    },
-    {
-      "cid": "34",
-      "name": "TG - 7年以上号",
-      "slug": "telegram-7-plus-years-main",
-      "parent_id": 25
-    },
-    {
-      "cid": "35",
-      "name": "TG - VIP会员号 🔥",
-      "slug": "telegram-vip-mystery-box",
-      "parent_id": 25
-    },
-    {
-      "cid": "36",
-      "name": "TG - 靓号专区",
-      "slug": "telegram-premium-numbers-4a-9a",
-      "parent_id": 25
-    },
-    {
-      "cid": "54",
-      "name": "【公共主页】🔥",
-      "slug": "gonggongzhuye",
-      "parent_id": 16
-    },
-    {
-      "cid": "37",
-      "name": "TG - 双向限制",
-      "slug": "shuangxianghao",
-      "parent_id": 25
-    },
-    {
-      "cid": "74",
-      "name": "TikTok-各区本土号",
-      "slug": "tkgequbentuhao",
-      "parent_id": 59
-    },
-    {
-      "cid": "75",
-      "name": "TikTok-带世界杯作品",
-      "slug": "tkshijiebei",
-      "parent_id": 59
-    },
-    {
-      "cid": "90",
-      "name": "Telegram 频道/群助力",
-      "slug": "telegram-channel-group-boosts",
-      "parent_id": 24
-    },
-    {
-      "cid": "103",
-      "name": "16-23年带随机粉丝号",
-      "slug": "16-23tiktok",
-      "parent_id": 59
+      "total_count": 5,
+      "children": []
     }
   ],
   "products": [
@@ -11172,30 +11361,6 @@
       ]
     },
     {
-      "id": "pid_3880",
-      "name": "【分站开通】专属代理分站（自主定价/一键同步全站商品）",
-      "price_cny": 148,
-      "price_usd": 20.6,
-      "cost_cny": 99.0,
-      "image": "https://chuhai91.cc/uploads/product/2026/07/916b02cd-935e-4b1f-9dd4-f54284f59115.png",
-      "stock": "充足",
-      "cid": "22",
-      "category": "代理与源码搭建",
-      "type": "digital",
-      "introduce": "<h2>👑 专属分站代理</h2><p><strong>「 零囤货 · 零风险 · 差价纯赚 」</strong></p><h3>💡 运作模式：你负责宣传与对接，其余交给我</h3><ul><li><p><strong>发货我来</strong> —— 全站商品自动同步，系统24小时全自动发货，无需你人工守候。</p></li><li><p><strong>售后我顶</strong> —— 遇到问题商品<strong>我们给换</strong>。你只需把买家问题反馈给我，我出货源，你做对接。</p></li><li><p><strong>异常我搞定</strong> —— 收款风控、通道不稳定、技术维护？总站技术团队全权搞定。</p></li><li><p><strong>定价你决定</strong> —— 商品售价自由调整，赚多赚少你说了算，差价利润秒到账。</p></li></ul><blockquote><p><strong>你唯一要做的事：</strong> 宣传分站链接，解答自己的客户疑问。剩下的技术、货源和售后替换，全部由总站做你的后盾。</p></blockquote><p></p><p>不明白的联系客服~ 下完单要联系客服。帮你开通分销商权限/</p>",
-      "skus": [
-        {
-          "id": "sku_6880",
-          "name": "限时特价/永久",
-          "price_cny": 148,
-          "price_usd": 20.6,
-          "cost_cny": 99.0,
-          "stock": "充足",
-          "picture": "https://chuhai91.cc/uploads/product/2026/07/916b02cd-935e-4b1f-9dd4-f54284f59115.png"
-        }
-      ]
-    },
-    {
       "id": "pid_3854",
       "name": "Gmail 账户 | 2017年创建 | 已过短信及2FA双重验证 | 已开启SMTP（应用专用密码）| 美国IP创建",
       "price_cny": 124,
@@ -19496,30 +19661,6 @@
           "cost_cny": 30.4,
           "stock": "45",
           "picture": "https://chuhai91.cc/uploads/upstream/accszone-173b511bc43e6e2a35ffff6b2eabf2d392234592.png"
-        }
-      ]
-    },
-    {
-      "id": "pid_3881",
-      "name": "【机器人代理】Telegram自动开通会员机器人+trx兑换+能量出售+星星购买+ton兑换+地址监听-多合一机器人",
-      "price_cny": 87,
-      "price_usd": 12.1,
-      "cost_cny": 58.0,
-      "image": "https://chuhai91.cc/uploads/upstream/acg-faka-2768e10303559f4494cf3de998a68be55f24b740.jpg",
-      "stock": "充足",
-      "cid": "22",
-      "category": "代理与源码搭建",
-      "type": "digital",
-      "introduce": "<h2>🤖 Telegram 多合一全自动机器人（代理加盟）</h2><p><strong>「 聚合六大核心功能 · 零基础搭建 · 自定义定价躺赚 」</strong></p><h3>▎成品演示</h3><ul><li><p><strong>官方演示机器人：</strong> <code>@lo8877_1bot</code>（欢迎点击参观体验）</p></li></ul><h3>▎核心六合一功能</h3><p>一体化聚合 Telegram 生态最赚钱的刚需业务，系统全自动运行：</p><ol><li><p><strong>会员直充</strong> —— TG 自动开通会员（Premium）</p></li><li><p><strong>TRX 兑换</strong> —— 闪电汇兑，自动秒发</p></li><li><p><strong>能量出售</strong> —— 自动波场能量租赁，降低转账手续费</p></li><li><p><strong>星星购买</strong> —— TG Stars（星星）一键充值</p></li><li><p><strong>TON 兑换</strong> —— TON 生态代币快速兑换</p></li><li><p><strong>地址监听</strong> —— 链上地址变动实时通知</p></li></ol><h3>▎为什么选择这个机器人？</h3><ul><li><p><strong>完全自主掌控</strong> —— 支持<strong>自定义价格</strong>。所有业务的利润空间完全由你说了算，你只管宣传引流，剩下的系统全自动搞定。</p></li><li><p><strong>转错U变利润</strong> —— 能量业务中，若客户不小心<strong>转错 U，系统会自动将转错的金额作为你的利润直接结算给你！</strong> 绝不漏掉任何一笔糊涂账。  当然你也可给客户退回去。</p></li><li><p><strong>成品即用</strong> —— 纯正成品机器人出售，免去复杂开发流程，对接即可上线运营。</p></li></ul><p><strong>▎做真正的甩手掌柜：你负责引流，机器人负责 24 小时全自动数钱！</strong></p>",
-      "skus": [
-        {
-          "id": "sku_6881",
-          "name": "代理同款机器人/永久",
-          "price_cny": 87,
-          "price_usd": 12.1,
-          "cost_cny": 58.0,
-          "stock": "充足",
-          "picture": "https://chuhai91.cc/uploads/upstream/acg-faka-2768e10303559f4494cf3de998a68be55f24b740.jpg"
         }
       ]
     },
@@ -41429,30 +41570,6 @@
           "cost_cny": 27.6,
           "stock": "80",
           "picture": "https://chuhai91.cc/uploads/upstream/accszone-8b8cb530564aabd20f1b3fe6cac3763e4a87f2d8.jpeg"
-        }
-      ]
-    },
-    {
-      "id": "pid_3882",
-      "name": "【号铺机器人代理】全自动TG电报号发卡系统出售：自带百万库存/无需自己备号",
-      "price_cny": 2500,
-      "price_usd": 347.2,
-      "cost_cny": 2000.0,
-      "image": "https://chuhai91.cc/uploads/upstream/acg-faka-2768e10303559f4494cf3de998a68be55f24b740.jpg",
-      "stock": "充足",
-      "cid": "22",
-      "category": "代理与源码搭建",
-      "type": "digital",
-      "introduce": "<p></p><h2>🤖 TG电报/飞机号 自动卖号机器人搭建</h2><p><strong>「 共享100W+海量库存 · 无需自己备号 · 零成本当老板 」</strong></p><h3>▎成品演示</h3><ul><li><p><strong>同款官方机器人：</strong> <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" class=\"text-primary underline\" href=\"https://t.me/haopu8877bot\">https://t.me/haopu8877bot</a>（欢迎点击参观体验）</p></li></ul><h3>💡 为什么选择加入我们的号铺代理？</h3><ul><li><p></p><ol><li><p><strong>百万现货支持：</strong> 搭建完成即自带100万+电报账号库存，种类齐全，随时随地下单。</p></li><li><p><strong>纯零成本创业：</strong> 彻底打破“先压货再倒卖”的传统模式，真正做到零资金风险。</p></li><li><p><strong>同款完美复刻：</strong> 完美搭建同款演示机器人（ <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" class=\"text-primary underline\" href=\"https://t.me/haopu8877bot\">https://t.me/haopu8877bot</a> ），界面美观，转化率极高。</p></li><li><p><strong>管理自由度高：</strong> 拥有独立后台，支持自定义商品价格，利润空间完全由你掌控。</p></li></ol></li></ul><p></p><p>共享百万库存，自主定价卖号。<strong>我们出技术和货源，你零成本引流</strong>，轻松开启高回报的躺赚模式！</p><p>最重要的是价格优势！！成为代理价格会碾压市场行情。可联系电报客服详聊</p>",
-      "skus": [
-        {
-          "id": "sku_6882",
-          "name": "代理费300u",
-          "price_cny": 2500,
-          "price_usd": 347.2,
-          "cost_cny": 2000.0,
-          "stock": "充足",
-          "picture": "https://chuhai91.cc/uploads/upstream/acg-faka-2768e10303559f4494cf3de998a68be55f24b740.jpg"
         }
       ]
     },
@@ -80054,30 +80171,6 @@
           "cost_cny": 188.0,
           "stock": "110",
           "picture": "https://chuhai91.cc/uploads/upstream/acg-faka-ba4392d891af140a0932313a24a5844391a2d11a.png"
-        }
-      ]
-    },
-    {
-      "id": "pid_371",
-      "name": "【承接定制】各类电报机器人/网站源码：源码二次开发 / 现成一键搭建（联系客服定制）",
-      "price_cny": 25,
-      "price_usd": 3.5,
-      "cost_cny": 1.0,
-      "image": "/images/default_product.jpg",
-      "stock": "充足",
-      "cid": "22",
-      "category": "代理与源码搭建",
-      "type": "digital",
-      "introduce": "<p>补差价</p><p></p><p>该付多少钱，数量就输入多少~</p><p></p>",
-      "skus": [
-        {
-          "id": "sku_344",
-          "name": "补差价",
-          "price_cny": 25,
-          "price_usd": 3.5,
-          "cost_cny": 1.0,
-          "stock": "充足",
-          "picture": "/images/default_product.jpg"
         }
       ]
     }
