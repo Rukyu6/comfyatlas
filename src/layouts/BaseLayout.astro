@@ -45,8 +45,8 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
     <slot />
     <TelegramChat />
     <!-- 全局多语言实时翻译与响应总线 -->
-    <script type="module">
-      import { translations } from '/src/scripts/i18n.js';
+    <script>
+      import { translations } from '../scripts/i18n.js';
 
       function applyTranslations() {
         const lang = localStorage.getItem('active_language') || 'zh-CN';
