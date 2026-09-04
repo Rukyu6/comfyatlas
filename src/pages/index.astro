@@ -185,10 +185,7 @@ import CartDrawer from '../components/CartDrawer.astro';
 
         <div class="md:col-span-3">
           <div id="digital-products-grid" class="flex flex-col gap-3.5">
-            <div class="col-span-full text-center py-20 text-slate-400">
-              
-              <p class="font-mono text-xs"></p>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -284,7 +281,7 @@ import CartDrawer from '../components/CartDrawer.astro';
       currentTiltX += (targetTiltX - currentTiltX) * 0.08;
       currentTiltY += (targetTiltY - currentTiltY) * 0.08;
 
-      heroBg.style.transform = `scale(1.05) translate3d(${(-currentTiltY * 3).toFixed(1)}px, ${(currentTiltX * 3).toFixed(1)}px, 0)`;
+      heroBg.style.transform = `scale(1.05) translate3d(${(-currentTiltY * 3)}px, ${(currentTiltX * 3)}px, 0)`;
     }
     requestAnimationFrame(animateParallax);
   }
@@ -426,7 +423,7 @@ import CartDrawer from '../components/CartDrawer.astro';
       }
 
       const origCny = Math.round(displayPriceCny * 1.25);
-      const origUsd = (displayPriceUsd * 1.25).toFixed(2);
+      const origUsd = (displayPriceUsd * 1.25);
 
       const isOutOfStock = p.stock === '0' || p.stock === '缺货';
       const cleanStock = isOutOfStock ? '暂时缺货' : `现货 ${p.stock} 件`;
@@ -436,7 +433,7 @@ import CartDrawer from '../components/CartDrawer.astro';
 
       const primaryPrice = currencyMode === 'cny'
         ? `${prefix}¥${displayPriceCny}`
-        : `${prefix}$${displayPriceUsd.toFixed(2)}`;
+        : `${prefix}$${displayPriceUsd}`;
       
       const strikedPrice = currencyMode === 'cny' ? `¥${origCny}` : `$${origUsd}`;
 
