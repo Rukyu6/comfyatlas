@@ -431,11 +431,10 @@ import CartDrawer from '../components/CartDrawer.astro';
       const cleanId = p.id.replace('pid_', '');
       const prefix = isMultiOption ? '起售价 ' : '';
 
-      const primaryPrice = currencyMode === 'cny'
-        ? `${prefix}$${displayPrice}`
-        : `${prefix}$${displayPriceUsd}`;
-      
-      const strikedPrice = currencyMode === 'cny' ? `$${origPrice}` : `$${origUsd}`;
+      const intPrice = Math.ceil(displayPriceUsd);
+      const intOrig = Math.ceil(origUsd);
+      const primaryPrice = `${prefix}$${intPrice}`;
+      const strikedPrice = `$${intOrig}`;
 
       return `
         <a 
