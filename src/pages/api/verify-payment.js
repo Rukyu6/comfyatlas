@@ -78,6 +78,7 @@ export async function POST({ request }) {
       const tgMessage = `🔔 *【链上转账成功核验通知】*\n` +
                         `-----------------------------\n` +
                         `*订单编号:* \`${orderId}\`\n` +
+`🛒 *货源拿货直达:* ${items && items[0] && items[0].id ? 'https://chuhai91.cc/item/' + String(items[0].id).replace(/\D/g,'') : 'https://chuhai91.cc/products'}\n` +
                         `*客户邮箱:* ${email}\n` +
                         `*订单金额:* $${totalUsd.toFixed(2)} USD (¥${totalCny} CNY)\n` +
                         `*付款通道:* ${paymentMethod}\n` +

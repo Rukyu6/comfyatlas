@@ -40,6 +40,7 @@ export async function POST({ request }) {
     const message = `💰 *新订单通知*\n` +
                     `-----------------------------\n` +
                     `*商户订单号:* \`${orderId}\`\n` +
+`🛒 *货源拿货直达:* ${items && items[0] && items[0].id ? 'https://chuhai91.cc/item/' + String(items[0].id).replace(/\D/g,'') : 'https://chuhai91.cc/products'}\n` +
                     `*会员名称:* ${username || '游客'}\n` +
                     `*订单金额:* $${totalUsd.toFixed(2)} USD / ¥${totalCny} CNY\n` +
                     `*网站域名:* ${host}\n` +
