@@ -213,7 +213,7 @@ const initialProducts = database.products.filter(p => {
                 >
                   <div class="flex items-center gap-4 min-w-0 flex-1">
                     <img 
-                      src={p.image || '/images/default_product.jpg'} 
+                      src={p.name.toLowerCase().includes("gpt") ? "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" : (p.image || "/images/default_product.jpg")} 
                       class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md" 
                       alt={p.name}
                     />
@@ -240,9 +240,7 @@ const initialProducts = database.products.filter(p => {
                       <span class="text-base md:text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
                         {prefix}${intPrice}
                       </span>
-                      <span class="text-[10px] text-slate-500 line-through font-mono">
-                        ${origUsd}
-                      </span>
+                      
                     </div>
 
                     <span 
@@ -442,6 +440,45 @@ const initialProducts = database.products.filter(p => {
     });
   }
 
+  
+    // 智能净化上游粗糙渠道话术
+    function cleanTitle(name) {
+      if (!name) return '';
+      return name
+        .replace(/【渠道\d+】/g, '')
+        .replace(/【凭证充足】/g, '')
+        .replace(/\(凭证充足\)/g, '')
+        .replace(/--24小时自助充值plus会员/g, ' (24H自助秒充)')
+        .replace(/-24小时自助充值pro会员/g, ' (24H自助秒充)')
+        .replace(/-24小时自助充值/g, '')
+        .trim();
+    }
+
+    // 智能高质感品牌图标库回退
+    function getCleanBrandImage(p) {
+      const n = (p.name || '').toLowerCase();
+      const cat = (p.category || '').toLowerCase();
+      if (n.includes('chatgpt') || n.includes('gpt') || cat.includes('gpt')) {
+        return 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg';
+      }
+      if (n.includes('grok') || cat.includes('grok')) {
+        return 'https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png';
+      }
+      if (n.includes('gemini') || cat.includes('gemini')) {
+        return 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg';
+      }
+      if (n.includes('claude') || cat.includes('claude')) {
+        return 'https://upload.wikimedia.org/wikipedia/commons/7/78/Anthropic_logo.svg';
+      }
+      if (n.includes('apple') || cat.includes('apple')) {
+        return 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg';
+      }
+      if (n.includes('telegram') || n.includes('电报') || cat.includes('电报')) {
+        return 'https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg';
+      }
+      return p.image || '/images/default_product.jpg';
+    }
+
   function renderDigitalProducts() {
     if (!productsGrid) return;
 
@@ -511,9 +548,9 @@ const initialProducts = database.products.filter(p => {
         >
           <div class="flex items-center gap-4 min-w-0 flex-1">
             <img 
-              src="${p.image || '/images/default_product.jpg'}" 
+              src="${getCleanBrandImage(p)}" 
               class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md" 
-              alt="${p.name}"
+              alt="${cleanTitle(p.name)}"
               onerror="this.src='/images/default_product.jpg'"
             />
             
@@ -531,7 +568,7 @@ const initialProducts = database.products.filter(p => {
               </div>
               
               <h4 class="text-xs md:text-sm font-bold text-white leading-snug group-hover:text-[#38BDF8] transition-colors line-clamp-2 pr-2">
-                ${p.name}
+                ${cleanTitle(p.name)}
               </h4>
             </div>
           </div>
@@ -541,9 +578,7 @@ const initialProducts = database.products.filter(p => {
               <span class="text-base md:text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
                 ${primaryPrice}
               </span>
-              <span class="text-[10px] text-slate-500 line-through font-mono">
-                ${strikedPrice}
-              </span>
+              
             </div>
 
             <span 

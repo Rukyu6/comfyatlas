@@ -27,8 +27,8 @@ const cleanIntroduce = rawIntroduce
 ---
 
 <BaseLayout 
-  title={`${product.name} — Soul Society`} 
-  description={`在 Soul Society 平台购买 ${product.name}，独享质保，秒级自动发卡。`}
+  title={`${product.name.replace(/【渠道\d+】/g, "").replace(/【凭证充足】/g, "").replace(/--24小时自助充值plus会员/g, "").replace(/-24小时自助充值pro会员/g, "").trim()} — Soul Society`} 
+  description={`在 Soul Society 平台购买 ${product.name.replace(/【渠道\d+】/g, "").replace(/【凭证充足】/g, "").replace(/--24小时自助充值plus会员/g, "").replace(/-24小时自助充值pro会员/g, "").trim()}，独享质保，秒级自动发卡。`}
 >
   <Header />
 
@@ -65,7 +65,7 @@ const cleanIntroduce = rawIntroduce
               {product.category}
             </span>
             <h1 class="text-2xl md:text-3xl font-black text-white tracking-tight leading-tight mt-4">
-              {product.name}
+              {product.name.replace(/【渠道\d+】/g, "").replace(/【凭证充足】/g, "").replace(/--24小时自助充值plus会员/g, "").replace(/-24小时自助充值pro会员/g, "").trim()}
             </h1>
             <div class="flex items-center gap-4 mt-3 font-mono">
               <span class="text-xs text-slate-500">ID: {cleanId}</span>
