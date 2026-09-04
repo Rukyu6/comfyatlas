@@ -166,7 +166,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     </div>
                   </div>
                   <a 
-                    href="https://t.me/puppyshop2Bot" 
+                    href="https://t.me/SoulSocietyServiceBot" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     class="px-4 py-2 rounded-xl bg-[#0284C7]/30 hover:bg-[#38BDF8] hover:text-[#06080F] text-[#38BDF8] border border-[#38BDF8]/50 text-xs font-bold transition flex items-center gap-2 shrink-0 cursor-pointer"
@@ -409,7 +409,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const mode = getCurrencyMode();
 
     listContainer.innerHTML = cart.map(item => {
-      const itemUsd = item.price * item.quantity;
+      const itemUsd = Math.ceil(item.price_usd || item.price || 10) * (item.quantity || 1);
       const itemCny = Math.round(itemUsd * 7.1);
       const priceText = mode === 'cny' ? `¥${itemCny} CNY` : `$${itemUsd.toFixed(0)}`;
 

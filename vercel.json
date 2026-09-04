@@ -1,0 +1,19 @@
+{
+  "rewrites": [
+    {
+      "source": "/catalog-lite.json",
+      "destination": "/catalog-lite.json"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, immutable"
+        }
+      ]
+    }
+  ]
+}
