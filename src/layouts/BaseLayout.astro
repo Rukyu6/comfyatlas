@@ -41,8 +41,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
     <meta property="og:site_name" content={siteName} />
     <meta property="og:image" content={ogImage} />
   
-  <!-- 全局神经翻译引擎: 解决动态商品、按钮及分类全量翻译 -->
-  <script src="https://cdn.jsdelivr.net/npm/translate.js/translate.min.js"></script>
+  
   <script>
     (function() {
       if (!window.translate) return;
@@ -93,6 +92,33 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
             window.applySiteLanguage(saved);
           }, 150);
         });
+      }
+    })();
+  </script>
+
+
+  <!-- 正统神经翻译引擎 (安全初始化，无 DOM 监听冲突) -->
+  <script src="https://cdn.staticfile.net/translate.js/3.18.66/translate.js"></script>
+  <script is:inline>
+    (function() {
+      function initTranslate() {
+        if (!window.translate) {
+          setTimeout(initTranslate, 100);
+          return;
+        }
+        translate.language.setLocal('chinese_simplified');
+        translate.service.use('client.edge');
+        var cur = localStorage.getItem('active_language') || 'zh-CN';
+        var langMap = { 'en': 'english', 'ja': 'japanese', 'ko': 'korean' };
+        if (langMap[cur]) {
+          translate.to = langMap[cur];
+        }
+        translate.execute();
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTranslate);
+      } else {
+        initTranslate();
       }
     })();
   </script>

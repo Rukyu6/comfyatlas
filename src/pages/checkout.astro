@@ -411,7 +411,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     listContainer.innerHTML = cart.map(item => {
       const itemUsd = item.price * item.quantity;
       const itemCny = Math.round(itemUsd * 7.1);
-      const priceText = mode === 'cny' ? `¥${itemCny} CNY` : `$${itemUsd.toFixed(2)}`;
+      const priceText = mode === 'cny' ? `¥${itemCny} CNY` : `$${itemUsd.toFixed(0)}`;
 
       return `
         <div class="flex items-center justify-between text-xs py-2.5 border-b border-white/5 last:border-0">
@@ -438,14 +438,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       subtotalText.textContent = `¥${totalCny} CNY`;
       grandtotalText.textContent = `¥${totalCny} CNY`;
     } else {
-      subtotalText.textContent = `$${totalUsd.toFixed(2)} USD`;
-      grandtotalText.textContent = `$${totalUsd.toFixed(2)} USD`;
+      subtotalText.textContent = `$${totalUsd.toFixed(0)} USD`;
+      grandtotalText.textContent = `$${totalUsd.toFixed(0)} USD`;
     }
 
     const hiddenCartData = document.getElementById('hidden-cart-data') as HTMLInputElement;
     const hiddenTotalPrice = document.getElementById('hidden-total-price') as HTMLInputElement;
     if (hiddenCartData) hiddenCartData.value = cart.map(i => `${i.quantity}x ${i.name}`).join(', ');
-    if (hiddenTotalPrice) hiddenTotalPrice.value = `$${totalUsd.toFixed(2)} USD (¥${totalCny} CNY)`;
+    if (hiddenTotalPrice) hiddenTotalPrice.value = `$${totalUsd.toFixed(0)} USD (¥${totalCny} CNY)`;
   }
 
   // 复制钱包地址交互

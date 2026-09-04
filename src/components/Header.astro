@@ -2,125 +2,44 @@
 ---
 <header class="glass-nav fixed top-0 left-0 w-full z-40 transition-all duration-300 font-outfit">
   <div class="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
-    
-    <!-- Left: Logo + Soul Society (无圆点，纯净洗练) -->
+    <!-- Left: Logo -->
     <a href="/" class="text-lg font-black tracking-wider text-white hover:text-[#38BDF8] transition-colors flex items-center gap-3 group shrink-0">
       <div class="w-9 h-9 rounded-full overflow-hidden border border-[#38BDF8]/40 shadow-[0_0_15px_rgba(56,189,248,0.2)] group-hover:border-[#38BDF8] group-hover:scale-105 transition-all bg-[#0B0F1A] shrink-0">
-        <img 
-          src="/images/soul_society_logo.jpg" 
-          class="w-full h-full object-cover" 
-          alt="Soul Society Logo"
-          onerror="this.style.display='none'"
-        />
+        <img src="/images/soul_society_logo.jpg" class="w-full h-full object-cover" alt="Soul Society Logo" onerror="this.style.display='none'">
       </div>
       <span class="tracking-wide text-lg font-black text-white group-hover:text-[#38BDF8] transition-colors">Soul Society</span>
     </a>
 
-    <!-- Center: 导航菜单（14px加粗，平时静默沉稳，鼠标悬停单独聚光亮起） -->
+    <!-- Center: 导航菜单 -->
     <nav class="hidden lg:flex items-center gap-2 text-sm font-bold tracking-wide text-slate-300">
-      <a 
-        href="/#digital" 
-        class="px-4 py-2 rounded-full border border-transparent hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/20 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.25)] transition-all duration-200 flex items-center gap-2 group"
-      >
-        <svg class="w-4 h-4 text-slate-400 group-hover:text-[#38BDF8] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-        </svg>
+      <a href="/#digital" class="px-4 py-2 rounded-full border border-transparent hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/20 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.25)] transition-all duration-200 flex items-center gap-2 group">
         <span>商品分类</span>
       </a>
-      
-      <a 
-        href="/query" 
-        class="px-4 py-2 rounded-full border border-transparent hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/20 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.25)] transition-all duration-200 flex items-center gap-2 group"
-      >
-        <svg class="w-4 h-4 text-slate-400 group-hover:text-[#38BDF8] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-        </svg>
+      <a href="/query" class="px-4 py-2 rounded-full border border-transparent hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/20 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.25)] transition-all duration-200 flex items-center gap-2 group">
         <span>订单查询</span>
       </a>
-      
-      <a 
-        href="/guide" 
-        class="px-4 py-2 rounded-full border border-transparent hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/20 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.25)] transition-all duration-200 flex items-center gap-2 group"
-      >
-        <svg class="w-4 h-4 text-slate-400 group-hover:text-[#38BDF8] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
+      <a href="/guide" class="px-4 py-2 rounded-full border border-transparent hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/20 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.25)] transition-all duration-200 flex items-center gap-2 group">
         <span>使用说明</span>
       </a>
     </nav>
 
-    <!-- Right: 功能控制台（私密管理员、用户登录/注册、购物车） -->
+    <!-- Right: 功能控制台 -->
     <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
-      
       <div id="auth-state-container" class="relative">
-        <a 
-          id="nav-login-btn"
-          href="/login" 
-          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/15 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all shadow-xs"
-        >
-          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
+        <a id="nav-login-btn" href="/login" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/15 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all shadow-xs">
           <span>登录 / 注册</span>
         </a>
-
-        <!-- 已登录用户下拉菜单 (默认隐藏，JS动态激活) -->
-        <div id="nav-user-dropdown" class="hidden relative inline-block text-left">
-          <button 
-            type="button" 
-            id="nav-user-menu-btn"
-            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#0B0F1A] border border-[#38BDF8]/40 text-xs font-bold text-slate-200 hover:border-[#38BDF8] transition cursor-pointer"
-          >
-            <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-            <span id="nav-username" class="max-w-[100px] truncate">我的账户</span>
-            <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          
-          <div id="nav-user-menu-panel" class="hidden absolute right-0 mt-2 w-44 rounded-2xl bg-[#0B0F1A] border border-[#38BDF8]/30 shadow-2xl p-2 z-50 space-y-1 backdrop-blur-xl">
-            <!-- 只有管理员登录后才会悄悄点亮 -->
-            <a 
-              id="nav-admin-link" 
-              href="/admin/dashboard" 
-              class="hidden px-3 py-2 rounded-xl text-xs text-[#38BDF8] hover:bg-[#0284C7]/20 transition font-bold items-center gap-2"
-            >
-              <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-              <span>进入管理后台</span>
-            </a>
-
-            <a href="/orders" class="block px-3 py-2 rounded-xl text-xs text-slate-300 hover:bg-[#0284C7]/20 hover:text-white transition">
-              历史订单记录
-            </a>
-            <button type="button" id="nav-logout-btn" class="w-full text-left px-3 py-2 rounded-xl text-xs text-rose-400 hover:bg-rose-500/10 transition cursor-pointer">
-              退出登录
-            </button>
-          </div>
-        </div>
       </div>
 
-            <!-- 国际化语言切换器 (默认全中文，用户主动勾选时切换) -->
+      <!-- 国际化语言切换器 -->
       <div class="relative inline-block text-left" id="lang-selector-container">
-        <button 
-          type="button" 
-          id="lang-menu-btn"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all cursor-pointer"
-        >
-          <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9-9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-          </svg>
+        <button type="button" id="lang-menu-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all cursor-pointer">
           <span id="current-lang-label">简体中文</span>
-          <svg class="w-2.5 h-2.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
+          <svg class="w-2.5 h-2.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
         </button>
-
         <div id="lang-menu-panel" class="hidden absolute right-0 mt-2 w-32 rounded-2xl bg-[#0B0F1A] border border-[#38BDF8]/30 shadow-2xl p-1.5 z-50 space-y-1 backdrop-blur-xl">
           <button type="button" onclick="window.changeSiteLang('zh-CN')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-white hover:bg-[#0284C7]/20 font-bold transition flex items-center justify-between">
             <span>简体中文</span>
-            <span class="text-[#38BDF8] text-[10px]">默认</span>
           </button>
           <button type="button" onclick="window.changeSiteLang('en')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
             <span>English</span>
@@ -135,128 +54,50 @@
       </div>
 
       <!-- 购物车抽屉按钮 -->
-      <button 
-        id="header-cart-btn"
-        type="button" 
-        class="relative p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white transition-all cursor-pointer"
-        aria-label="打开购物车"
-      >
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-        </svg>
-        <span id="cart-count-badge" class="hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#0284C7] text-white text-[9px] font-black flex items-center justify-center border border-[#38BDF8] shadow-sm">
-          0
-        </span>
+      <button id="header-cart-btn" type="button" class="relative p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white transition-all cursor-pointer" aria-label="打开购物车">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+        <span id="cart-count-badge" class="hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#0284C7] text-white text-[9px] font-black flex items-center justify-center border border-[#38BDF8] shadow-sm">0</span>
       </button>
-
     </div>
   </div>
 </header>
 
-<script>
-  import { authInstance, onAuthStateChanged, signOut } from '../lib/firebase.js';
-
-  const adminEmail = import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com';
-
-  const cartBtn = document.getElementById('header-cart-btn');
-  const cartBadge = document.getElementById('cart-count-badge');
-  const loginBtn = document.getElementById('nav-login-btn');
-  const userDropdown = document.getElementById('nav-user-dropdown');
-  const userMenuBtn = document.getElementById('nav-user-menu-btn');
-  const userMenuPanel = document.getElementById('nav-user-menu-panel');
-  const usernameLabel = document.getElementById('nav-username');
-  const logoutBtn = document.getElementById('nav-logout-btn');
-  const adminLink = document.getElementById('nav-admin-link');
-
-  
-  // 语言菜单交互
-  const langBtn = document.getElementById('lang-menu-btn');
-  const langPanel = document.getElementById('lang-menu-panel');
-  const currentLangLabel = document.getElementById('current-lang-label');
-
-  langBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    langPanel?.classList.toggle('hidden');
-  });
-
-  document.addEventListener('click', () => {
-    langPanel?.classList.add('hidden');
-  });
-
-  const savedLang = localStorage.getItem('active_language') || 'zh-CN';
-  if (currentLangLabel) {
-    if (savedLang === 'en') currentLangLabel.textContent = 'English';
-    else if (savedLang === 'ja') currentLangLabel.textContent = '日本語';
-    else if (savedLang === 'ko') currentLangLabel.textContent = '한국어';
-    else currentLangLabel.textContent = '简体中文';
-  }
-
-  (window as any).changeSiteLang = function(lang: string) {
-    localStorage.setItem('active_language', lang);
-    window.location.reload();
-  };
-
-  cartBtn?.addEventListener('click', () => {
-    window.dispatchEvent(new CustomEvent('open-cart'));
-  });
-
-  function updateCartBadge() {
-    if (!cartBadge) return;
-    try {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const count = cart.reduce((acc: number, item: any) => acc + (item.quantity || 1), 0);
-      if (count > 0) {
-        cartBadge.textContent = count.toString();
-        cartBadge.classList.remove('hidden');
-      } else {
-        cartBadge.classList.add('hidden');
-      }
-    } catch {
-      cartBadge.classList.add('hidden');
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('lang-menu-btn');
+    var panel = document.getElementById('lang-menu-panel');
+    if (btn && panel) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        panel.classList.toggle('hidden');
+      });
+      document.addEventListener('click', function() {
+        panel.classList.add('hidden');
+      });
     }
-  }
 
-  updateCartBadge();
-  window.addEventListener('storage', updateCartBadge);
-  window.addEventListener('cart-updated', updateCartBadge);
+    var cur = localStorage.getItem('active_language') || 'zh-CN';
+    var label = document.getElementById('current-lang-label');
+    if (label) {
+      var nameMap = { 'zh-CN': '简体中文', 'en': 'English', 'ja': '日本語', 'ko': '한국어' };
+      if (nameMap[cur]) label.textContent = nameMap[cur];
+    }
+  });
 
-  onAuthStateChanged(authInstance, (user) => {
-    if (user) {
-      loginBtn?.classList.add('hidden');
-      userDropdown?.classList.remove('hidden');
-      if (usernameLabel) {
-        usernameLabel.textContent = user.displayName || user.email?.split('@')[0] || '已登录';
-      }
-      if (user.email === adminEmail) {
-        adminLink?.classList.remove('hidden');
-        adminLink?.classList.add('flex');
-      } else {
-        adminLink?.classList.add('hidden');
-        adminLink?.classList.remove('flex');
+  window.changeSiteLang = function(lang) {
+    localStorage.setItem('active_language', lang);
+    var langMap = { 'zh-CN': 'chinese_simplified', 'en': 'english', 'ja': 'japanese', 'ko': 'korean' };
+    var target = langMap[lang] || 'chinese_simplified';
+    if (target === 'chinese_simplified') {
+      window.location.reload();
+    } else if (window.translate) {
+      try {
+        translate.changeLanguage(target);
+      } catch(e) {
+        window.location.reload();
       }
     } else {
-      loginBtn?.classList.remove('hidden');
-      userDropdown?.classList.add('hidden');
-      adminLink?.classList.add('hidden');
-      adminLink?.classList.remove('flex');
-    }
-  });
-
-  userMenuBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    userMenuPanel?.classList.toggle('hidden');
-  });
-
-  document.addEventListener('click', () => {
-    userMenuPanel?.classList.add('hidden');
-  });
-
-  logoutBtn?.addEventListener('click', async () => {
-    try {
-      await signOut(authInstance);
       window.location.reload();
-    } catch (e) {
-      console.error(e);
     }
-  });
+  };
 </script>
