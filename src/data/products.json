@@ -2,7 +2,7 @@
   "categories": [
     {
       "cid": "289",
-      "name": "chatGPT账号/会员号"
+      "name": "ChatGPT账号"
     },
     {
       "cid": "290",
@@ -123,6 +123,146 @@
   ],
   "products": [
     {
+      "id": "pid_8877_gpt_plus_199",
+      "name": "【独享不翻车】ChatGPT Plus 官方订阅 | 1个月纯净成品号/代充 | 支持最新 GPT-5.5/Codex 系列",
+      "price_cny": 199,
+      "price_usd": 28,
+      "image": "/images/products/52151e06b7475980d97e801d76e4f901.png",
+      "stock": "库存充足",
+      "cid": "289",
+      "category": "ChatGPT账号",
+      "type": "digital",
+      "introduce": "<p><b>【正规独享】ChatGPT Plus 官方订阅</b></p><p>✅ 官方正规订阅，支持最新 GPT-5.5、o1 与 Codex 系列模型</p><p>✅ 可提供全新独享纯净成品号，或代充至您自己注册的干净账号</p><p>✅ 稳定质保30天不掉订阅，独立专享，杜绝封号风控</p>",
+      "skus": [
+        {
+          "id": "sku_gpt_plus_new",
+          "name": "1个月独享纯净成品号",
+          "price_cny": 199,
+          "price_usd": 28,
+          "stock": "充足",
+          "picture": "/images/products/52151e06b7475980d97e801d76e4f901.png"
+        },
+        {
+          "id": "sku_gpt_plus_recharge",
+          "name": "1个月官方代充 (无需提供密码)",
+          "price_cny": 199,
+          "price_usd": 28,
+          "stock": "充足",
+          "picture": "/images/products/52151e06b7475980d97e801d76e4f901.png"
+        }
+      ]
+    },
+    {
+      "id": "pid_8877_gpt_normal_ms",
+      "name": "【手工注册】🔥 Chat GPT 普通账号 免费提问-可改密码- 个人独享 -微软邮箱",
+      "price_cny": 10,
+      "price_usd": 1.5,
+      "image": "/images/products/4496dbde556e6e3910ff354cac6729fa.png",
+      "stock": "1336",
+      "cid": "289",
+      "category": "ChatGPT账号",
+      "type": "digital",
+      "introduce": "<p><b>【手工纯净注册】微软邮箱独享 GPT 账号</b></p><p>✅ 纯手工注册，一号一IP，防封属性极高</p><p>✅ 免费无限制提问，自带原生微软 Outlook 邮箱，可自由改密、换绑</p><p>✅ 自动秒发卡密，格式：账号---密码---邮箱密码</p>",
+      "skus": [
+        {
+          "id": "sku_gpt_norm_ms",
+          "name": "微软邮箱个人独享号 (可改密)",
+          "price_cny": 10,
+          "price_usd": 1.5,
+          "stock": "1336",
+          "picture": "/images/products/4496dbde556e6e3910ff354cac6729fa.png"
+        }
+      ]
+    },
+    {
+      "id": "pid_8877_gpt_normal_mail",
+      "name": "【手工注册】🔥 Chat GPT 普通账号 免费提问-可改密码- 个人独享-mail.com邮箱",
+      "price_cny": 10,
+      "price_usd": 1.5,
+      "image": "/images/products/4496dbde556e6e3910ff354cac6729fa.png",
+      "stock": "78",
+      "cid": "289",
+      "category": "ChatGPT账号",
+      "type": "digital",
+      "introduce": "<p><b>【手工纯净注册】mail.com 海外邮箱独享账号</b></p><p>✅ 海外优质邮箱注册，纯净环境，独享不封</p><p>✅ 支持所有官方功能，可改密，秒发卡密</p>",
+      "skus": [
+        {
+          "id": "sku_gpt_norm_mail",
+          "name": "mail.com个人独享号",
+          "price_cny": 10,
+          "price_usd": 1.5,
+          "stock": "78",
+          "picture": "/images/products/4496dbde556e6e3910ff354cac6729fa.png"
+        }
+      ]
+    },
+    {
+      "id": "pid_8877_gpt_plus_cdk_188",
+      "name": "GPT PLUS 充值卡密/自助充值/ 可充1个月",
+      "price_cny": 188,
+      "price_usd": 26,
+      "image": "/images/products/U8LpRznTPMukV2s.png",
+      "stock": "48",
+      "cid": "289",
+      "category": "ChatGPT账号",
+      "type": "digital",
+      "introduce": "<p><b>【自助秒充】GPT Plus 1个月充值卡密</b></p><p>✅ 购买后自动发放激活卡密，无需提供账号密码</p><p>✅ 登录自己账号后，一键输入卡密即可瞬间升级 Plus 会员</p><p>✅ 30天全额质保</p>",
+      "skus": [
+        {
+          "id": "sku_gpt_cdk_188",
+          "name": "Plus 自助激活卡密 (1个月)",
+          "price_cny": 188,
+          "price_usd": 26,
+          "stock": "48",
+          "picture": "/images/products/U8LpRznTPMukV2s.png"
+        }
+      ]
+    },
+    {
+      "id": "pid_8877_codex_9",
+      "name": "【直登普号】🔥 Codex 专用账号 手机已验证-适配Sub2api- 长效微软 -不包二验",
+      "price_cny": 10,
+      "price_usd": 1.5,
+      "image": "/images/products/4496dbde556e6e3910ff354cac6729fa.png",
+      "stock": "0",
+      "cid": "289",
+      "category": "ChatGPT账号",
+      "type": "digital",
+      "introduce": "<p><b>Codex 开发者专用直登账号</b></p><p>✅ 手机已过验证，完美适配 Sub2api 与开发者 API 接入</p><p>✅ 长效微软邮箱，到手即用</p>",
+      "skus": [
+        {
+          "id": "sku_codex_9",
+          "name": "Codex 专用号 (手机已验)",
+          "price_cny": 10,
+          "price_usd": 1.5,
+          "stock": "0",
+          "picture": "/images/products/4496dbde556e6e3910ff354cac6729fa.png"
+        }
+      ]
+    },
+    {
+      "id": "pid_8877_gpt_plus_ios_cdk",
+      "name": "GPT PLUS 充值卡密(IOS美区质保)",
+      "price_cny": 190,
+      "price_usd": 27,
+      "image": "/images/products/U8LpRznTPMukV2s.png",
+      "stock": "110",
+      "cid": "289",
+      "category": "ChatGPT账号",
+      "type": "digital",
+      "introduce": "<p><b>GPT Plus iOS 美区正规充值卡密</b></p><p>✅ iOS 正规美区内购渠道质保，风控极低，长期续费首选</p><p>✅ 自助激活，即充即到，30天掉单退款保障</p>",
+      "skus": [
+        {
+          "id": "sku_gpt_ios_cdk",
+          "name": "iOS 美区质保 Plus 卡密",
+          "price_cny": 190,
+          "price_usd": 27,
+          "stock": "110",
+          "picture": "/images/products/U8LpRznTPMukV2s.png"
+        }
+      ]
+    },
+    {
       "id": "pid_6246",
       "name": "【24小时自动充值】Grok Super直充卡密（两个月）",
       "price_cny": 442,
@@ -210,32 +350,6 @@
       "source_url": ""
     },
     {
-      "id": "pid_6209",
-      "name": "GPT 20X PRO 充值卡密(iOS美区质保) -24小时自助充值pro会员",
-      "price_cny": 1934,
-      "price_usd": 269,
-      "image": "/images/products/e4be631f335c2e4803b0903f3a5cf62f.png",
-      "stock": "2",
-      "cid": "289",
-      "category": "chatGPT账号/会员号",
-      "type": "digital",
-      "introduce": "<p><font size=\"5\">🧡GPT 20X PRO 充值卡密(iOS正规美区质保)</font></p><p><b><font color=\"#c24f4a\" size=\"5\">🧡质保30天不掉订阅，掉订阅按天退差价，封号99%的原因是由于帐号本身的问题，无售后</font></b></p><p><b><font color=\"#c24f4a\" size=\"5\">🧡常见封号原因：批量注册的帐号、帐号共享、频繁更换使用ip、问一些敏感问题、翻译敏感话术等，都会造成封号</font></b></p><p><font size=\"5\">🧡全自动化充值，即充即到，非人工代充，下单发送卡密和充值地址!</font></p><p><font size=\"5\">✅已有Plus 或者 Pro 都可覆盖，重置到期时间</font></p>",
-      "skus": [
-        {
-          "id": "sku_13002",
-          "name": "GPT 20X PRO 充值卡密(iOS美区质保)",
-          "price_cny": 1934,
-          "price_usd": 269,
-          "stock": "2",
-          "picture": "/images/products/e4be631f335c2e4803b0903f3a5cf62f.png",
-          "price": 269
-        }
-      ],
-      "price": 269,
-      "source_id": "6209",
-      "source_url": ""
-    },
-    {
       "id": "pid_127",
       "name": "🔥[兑换码] 90天免翻墙镜像 可用GPT+谷歌+claude【支持国外ip】",
       "price_cny": 717,
@@ -314,32 +428,6 @@
       "source_url": ""
     },
     {
-      "id": "pid_6205",
-      "name": "GPT PRO 5X 埃及区代充1个月 -24小时自助充值pro会员",
-      "price_cny": 1132,
-      "price_usd": 158,
-      "image": "/images/products/2bb77c4843273785a57ace1e09ec1311.png",
-      "stock": "19",
-      "cid": "289",
-      "category": "chatGPT账号/会员号",
-      "type": "digital",
-      "introduce": "<div style=\"font-family:Arial, 'Microsoft YaHei', sans-serif;line-height:1.85;color:#333;font-size:15px;\">\n\n  <div style=\"padding:16px 18px;border:1px solid #e6eefc;margin-bottom:16px;\">\n    <h2 style=\"margin:0 0 10px;font-size:20px;color:#1f2937;\">ChatGPT Pro 月卡充值说明</h2>\n    <p style=\"margin:0;\">\n      本商品为 <strong>ChatGPT Pro 月卡充值卡密</strong>，支持 Pro  / 套餐。\n      购买后系统会自动发货卡密，您需要前往充值站点，使用卡密自助提交充值信息。\n    </p>\n  </div>\n\n  <div style=\"padding:15px 18px;background:#ffffff;border:1px solid #eeeeee;margin-bottom:16px;\">\n    <h3 style=\"margin:0 0 10px;font-size:17px;color:#2563eb;\">📦 购买后发货内容</h3>\n    <p style=\"margin:0;\">\n      购买成功后，您将收到一张 <strong>充值卡密</strong>。请妥善保存卡密，后续需要凭卡密进入充值站点提交订单。\n    </p>\n  </div>\n\n  <div style=\"padding:15px 18px;background:#ffffff;border:1px solid #eeeeee;margin-bottom:16px;\">\n    <h3 style=\"margin:0 0 10px;font-size:17px;color:#16a34a;\">🚀 使用流程</h3>\n    <ol style=\"margin:0;padding-left:22px;\">\n      <li>购买商品后，复制系统发货的卡密。</li>\n      <li>\n        打开充值站点：\n        \n      </li>\n      <li>在充值页面输入卡密，并按页面提示填写 ChatGPT 账号信息。</li>\n      <li>提交后系统会按订单队列自动处理。</li>\n      <li>可在充值站点的进度查询页面查看处理结果。</li>\n    </ol>\n  </div>\n\n  <div style=\"padding:15px 18px;background:#fffaf0;border:1px solid #fde7b0;margin-bottom:16px;\">\n    <h3 style=\"margin:0 0 10px;font-size:17px;color:#d97706;\">📝 提交时需要准备</h3>\n    <ul style=\"margin:0;padding-left:22px;\">\n      <li>ChatGPT 登录邮箱</li>\n      <li>页面要求提交的 Token、Cookie 或其他充值凭证</li>\n      <li>确保账号可以正常登录，且信息填写正确</li>\n    </ul>\n  </div>\n\n  <div style=\"padding:15px 18px;background:#f8fbff;border:1px solid #dbeafe;margin-bottom:16px;\">\n    <h3 style=\"margin:0 0 10px;font-size:17px;color:#2563eb;\">✅ 服务说明</h3>\n    <ul style=\"margin:0;padding-left:22px;\">\n      <li>自助提交：无需私聊发送资料，按页面提示操作即可。</li>\n      <li>顺序处理：系统会根据订单队列依次处理充值任务。</li>\n      <li>安全清理：订单完成后，系统会自动清理敏感凭证。</li>\n      <li>状态可查：提交后可在充值站点查询处理进度。</li>\n      <li>售后支持：如遇异常，可提交工单核查。</li>\n    </ul>\n  </div>\n\n  <div style=\"padding:15px 18px;background:#fff5f5;border:1px solid #ffd6d6;margin-bottom:16px;\">\n    <h3 style=\"margin:0 0 10px;font-size:17px;color:#dc2626;\">⚠️ 注意事项</h3>\n    <ul style=\"margin:0;padding-left:22px;\">\n      <li>充值成功后，正价订阅消费原则上不支持退款。</li>\n      <li>账号异常、Token 失效、Cookie 过期、信息填写错误，可能导致充值失败或处理变慢。</li>\n      <li>因账号违规、风控、封禁、KYC 验证、手机号绑定异常等问题导致无法使用，需客户自行处理。</li>\n      <li>因客户主动取消订阅、账号异常、违反平台规则导致的问题，不支持退款。</li>\n      <li>如出现掉订阅、官方账单异常或官方风控问题，需客户自行联系 OpenAI / ChatGPT 官方客服处理。</li>\n      <li>如官方实际退款到账，我们将扣除 20% 处理费后退还剩余金额。</li>\n    </ul>\n  </div>\n\n  <div style=\"padding:15px 18px;background:#f9fafb;border:1px solid #e5e7eb;\">\n    <h3 style=\"margin:0 0 10px;font-size:17px;color:#111827;\">📌 下单提醒</h3>\n    <p style=\"margin:0;\">\n      请在购买前确认 ChatGPT 账号可以正常登录，并仔细阅读本商品说明。\n      购买后请及时使用卡密前往充值站点提交信息，提交后请勿频繁重复提交。\n      下单即代表您已了解并接受本商品规则。\n    </p>\n  </div>\n\n</div>",
-      "skus": [
-        {
-          "id": "sku_12998",
-          "name": "GPT PRO 5X 埃及区代充1个月",
-          "price_cny": 1132,
-          "price_usd": 158,
-          "stock": "19",
-          "picture": "/images/products/2bb77c4843273785a57ace1e09ec1311.png",
-          "price": 158
-        }
-      ],
-      "price": 158,
-      "source_id": "6205",
-      "source_url": ""
-    },
-    {
       "id": "pid_6308",
       "name": "【自动发货】Gemini 3.1pro 年号（12个月）谷歌ai成品号 (美区22-23年账号)/一人一号/独享",
       "price_cny": 302,
@@ -389,32 +477,6 @@
       ],
       "price": 39,
       "source_id": "124",
-      "source_url": ""
-    },
-    {
-      "id": "pid_6188",
-      "name": "🔥Chat GPT 普通账号提问不限次数-可改密码- 个人独享",
-      "price_cny": 80,
-      "price_usd": 12,
-      "image": "/images/products/155d7f3857c0251114684d82caaaadd9.png",
-      "stock": "60",
-      "cid": "289",
-      "category": "chatGPT账号/会员号",
-      "type": "digital",
-      "introduce": "<p>🔥Chat GPT 普通账号 -个人独享</p><p>提问不限次数-可改密码</p><p>🥳<b>关于商品</b>：</p><p><b>【账号说明】邮箱后缀为 @hotmail 或 @outlook 的全新白号，无任何使用记录。 hotmail 是微软的邮箱，同 @outlook 一致。</b><br /></p><p><font size=\"4\"><b><span style=\"font-family:'Helvetica Neue', Helvetica, 'PingFang SC', Tahoma, Arial, sans-serif;\">🫡 </span></b><b style=\"font-family:'Helvetica Neue', Helvetica, 'PingFang SC', Tahoma, Arial, sans-serif;\">本站均为3.5一手独享 100%独享</b></font></p><p><b style=\"font-family:'Helvetica Neue', Helvetica, 'PingFang SC', Tahoma, Arial, sans-serif;\">🤫<font size=\"4\"> 拒绝二次销售 不玩任何套路 可放心购买</font></b></p><p><b style=\"font-family:'Helvetica Neue', Helvetica, 'PingFang SC', Tahoma, Arial, sans-serif;\"><font size=\"4\">🤡 本商品仅用于学习使用 请勿非法用途</font></b></p><p>提供购买后当天内的售后服务<br />首登遇密码错误系统承诺包换新<br />过后不处理任何理由的售后</p><p>🤑账号理论可以永久使用</p><p>账户----密码----邮箱密码----refresh_token</p><p>安全改密请参考站内「帮助中心与使用指南」。<br /></p>",
-      "skus": [
-        {
-          "id": "sku_12977",
-          "name": "独享成品号",
-          "price_cny": 80,
-          "price_usd": 12,
-          "stock": "60",
-          "picture": "/images/products/155d7f3857c0251114684d82caaaadd9.png",
-          "price": 12
-        }
-      ],
-      "price": 12,
-      "source_id": "6188",
       "source_url": ""
     },
     {
@@ -728,59 +790,6 @@
       ],
       "price": 15,
       "source_id": "1202",
-      "source_url": ""
-    },
-    {
-      "id": "pid_6189",
-      "name": "【手动充值】【独享不翻车】ChatGPT Plus 官方订阅 | 1个月纯净成品号/代充 | 支持最新 GPT-5/o1 系列模型",
-      "price_cny": 328,
-      "price_usd": 46,
-      "image": "/images/products/29c0b071f1c03d7a8ab5b9a4ae85760f.png",
-      "stock": "在线发货",
-      "cid": "289",
-      "category": "chatGPT账号/会员号",
-      "type": "digital",
-      "introduce": "<p><span style=\"font-size:32px;\">🤖 ChatGPT Plus 独享会员 (支持 GPT-5.1 / o1 模型)</span></p><p><b>【商品属性】</b>：官方正版订阅 | 独享成品号/代充 | 24H自动发货</p><p><b>【核心功能】</b>：解锁最新 GPT-5.1 Pro 模型、o1 深度推理模式、DALL-E 3 绘图、高级数据分析及自定义 GPTs。</p><p><b>独享成品号：</b> 已开通 Plus 的全新账号，账号密码/邮箱资料全给，一人一号，隐私安全。</p><p><b>正规代充：</b> 官方渠道手工代充至您的个人账号，无需提供密码，稳定不掉。</p><p><b>⚠️ 购买须知及售后说明</b></p><p>✅ <b>带售后版（质保30天）：</b></p><p><b>保什么：</b> 质保期内会员不掉线，保官方订阅有效，保系统性异常导致的权限丢失。</p><p><b>不保什么：</b> 人为违规导致的封号。包括但不限于：共享账号给他人、发布涉黄/政治/欺诈等违禁词、恶意滥用 API 接口。</p><p><b>赔付：</b> 质保期内非人为问题，直接包补。</p><p>❌ <b>不带售后版（特价/无保）：</b></p><p><b>仅包首进：</b> 开好发货，登录可用即视为交易完成。</p><p><b>风险自负：</b> 鉴于特价利润极低，购买后发生的任何会员掉线、封号或登录异常（<b>哪怕是隔天失效</b>），均不提供补发或退款。适合有经验、追求极致性价比的老手。</p><p><b>模型全覆盖：</b> 实时同步 OpenAI 官方更新，第一时间支持 GPT-5及 o1 系列模型。</p><p><b>拒绝黑卡：</b> 官方正版支付渠道，拒绝短期试用号，确保账号 30 天稳定在线。</p><p><b>功能解锁：</b> 包含 DALL-E 3 绘图、高级数据分析、语音对话及自定义 GPTs 商店。</p><p>1.<strong>使用正规卡开通</strong>，非市面低成本的Plus账号，正规信用卡开通（更安全）。</p><p>2.本店账号<strong>本账号售后质保30天</strong>（全程包售后）。</p><p>3.账号为独享账号，可改密码。</p><p>质保为补差价。如第7天封号，补使用7天的费用，客服再发您一个当天开通的全新GPT5账号，新账号还是30天有效期。</p><p><code>ChatGPT Plus</code> <code>OpenAI</code> <code>GPT5.1</code> <code>o1-preview</code> <code>AI会员</code> <code>代充</code> <code>成品号</code> <code>DALL-E3</code> <code>绘图</code> <code>写代码</code> <code>翻译</code> <code>独享</code> <code>自动发货</code></p><p>ChatGPT Plus\nGPT-5.1\nGPT-5.1 Pro\nGPT-5订阅\nChatGPT会员\nOpenAI成品号\nChatGPT代充\nGPT-5.1账号\nGPT Plus购买\no1模型账号\nOpenAI会员\nGPT-5 Pro成品号</p><p>ChatGPT Plus独享成品号\nGPT-5.1 Pro一个月会员代充\n支持最新GPT-5.1模型账号购买\nChatGPT Plus官方正规订阅不掉线\nOpenAI o1满血版权限账号\nGPT-5.1 Thinking模式开启号\nChatGPT 20美金官方订阅代充\n美国纯净环境注册ChatGPT Plus\nChatGPT Plus带DALL-E3绘图功能\nGPT-5.1 Pro开发者API权限号\n支持自定义GPTs的Plus成品号\nChatGPT Plus自动发货一人一号\nGPT-5.1全功能解锁成品号\nChatGPT Plus封号包补质保号\n海外苹果ID代充ChatGPT会员\nGPT-5.1多模态视觉模型账号\nChatGPT Plus中文版网页登录号\n高权重稳定版GPT-5.1成品号\nChatGPT Plus代充不封号渠道\nGPT-5.1 Pro 12个月长期订阅号</p>",
-      "skus": [
-        {
-          "id": "sku_12978",
-          "name": "独享plus成品号-可改密-有售后",
-          "price_cny": 328,
-          "price_usd": 46,
-          "stock": "在线发货",
-          "picture": "/images/products/29c0b071f1c03d7a8ab5b9a4ae85760f.png",
-          "price": 46
-        },
-        {
-          "id": "sku_12981",
-          "name": "独享plus成品号-可改密-无售后",
-          "price_cny": 265,
-          "price_usd": 37,
-          "stock": "在线发货",
-          "picture": "/images/products/29c0b071f1c03d7a8ab5b9a4ae85760f.png",
-          "price": 37
-        },
-        {
-          "id": "sku_12979",
-          "name": "代充1个月-（有售后）",
-          "price_cny": 328,
-          "price_usd": 46,
-          "stock": "在线发货",
-          "picture": "/images/products/29c0b071f1c03d7a8ab5b9a4ae85760f.png",
-          "price": 46
-        },
-        {
-          "id": "sku_12980",
-          "name": "代充1个月-（无售后）",
-          "price_cny": 265,
-          "price_usd": 37,
-          "stock": "在线发货",
-          "picture": "/images/products/29c0b071f1c03d7a8ab5b9a4ae85760f.png",
-          "price": 37
-        }
-      ],
-      "price": 46,
-      "source_id": "6189",
       "source_url": ""
     },
     {
