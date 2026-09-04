@@ -115,7 +115,28 @@ const initialProducts = database.products.filter(p => {
 
       <!-- 主双栏布局 -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="hidden md:block col-span-1 space-y-1.5 max-h-[750px] overflow-y-auto pr-3 scrollbar sticky top-24" id="desktop-categories-sidebar"></div>
+        <div class="hidden md:block col-span-1 space-y-1.5 max-h-[750px] overflow-y-auto pr-3 scrollbar sticky top-24" id="desktop-categories-sidebar">
+          {database.categories.map(cat => {
+            const count = database.products.filter(p => p.cid === cat.cid).length;
+            const isActive = cat.cid === defaultCategory.cid;
+            return (
+              <button 
+                type="button"
+                class={`w-full text-left px-4 py-3 rounded-2xl text-xs transition-all duration-200 flex items-center justify-between group border ${
+                  isActive 
+                    ? 'bg-[#0284C7]/25 text-[#38BDF8] border-[#38BDF8]/60 font-black shadow-[0_0_15px_rgba(56,189,248,0.2)]' 
+                    : 'text-slate-400 hover:text-white hover:bg-white/[0.04] border-transparent font-medium'
+                }`}
+                data-category-id={cat.cid}
+              >
+                <span class="truncate pr-2">{cat.name}</span>
+                <span class={`px-2 py-0.5 rounded-full text-[10px] ${isActive ? 'bg-[#38BDF8] text-black font-black' : 'bg-white/5 text-slate-400 group-hover:bg-white/10 group-hover:text-white'} font-mono`}>
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
         <div class="md:col-span-3">
           <div id="digital-products-grid" class="flex flex-col gap-3.5">
