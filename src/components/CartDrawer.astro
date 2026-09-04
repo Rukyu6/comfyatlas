@@ -122,7 +122,7 @@
       return `
         <div class="flex items-center justify-between p-3 rounded-2xl bg-[#06080F]/70 border border-[#38BDF8]/20 text-xs">
           <div class="flex items-center gap-3 min-w-0 flex-1">
-            <img src="${item.image || '/favicon.ico'}" class="w-10 h-10 rounded-xl object-cover bg-black/50 border border-white/10 shrink-0" />
+            <img src="${item.image || '/images/default_product.jpg'}" onerror="this.src='/images/default_product.jpg'" class="w-10 h-10 rounded-xl object-cover bg-black/50 border border-white/10 shrink-0" />
             <div class="min-w-0 flex-1 pr-2">
               <h4 class="font-bold text-white truncate">${item.name}</h4>
               <span class="text-[10px] text-slate-400 block mt-0.5">${item.size ? `规格: ${item.size} | ` : ''}数量: ${item.quantity}</span>
