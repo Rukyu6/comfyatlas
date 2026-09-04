@@ -498,7 +498,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   // Load and check cart
   function checkCart() {
-    const savedCart = localStorage.getItem('boutique_cart');
+    let savedCart = localStorage.getItem('cart');
+    if (!savedCart) savedCart = localStorage.getItem('boutique_cart');
     if (savedCart) {
       try {
         cart = JSON.parse(savedCart);
@@ -798,7 +799,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       if (result.success) {
         // Clear cart
-        localStorage.removeItem('boutique_cart');
+        localStorage.removeItem('cart'); localStorage.removeItem('boutique_cart');
         
                 // Show success screen & render Card Key
         const refId = document.getElementById('checkout-reference-id');
