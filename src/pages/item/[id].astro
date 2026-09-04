@@ -100,8 +100,8 @@ const cleanIntroduce = rawIntroduce
             <div class="flex flex-col">
               <span class="text-[10px] text-slate-400 uppercase font-mono font-bold">合计结算</span>
               <div class="flex items-baseline gap-2">
-                <span id="total-usd" class="text-2xl md:text-3xl font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">$0</span>
-                <span id="total-cny" class="text-xs text-slate-400 font-mono">≈ 0 USDT</span>
+                <span id="total-price-cny" class="text-2xl md:text-3xl font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">¥0</span>
+                <span id="total-price-usd" class="text-xs text-slate-400 font-mono">≈ 0 USDT</span>
               </div>
             </div>
             <button 
@@ -256,8 +256,8 @@ const cleanIntroduce = rawIntroduce
           cartItemId,
           id: product.id,
           name: product.name,
-          price: Math.ceil(selectedSku.price_usd),
-          
+          priceCny: Math.round(selectedSku.price_cny),
+          priceUsd: Math.ceil(selectedSku.price_cny / 7.2),
           image: selectedSku.picture || product.image,
           type: 'digital',
           size: size,
@@ -295,9 +295,10 @@ const cleanIntroduce = rawIntroduce
     skuContainer.innerHTML = skusList.map((sku: any, index: number) => {
       const isOutOfStock = sku.stock === '0' || sku.stock === '缺货';
       const isSelected = selectedSku && selectedSku.id === sku.id;
-      const intUsd = Math.ceil(sku.price_usd);
-      const priceLabel = `$${intUsd}`;
-      const secondaryPriceLabel = `≈ ${intUsd} USDT`;
+      const cnyVal = Math.round(sku.price_cny);
+      const usdtVal = Math.ceil(sku.price_cny / 7.2);
+      const priceLabel = `¥${cnyVal}`;
+      const secondaryPriceLabel = `≈ ${usdtVal} USDT`;
 
       return `
         <button
@@ -342,11 +343,15 @@ const cleanIntroduce = rawIntroduce
 
   function updateQtyDisplay() {
     if (qtyInput) qtyInput.value = selectedQuantity.toString();
-    if (!selectedSku || !totalUsd || !totalCny) return;
+    const totalCnyEl = document.getElementById('total-price-cny') || document.getElementById('total-usd');
+    const totalUsdEl = document.getElementById('total-price-usd') || document.getElementById('total-cny');
+    if (!selectedSku || !totalCnyEl) return;
 
-    const intPrice = Math.ceil(selectedSku.price_usd) * selectedQuantity;
-    totalUsd.textContent = `$${intPrice}`;
-    totalCny.textContent = `≈ ${intPrice} USDT`;
+    const totalCny = Math.round(selectedSku.price_cny) * selectedQuantity;
+    const totalUsd = Math.ceil(totalCny / 7.2);
+
+    totalCnyEl.textContent = `¥${totalCny}`;
+    if (totalUsdEl) totalUsdEl.textContent = `≈ ${totalUsd} USDT`;
   }
   }
 

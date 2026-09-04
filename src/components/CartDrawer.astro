@@ -109,7 +109,7 @@
 
     if (cart.length === 0) {
       itemsContainer.innerHTML = `<p class="text-slate-500 text-center py-16 text-xs">清单目前为空，请在商品库中选购。</p>`;
-      totalEl.textContent = '$0';
+      totalEl.textContent = '¥0';
       checkoutBtn.disabled = true;
       return;
     }
@@ -118,10 +118,10 @@
     let total = 0;
 
     itemsContainer.innerHTML = cart.map((item, index) => {
-      const price = Math.ceil(item.price || 0);
-      const itemSubtotal = price * (item.quantity || 1);
+      const cny = Math.round(item.priceCny || (item.price ? item.price * 7.2 : 0));
+      const itemSubtotal = cny * (item.quantity || 1);
       total += itemSubtotal;
-      const formattedPrice = `$${itemSubtotal}`;
+      const formattedPrice = `¥${itemSubtotal}`;
 
       return `
         <div class="p-3.5 rounded-2xl bg-[#06080F]/90 border border-[#38BDF8]/20 space-y-3 text-xs">
@@ -140,20 +140,23 @@
             </button>
           </div>
 
-          <!-- 数量自选与价格小计栏 -->
           <div class="flex items-center justify-between pt-2 border-t border-white/5">
             <div class="flex items-center border border-white/15 rounded-lg overflow-hidden bg-[#0B0F1A] text-xs font-bold">
               <button type="button" onclick="window.updateCartQty(${index}, -1)" class="px-2.5 py-1 hover:bg-white/10 text-white font-bold select-none cursor-pointer">-</button>
               <span class="px-3 py-1 text-center text-white font-mono min-w-[28px]">${item.quantity}</span>
               <button type="button" onclick="window.updateCartQty(${index}, 1)" class="px-2.5 py-1 hover:bg-white/10 text-white font-bold select-none cursor-pointer">+</button>
             </div>
-            <span class="font-bold font-mono text-[#38BDF8] text-sm">${formattedPrice}</span>
+            <div class="text-right">
+              <span class="font-bold font-mono text-[#38BDF8] text-sm">${formattedPrice}</span>
+              <span class="text-[10px] text-slate-500 font-mono block">≈ ${Math.ceil(itemSubtotal / 7.2)} USDT</span>
+            </div>
           </div>
         </div>
       `;
     }).join('');
 
-    totalEl.textContent = `$${total}`;
+    const totalUsdt = Math.ceil(total / 7.2);
+    totalEl.innerHTML = `¥${total} <span class="text-xs text-slate-400 font-mono font-normal">(${totalUsdt} USDT)</span>`;
   }
 
   (window as any).updateCartQty = function(index: number, delta: number) {

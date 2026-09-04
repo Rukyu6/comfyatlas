@@ -80,7 +80,8 @@ export async function POST({ request }) {
                         `*订单编号:* \`${orderId}\`\n` +
 `🛒 *货源拿货直达:* ${items && items[0] && items[0].id ? 'https://chuhai91.cc/item/' + String(items[0].id).replace(/\D/g,'') : 'https://chuhai91.cc/products'}\n` +
                         `*客户邮箱:* ${email}\n` +
-                        `*订单金额:* $${totalUsd.toFixed(2)} USD (¥${totalCny} CNY)\n` +
+                        `*订单金额:* ¥${totalCny || Math.round(totalUsd * 7.2)} CNY (≈ ${Math.ceil(totalUsd)} USDT)
+` +
                         `*付款通道:* ${paymentMethod}\n` +
                         `*收款钱包:* \`${targetAddress || '默认充值地址'}\`\n` +
                         `*交易哈希:* \`${cleanTxId}\`\n` +
