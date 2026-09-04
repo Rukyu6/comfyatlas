@@ -296,6 +296,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span id="copy-btn-text">一键复制卡密凭据</span>
           </button>
         </div>
+        <!-- 下单成功专属：站内原生文本使用教程 (零外链、原地展开) -->
+        <div class="p-5 rounded-2xl bg-[#06080F] border border-[#38BDF8]/30 text-left space-y-4 shadow-lg">
+          <div class="flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 font-mono">
+              <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <span>新手使用与安全登入规范指南</span>
+            </span>
+            <button 
+              type="button" 
+              id="toggle-tutorial-btn"
+              class="text-xs text-[#38BDF8] hover:underline font-mono cursor-pointer font-bold"
+            >
+              [展开新手教程 ▼]
+            </button>
+          </div>
+
+          <div id="tutorial-content-drawer" class="space-y-3 pt-3 border-t border-white/10 text-xs text-slate-300 leading-relaxed font-mono">
+            <!-- 教程 1：2FA 验证码 -->
+            <div class="p-3.5 bg-[#0B0F1A] rounded-xl border border-white/10 space-y-1.5">
+              <span class="text-white font-bold block text-[#38BDF8]">1. 2FA 双重动态验证码获取方法</span>
+              <p>如果卡密中附带了 2FA 密钥（形如 <code>7NVHG2MOPJIQEE6F</code>），您可直接使用站内自带的 <a href="/guide#soul-2fa-tool" target="_blank" class="text-[#38BDF8] underline font-bold">Soul Society 2FA 令牌生成器</a> 本地计算 6 位动态验证码，无需在任何外部第三方发卡网站操作。</p>
+            </div>
+
+            <!-- 教程 2：Apple ID 登录规范 -->
+            <div class="p-3.5 bg-[#0B0F1A] rounded-xl border border-white/10 space-y-1.5">
+              <span class="text-white font-bold block text-rose-300">2. Apple 苹果 ID 登录防锁机规范【必看】</span>
+              <p>严禁在手机系统的【设置】或【iCloud】中登录！只能打开 <strong class="text-white">App Store 应用商店</strong>，点击右上角头像退出后登录。登录提示双重认证时，点击“其他选项”并选择“不升级”即可顺利下载。</p>
+            </div>
+
+            <!-- 教程 3：ChatGPT / 账号改密 -->
+            <div class="p-3.5 bg-[#0B0F1A] rounded-xl border border-white/10 space-y-1.5">
+              <span class="text-white font-bold block text-emerald-300">3. 账号安全与质保首登规范</span>
+              <p>独享账号发货后享受 24 小时首登质保。请在确认账号正常可用后，第一时间前往对应官方平台修改登录密码并绑定自己的辅助邮箱，确保资产永久安全。</p>
+            </div>
+          </div>
+        </div>
+
 
         <div class="p-4 rounded-2xl bg-[#06080F]/70 border border-[#38BDF8]/20 space-y-1.5 text-left font-mono text-xs text-slate-400">
           <div class="flex justify-between items-center">
@@ -607,5 +646,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   });
 
+  
+  document.getElementById('toggle-tutorial-btn')?.addEventListener('click', (e) => {
+    const drawer = document.getElementById('tutorial-content-drawer');
+    const btn = e.currentTarget as HTMLButtonElement;
+    if (!drawer) return;
+    if (drawer.classList.contains('hidden')) {
+      drawer.classList.remove('hidden');
+      btn.textContent = '[收起教程 ▲]';
+    } else {
+      drawer.classList.add('hidden');
+      btn.textContent = '[展开新手教程 ▼]';
+    }
+  });
+
   checkCart();
+
 </script>
