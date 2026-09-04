@@ -189,9 +189,9 @@ const cleanIntroduce = rawIntroduce
   const stockBadge = document.getElementById('product-stock-badge');
   const addToBagBtn = document.getElementById('add-to-bag-btn');
 
-  function getCurrencyMode(): 'cny' | 'usd' {\n    const lang = localStorage.getItem('active_language') || 'zh-CN';\n    return ['zh-CN', 'zh-TW'].includes(lang) ? 'cny' : 'usd';
-    const lang = localStorage.getItem('active_language') || 'en';
-    return ['zh-CN', 'zh-TW', 'ja', 'ko'].includes(lang) ? 'cny' : 'usd';
+  function getCurrencyMode(): 'cny' | 'usd' {
+    const lang = localStorage.getItem('active_language') || 'zh-CN';
+    return ['zh-CN', 'zh-TW'].includes(lang) ? 'cny' : 'usd';
   }
 
   function initPage() {
