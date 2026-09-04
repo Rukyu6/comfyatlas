@@ -1,6 +1,6 @@
 ---
 ---
-<div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+<div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300 font-outfit">
   <div 
     id="cart-drawer" 
     class="absolute right-0 top-0 h-full w-full max-w-md bg-[#0B0F1A]/95 border-l border-[#38BDF8]/20 shadow-2xl p-6 sm:p-8 flex flex-col translate-x-full transition-transform duration-300 ease-out backdrop-blur-xl"
@@ -71,10 +71,14 @@
   const checkoutBtn = document.getElementById('checkout-btn') as HTMLButtonElement;
 
   window.addEventListener('open-cart', () => openCart());
+  window.addEventListener('cart-updated', () => loadCart());
+
   overlay?.addEventListener('click', (e) => {
     if (e.target === overlay) closeCart();
   });
+
   closeBtn?.addEventListener('click', closeCart);
+
   checkoutBtn?.addEventListener('click', () => {
     window.location.href = '/checkout';
   });
@@ -120,17 +124,30 @@
       const formattedPrice = currency === 'cny' ? `¥${itemSubtotal.toFixed(2)}` : `$${itemSubtotal.toFixed(2)}`;
 
       return `
-        <div class="flex items-center justify-between p-3 rounded-2xl bg-[#06080F]/70 border border-[#38BDF8]/20 text-xs">
-          <div class="flex items-center gap-3 min-w-0 flex-1">
-            <img src="${item.image || '/images/default_product.jpg'}" onerror="this.src='/images/default_product.jpg'" class="w-10 h-10 rounded-xl object-cover bg-black/50 border border-white/10 shrink-0" />
-            <div class="min-w-0 flex-1 pr-2">
-              <h4 class="font-bold text-white truncate">${item.name}</h4>
-              <span class="text-[10px] text-slate-400 block mt-0.5">${item.size ? `规格: ${item.size} | ` : ''}数量: ${item.quantity}</span>
+        <div class="p-3.5 rounded-2xl bg-[#06080F]/90 border border-[#38BDF8]/20 space-y-3 text-xs">
+          <div class="flex items-center gap-3 min-w-0">
+            <img 
+              src="${item.image || '/images/default_product.jpg'}" 
+              onerror="this.src='/images/default_product.jpg'" 
+              class="w-11 h-11 rounded-xl object-cover bg-black/50 border border-white/10 shrink-0" 
+            />
+            <div class="min-w-0 flex-1 pr-2 text-left">
+              <h4 class="font-bold text-white truncate text-xs leading-snug">${item.name}</h4>
+              <span class="text-[10px] text-slate-400 block mt-0.5">${item.size ? `规格: ${item.size}` : '标准规格'}</span>
             </div>
+            <button type="button" onclick="window.removeCartItem(${index})" class="text-[11px] text-rose-400 hover:text-rose-300 p-1 cursor-pointer shrink-0">
+              移除
+            </button>
           </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            <span class="font-bold font-mono text-[#38BDF8]">${formattedPrice}</span>
-            <button type="button" onclick="window.removeCartItem(${index})" class="text-[10px] text-rose-400 hover:text-rose-300">移除</button>
+
+          <!-- 数量自选与价格小计栏 -->
+          <div class="flex items-center justify-between pt-2 border-t border-white/5">
+            <div class="flex items-center border border-white/15 rounded-lg overflow-hidden bg-[#0B0F1A] text-xs font-bold">
+              <button type="button" onclick="window.updateCartQty(${index}, -1)" class="px-2.5 py-1 hover:bg-white/10 text-white font-bold select-none cursor-pointer">-</button>
+              <span class="px-3 py-1 text-center text-white font-mono min-w-[28px]">${item.quantity}</span>
+              <button type="button" onclick="window.updateCartQty(${index}, 1)" class="px-2.5 py-1 hover:bg-white/10 text-white font-bold select-none cursor-pointer">+</button>
+            </div>
+            <span class="font-bold font-mono text-[#38BDF8] text-sm">${formattedPrice}</span>
           </div>
         </div>
       `;
@@ -138,6 +155,16 @@
 
     totalEl.textContent = currency === 'cny' ? `¥${total.toFixed(2)}` : `$${total.toFixed(2)}`;
   }
+
+  (window as any).updateCartQty = function(index: number, delta: number) {
+    if (!cart[index]) return;
+    cart[index].quantity += delta;
+    if (cart[index].quantity <= 0) {
+      cart.splice(index, 1);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  };
 
   (window as any).removeCartItem = function(index: number) {
     cart.splice(index, 1);
