@@ -9,12 +9,7 @@ import CartDrawer from '../components/CartDrawer.astro';
   <Header />
 
   <!-- 蓝染降临专属原声 (入站自动播放，无需任何点击) -->
-  <audio 
-    id="aizen-welcome-audio" 
-    src="/audio/welcome.mp3" 
-    autoplay 
-    preload="auto"
-  ></audio>
+  
 
 
   <!-- 灵压烈焰动态聚光交互层 -->
@@ -519,4 +514,57 @@ import CartDrawer from '../components/CartDrawer.astro';
 
   init();
 
+</script>
+
+
+<!-- Soul Society 进站音频（带 Cookie 记忆：仅首访播放一次） -->
+<audio id="soul-welcome-audio" preload="none">
+  <source src="/welcome.mp3" type="audio/mpeg">
+</audio>
+
+<script is:inline>
+  (function() {
+    var COOKIE_KEY = 'soul_welcome_played';
+    
+    // 检查 Cookie 或 localStorage 是否已有记录
+    function hasPlayed() {
+      var match = document.cookie.match(new RegExp('(^| )' + COOKIE_KEY + '=([^;]+)'));
+      if (match && match[2] === 'true') return true;
+      if (localStorage.getItem(COOKIE_KEY) === 'true') return true;
+      return false;
+    }
+
+    // 标记已播放过（写入 Cookie 保留 30 天，并同步写入 localStorage）
+    function markAsPlayed() {
+      var d = new Date();
+      d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
+      document.cookie = COOKIE_KEY + '=true; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+      localStorage.setItem(COOKIE_KEY, 'true');
+    }
+
+    // 如果已经有记录，直接退出，绝不打扰用户
+    if (hasPlayed()) return;
+
+    // 首次进站：监听用户的首次任意交互（点击/滚动/触摸），触发唯一一次音频
+    function playOnce() {
+      if (hasPlayed()) return;
+      var audio = document.getElementById('soul-welcome-audio');
+      if (audio) {
+        audio.volume = 0.6; // 舒适音量
+        audio.play().then(function() {
+          markAsPlayed();
+        }).catch(function() {
+          // 浏览器若策略拦截，则等下一次交互
+        });
+      }
+      // 移除监听器，确保只执行一次
+      ['click', 'touchstart', 'keydown'].forEach(function(evt) {
+        document.removeEventListener(evt, playOnce);
+      });
+    }
+
+    ['click', 'touchstart', 'keydown'].forEach(function(evt) {
+      document.addEventListener(evt, playOnce, { once: true });
+    });
+  })();
 </script>
