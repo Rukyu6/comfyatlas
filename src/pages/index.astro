@@ -432,10 +432,10 @@ import CartDrawer from '../components/CartDrawer.astro';
       const prefix = isMultiOption ? '起售价 ' : '';
 
       const primaryPrice = currencyMode === 'cny'
-        ? `${prefix}¥${displayPriceCny}`
+        ? `${prefix}$${displayPrice}`
         : `${prefix}$${displayPriceUsd}`;
       
-      const strikedPrice = currencyMode === 'cny' ? `¥${origCny}` : `$${origUsd}`;
+      const strikedPrice = currencyMode === 'cny' ? `$${origPrice}` : `$${origUsd}`;
 
       return `
         <a 
