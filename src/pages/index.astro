@@ -128,7 +128,7 @@ const initialProducts = database.products.filter(p => {
               const cleanStock = p.stock === '0' || p.stock === '缺货' ? '暂时缺货' : `现货 ${p.stock} 件`;
               const isMultiOption = p.skus && p.skus.length > 1;
               const cleanId = p.id.replace('pid_', '');
-              const prefix = isMultiOption ? '起售价 ' : '';
+              const prefix = '';
               const primaryPrice = `${prefix}¥${Math.round(displayPriceCny)}`;
 
               return (
@@ -299,7 +299,7 @@ const initialProducts = database.products.filter(p => {
       const cleanStock = isOutOfStock ? '暂时缺货' : `现货 ${p.stock} 件`;
       const isMultiOption = p.skus && p.skus.length > 1;
       const cleanId = p.id.replace('pid_', '');
-      const prefix = isMultiOption ? '起售价 ' : '';
+      const prefix = '';
       const primaryPrice = `${prefix}¥${Math.round(displayPriceCny)}`;
 
       return `
