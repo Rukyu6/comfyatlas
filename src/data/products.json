@@ -1241,8 +1241,8 @@
     {
       "id": "pid_2688",
       "name": "[独享成品号] 已购小火箭 - 美国 Apple ID 老号 - 送密保可改密",
-      "price_cny": 104,
-      "price_usd": 15,
+      "price_cny": 24.9,
+      "price_usd": 4,
       "image": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
       "stock": "119",
       "cid": "67",
@@ -1253,16 +1253,17 @@
         {
           "id": "sku_5088",
           "name": "[独享成品号] 美国 Apple ID  老号- - 已购 小火箭 - 送密保可改密",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "119",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         }
       ],
-      "price": 15,
+      "price": 24.9,
       "source_id": "2688",
-      "source_url": "https://chuhai91.cc/item/2688"
+      "source_url": "https://chuhai91.cc/item/2688",
+      "slug": "exclusive-shadowrocket-us-apple-id-old-account-security-questions-password-changeable"
     },
     {
       "id": "pid_2689",
@@ -1345,8 +1346,8 @@
     {
       "id": "pid_2686",
       "name": "[独享成品号] 已购小火箭 - 全球 Apple ID - 送密保可改密 日本/台湾/香港/马来西亚/越南/泰国/印尼/巴西/",
-      "price_cny": 104,
-      "price_usd": 15,
+      "price_cny": 24.9,
+      "price_usd": 4,
       "image": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
       "stock": "64",
       "cid": "67",
@@ -1357,88 +1358,89 @@
         {
           "id": "sku_5078",
           "name": "日本",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "17",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         },
         {
           "id": "sku_5079",
           "name": "台湾",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "7",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         },
         {
           "id": "sku_5080",
           "name": "菲律宾",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "8",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         },
         {
           "id": "sku_5081",
           "name": "香港",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "4",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         },
         {
           "id": "sku_5082",
           "name": "马来西亚",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "9",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         },
         {
           "id": "sku_5083",
           "name": "越南",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "3",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         },
         {
           "id": "sku_5084",
           "name": "泰国",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "5",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         },
         {
           "id": "sku_5085",
           "name": "印尼",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "6",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         },
         {
           "id": "sku_5086",
           "name": "巴西",
-          "price_cny": 104,
-          "price_usd": 15,
+          "price_cny": 24.9,
+          "price_usd": 4,
           "stock": "5",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 15
+          "price": 24.9
         }
       ],
-      "price": 15,
+      "price": 24.9,
       "source_id": "2686",
-      "source_url": "https://chuhai91.cc/item/2686"
+      "source_url": "https://chuhai91.cc/item/2686",
+      "slug": "exclusive-shadowrocket-global-apple-id-security-questions-japan-taiwan-hong-kong"
     },
     {
       "id": "pid_1155",
@@ -1765,8 +1767,8 @@
     {
       "id": "pid_2690",
       "name": "[独享成品号] 已购小火箭 - 美国 Apple ID 老号 - 已激活iCloud - 送密保可改密",
-      "price_cny": 112,
-      "price_usd": 16,
+      "price_cny": 29.9,
+      "price_usd": 5,
       "image": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
       "stock": "33",
       "cid": "67",
@@ -1777,16 +1779,17 @@
         {
           "id": "sku_5090",
           "name": "[独享成品号] 美国 Apple ID 老号 - 已购小火箭 - 已激活iCloud -送密保可改密",
-          "price_cny": 112,
-          "price_usd": 16,
+          "price_cny": 29.9,
+          "price_usd": 5,
           "stock": "33",
           "picture": "/images/products/32ec5e5c5bd05c7f9e3716ef70cec8ad.png",
-          "price": 16
+          "price": 29.9
         }
       ],
-      "price": 16,
+      "price": 29.9,
       "source_id": "2690",
-      "source_url": "https://chuhai91.cc/item/2690"
+      "source_url": "https://chuhai91.cc/item/2690",
+      "slug": "upstream-20-94-1783321066896"
     },
     {
       "id": "pid_1247",
@@ -8715,8 +8718,8 @@
     {
       "id": "pid_848",
       "name": "Twitter真人号 | 随机年份 开启2FA 含邮箱 带粉丝",
-      "price_cny": 88,
-      "price_usd": 13,
+      "price_cny": 15.0,
+      "price_usd": 3,
       "image": "/images/products/20c0225499185cd9256d6617f522eb42.png",
       "stock": "5024",
       "cid": "68",
@@ -8727,16 +8730,17 @@
         {
           "id": "sku_1686",
           "name": "Twitter真人号 | 随机年份 开启2FA 含邮箱 带粉丝",
-          "price_cny": 88,
-          "price_usd": 13,
+          "price_cny": 15.0,
+          "price_usd": 3,
           "stock": "5024",
           "picture": "/images/products/20c0225499185cd9256d6617f522eb42.png",
-          "price": 13
+          "price": 15.0
         }
       ],
-      "price": 13,
+      "price": 15.0,
       "source_id": "848",
-      "source_url": "https://chuhai91.cc/item/848"
+      "source_url": "https://chuhai91.cc/item/848",
+      "slug": "twitter-2fa-mail-1329"
     },
     {
       "id": "pid_827",
@@ -19553,8 +19557,8 @@
     {
       "id": "pid_4480",
       "name": "台湾下机号-带作品（部分带头像）",
-      "price_cny": 94,
-      "price_usd": 14,
+      "price_cny": 70.0,
+      "price_usd": 10,
       "image": "/images/products/24f6aa7ac3e062367516bd4b2ba60eb0.png",
       "stock": "903",
       "cid": "91",
@@ -19565,16 +19569,17 @@
         {
           "id": "sku_9132",
           "name": "台湾下机号-带作品（部分带头像）",
-          "price_cny": 94,
-          "price_usd": 14,
+          "price_cny": 70.0,
+          "price_usd": 10,
           "stock": "903",
           "picture": "/images/products/24f6aa7ac3e062367516bd4b2ba60eb0.png",
-          "price": 14
+          "price": 70.0
         }
       ],
-      "price": 14,
+      "price": 70.0,
       "source_id": "4480",
-      "source_url": "https://chuhai91.cc/item/4480"
+      "source_url": "https://chuhai91.cc/item/4480",
+      "slug": "for-development-api-id-account-and-api-hash-details"
     },
     {
       "id": "pid_4486",
@@ -19657,8 +19662,8 @@
     {
       "id": "pid_4481",
       "name": "马来下机号-带作品（部分带头像）",
-      "price_cny": 94,
-      "price_usd": 14,
+      "price_cny": 15.9,
+      "price_usd": 3,
       "image": "/images/products/24f6aa7ac3e062367516bd4b2ba60eb0.png",
       "stock": "776",
       "cid": "91",
@@ -19669,16 +19674,17 @@
         {
           "id": "sku_9133",
           "name": "马来下机号-带作品（部分带头像）",
-          "price_cny": 94,
-          "price_usd": 14,
+          "price_cny": 15.9,
+          "price_usd": 3,
           "stock": "776",
           "picture": "/images/products/24f6aa7ac3e062367516bd4b2ba60eb0.png",
-          "price": 14
+          "price": 15.9
         }
       ],
-      "price": 14,
+      "price": 15.9,
       "source_id": "4481",
-      "source_url": "https://chuhai91.cc/item/4481"
+      "source_url": "https://chuhai91.cc/item/4481",
+      "slug": "gmail-account-24-years-old-used-2fa-enabled-us-ip"
     },
     {
       "id": "pid_868",
@@ -20017,8 +20023,8 @@
     {
       "id": "pid_4487",
       "name": "菲律宾下机号-带作品（部分带头像）",
-      "price_cny": 94,
-      "price_usd": 14,
+      "price_cny": 19.8,
+      "price_usd": 3,
       "image": "/images/products/24f6aa7ac3e062367516bd4b2ba60eb0.png",
       "stock": "882",
       "cid": "91",
@@ -20029,16 +20035,17 @@
         {
           "id": "sku_9139",
           "name": "菲律宾下机号-带作品（部分带头像）",
-          "price_cny": 94,
-          "price_usd": 14,
+          "price_cny": 19.8,
+          "price_usd": 3,
           "stock": "882",
           "picture": "/images/products/24f6aa7ac3e062367516bd4b2ba60eb0.png",
-          "price": 14
+          "price": 19.8
         }
       ],
-      "price": 14,
+      "price": 19.8,
       "source_id": "4487",
-      "source_url": "https://chuhai91.cc/item/4487"
+      "source_url": "https://chuhai91.cc/item/4487",
+      "slug": "recommended-permanent-little-rocket-id-no-ban-freeze-rent-accounts"
     },
     {
       "id": "pid_4492",
