@@ -302,7 +302,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               id="submit-order-btn"
               class="w-full py-4 rounded-xl bg-[#38BDF8] border border-[#0284C7] text-[#080808] hover:bg-[#0284C7] font-bold uppercase tracking-wider text-sm font-sora transition-all duration-300 shadow-lg active:scale-[0.99] cursor-pointer"
             >
-              确认并提交订单 / Verify & Submit Order ⚡
+              确认并提交订单 / 链上核验并确认订单
             </button>
           </form>
         </div>
@@ -310,7 +310,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Right Side: Order Summary -->
         <div class="lg:col-span-5">
           <div class="glass-card p-8 rounded-[2rem] border border-[#38BDF8]/20 bg-[#1C1917]/50 backdrop-blur-xl space-y-6 sticky top-28">
-            <h3 class="text-lg font-bold font-sora text-white border-b border-[#38BDF8]/20 pb-3">订单汇总 / Order Summary ⚡</h3>
+            <h3 class="text-lg font-bold font-sora text-white border-b border-[#38BDF8]/20 pb-3">订单汇总 / 订单汇总 / Order Summary</h3>
             
             <!-- Items list -->
             <div id="checkout-summary-list" class="space-y-4 max-h-[300px] overflow-y-auto pr-2">
@@ -325,7 +325,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </div>
               <div class="flex justify-between">
                 <span>配送方式 / Delivery</span>
-                <span class="text-[#38BDF8] font-bold uppercase tracking-wider text-xs">自动发货 / Auto Delivery ⚡</span>
+                <span class="text-[#38BDF8] font-bold uppercase tracking-wider text-xs">自动发货 / 自动发货 / Auto Delivery</span>
               </div>
               <div class="flex justify-between text-[#38BDF8] font-bold font-sora text-xl pt-4 border-t border-[#38BDF8]/20">
                 <span>实付总额 / Grand Total</span>
@@ -337,29 +337,61 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       </div>
 
-      <!-- SUCCESS SCREEN (Hidden initially) -->
-      <div id="checkout-success-view" class="hidden max-w-xl mx-auto text-center py-20 px-6 space-y-8 glass-card border border-[#38BDF8]/20 rounded-[2rem] bg-[#1C1917]/50 backdrop-blur-xl text-white">
-        <div class="w-20 h-20 rounded-full bg-green-950/20 border border-green-800 flex items-center justify-center mx-auto text-green-400 shadow-md">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+            <!-- SUCCESS SCREEN: Soul Society 苍蓝暗晶核验成功界面 (零 Emoji) -->
+      <div id="checkout-success-view" class="hidden max-w-xl mx-auto text-center py-16 px-8 space-y-8 glass-card border border-[#38BDF8]/40 rounded-[2.5rem] bg-[#0B0F1A]/95 backdrop-blur-2xl text-white shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
+        
+        <!-- 灵压核验通过徽章 (苍蓝微光动效) -->
+        <div class="relative w-22 h-22 mx-auto flex items-center justify-center">
+          <div class="absolute inset-0 rounded-full bg-[#0284C7]/30 blur-xl animate-pulse"></div>
+          <div class="relative w-20 h-20 rounded-full bg-gradient-to-tr from-[#0284C7] to-[#38BDF8] border-2 border-[#38BDF8] flex items-center justify-center text-[#06080F] shadow-[0_0_30px_rgba(56,189,248,0.5)]">
+            <svg class="w-10 h-10 text-[#06080F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
         </div>
-        <div class="space-y-4">
-          <h2 class="text-3xl font-bold font-sora text-white tracking-tight">Order Submitted Successfully! 🎉</h2>
-          <p class="text-zinc-400 text-xs leading-relaxed max-w-md mx-auto font-sans">
-            We are preparing your keys manually (usually takes 5-15 mins). Once shipped, card keys will display instantly in your <strong>Order Vault</strong> history page.<br/><br/>
-            系统已收到您的订单，正为您人工配货（通常需 5~15 分钟）。发货后卡密将自动呈现于您的“订单保险库”（Order Vault）中，请稍后刷新查看。
+
+        <div class="space-y-3">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] text-xs font-bold font-mono">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>ON-CHAIN VERIFIED • 链上确认成功</span>
+          </span>
+          <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">
+            订单凭证核验通过
+          </h2>
+          <p class="text-slate-300 text-xs md:text-sm leading-relaxed max-w-md mx-auto font-sans">
+            区块链转账确认已通过，系统正在为您发放专属数字卡密。<br/>
+            卡密凭据将即时呈现于下方，同时已同步至您的订单库中。
           </p>
         </div>
-        <div class="border-t border-[#38BDF8]/20 pt-6 text-zinc-400 text-xs font-sora">
-          Order reference: <span id="checkout-reference-id" class="font-mono text-white font-bold">CA-837492</span>
+
+        <!-- 订单参数卡 -->
+        <div class="p-4 rounded-2xl bg-[#06080F]/90 border border-[#38BDF8]/30 space-y-2 text-left font-mono text-xs">
+          <div class="flex justify-between items-center text-slate-400">
+            <span>订单索引编号:</span>
+            <span id="checkout-reference-id" class="text-white font-bold text-sm select-all"></span>
+          </div>
+          <div class="flex justify-between items-center text-slate-400">
+            <span>支付核验状态:</span>
+            <span class="text-emerald-400 font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 已确权打款
+            </span>
+          </div>
         </div>
-        <a 
-          href="/" 
-          class="inline-block px-8 py-3 rounded-xl bg-[#38BDF8] border border-[#0284C7] text-[#080808] hover:bg-[#0284C7] font-bold uppercase tracking-wider text-xs font-sora transition-all duration-300 shadow-md"
-        >
-          Return to Vault ⚡
-        </a>
+
+        <div class="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+          <a 
+            href="/query" 
+            class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:brightness-115 active:scale-95 cursor-pointer text-center"
+          >
+            前往订单库提取卡密
+          </a>
+          <a 
+            href="/" 
+            class="px-6 py-3.5 rounded-xl bg-white/5 border border-white/15 text-slate-300 hover:text-white hover:bg-white/10 font-bold text-xs uppercase tracking-wider transition active:scale-95 text-center"
+          >
+            返回商城前台
+          </a>
+        </div>
       </div>
 
     </div>
@@ -671,6 +703,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       };
 
       // 1. Create order document in database
+      // ==========================================
+      // 1. 触发服务端真实区块链链上转账核实
+      // ==========================================
+      if (!isBalancePayment) {
+        submitBtn.textContent = '正在核验链上转账凭据 (On-Chain Checking)...';
+        const verifyRes = await fetch('/api/verify-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderId: 'TEMP-' + Date.now(),
+            email: email,
+            txid: txIdVal,
+            paymentMethod: paymentMethod,
+            totalUsd: totalUsd,
+            totalCny: totalCny,
+            targetAddress: hiddenPaymentMethod.getAttribute('data-address') || ''
+          })
+        });
+
+        const verifyData = await verifyRes.json();
+        if (!verifyRes.ok || !verifyData.success) {
+          throw new Error(verifyData.message || '链上核实未通过：未能检测到有效转账，请确认 TxID 后重试。');
+        }
+      }
+
+      // ==========================================
+      // 2. 链上核实通过 -> 写入数据库
+      // ==========================================
       const orderRef = await addDoc(collection(dbInstance, 'orders'), orderData);
       const orderId = orderRef.id;
 
