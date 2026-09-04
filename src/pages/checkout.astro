@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Checkout | WorldMarket">
+<BaseLayout title="Soul Society 收银台 — 灵压凭证核验与结算">
   
   <div class="min-h-screen py-12 px-6 md:py-20 bg-[#06080F] text-white font-sora">
     <div class="max-w-6xl mx-auto">
@@ -15,7 +15,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Back to vault
+          返回商城
         </a>
       </div>
 
@@ -24,7 +24,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         
         <!-- Left Side: Order Verification Form -->
         <div class="lg:col-span-7">
-          <h2 class="text-3xl font-bold font-sora text-white mb-8">收银台 / Checkout</h2>
+          <h2 class="text-2xl md:text-3xl font-black text-white mb-8 tracking-tight flex items-center gap-3"><span>收银台</span><span class="text-xs font-mono font-bold text-[#38BDF8] bg-[#0284C7]/20 px-3 py-1 rounded-full border border-[#38BDF8]/40">SOUL SOCIETY CHECKOUT</span></h2>
           
           <form id="checkout-form" class="space-y-8">
             <!-- Web3Forms Configuration -->
@@ -130,39 +130,56 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="glass-card p-8 rounded-[2rem] border border-[#38BDF8]/20 bg-[#1C1917]/50 backdrop-blur-xl space-y-6">
               <h3 class="text-lg font-bold font-sora text-white border-b border-[#38BDF8]/20 pb-3">02. 转账支付 / Transfer Payment</h3>
 
-              <!-- Payment Method Selection Grid -->
-              <div class="space-y-3">
-                <label class="block text-xs uppercase text-zinc-400 font-bold tracking-wider font-sora">选择付款网络 / Select Payment Network</label>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="payment-networks-grid">
+                            <!-- Payment Method Selection Grid -->
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <label class="block text-xs uppercase text-slate-300 font-bold tracking-wider font-mono">
+                    选择付款网络 / Payment Network
+                  </label>
+                  <span class="text-[10px] text-[#38BDF8] font-mono bg-[#0284C7]/20 border border-[#38BDF8]/30 px-2.5 py-0.5 rounded-full">
+                    零手续费 • 秒级到账
+                  </span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="payment-networks-grid">
                   <!-- Wallet Balance Payment Button (Initially Hidden) -->
-                  <button type="button" id="pay-method-balance" class="hidden payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#38BDF8]/20 bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="BALANCE" data-name="余额支付 (Wallet Balance)" data-badge="Wallet Balance Payment">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#38BDF8]">余额支付</span>
-                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">Balance: $<span id="checkout-wallet-balance">0.00</span></span>
+                  <button type="button" id="pay-method-balance" class="hidden col-span-2 sm:col-span-4 payment-method-btn flex items-center justify-between p-3.5 rounded-2xl border border-[#38BDF8]/40 bg-[#0B0F1A] text-white shadow-md transition hover:border-[#38BDF8] active:scale-98 cursor-pointer" data-id="BALANCE" data-name="余额支付 (Wallet Balance)" data-badge="Wallet Balance Payment">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-8 h-8 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] flex items-center justify-center font-bold text-xs">⚡</div>
+                      <div class="text-left">
+                        <span class="text-xs uppercase font-extrabold tracking-wider text-[#38BDF8] block">会员钱包余额支付</span>
+                        <span class="text-[10px] text-slate-400 font-mono">当前可用余额: $<span id="checkout-wallet-balance">0.00</span> USD</span>
+                      </div>
+                    </div>
+                    <span class="text-xs font-bold text-[#38BDF8] px-3 py-1 rounded-xl bg-[#0284C7]/30 border border-[#38BDF8]/40">立即抵扣</span>
                   </button>
 
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#0284C7] bg-[#38BDF8] text-[#080808] font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer" data-id="USDT_TRC20" data-address="TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" data-name="USDT (TRC-20)" data-badge="USDT TRC-20 Address" data-note="请向上述 TRC-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the TRC-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest">USDT</span>
-                    <span class="text-[9px] font-bold mt-0.5 font-sans text-[#080808]/90">Tron (TRC-20)</span>
+                  <!-- TRON (TRC20) 推荐通道 -->
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3 rounded-2xl border border-[#0284C7] bg-[#38BDF8] text-[#06080F] shadow-[0_0_20px_rgba(56,189,248,0.3)] transition active:scale-95 cursor-pointer relative overflow-hidden" data-id="USDT_TRC20" data-address="TXLUKiCFzMsSxyAy6uR5WduCsnYXqXMJ1C" data-name="USDT (TRC-20)" data-badge="USDT TRON (TRC-20)" data-note="请向上述 TRON (TRC-20) 地址转入精确订单金额。转账成功后请复制 TxID 交易哈希进行凭据提交。<br/><span class='text-slate-400'>Please transfer exact USDT to the TRC-20 address above.</span>">
+                    <span class="text-[9px] font-black uppercase tracking-widest bg-black/20 px-1.5 py-0.5 rounded-md mb-1 font-mono">POPULAR</span>
+                    <span class="text-xs font-black uppercase tracking-wider">USDT</span>
+                    <span class="text-[10px] font-bold font-mono">TRC-20 (Tron)</span>
                   </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#38BDF8]/20 bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="USDT_BEP20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDT (BEP-20)" data-badge="USDT BEP-20 Address" data-note="请向上述 BEP-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the BEP-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#38BDF8]">USDT</span>
-                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">BNB Chain (BEP-20)</span>
+
+                  <!-- BSC (BEP20) 极低费率 -->
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3 rounded-2xl border border-[#38BDF8]/20 bg-[#0B0F1A] text-white hover:border-[#38BDF8]/50 shadow-md transition active:scale-95 cursor-pointer" data-id="USDT_BEP20" data-address="0x1d6aa81a17701932b09bd45e018af2be5efa53de" data-name="USDT (BEP-20)" data-badge="USDT BSC (BEP-20)" data-note="⚠️ <b>注意：</b>请勿使用 opBNB 链存入 USDT，否则资产不可找回。转账完成后请填写 TxID 交易哈希。<br/><span class='text-slate-400'>BNB Smart Chain (BEP-20) Network. Do NOT use opBNB.</span>">
+                    <span class="text-[9px] font-black uppercase tracking-widest text-[#38BDF8] bg-[#0284C7]/20 px-1.5 py-0.5 rounded-md mb-1 font-mono">LOW GAS</span>
+                    <span class="text-xs font-black uppercase tracking-wider">USDT</span>
+                    <span class="text-[10px] font-bold font-mono text-slate-400">BEP-20 (BSC)</span>
                   </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#38BDF8]/20 bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="USDT_ERC20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDT (ERC-20)" data-badge="USDT ERC-20 Address" data-note="请向上述 ERC-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDT to the ERC-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#38BDF8]">USDT</span>
-                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">Ethereum (ERC-20)</span>
+
+                  <!-- Solana (SOL) 高速链 -->
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3 rounded-2xl border border-[#38BDF8]/20 bg-[#0B0F1A] text-white hover:border-[#38BDF8]/50 shadow-md transition active:scale-95 cursor-pointer" data-id="USDT_SOL" data-address="925egwkSqvQkrGv9aCjJx5TAzcscCu9sAQMrt3VrwKXF" data-name="USDT (Solana)" data-badge="USDT Solana (SOL)" data-note="请向上述 Solana (SOL) 链地址转入精确订单金额。转账完成后填写交易签名/哈希。<br/><span class='text-slate-400'>Solana Network (USDT). Fast confirmation.</span>">
+                    <span class="text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded-md mb-1 font-mono">FAST</span>
+                    <span class="text-xs font-black uppercase tracking-wider">USDT</span>
+                    <span class="text-[10px] font-bold font-mono text-slate-400">Solana (SOL)</span>
                   </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#38BDF8]/20 bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="USDC_BEP20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDC (BEP-20)" data-badge="USDC BEP-20 Address" data-note="请向上述 BEP-20 地址转入精确的订单金额（USDC）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDC to the BEP-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#38BDF8]">USDC</span>
-                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">BNB Chain (BEP-20)</span>
-                  </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#38BDF8]/20 bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="USDC_ERC20" data-address="0xfd28A01945BDeF96e66Da9435184395204Aa287" data-name="USDC (ERC-20)" data-badge="USDC ERC-20 Address" data-note="请向上述 ERC-20 地址转入精确的订单金额（USDC）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in USDC to the ERC-20 address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#38BDF8]">USDC</span>
-                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">Ethereum (ERC-20)</span>
-                  </button>
-                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3.5 rounded-2xl border border-[#38BDF8]/20 bg-transparent text-white font-sora shadow-md transition hover:translate-y-[-2px] active:scale-95 cursor-pointer hover:bg-white/5" data-id="TRX" data-address="TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" data-name="TRX (Tron)" data-badge="TRX Tron Address" data-note="请向上述 Tron 地址转入精确的订单金额（TRX）。转账完成后，系统将自动在区块链上进行验证。<br/>Please transfer the exact order amount in TRX to the Tron address above.">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-[#38BDF8]">TRX</span>
-                    <span class="text-[9px] font-bold text-zinc-400 mt-0.5 font-sans">Tron Network</span>
+
+                  <!-- Ethereum (ERC20) 以太坊 -->
+                  <button type="button" class="payment-method-btn flex flex-col items-center justify-center p-3 rounded-2xl border border-[#38BDF8]/20 bg-[#0B0F1A] text-white hover:border-[#38BDF8]/50 shadow-md transition active:scale-95 cursor-pointer" data-id="USDT_ERC20" data-address="0x1d6aa81a17701932b09bd45e018af2be5efa53de" data-name="USDT (ERC-20)" data-badge="USDT Ethereum (ERC-20)" data-note="请向上述 Ethereum (ERC-20) 地址转入精确订单金额。适合大额结算。<br/><span class='text-slate-400'>Ethereum Network (ERC-20). Recommended for high-value orders.</span>">
+                    <span class="text-[9px] font-black uppercase tracking-widest text-indigo-300 bg-indigo-950/40 px-1.5 py-0.5 rounded-md mb-1 font-mono">ETH</span>
+                    <span class="text-xs font-black uppercase tracking-wider">USDT</span>
+                    <span class="text-[10px] font-bold font-mono text-slate-400">ERC-20 (Mainnet)</span>
                   </button>
                 </div>
               </div>
@@ -170,64 +187,109 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <!-- Payment Method Selection Storage -->
               <input type="hidden" id="hidden-payment-method" name="payment_method" value="USDT (TRC-20)" />
 
-              <!-- CRYPTO DETAILS -->
-              <div id="payment-crypto-container" class="space-y-6 animate-fadeIn">
-                <div class="bg-[#090909] border border-[#38BDF8]/20 rounded-2xl p-6 space-y-6 shadow-md flex flex-col items-center text-center">
+              <!-- CRYPTO DETAILS BOX (高保真专属卡片) -->
+              <div id="payment-crypto-container" class="space-y-6">
+                <div class="bg-[#0B0F1A] border border-[#38BDF8]/30 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl flex flex-col items-center text-center backdrop-blur-xl relative overflow-hidden">
                   
-                  <span id="payment-badge-label" class="text-[10px] uppercase font-bold text-[#38BDF8] bg-[#38BDF8]/10 px-3.5 py-1 rounded-full border border-[#38BDF8]/30 font-sora">
-                    USDT TRC-20 Address
-                  </span>
+                  <div class="flex items-center justify-between w-full">
+                    <span id="payment-badge-label" class="text-xs font-black font-mono text-[#38BDF8] bg-[#0284C7]/20 px-3.5 py-1 rounded-full border border-[#38BDF8]/40 shadow-[0_0_15px_rgba(56,189,248,0.25)]">
+                      USDT TRON (TRC-20)
+                    </span>
+                    <span class="text-[10px] font-mono text-slate-400 flex items-center gap-1.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      节点在线
+                    </span>
+                  </div>
 
                   <!-- Dynamic QR Code -->
-                  <div class="w-36 h-36 bg-white p-2 rounded-2xl flex items-center justify-center border border-[#38BDF8]/20 hover:scale-105 transition-transform duration-300">
-                    <img 
-                      id="payment-qr-image"
-                      src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" 
-                      alt="Payment QR Code" 
-                      class="w-32 h-32 rounded-lg"
-                    />
+                  <div class="relative group">
+                    <div class="w-44 h-44 bg-white p-3 rounded-2xl flex items-center justify-center border-2 border-[#38BDF8]/50 shadow-[0_0_30px_rgba(56,189,248,0.25)] group-hover:scale-103 transition-transform duration-300">
+                      <img 
+                        id="payment-qr-image"
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=TXLUKiCFzMsSxyAy6uR5WduCsnYXqXMJ1C" 
+                        alt="Payment QR Code" 
+                        class="w-38 h-38 rounded-lg"
+                      />
+                    </div>
                   </div>
 
+                  <!-- Wallet Address & Copy -->
                   <div class="w-full space-y-3">
-                    <div class="text-xs font-bold text-zinc-400 font-sora">点击下方地址即可自动复制 / Click to copy address:</div>
-                    <p id="crypto-address-text" class="text-xs md:text-sm font-mono text-white break-all bg-[#06080F] py-3 px-4 rounded-xl border border-[#38BDF8]/20 select-all cursor-pointer hover:bg-white/5 transition-colors font-bold shadow-sm">
-                      TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA
-                    </p>
-                    <button 
-                      type="button"
-                      id="copy-crypto-btn"
-                      class="px-6 py-2.5 rounded-xl bg-transparent border border-[#38BDF8]/20 text-xs font-bold text-white hover:bg-white/5 active:scale-95 transition font-sora shadow-sm cursor-pointer"
+                    <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+                      <span>官方充值钱包地址 (点击可直接复制)</span>
+                      <span id="copy-status-hint" class="text-[#38BDF8] font-bold"></span>
+                    </div>
+
+                    <div 
+                      id="crypto-address-text" 
+                      class="text-xs sm:text-sm font-mono text-white break-all bg-[#06080F] py-3.5 px-4 rounded-2xl border border-[#38BDF8]/30 select-all cursor-pointer hover:border-[#38BDF8] hover:bg-[#0284C7]/10 transition-all font-bold shadow-inner flex items-center justify-between gap-3 group"
+                      title="点击直接复制地址"
                     >
-                      Copy Wallet Address
-                    </button>
+                      <span id="address-display-val">TXLUKiCFzMsSxyAy6uR5WduCsnYXqXMJ1C</span>
+                      <button 
+                        type="button" 
+                        id="copy-crypto-btn"
+                        class="p-2 rounded-xl bg-white/5 group-hover:bg-[#0284C7]/30 text-[#38BDF8] shrink-0 transition"
+                      >
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
 
-                  <p id="payment-note-paragraph" class="text-xs text-zinc-500 font-sora font-semibold leading-relaxed border-t border-[#38BDF8]/20 pt-4 w-full">
-                    请向上述 TRC-20 地址转入精确的订单金额（USDT）。转账完成后，系统将自动在区块链上进行验证。<br/>
-                    Please transfer the exact order amount in USDT to the TRC-20 address above.
-                  </p>
+                  <!-- Note -->
+                  <div id="payment-note-paragraph" class="text-xs text-slate-400 font-sans leading-relaxed border-t border-[#38BDF8]/20 pt-4 w-full text-left bg-white/2 p-3 rounded-xl">
+                    请向上述 TRON (TRC-20) 地址转入精确订单金额。转账成功后请复制 TxID 交易哈希进行凭据提交。<br/>
+                    <span class="text-slate-500">Please transfer exact USDT to the TRC-20 address above.</span>
+                  </div>
+                </div>
+
+                <!-- 其他链付款通道提示栏 (如客户有其他链付款请联系客服付款) -->
+                <div class="p-4 rounded-2xl bg-gradient-to-r from-[#0B0F1A] to-[#06080F] border border-[#38BDF8]/30 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+                  <div class="flex items-center gap-3 text-left">
+                    <div class="w-9 h-9 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] flex items-center justify-center shrink-0">
+                      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h5 class="text-xs font-bold text-white">其他网络与币种结算？</h5>
+                      <p class="text-[11px] text-slate-400">如需使用 Polygon、Arbitrum、USDC 或其他链付款，请联系专席客服处理。</p>
+                    </div>
+                  </div>
+                  <a 
+                    href="https://t.me/puppyshop2Bot" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="px-4 py-2 rounded-xl bg-[#0284C7]/30 hover:bg-[#38BDF8] hover:text-[#06080F] text-[#38BDF8] border border-[#38BDF8]/50 text-xs font-bold transition flex items-center gap-2 shrink-0 cursor-pointer active:scale-95"
+                  >
+                    <span>联系专席客服</span>
+                    <span>→</span>
+                  </a>
                 </div>
 
                 <!-- Proof input -->
-                <div id="txid-input-container" class="space-y-2">
-                  <label for="txid" class="block text-xs uppercase text-zinc-400 font-bold tracking-wider font-sora">
-                    转账交易哈希 / Transaction Hash (TxID)
-                  </label>
+                <div id="txid-input-container" class="space-y-2 text-left">
+                  <div class="flex items-center justify-between">
+                    <label for="txid" class="block text-xs uppercase text-slate-300 font-bold tracking-wider font-mono">
+                      转账交易哈希 / Transaction Hash (TxID) <span class="text-[#38BDF8]">*</span>
+                    </label>
+                    <span class="text-[10px] text-slate-500 font-mono">区块链唯一支付凭据</span>
+                  </div>
                   <input 
                     type="text" 
                     id="txid" 
                     name="txid" 
                     required 
-                    placeholder="请输入区块链交易哈希值 (TxID) / Enter TxID"
-                    class="w-full bg-[#06080F] border border-[#38BDF8]/20 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8] transition font-sora font-semibold"
+                    placeholder="请输入区块链转账成功后的 TxID 交易哈希 (例如: f89a7b...)"
+                    class="w-full bg-[#06080F] border border-[#38BDF8]/30 rounded-2xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/30 transition font-mono text-xs shadow-inner"
                   />
-                  <p class="text-[10px] text-zinc-550 font-sora font-semibold">
-                    请填写您转账的交易哈希，以便我们自动匹配和确认您的订单。<br/>
-                    Provide the TxID hash so we can automatically match this ledger action with your order.
+                  <p class="text-[10px] text-slate-400 font-sans leading-normal">
+                    请填写您在钱包或交易所转账成功后生成的交易哈希 (TxID / Hash)，系统将自动匹配订单并在 5~15 分钟内完成卡密派发。
                   </p>
                 </div>
               </div>
-            </div>
 
             <!-- Validation Error Alert (Hidden by default) -->
             <div id="error-message" class="hidden p-4 rounded-xl border border-red-900 bg-red-950/20 text-red-400 text-sm font-semibold font-sora">
@@ -475,40 +537,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   // Click-to-copy utility
-  function setupCopyToClipboard(triggerId, textId) {
-    const trigger = document.getElementById(triggerId);
-    const element = document.getElementById(textId);
-    if (!trigger || !element) return;
+  function   // Direct Click-to-copy for the crypto address text block
+  const cryptoAddressText = document.getElementById('crypto-address-text');
+  const copyHint = document.getElementById('copy-status-hint');
+  const addressSpan = document.getElementById('address-display-val');
 
-    trigger.addEventListener('click', () => {
-      const textToCopy = element.textContent?.trim() || '';
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        const originalText = trigger.textContent;
-        trigger.textContent = 'Copied!';
-        trigger.classList.add('bg-emerald-950/40', 'text-emerald-350');
-        setTimeout(() => {
-          trigger.textContent = originalText;
-          trigger.classList.remove('bg-emerald-950/40', 'text-emerald-350');
-        }, 1500);
-      });
+  function copyAddress() {
+    const text = addressSpan?.textContent?.trim() || cryptoAddressText?.textContent?.trim() || '';
+    navigator.clipboard.writeText(text).then(() => {
+      if (copyHint) copyHint.textContent = '已复制到剪贴板 ✓';
+      cryptoAddressText?.classList.add('border-emerald-400', 'bg-emerald-950/20');
+      setTimeout(() => {
+        if (copyHint) copyHint.textContent = '';
+        cryptoAddressText?.classList.remove('border-emerald-400', 'bg-emerald-950/20');
+      }, 1800);
     });
   }
 
-  setupCopyToClipboard('copy-crypto-btn', 'crypto-address-text');
-
-  // Direct Click-to-copy for the crypto address text block
-  const cryptoAddressText = document.getElementById('crypto-address-text');
-  cryptoAddressText?.addEventListener('click', () => {
-    const text = cryptoAddressText.textContent?.trim() || '';
-    navigator.clipboard.writeText(text).then(() => {
-      const originalText = cryptoAddressText.innerText;
-      cryptoAddressText.innerText = "COPIED / 地址已复制 ✓";
-      cryptoAddressText.style.color = "#38BDF8";
-      setTimeout(() => {
-        cryptoAddressText.innerText = text;
-        cryptoAddressText.style.color = "";
-      }, 1000);
-    });
+  cryptoAddressText?.addEventListener('click', copyAddress);
+  document.getElementById('copy-crypto-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    copyAddress();
+  });
   });
 
   // Handle switching payment networks
@@ -542,7 +592,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         
         // Update inputs & display text
         if (badgeLabel) badgeLabel.textContent = badge;
-        if (cryptoAddressText) cryptoAddressText.textContent = address;
+        if (addressSpan) addressSpan.textContent = address; else if (cryptoAddressText) cryptoAddressText.textContent = address;
         if (qrImage) {
           qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(address)}`;
         }
