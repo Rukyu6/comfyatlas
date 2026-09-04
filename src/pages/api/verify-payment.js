@@ -82,7 +82,6 @@ export async function POST({ request }) {
                         `*客户邮箱:* ${email}\n` +
                         `*订单金额:* ¥${totalCny || Math.round(totalUsd * 7.2)} CNY (≈ ${Math.ceil(totalUsd)} USDT)
 ` +
-                        `*付款通道:* ${paymentMethod}\n` +
                         `*收款钱包:* \`${targetAddress || '默认充值地址'}\`\n` +
                         `*交易哈希:* \`${cleanTxId}\`\n` +
                         `*区块查询:* [点击直达区块链浏览器](<${explorerUrl || 'https://tronscan.org'}>)\n` +

@@ -44,7 +44,6 @@ export async function POST({ request }) {
                     `*会员名称:* ${username || '游客'}\n` +
                     `*订单金额:* ¥${totalCny || Math.round(totalUsd * 7.2)} CNY (≈ ${Math.ceil(totalUsd)} USDT)
 ` +
-                    `*网站域名:* ${host}\n` +
                     `*支付方式:* ${methodLabel}\n` +
                     `*创建时间:* ${formattedDate}\n` +
                     `*通知状态:* 通知成功`;
