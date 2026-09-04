@@ -399,18 +399,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     renderCheckout();
   }
 
-  function renderCheckout() {
+    function renderCheckout() {
     const listContainer = document.getElementById('checkout-summary-list');
     const subtotalText = document.getElementById('checkout-subtotal');
     const grandtotalText = document.getElementById('checkout-grand-total');
 
     if (!listContainer || !subtotalText || !grandtotalText) return;
 
-    const mode = getCurrencyMode();
+    let calcTotalCny = 0;
 
     listContainer.innerHTML = cart.map(item => {
-      const itemUsd = Math.ceil(item.price || 10) * (item.quantity || 1);
-      const priceText = `$${itemUsd}`;
+      // 容错取值：兼容旧版存入的 price 或新版 priceCny
+      let unitCny = Number(item.priceCny || item.price || 0);
+      if (isNaN(unitCny)) unitCny = 0;
+      // 若原数据仅存了美元小额，自动按 7.2 还原为人民币
+      if (unitCny > 0 && unitCny < 150 && !item.priceCny && item.price) {
+        unitCny = Math.round(unitCny * 7.2);
+      }
+      
+      const qty = Number(item.quantity) || 1;
+      const itemSubtotalCny = Math.round(unitCny) * qty;
+      calcTotalCny += itemSubtotalCny;
 
       return `
         <div class="flex items-center justify-between text-xs py-2.5 border-b border-white/5 last:border-0">
@@ -422,29 +431,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             />
             <div class="min-w-0 flex-1">
               <span class="text-white font-bold block truncate">${item.name}</span>
-              <span class="text-slate-400 text-[10px] font-mono">${item.size ? `规格: ${item.size} | ` : ''}数量: ${item.quantity}</span>
+              <span class="text-slate-400 text-[10px] font-mono">${item.size ? `规格: ${item.size} | ` : ''}数量: ${qty}</span>
             </div>
           </div>
-          <span class="text-[#38BDF8] font-mono font-bold shrink-0">${priceText}</span>
+          <span class="text-[#38BDF8] font-mono font-bold shrink-0">¥${itemSubtotalCny}</span>
         </div>
       `;
     }).join('');
 
-    const totalUsd = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const totalCny = Math.round(totalUsd * 7.1);
+    const totalCny = Math.round(calcTotalCny);
+    const totalUsdt = Math.ceil(totalCny / 7.2);
 
-    if (mode === 'cny') {
-      subtotalText.textContent = `¥${totalCny} CNY`;
-      grandtotalText.textContent = `¥${totalCny} CNY`;
-    } else {
-      subtotalText.textContent = `$${totalUsd.toFixed(0)} USD`;
-      grandtotalText.textContent = `$${totalUsd.toFixed(0)} USD`;
-    }
+    subtotalText.textContent = `¥${totalCny} CNY`;
+    grandtotalText.innerHTML = `¥${totalCny} <span class="text-sm text-[#38BDF8] font-mono font-bold ml-2">(折合支付: ${totalUsdt} USDT)</span>`;
 
     const hiddenCartData = document.getElementById('hidden-cart-data') as HTMLInputElement;
     const hiddenTotalPrice = document.getElementById('hidden-total-price') as HTMLInputElement;
     if (hiddenCartData) hiddenCartData.value = cart.map(i => `${i.quantity}x ${i.name}`).join(', ');
-    if (hiddenTotalPrice) hiddenTotalPrice.value = `$${totalUsd.toFixed(0)} USD (¥${totalCny} CNY)`;
+    if (hiddenTotalPrice) hiddenTotalPrice.value = `¥${totalCny} CNY (≈ ${totalUsdt} USDT)`;
   }
 
   // 复制钱包地址交互
@@ -511,8 +515,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const paymentMethod = hiddenPaymentMethod.value;
       const txIdVal = inputTxID.value.trim();
 
-      const totalUsd = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      const totalCny = Math.round(totalUsd * 7.1);
+      let totalCnyCalc = 0;
+      cart.forEach(i => {
+        let u = Number(i.priceCny || i.price || 0);
+        if (isNaN(u)) u = 0;
+        if (u > 0 && u < 150 && !i.priceCny && i.price) u = u * 7.2;
+        totalCnyCalc += Math.round(u) * (Number(i.quantity) || 1);
+      });
+      const totalCny = Math.round(totalCnyCalc);
+      const totalUsd = Math.ceil(totalCny / 7.2);
 
       // 1. 服务端链上核验
       const verifyRes = await fetch('/api/verify-payment', {
