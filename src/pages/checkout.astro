@@ -602,8 +602,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 
-  // Click-to-copy utility
-  function   // Direct Click-to-copy for the crypto address text block
+  // Direct Click-to-copy for the crypto address text block
   const cryptoAddressText = document.getElementById('crypto-address-text');
   const copyHint = document.getElementById('copy-status-hint');
   const addressSpan = document.getElementById('address-display-val');
@@ -624,7 +623,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   document.getElementById('copy-crypto-btn')?.addEventListener('click', (e) => {
     e.stopPropagation();
     copyAddress();
-  });
   });
 
   // Handle switching payment networks
