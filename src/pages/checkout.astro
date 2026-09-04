@@ -26,7 +26,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="lg:col-span-7">
           <h2 class="text-2xl md:text-3xl font-black text-white mb-8 tracking-tight flex items-center gap-3">
             <span>收银台</span>
-            <span class="text-xs font-mono font-bold text-[#38BDF8] bg-[#0284C7]/20 px-3 py-1 rounded-full border border-[#38BDF8]/40">SOUL SOCIETY CHECKOUT</span>
+            <span class="text-xs font-mono font-bold text-[#38BDF8] bg-[#0284C7]/20 px-3 py-1 rounded-full border border-[#38BDF8]/40">灵压结账中心</span>
           </h2>
           
           <form id="checkout-form" class="space-y-8">
@@ -45,7 +45,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               
               <div>
                 <label for="email" class="block text-xs uppercase text-slate-300 font-bold tracking-wider mb-2 font-mono">
-                  电子邮箱地址 / Email Address <span class="text-[#38BDF8]">*</span>
+                  接收电子邮箱地址 <span class="text-[#38BDF8]">*</span>
                 </label>
                 <input 
                   type="email" 
@@ -180,7 +180,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <!-- TxID Input -->
                 <div id="txid-input-container" class="space-y-2 text-left">
                   <label for="txid" class="block text-xs uppercase text-slate-300 font-bold tracking-wider font-mono">
-                    转账交易哈希 / Transaction Hash (TxID) <span class="text-[#38BDF8]">*</span>
+                    转账交易哈希 (TxID) <span class="text-[#38BDF8]">*</span>
                   </label>
                   <input 
                     type="text" 
@@ -216,7 +216,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="lg:col-span-5">
           <div class="glass-card p-6 sm:p-8 rounded-3xl border border-[#38BDF8]/25 bg-[#0B0F1A]/90 backdrop-blur-xl space-y-6 sticky top-28">
             <h3 class="text-base font-bold text-white border-b border-white/10 pb-3 flex items-center justify-between">
-              <span>订单汇总 / Summary</span>
+              <span>已选商品订单汇总</span>
               <span class="text-[10px] font-mono text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/30 px-2.5 py-0.5 rounded-full">LIVE</span>
             </h3>
             
@@ -257,7 +257,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="space-y-2">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] text-xs font-bold font-mono">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>ON-CHAIN VERIFIED • 链上确认成功</span>
+            <span>区块链已确认到账</span>
           </span>
           <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
             支付成功 • 卡密已派发
@@ -274,7 +274,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
               </svg>
-              <span>数字商品卡密凭证 (CREDENTIALS)</span>
+              <span>数字商品卡密授权凭证</span>
             </span>
             <span id="copy-cardkey-hint" class="text-[11px] font-bold text-emerald-400 font-mono"></span>
           </div>

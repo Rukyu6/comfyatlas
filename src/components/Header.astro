@@ -101,6 +101,39 @@
         </div>
       </div>
 
+            <!-- 国际化语言切换器 (默认全中文，用户主动勾选时切换) -->
+      <div class="relative inline-block text-left" id="lang-selector-container">
+        <button 
+          type="button" 
+          id="lang-menu-btn"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9-9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+          </svg>
+          <span id="current-lang-label">简体中文</span>
+          <svg class="w-2.5 h-2.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <div id="lang-menu-panel" class="hidden absolute right-0 mt-2 w-32 rounded-2xl bg-[#0B0F1A] border border-[#38BDF8]/30 shadow-2xl p-1.5 z-50 space-y-1 backdrop-blur-xl">
+          <button type="button" onclick="window.changeSiteLang('zh-CN')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-white hover:bg-[#0284C7]/20 font-bold transition flex items-center justify-between">
+            <span>简体中文</span>
+            <span class="text-[#38BDF8] text-[10px]">默认</span>
+          </button>
+          <button type="button" onclick="window.changeSiteLang('en')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
+            <span>English</span>
+          </button>
+          <button type="button" onclick="window.changeSiteLang('ja')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
+            <span>日本語</span>
+          </button>
+          <button type="button" onclick="window.changeSiteLang('ko')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
+            <span>한국어</span>
+          </button>
+        </div>
+      </div>
+
       <!-- 购物车抽屉按钮 -->
       <button 
         id="header-cart-btn"
@@ -134,6 +167,34 @@
   const usernameLabel = document.getElementById('nav-username');
   const logoutBtn = document.getElementById('nav-logout-btn');
   const adminLink = document.getElementById('nav-admin-link');
+
+  
+  // 语言菜单交互
+  const langBtn = document.getElementById('lang-menu-btn');
+  const langPanel = document.getElementById('lang-menu-panel');
+  const currentLangLabel = document.getElementById('current-lang-label');
+
+  langBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langPanel?.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', () => {
+    langPanel?.classList.add('hidden');
+  });
+
+  const savedLang = localStorage.getItem('active_language') || 'zh-CN';
+  if (currentLangLabel) {
+    if (savedLang === 'en') currentLangLabel.textContent = 'English';
+    else if (savedLang === 'ja') currentLangLabel.textContent = '日本語';
+    else if (savedLang === 'ko') currentLangLabel.textContent = '한국어';
+    else currentLangLabel.textContent = '简体中文';
+  }
+
+  (window as any).changeSiteLang = function(lang: string) {
+    localStorage.setItem('active_language', lang);
+    window.location.reload();
+  };
 
   cartBtn?.addEventListener('click', () => {
     window.dispatchEvent(new CustomEvent('open-cart'));

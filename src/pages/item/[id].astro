@@ -77,7 +77,7 @@ const cleanIntroduce = rawIntroduce
 
           <!-- SKU 规格选择区 -->
           <div class="space-y-3">
-            <span class="text-xs uppercase text-slate-400 tracking-wider font-bold block font-mono">选择套餐规格 / SPECIFICATION</span>
+            <span class="text-xs uppercase text-slate-400 tracking-wider font-bold block font-mono">选择套餐规格</span>
             <div class="grid grid-cols-1 gap-2.5" id="sku-options-container">
             </div>
           </div>
@@ -189,7 +189,7 @@ const cleanIntroduce = rawIntroduce
   const stockBadge = document.getElementById('product-stock-badge');
   const addToBagBtn = document.getElementById('add-to-bag-btn');
 
-  function getCurrencyMode(): 'cny' | 'usd' {
+  function getCurrencyMode(): 'cny' | 'usd' {\n    const lang = localStorage.getItem('active_language') || 'zh-CN';\n    return ['zh-CN', 'zh-TW'].includes(lang) ? 'cny' : 'usd';
     const lang = localStorage.getItem('active_language') || 'en';
     return ['zh-CN', 'zh-TW', 'ja', 'ko'].includes(lang) ? 'cny' : 'usd';
   }
