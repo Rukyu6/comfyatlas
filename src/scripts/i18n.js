@@ -55,7 +55,6 @@ export const translations = {
 
     // Checkout
     'checkout_title': '收银台',
-    'checkout_subtitle': '灵压结账中心',
     'delivery_email_title': '01. 接收卡密邮箱',
     'delivery_email_label': '接收电子邮箱地址',
     'delivery_email_desc': '您购买的账号卡密及履约更新将自动同步至此邮箱，请务必确保填写正确。',
@@ -152,7 +151,6 @@ export const translations = {
 
     // Checkout
     'checkout_title': 'Checkout',
-    'checkout_subtitle': 'Soul Society Settlement Hub',
     'delivery_email_title': '01. Delivery Email',
     'delivery_email_label': 'Email Address for Credentials',
     'delivery_email_desc': 'Your purchased card keys and receipts will be delivered to this email. Please verify accuracy.',
@@ -249,7 +247,6 @@ export const translations = {
 
     // Checkout
     'checkout_title': 'お会計',
-    'checkout_subtitle': 'Soul Society 決済センター',
     'delivery_email_title': '01. 受信用メールアドレス',
     'delivery_email_label': 'メールアドレス',
     'delivery_email_desc': 'ご購入いただいたキーおよび受領書はこのメールに送信されます。',
@@ -346,7 +343,6 @@ export const translations = {
 
     // Checkout
     'checkout_title': '결제하기',
-    'checkout_subtitle': 'Soul Society 결제 센터',
     'delivery_email_title': '01. 수신 이메일',
     'delivery_email_label': '이메일 주소',
     'delivery_email_desc': '구매하신 계정 키와 영수증이 해당 이메일로 전송됩니다.',
