@@ -1,4 +1,24 @@
----
+with open("src/pages/index.astro", "r", encoding="utf-8") as f:
+    text = f.read()
+
+# 1. 修正首屏 SSR 默认分类 ID：取第一个大类的第一个细分子分类（ChatGPT账号）
+ssr_old = """const defaultCategory = database.categories && database.categories.length > 0 ? database.categories[0] : { cid: '289', name: 'chatGPT账号/会员号' };
+const initialProducts = database.products.filter(p => {
+  const isOut = p.stock === '0' || p.stock === '缺货';
+  return p.cid === defaultCategory.cid && !isOut && p.cid !== '99';
+});"""
+
+ssr_new = """const firstCat = database.categories && database.categories.length > 0 ? database.categories[0] : null;
+const defaultCid = firstCat ? (firstCat.children && firstCat.children.length > 0 ? firstCat.children[0].cid : firstCat.cid) : '4';
+const initialProducts = database.products.filter(p => {
+  const isOut = p.stock === '0' || p.stock === '缺货';
+  return p.cid === defaultCid && !isOut;
+});"""
+
+text = text.replace(ssr_old, ssr_new)
+
+# 2. 彻底重构整页的 HTML 与客户端折叠控制，100% 对齐 8877
+html_template = '''---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -418,3 +438,9 @@ const initialProducts = database.products.filter(p => {
 
   init();
 </script>
+'''
+
+with open("src/pages/index.astro", "w", encoding="utf-8") as f:
+    f.write(html_template)
+
+print(">>> index.astro 完整重构并修复成功！")
