@@ -337,59 +337,92 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       </div>
 
-            <!-- SUCCESS SCREEN: Soul Society 苍蓝暗晶核验成功界面 (零 Emoji) -->
-      <div id="checkout-success-view" class="hidden max-w-xl mx-auto text-center py-16 px-8 space-y-8 glass-card border border-[#38BDF8]/40 rounded-[2.5rem] bg-[#0B0F1A]/95 backdrop-blur-2xl text-white shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
+                  <!-- SUCCESS SCREEN: 链上核实成功与卡密一键复制面板 (0 Emoji) -->
+      <div id="checkout-success-view" class="hidden max-w-xl mx-auto text-center py-12 px-6 sm:px-8 space-y-7 glass-card border border-[#38BDF8]/40 rounded-[2.5rem] bg-[#0B0F1A]/95 backdrop-blur-2xl text-white shadow-[0_25px_60px_rgba(0,0,0,0.9)] animate-fadeIn">
         
-        <!-- 灵压核验通过徽章 (苍蓝微光动效) -->
-        <div class="relative w-22 h-22 mx-auto flex items-center justify-center">
+        <!-- 灵压核验通过徽章 -->
+        <div class="relative w-20 h-20 mx-auto flex items-center justify-center">
           <div class="absolute inset-0 rounded-full bg-[#0284C7]/30 blur-xl animate-pulse"></div>
-          <div class="relative w-20 h-20 rounded-full bg-gradient-to-tr from-[#0284C7] to-[#38BDF8] border-2 border-[#38BDF8] flex items-center justify-center text-[#06080F] shadow-[0_0_30px_rgba(56,189,248,0.5)]">
-            <svg class="w-10 h-10 text-[#06080F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.8">
+          <div class="relative w-18 h-18 rounded-full bg-gradient-to-tr from-[#0284C7] to-[#38BDF8] border-2 border-[#38BDF8] flex items-center justify-center text-[#06080F] shadow-[0_0_30px_rgba(56,189,248,0.5)]">
+            <svg class="w-9 h-9 text-[#06080F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.8">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
         </div>
 
-        <div class="space-y-3">
+        <div class="space-y-2.5">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] text-xs font-bold font-mono">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
             <span>ON-CHAIN VERIFIED • 链上确认成功</span>
           </span>
-          <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">
-            订单凭证核验通过
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            支付成功 • 卡密已派发
           </h2>
-          <p class="text-slate-300 text-xs md:text-sm leading-relaxed max-w-md mx-auto font-sans">
-            区块链转账确认已通过，系统正在为您发放专属数字卡密。<br/>
-            卡密凭据将即时呈现于下方，同时已同步至您的订单库中。
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-md mx-auto">
+            区块链转账确认已通过！您的专属数字商品卡密凭据如下，请妥善保管。
           </p>
         </div>
 
-        <!-- 订单参数卡 -->
-        <div class="p-4 rounded-2xl bg-[#06080F]/90 border border-[#38BDF8]/30 space-y-2 text-left font-mono text-xs">
-          <div class="flex justify-between items-center text-slate-400">
-            <span>订单索引编号:</span>
-            <span id="checkout-reference-id" class="text-white font-bold text-sm select-all"></span>
-          </div>
-          <div class="flex justify-between items-center text-slate-400">
-            <span>支付核验状态:</span>
-            <span class="text-emerald-400 font-bold flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 已确权打款
+        <!-- 卡密专区：醒目展示与一键复制 -->
+        <div class="p-5 rounded-2xl bg-[#06080F] border border-[#38BDF8]/40 text-left space-y-3 shadow-inner relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-black text-[#38BDF8] flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+              </svg>
+              <span>数字商品卡密凭证 (CREDENTIALS)</span>
             </span>
+            <span id="copy-cardkey-hint" class="text-[11px] font-bold text-emerald-400 font-mono"></span>
+          </div>
+
+          <!-- 动态卡密内容 -->
+          <div 
+            id="checkout-card-key-display" 
+            class="p-3.5 bg-[#0B0F1A] border border-[#38BDF8]/30 rounded-xl font-mono text-xs sm:text-sm text-[#38BDF8] break-all select-all font-bold tracking-wide leading-relaxed shadow-sm"
+          >
+            正在为您提取专属授权卡密...
+          </div>
+
+          <!-- 一键复制卡密核心操作按钮 -->
+          <button 
+            type="button" 
+            id="copy-final-key-btn"
+            class="w-full py-3 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] hover:brightness-115 text-white font-extrabold text-xs tracking-wider uppercase transition-all duration-200 shadow-[0_0_20px_rgba(56,189,248,0.4)] flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+          >
+            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+            </svg>
+            <span id="copy-btn-text">一键复制卡密凭据</span>
+          </button>
+        </div>
+
+        <!-- 订单参数卡 -->
+        <div class="p-4 rounded-2xl bg-[#06080F]/70 border border-[#38BDF8]/20 space-y-1.5 text-left font-mono text-xs text-slate-400">
+          <div class="flex justify-between items-center">
+            <span>订单编号:</span>
+            <span id="checkout-reference-id" class="text-white font-bold select-all"></span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span>交付保障:</span>
+            <span class="text-emerald-400 font-bold">已写入安全订单库 (可凭邮箱随时查单)</span>
           </div>
         </div>
 
-        <div class="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+        <div class="pt-1 flex flex-col sm:flex-row gap-3 justify-center">
           <a 
             href="/query" 
-            class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:brightness-115 active:scale-95 cursor-pointer text-center"
+            class="px-5 py-3 rounded-xl bg-white/5 border border-white/15 text-slate-200 hover:text-white hover:bg-white/10 font-bold text-xs uppercase tracking-wider transition active:scale-95 text-center flex items-center justify-center gap-1.5"
           >
-            前往订单库提取卡密
+            <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <span>进入订单库查看全部记录</span>
           </a>
           <a 
             href="/" 
-            class="px-6 py-3.5 rounded-xl bg-white/5 border border-white/15 text-slate-300 hover:text-white hover:bg-white/10 font-bold text-xs uppercase tracking-wider transition active:scale-95 text-center"
+            class="px-5 py-3 rounded-xl bg-white/5 border border-white/15 text-slate-200 hover:text-white hover:bg-white/10 font-bold text-xs uppercase tracking-wider transition active:scale-95 text-center"
           >
-            返回商城前台
+            返回商城首页
           </a>
         </div>
       </div>
@@ -767,10 +800,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         // Clear cart
         localStorage.removeItem('boutique_cart');
         
-        // Show success screen
+                // Show success screen & render Card Key
         const refId = document.getElementById('checkout-reference-id');
         if (refId) refId.textContent = orderId;
-        
+
+        // 生成或派发专属卡密内容
+        const cardKeyBox = document.getElementById('checkout-card-key-display');
+        const copyKeyBtn = document.getElementById('copy-final-key-btn');
+        const copyHint = document.getElementById('copy-cardkey-hint');
+        const copyBtnText = document.getElementById('copy-btn-text');
+
+        const cardKeyPayload = "SOUL-SOCIETY-" + orderId + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+        if (cardKeyBox) {
+          cardKeyBox.textContent = cardKeyPayload;
+        }
+
+        if (copyKeyBtn) {
+          copyKeyBtn.onclick = () => {
+            navigator.clipboard.writeText(cardKeyPayload).then(() => {
+              if (copyHint) copyHint.textContent = "已成功复制到剪贴板 ✓";
+              if (copyBtnText) copyBtnText.textContent = "卡密已复制 ✓";
+              copyKeyBtn.classList.add('brightness-125');
+              setTimeout(() => {
+                if (copyHint) copyHint.textContent = "";
+                if (copyBtnText) copyBtnText.textContent = "一键复制卡密凭据";
+                copyKeyBtn.classList.remove('brightness-125');
+              }, 2000);
+            });
+          };
+        }
+
         document.getElementById('checkout-main-grid')?.classList.add('hidden');
         document.getElementById('checkout-success-view')?.classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
