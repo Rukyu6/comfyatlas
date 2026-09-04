@@ -194,7 +194,7 @@ import Footer from '../components/Footer.astro';
               <p class="text-[11px] text-slate-400 mt-0.5">${item.size ? `规格: ${item.size} | ` : ''}数量: ${item.quantity || 1}</p>
             </div>
           </div>
-          <span class="text-xs font-black text-[#38BDF8] font-mono">$${Number(item.price * (item.quantity || 1)).toFixed(2)}</span>
+          <span class="text-xs font-black text-[#38BDF8] font-mono">$${Math.ceil(Number(item.price * (item.quantity || 1)))}</span>
         </div>
       `).join('');
 

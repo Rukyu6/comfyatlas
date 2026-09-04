@@ -8,7 +8,7 @@ const dispatcher = proxyUrl ? new ProxyAgent(proxyUrl) : undefined;
 export async function POST({ request }) {
   try {
     const body = await request.json();
-    const { orderId, email, txid, paymentMethod, totalUsd, totalCny, targetAddress } = body;
+    const { orderId, email, txid, paymentMethod, totalUsd, targetAddress, items = [] } = body;
 
     if (!txid || txid.trim().length < 10) {
       return new Response(JSON.stringify({ success: false, message: "请输入有效的区块链交易哈希 (TxID)！" }), {

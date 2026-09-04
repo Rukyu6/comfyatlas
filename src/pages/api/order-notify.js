@@ -8,7 +8,7 @@ const dispatcher = proxyUrl ? new ProxyAgent(proxyUrl) : undefined;
 export async function POST({ request }) {
   try {
     const body = await request.json();
-    const { orderId, totalUsd, totalCny, paymentMethod, createdAt, username } = body;
+    const { orderId, totalUsd, paymentMethod, createdAt, username, items = [] } = body;
 
     const botToken = import.meta.env.TELEGRAM_BOT_TOKEN_1;
     const chatId = import.meta.env.TELEGRAM_CHAT_ID;

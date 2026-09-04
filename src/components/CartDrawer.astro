@@ -109,7 +109,7 @@
 
     if (cart.length === 0) {
       itemsContainer.innerHTML = `<p class="text-slate-500 text-center py-16 text-xs">清单目前为空，请在商品库中选购。</p>`;
-      totalEl.textContent = currency === 'cny' ? '¥0.00' : '$0.00';
+      totalEl.textContent = '$0';
       checkoutBtn.disabled = true;
       return;
     }
@@ -118,10 +118,10 @@
     let total = 0;
 
     itemsContainer.innerHTML = cart.map((item, index) => {
-      const price = currency === 'cny' ? (item.priceCny || item.price * 7.1) : item.price;
-      const itemSubtotal = price * item.quantity;
+      const price = Math.ceil(item.price || 0);
+      const itemSubtotal = price * (item.quantity || 1);
       total += itemSubtotal;
-      const formattedPrice = currency === 'cny' ? `¥${itemSubtotal.toFixed(2)}` : `$${itemSubtotal.toFixed(2)}`;
+      const formattedPrice = `$${itemSubtotal}`;
 
       return `
         <div class="p-3.5 rounded-2xl bg-[#06080F]/90 border border-[#38BDF8]/20 space-y-3 text-xs">
@@ -153,7 +153,7 @@
       `;
     }).join('');
 
-    totalEl.textContent = currency === 'cny' ? `¥${total.toFixed(2)}` : `$${total.toFixed(2)}`;
+    totalEl.textContent = `$${total}`;
   }
 
   (window as any).updateCartQty = function(index: number, delta: number) {

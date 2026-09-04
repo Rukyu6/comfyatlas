@@ -409,9 +409,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const mode = getCurrencyMode();
 
     listContainer.innerHTML = cart.map(item => {
-      const itemUsd = Math.ceil(item.price_usd || item.price || 10) * (item.quantity || 1);
-      const itemCny = Math.round(itemUsd * 7.1);
-      const priceText = mode === 'cny' ? `¥${itemCny} CNY` : `$${itemUsd.toFixed(0)}`;
+      const itemUsd = Math.ceil(item.price || 10) * (item.quantity || 1);
+      const priceText = `$${itemUsd}`;
 
       return `
         <div class="flex items-center justify-between text-xs py-2.5 border-b border-white/5 last:border-0">
@@ -525,7 +524,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           txid: txIdVal,
           paymentMethod,
           totalUsd,
-          totalCny,
+          items: cart,
           targetAddress: addressSpan?.textContent?.trim() || ''
         })
       });

@@ -92,7 +92,7 @@ import Footer from '../components/Footer.astro';
                 <span class="text-xs text-slate-400 font-mono ml-1">USDT</span>
               </div>
               <p class="text-[11px] text-slate-500 font-mono">
-                约合人民币: ¥<span id="wallet-balance-cny">0.00</span> CNY
+                折合: <span id="wallet-balance-usdt">0</span> USDT
               </p>
             </div>
 
@@ -399,7 +399,7 @@ import Footer from '../components/Footer.astro';
               </div>
             </div>
           </div>
-          <span class="text-xs font-bold font-mono text-[#38BDF8]">$${Number(item.price * (item.quantity || 1)).toFixed(2)}</span>
+          <span class="text-xs font-bold font-mono text-[#38BDF8]">$${Math.ceil(Number(item.price * (item.quantity || 1)))}</span>
         </div>
       `).join('');
 
