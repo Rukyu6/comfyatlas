@@ -18,33 +18,26 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 const cleanId = product.id.replace('pid_', '');
 
-// 深度净化商品原始 HTML：剥离全部外部链接、发卡网字眼、微信号/QQ号及刺眼色块
 const rawIntroduce = product.introduce || '';
 let cleanIntroduce = rawIntroduce
-  .replace(/<a\s+[^>]*href=["'][^"']*["'][^>]*>(.*?)<\/a>/gi, '$1')
-  .replace(/https?:\/\/[^\s<"'>]+/gi, '')
-  .replace(/(chuhai91(\.(cc|store))?|aisub(\.(vip))?|aiee(\.(fun))?|quickplus(\.(vip))?|某某发卡网|发卡网|一手货源|拿货价|渠道价|代运营|接码平台)/gi, '')
-  .replace(/(微信|微信号|vx|v信|QQ|扣扣|tg群|电报群|联系客服[：:])\s*[:：]?\s*[a-zA-Z0-9_\-\.\+]{4,25}/gi, '')
   .replace(/background(-color)?:\s*(#fff(fff)?|rgb\(255,\s*255,\s*255\)|white)[^;"]*;?/gi, '')
   .replace(/color:\s*(#243042|#000|#333|black)[^;"]*;?/gi, '')
-  .replace(/📦|✅|⭐️|🔥|⚡|🐾|💎|🗡️|👑|💰/g, '')
+  .replace(/<img[^>]*>/gi, '') // 拦截任何前端可能遗漏的死图
   .trim();
 ---
 
 <BaseLayout 
   title={`${product.name.replace(/【渠道\d+】/g, "").replace(/【凭证充足】/g, "").replace(/--24小时自助充值plus会员/g, "").replace(/-24小时自助充值pro会员/g, "").trim()} — Soul Society`} 
-  description={`在 Soul Society 平台购买 ${product.name.replace(/【渠道\d+】/g, "").replace(/【凭证充足】/g, "").replace(/--24小时自助充值plus会员/g, "").replace(/-24小时自助充值pro会员/g, "").trim()}，独享质保，秒级自动发卡。`}
+  description={`在 Soul Society 平台购买 ${product.name}，独享质保，秒级自动发卡。`}
 >
   <Header />
 
-  <!-- 背景光晕 -->
   <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-[#0284C7]/20 via-[#38BDF8]/10 to-transparent rounded-full filter blur-[140px] pointer-events-none z-0"></div>
 
   <div id="product-page-context" class="hidden" data-product={JSON.stringify(product)}></div>
 
   <div class="relative min-h-screen pt-28 pb-16 overflow-hidden bg-[#06080F] text-white font-outfit">
     
-    <!-- 返回面包屑 -->
     <div class="max-w-7xl mx-auto px-6 mb-8 relative z-10">
       <a 
         href="/#digital" 
@@ -59,7 +52,7 @@ let cleanIntroduce = rawIntroduce
 
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative z-10">
       
-      <!-- 左栏：商品规格与购买面板 -->
+      <!-- 左栏：规格与价格面板 -->
       <div class="lg:col-span-5 space-y-6">
         <div class="glass-card p-6 md:p-8 rounded-3xl border border-[#38BDF8]/25 bg-[#0B0F1A]/90 shadow-2xl relative space-y-6">
           <div>
@@ -77,14 +70,11 @@ let cleanIntroduce = rawIntroduce
             </div>
           </div>
 
-          <!-- SKU 规格选择区 -->
           <div class="space-y-3">
             <span class="text-xs uppercase text-slate-400 tracking-wider font-bold block font-mono">选择套餐规格</span>
-            <div class="grid grid-cols-1 gap-2.5" id="sku-options-container">
-            </div>
+            <div class="grid grid-cols-1 gap-2.5" id="sku-options-container"></div>
           </div>
 
-          <!-- 数量选择器 -->
           <div class="flex items-center justify-between bg-[#06080F] p-4 rounded-2xl border border-white/10">
             <div>
               <span class="text-xs font-bold text-white block">购买数量</span>
@@ -97,7 +87,7 @@ let cleanIntroduce = rawIntroduce
             </div>
           </div>
 
-          <!-- 价格与加购 (纯人民币结算) -->
+          <!-- 价格计算器 (严格显示纯人民币) -->
           <div class="pt-6 border-t border-white/10 flex items-center justify-between gap-4">
             <div class="flex flex-col">
               <span class="text-[10px] text-slate-400 uppercase font-mono font-bold">合计结算</span>
@@ -120,7 +110,7 @@ let cleanIntroduce = rawIntroduce
         </div>
       </div>
 
-      <!-- 右栏：商品富文本图文说明 + 统一售后保障政策 -->
+      <!-- 右栏：清洗后的富文本 + 统一质保条款 -->
       <div class="lg:col-span-7 space-y-6">
         <div class="glass-card p-6 md:p-8 rounded-3xl border border-[#38BDF8]/25 bg-[#0B0F1A]/90 shadow-2xl relative min-h-[450px]">
           <h2 class="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-3 mb-6 flex items-center gap-2 font-mono">
@@ -130,12 +120,11 @@ let cleanIntroduce = rawIntroduce
             <span>商品详情与使用须知</span>
           </h2>
           
-          <!-- 深度净化后的详情展示区 -->
-          <div class="text-slate-200 leading-relaxed space-y-4 select-text text-xs md:text-sm max-w-none break-words custom-product-content" id="product-description-content">
-            <Fragment set:html={cleanIntroduce || '<p class="text-slate-400">该商品为独享现货，下单后凭卡密直接登录使用。</p>'} />
+          <div class="text-slate-200 leading-relaxed space-y-3 select-text text-xs md:text-sm max-w-none break-words custom-product-content" id="product-description-content">
+            <Fragment set:html={cleanIntroduce || '<p class="text-slate-400">该商品为独享现货，下单后凭卡密直接登录或按附带指引自助使用。</p>'} />
           </div>
 
-          <!-- 统一植入 Soul Society 售后服务与保障条款 -->
+          <!-- 统一官方质保卡片 -->
           <div class="mt-8 pt-6 border-t border-[#38BDF8]/20 space-y-4 font-mono">
             <div class="p-5 rounded-2xl bg-[#06080F]/80 border border-[#38BDF8]/30 space-y-3">
               <div class="text-[#38BDF8] font-black text-sm flex items-center gap-2">
@@ -145,10 +134,10 @@ let cleanIntroduce = rawIntroduce
                 <span>Soul Society 售后服务与保障条款</span>
               </div>
               <div class="space-y-2 text-slate-300 leading-relaxed text-xs">
-                <p><strong class="text-white">【首登质保】：</strong>独享一手资源，付款后系统自动发货。请在收到卡密后 24 小时内完成首次登录验证，首登出现密码错误或封禁无条件更换。</p>
-                <p><strong class="text-white">【使用规范】：</strong>请使用干净独立的纯净网络环境登录，严禁短时间内频繁更换节点及设备，因用户个人网络触发官方风控不在质保范围。</p>
-                <p><strong class="text-white">【修改密保】：</strong>首登成功后，请根据站内使用指引及时修改密码并绑定个人辅助邮箱/手机号，确保资产永久归您个人掌控。</p>
-                <p><strong class="text-white">【自助查单】：</strong>所有订单永久存档于安全数据库中。您可随时通过顶栏「订单查询」凭下单时填写的电子邮箱一键提取全部历史卡密与配置教程。</p>
+                <p><strong class="text-white">【首登质保】：</strong>独享资源，系统自动发货。请在收到卡密后 24 小时内完成首次登录或提交，首登出现密码错误或失效无条件换新。</p>
+                <p><strong class="text-white">【使用环境】：</strong>请使用纯净独立网络登录，严禁在短时间内频繁切换 IP 或节点，因个人设备环境触发官方风控不在质保范围。</p>
+                <p><strong class="text-white">【安全绑定】：</strong>首登成功后，请根据站内使用指引及时修改密码并绑定个人辅助邮箱，确保账号所有权归您个人专属掌控。</p>
+                <p><strong class="text-white">【自助查单】：</strong>所有订单永久存档于安全数据库中。您可随时通过顶栏「订单查询」凭下单邮箱一键检索全部历史卡密与凭证。</p>
               </div>
             </div>
           </div>
@@ -170,13 +159,9 @@ let cleanIntroduce = rawIntroduce
     color: #E2E8F0 !important;
     border-color: rgba(56, 189, 248, 0.18) !important;
   }
-  .custom-product-content div,
-  .custom-product-content section {
-    background-color: rgba(6, 8, 15, 0.6) !important;
-    border: 1px solid rgba(56, 189, 248, 0.18) !important;
-    border-radius: 1rem !important;
-    padding: 1rem !important;
-    margin-bottom: 0.85rem !important;
+  .custom-product-content p {
+    margin-bottom: 0.65rem !important;
+    line-height: 1.6 !important;
   }
   .custom-product-content h1,
   .custom-product-content h2,
@@ -187,9 +172,8 @@ let cleanIntroduce = rawIntroduce
     color: #FFFFFF !important;
     font-weight: 800 !important;
   }
-  .custom-product-content a {
-    color: #38BDF8 !important;
-    text-decoration: underline !important;
+  .custom-product-content img {
+    display: none !important; /* 彻底杜绝任何死图显示 */
   }
 </style>
 
@@ -348,7 +332,7 @@ let cleanIntroduce = rawIntroduce
     updateQtyDisplay();
   }
 
-  // 精准映射 final-total-cny，解决详情页 0 元 Bug
+  // 修复：精准选择 final-total-cny
   function updateQtyDisplay() {
     if (qtyInput) qtyInput.value = selectedQuantity.toString();
     const totalCnyEl = document.getElementById('final-total-cny');
