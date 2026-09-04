@@ -148,15 +148,14 @@
             </div>
             <div class="text-right">
               <span class="font-bold font-mono text-[#38BDF8] text-sm">${formattedPrice}</span>
-              <span class="text-[10px] text-slate-500 font-mono block">≈ ${Math.ceil(itemSubtotal / 7.2)} USDT</span>
+              
             </div>
           </div>
         </div>
       `;
     }).join('');
 
-    const totalUsdt = Math.ceil(total / 7.2);
-    totalEl.innerHTML = `¥${total} <span class="text-xs text-slate-400 font-mono font-normal">(${totalUsdt} USDT)</span>`;
+    totalEl.textContent = `¥${total}`;
   }
 
   (window as any).updateCartQty = function(index: number, delta: number) {
