@@ -307,3 +307,30 @@ window.formatSkuDisplay = function(raw, title, specValues) {
   return '官方正版 · 独享现货 (自动发货)';
 };
 </script>
+
+
+<script is:inline>
+window.openCart = function() {
+  const drawer = document.getElementById('cart-drawer');
+  const overlay = document.getElementById('cart-overlay');
+  const panel = document.getElementById('cart-panel');
+  if (drawer) drawer.classList.remove('hidden');
+  if (overlay) overlay.classList.remove('opacity-0');
+  if (panel) {
+    panel.classList.remove('translate-x-full');
+    panel.classList.add('translate-x-0');
+  }
+  if (window.renderCartItems) window.renderCartItems();
+};
+window.closeCart = function() {
+  const drawer = document.getElementById('cart-drawer');
+  const panel = document.getElementById('cart-panel');
+  if (panel) {
+    panel.classList.add('translate-x-full');
+    panel.classList.remove('translate-x-0');
+  }
+  setTimeout(() => {
+    if (drawer) drawer.classList.add('hidden');
+  }, 300);
+};
+</script>

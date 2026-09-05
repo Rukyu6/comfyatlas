@@ -89,7 +89,7 @@
  </div>
 
  <!-- 购物车抽屉按钮 -->
- <button id="header-cart-btn" type="button" class="relative p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white transition-all cursor-pointer" aria-label="打开购物车">
+ <button id="header-cart-btn" type="button" class="relative p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white transition-all cursor-pointer" aria-label="打开购物车" onclick="if(window.openCart){window.openCart();}else{console.log('Cart initializing...');}">
  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
  <span id="cart-count-badge" class="hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#0284C7] text-white text-[9px] font-black flex items-center justify-center border border-[#38BDF8] shadow-sm">0</span>
  </button>
