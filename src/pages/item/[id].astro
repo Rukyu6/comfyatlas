@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import CartDrawer from '../../components/CartDrawer.astro';
+// import CartDrawer
 
 export async function getStaticPaths() {
   const data = (await import('../../data/products.json')).default;
@@ -148,7 +148,7 @@ let cleanIntroduce = rawIntroduce
     </div>
   </div>
 
-  <CartDrawer />
+  
   <Footer />
 </BaseLayout>
 

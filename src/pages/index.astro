@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import CartDrawer from '../components/CartDrawer.astro';
+// import CartDrawer
 import database from '../data/products.json';
 
 const firstCat = database.categories && database.categories.length > 0 ? database.categories[0] : null;
@@ -256,7 +256,7 @@ const initialProducts = database.products.filter(p => {
     </div>
   </section>
 
-  <CartDrawer />
+  
   <Footer />
 
 </BaseLayout>

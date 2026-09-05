@@ -257,6 +257,39 @@
       }, 800);
     }
   });
+
+  // 购物车抽屉点击与角标联动
+  function syncHeaderCartBadge() {
+    try {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      const badge = document.getElementById('cart-count-badge');
+      if (badge) {
+        if (count > 0) {
+          badge.textContent = count > 99 ? '99+' : count.toString();
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
+    } catch(e) {}
+  }
+
+  // 初始同步与侦听
+  syncHeaderCartBadge();
+  window.addEventListener('cart-updated', syncHeaderCartBadge);
+  window.addEventListener('storage', syncHeaderCartBadge);
+
+  // 监听点击打开购物车抽屉
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target && target.closest('#header-cart-btn')) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.dispatchEvent(new CustomEvent('open-cart'));
+    }
+  });
+
 </script>
 
 <script is:inline>
@@ -297,4 +330,37 @@
       window.location.reload();
     }
   };
+
+  // 购物车抽屉点击与角标联动
+  function syncHeaderCartBadge() {
+    try {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      const badge = document.getElementById('cart-count-badge');
+      if (badge) {
+        if (count > 0) {
+          badge.textContent = count > 99 ? '99+' : count.toString();
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
+    } catch(e) {}
+  }
+
+  // 初始同步与侦听
+  syncHeaderCartBadge();
+  window.addEventListener('cart-updated', syncHeaderCartBadge);
+  window.addEventListener('storage', syncHeaderCartBadge);
+
+  // 监听点击打开购物车抽屉
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target && target.closest('#header-cart-btn')) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.dispatchEvent(new CustomEvent('open-cart'));
+    }
+  });
+
 </script>
