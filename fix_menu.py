@@ -1,4 +1,11 @@
----
+import os
+
+print("=== 开始升级顶部用户菜单与退出机制 ===")
+
+# 1. 深度重构 src/components/Header.astro
+header_path = 'src/components/Header.astro'
+
+new_header_code = """---
 // Header.astro - Soul Society Dark High-Tech
 ---
 
@@ -285,3 +292,61 @@
     }
   };
 </script>
+"""
+
+with open(header_path, 'w', encoding='utf-8') as f:
+    f.write(new_header_code)
+print('✓ [1/2] src/components/Header.astro 用户菜单与锁定交互重构完成')
+
+# 2. 在 src/pages/orders.astro 页面内增加直出安全退出按钮
+orders_path = 'src/pages/orders.astro'
+with open(orders_path, 'r', encoding='utf-8') as f:
+    orders_content = f.read()
+
+# 在 orders-user-badge 内添加退出登录按钮
+old_badge = """    if (userBadge) {
+      userBadge.innerHTML = `<span class=\"text-slate-400\">已登录账号:</span> <span class=\"text-[#38BDF8] font-bold\">${currentUserEmail}</span>`;
+    }"""
+
+new_badge = """    if (userBadge) {
+      userBadge.innerHTML = `
+        <span class=\"text-slate-400\">已登录账号:</span> 
+        <span class=\"text-[#38BDF8] font-bold font-mono\">${currentUserEmail}</span>
+        <button id=\"direct-logout-btn\" type=\"button\" class=\"ml-2.5 px-2.5 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/40 text-rose-300 text-[11px] font-bold transition cursor-pointer active:scale-95\">退出登录</button>
+      `;
+    }"""
+
+if old_badge in orders_content:
+    orders_content = orders_content.replace(old_badge, new_badge)
+
+# 绑定 direct-logout-btn 事件
+if 'direct-logout-btn' not in orders_content:
+    orders_content = orders_content.replace(
+        "// 历史订单删除动效与持久化",
+        """// 直出退出登录
+  document.addEventListener('click', async (e) => {
+    const target = e.target as HTMLElement;
+    if (target?.closest('#direct-logout-btn')) {
+      e.preventDefault();
+      localStorage.removeItem('auth_session');
+      try { await signOut(authInstance); } catch(err) {}
+      window.location.href = '/';
+      return;
+    }
+  });
+
+  // 历史订单删除动效与持久化"""
+    )
+
+with open(orders_path, 'w', encoding='utf-8') as f:
+    f.write(orders_content)
+print('✓ [2/2] src/pages/orders.astro 直出退出按钮集成完成')
+
+print("\n=== 开始编译验证 ===")
+res = os.system("npm run build")
+if res == 0:
+    print("\n🎉 构建 100% 成功！正在自动提交推送 Git...")
+    os.system('git add -A && git commit -m "feat: permanent pinned user menu, safe hover buffer, and direct logout button on orders page" && git push origin main')
+    print("🚀 升级已完成并推送到线上！")
+else:
+    print("\n❌ 编译未通过，请查看上方输出。")

@@ -313,7 +313,11 @@ import Footer from '../components/Footer.astro';
     currentUserUid = user.uid || '';
     
     if (userBadge) {
-      userBadge.innerHTML = `<span class="text-slate-400">已登录账号:</span> <span class="text-[#38BDF8] font-bold">${currentUserEmail}</span>`;
+      userBadge.innerHTML = `
+        <span class="text-slate-400">已登录账号:</span> 
+        <span class="text-[#38BDF8] font-bold font-mono">${currentUserEmail}</span>
+        <button id="direct-logout-btn" type="button" class="ml-2.5 px-2.5 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/40 text-rose-300 text-[11px] font-bold transition cursor-pointer active:scale-95">退出登录</button>
+      `;
     }
 
     loadOrders();
