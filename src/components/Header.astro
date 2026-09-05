@@ -20,6 +20,31 @@
       </div>
     </a>
 
+    <!-- 网页置顶正中间：蓝染原声点击播放 Icon -->
+    <div class="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto">
+      <button 
+        id="aizen-sound-btn" 
+        type="button" 
+        class="relative flex items-center justify-center p-0.5 rounded-2xl bg-[#0B0F1A]/90 border-2 border-[#38BDF8]/40 hover:border-[#38BDF8] shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group select-none"
+        title="点击播放：蓝染惣右介原声"
+        aria-label="播放蓝染原声"
+      >
+        <img 
+          src="/images/aizen_audio_icon.jpg" 
+          alt="Aizen Voice" 
+          class="w-10 h-10 sm:w-11 sm:h-11 object-cover rounded-xl group-hover:brightness-110 transition-all"
+        />
+        <!-- 播放时动态声波光环 -->
+        <span id="aizen-sound-pulse" class="hidden absolute -inset-1 rounded-2xl border-2 border-[#38BDF8] animate-ping pointer-events-none opacity-60"></span>
+      </button>
+
+      <!-- 原声音频播放源 -->
+      <audio id="aizen-voice-player" preload="auto" class="hidden">
+        <source src="/audio/welcome.mp3" type="audio/mpeg" />
+        <source src="/audio/welcome.mp4" type="audio/mp4" />
+      </audio>
+    </div>
+
     <!-- Right Controls: Language Switcher + Cart + Auth -->
     <div class="flex items-center gap-2 sm:gap-3">
       
@@ -290,6 +315,40 @@
     }
   });
 
+
+  // 网页置顶正中：蓝染原声点击播放/暂停交互
+  const aizenBtn = document.getElementById('aizen-sound-btn');
+  const aizenAudio = document.getElementById('aizen-voice-player');
+  const aizenPulse = document.getElementById('aizen-sound-pulse');
+
+  aizenBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!aizenAudio) return;
+
+    if (aizenAudio.paused) {
+      aizenAudio.currentTime = 0;
+      aizenAudio.volume = 0.9;
+      aizenAudio.play().then(() => {
+        aizenPulse?.classList.remove('hidden');
+      }).catch((err) => {
+        console.warn('Playback blocked:', err);
+      });
+    } else {
+      aizenAudio.pause();
+      aizenAudio.currentTime = 0;
+      aizenPulse?.classList.add('hidden');
+    }
+  });
+
+  aizenAudio?.addEventListener('ended', () => {
+    aizenPulse?.classList.add('hidden');
+  });
+
+  aizenAudio?.addEventListener('pause', () => {
+    aizenPulse?.classList.add('hidden');
+  });
+
 </script>
 
 <script is:inline>
@@ -361,6 +420,40 @@
       e.stopPropagation();
       window.dispatchEvent(new CustomEvent('open-cart'));
     }
+  });
+
+
+  // 网页置顶正中：蓝染原声点击播放/暂停交互
+  const aizenBtn = document.getElementById('aizen-sound-btn');
+  const aizenAudio = document.getElementById('aizen-voice-player');
+  const aizenPulse = document.getElementById('aizen-sound-pulse');
+
+  aizenBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!aizenAudio) return;
+
+    if (aizenAudio.paused) {
+      aizenAudio.currentTime = 0;
+      aizenAudio.volume = 0.9;
+      aizenAudio.play().then(() => {
+        aizenPulse?.classList.remove('hidden');
+      }).catch((err) => {
+        console.warn('Playback blocked:', err);
+      });
+    } else {
+      aizenAudio.pause();
+      aizenAudio.currentTime = 0;
+      aizenPulse?.classList.add('hidden');
+    }
+  });
+
+  aizenAudio?.addEventListener('ended', () => {
+    aizenPulse?.classList.add('hidden');
+  });
+
+  aizenAudio?.addEventListener('pause', () => {
+    aizenPulse?.classList.add('hidden');
   });
 
 </script>
