@@ -247,5 +247,49 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
       });
       observer.observe(document.body, { childList: true, subtree: true });
     </script>
+
+    <!-- 尸魂界欢迎原声音频 (纯静默无界面) -->
+    <audio id="soul-society-welcome" preload="auto" class="hidden">
+      <source src="/audio/welcome.mp3" type="audio/mpeg" />
+      <source src="/audio/welcome.mp4" type="audio/mp4" />
+    </audio>
+
+    <script is:inline>
+      (function() {
+        // 用户进入网站只播放一次 (通过 sessionStorage 记忆)
+        if (sessionStorage.getItem('aizen_welcomed')) return;
+
+        function playOnce() {
+          var audio = document.getElementById('soul-society-welcome');
+          if (!audio) return;
+          audio.volume = 0.85;
+
+          var markPlayed = function() {
+            sessionStorage.setItem('aizen_welcomed', '1');
+            ['click', 'touchstart', 'keydown'].forEach(function(evt) {
+              document.removeEventListener(evt, unlock);
+            });
+          };
+
+          var unlock = function() {
+            if (sessionStorage.getItem('aizen_welcomed')) return;
+            audio.play().then(markPlayed).catch(function() {});
+          };
+
+          audio.play().then(markPlayed).catch(function() {
+            // 浏览器策略拦截自动播放时，在用户第一次任意点击网页时唤醒
+            ['click', 'touchstart', 'keydown'].forEach(function(evt) {
+              document.addEventListener(evt, unlock, { once: true });
+            });
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', playOnce);
+        } else {
+          playOnce();
+        }
+      })();
+    </script>
   </body>
 </html>
