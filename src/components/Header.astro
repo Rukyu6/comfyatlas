@@ -326,18 +326,18 @@
     e.stopPropagation();
     if (!aizenAudio) return;
 
-    if (aizenAudio.paused) {
-      aizenAudio.currentTime = 0;
-      aizenAudio.volume = 0.9;
-      aizenAudio.play().then(() => {
-        aizenPulse?.classList.remove('hidden');
-      }).catch((err) => {
-        console.warn('Playback blocked:', err);
-      });
-    } else {
-      aizenAudio.pause();
-      aizenAudio.currentTime = 0;
-      aizenPulse?.classList.add('hidden');
+    // 重复点击从头播放音频
+    aizenAudio.currentTime = 0;
+    aizenAudio.volume = 0.9;
+    aizenAudio.play().then(() => {
+      aizenPulse?.classList.remove('hidden');
+    }).catch((err) => {
+      console.warn('Playback blocked:', err);
+    });
+
+    // 每次点击同时跳出公告窗口
+    if (typeof (window as any).openNoticeModal === 'function') {
+      (window as any).openNoticeModal();
     }
   });
 
@@ -433,18 +433,18 @@
     e.stopPropagation();
     if (!aizenAudio) return;
 
-    if (aizenAudio.paused) {
-      aizenAudio.currentTime = 0;
-      aizenAudio.volume = 0.9;
-      aizenAudio.play().then(() => {
-        aizenPulse?.classList.remove('hidden');
-      }).catch((err) => {
-        console.warn('Playback blocked:', err);
-      });
-    } else {
-      aizenAudio.pause();
-      aizenAudio.currentTime = 0;
-      aizenPulse?.classList.add('hidden');
+    // 重复点击从头播放音频
+    aizenAudio.currentTime = 0;
+    aizenAudio.volume = 0.9;
+    aizenAudio.play().then(() => {
+      aizenPulse?.classList.remove('hidden');
+    }).catch((err) => {
+      console.warn('Playback blocked:', err);
+    });
+
+    // 每次点击同时跳出公告窗口
+    if (typeof (window as any).openNoticeModal === 'function') {
+      (window as any).openNoticeModal();
     }
   });
 
