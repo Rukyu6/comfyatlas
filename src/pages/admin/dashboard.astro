@@ -359,15 +359,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <table class="w-full text-left border-collapse text-xs">
               <thead>
                 <tr class="border-b border-white/10 text-slate-400 uppercase tracking-wider text-[10px] font-bold font-mono">
-                  <th class="pb-3 pr-2">用户 UID</th>
+                  <th class="pb-3 pr-2">用户名 / UID</th>
                   <th class="pb-3 px-2">客户邮箱</th>
+                  <th class="pb-3 px-2">注册/登录密码</th>
                   <th class="pb-3 px-2">钱包余额</th>
                   <th class="pb-3 pl-2 text-right">操作</th>
                 </tr>
               </thead>
               <tbody id="customer-ledger-rows" class="divide-y divide-white/5 text-slate-200">
                 <tr>
-                  <td colspan="4" class="py-12 text-center text-slate-400">正在同步客户列表...</td>
+                  <td colspan="5" class="py-12 text-center text-slate-400">正在同步客户列表...</td>
                 </tr>
               </tbody>
             </table>
@@ -1134,22 +1135,44 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
         if (!customerLedgerRows) return;
         if (users.length === 0) {
-          customerLedgerRows.innerHTML = '<tr><td colspan="4" class="py-12 text-center text-slate-400 font-mono">暂无客户记录</td></tr>';
+          customerLedgerRows.innerHTML = '<tr><td colspan="5" class="py-12 text-center text-slate-400 font-mono">暂无客户记录</td></tr>';
           return;
         }
 
-        customerLedgerRows.innerHTML = users.map(u => `
-          <tr class="hover:bg-white/5 transition">
-            <td class="py-3.5 pr-2 font-mono text-[11px] text-[#38BDF8] truncate max-w-[120px]" title="${u.id}">${u.id}</td>
-            <td class="py-3.5 px-2 font-medium text-white text-xs">${u.email}</td>
-            <td class="py-3.5 px-2 font-mono font-bold text-emerald-400 text-xs">$${Number(u.balance_usd || 0).toFixed(2)} USDT</td>
-            <td class="py-3.5 pl-2 text-right">
-              <button type="button" class="btn-adjust-balance px-2.5 py-1 rounded-lg bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] hover:text-white text-[10px] font-bold transition cursor-pointer active:scale-95" data-uid="${u.id}" data-email="${u.email}" data-balance="${u.balance_usd || 0}">
-                充值/调账
-              </button>
-            </td>
-          </tr>
-        `).join('');
+        customerLedgerRows.innerHTML = users.map(u => {
+          const userName = u.displayName || u.username || u.email.split('@')[0];
+          const shortUid = u.id && u.id.length > 14 ? (u.id.substring(0, 8) + '...' + u.id.substring(u.id.length - 4)) : (u.id || '-');
+          
+          let passwordDisplay = '';
+          if (u.password) {
+            if (u.password.includes('Google')) {
+              passwordDisplay = `<span class="px-2 py-0.5 rounded-lg bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] text-[10px] font-medium font-sans">Google 免密授权</span>`;
+            } else {
+              passwordDisplay = `<span class="px-2 py-0.5 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold select-all tracking-wider" title="可双击复制">${u.password}</span>`;
+            }
+          } else {
+            passwordDisplay = `<span class="text-slate-500 text-[10px] italic">老用户/密文</span>`;
+          }
+
+          return `
+            <tr class="hover:bg-white/5 transition">
+              <td class="py-3.5 pr-2">
+                <div class="flex flex-col text-left">
+                  <span class="font-bold text-white text-xs tracking-wide">${userName}</span>
+                  <span class="font-mono text-[10px] text-slate-400 select-all cursor-pointer hover:text-[#38BDF8] transition mt-0.5" title="点击复制完整 UID: ${u.id}" onclick="navigator.clipboard.writeText('${u.id}'); alert('已复制完整 UID');">UID: ${shortUid}</span>
+                </div>
+              </td>
+              <td class="py-3.5 px-2 font-medium text-white text-xs">${u.email}</td>
+              <td class="py-3.5 px-2 text-left">${passwordDisplay}</td>
+              <td class="py-3.5 px-2 font-mono font-bold text-emerald-400 text-xs">$${Number(u.balance_usd || 0).toFixed(2)} USDT</td>
+              <td class="py-3.5 pl-2 text-right">
+                <button type="button" class="btn-adjust-balance px-2.5 py-1 rounded-lg bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] hover:text-white text-[10px] font-bold transition cursor-pointer active:scale-95" data-uid="${u.id}" data-email="${u.email}" data-balance="${u.balance_usd || 0}">
+                  充值/调账
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
       });
     });
   }

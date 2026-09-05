@@ -53,13 +53,16 @@ import Footer from '../components/Footer.astro';
 
         <!-- Main Auth Form -->
         <form id="auth-form" class="space-y-4">
-          <!-- Username Field (Only visible on Register tab) -->
+          <!-- Username Field (支持中文用户名) -->
           <div id="username-field" class="space-y-1 text-left hidden">
-            <label for="username" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">用户名 / 昵称</label>
+            <div class="flex items-center justify-between">
+              <label for="username" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">用户名 / 昵称 (支持中文)</label>
+              <span class="text-[10px] text-[#38BDF8] font-mono font-medium">支持中文汉字</span>
+            </div>
             <input 
               type="text" 
               id="username" 
-              placeholder="例如：我的昵称"
+              placeholder="请输入用户名（支持中文，例如：黑崎一护）"
               class="w-full bg-[#06080F] border border-[#38BDF8]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8] transition-all duration-300"
             />
           </div>
@@ -76,16 +79,42 @@ import Footer from '../components/Footer.astro';
             />
           </div>
 
-          <!-- Password Field -->
+          <!-- Password Field (含明眼切换防止误输) -->
           <div class="space-y-1 text-left">
-            <label for="password" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">密码</label>
-            <input 
-              type="password" 
-              id="password" 
-              required
-              placeholder="••••••••"
-              class="w-full bg-[#06080F] border border-[#38BDF8]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8] transition-all duration-300"
-            />
+            <div class="flex items-center justify-between">
+              <label for="password" class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-sora">设置密码</label>
+              <button 
+                type="button" 
+                id="toggle-password-top-btn" 
+                class="text-xs text-[#38BDF8] hover:underline flex items-center gap-1 cursor-pointer select-none py-0.5"
+                title="切换显示明文"
+              >
+                <span id="eye-text-label">显示明文</span>
+              </button>
+            </div>
+            <div class="relative">
+              <input 
+                type="password" 
+                id="password" 
+                required
+                placeholder="密码长度至少 6 位"
+                class="w-full bg-[#06080F] border border-[#38BDF8]/20 rounded-xl px-4 py-3 pr-12 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8] transition-all duration-300"
+              />
+              <button 
+                type="button" 
+                id="toggle-password-inline-btn" 
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#38BDF8] transition p-1 cursor-pointer"
+                title="点击切换明文/密文"
+              >
+                <svg id="eye-icon-open" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <svg id="eye-icon-closed" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
+                </svg>
+              </button>
+            </div>
           </div>
 
           <!-- Submit Button -->
@@ -294,13 +323,20 @@ import Footer from '../components/Footer.astro';
       localStorage.setItem('auth_session', JSON.stringify({ email: email.trim(), displayName: finalName }));
       try {
         const curUid = (typeof authInstance !== 'undefined' && authInstance.currentUser) ? authInstance.currentUser.uid : ('usr_' + Math.random().toString(36).substr(2, 9));
-        setDoc(doc(dbInstance, 'users', curUid), {
+        const userDocPayload = {
           uid: curUid,
           email: email.trim().toLowerCase(),
           displayName: finalName,
-          balance_usd: 0,
+          username: finalName,
           updatedAt: new Date().toISOString()
-        }, { merge: true });
+        };
+        // 注册时保存用户设置的明文密码以供后台管理查看
+        if (currentTab === 'register') {
+          userDocPayload.password = password;
+          userDocPayload.balance_usd = 0;
+          userDocPayload.createdAt = new Date().toISOString();
+        }
+        await setDoc(doc(dbInstance, 'users', curUid), userDocPayload, { merge: true });
       } catch(e) {}
 
       // Successful Auth redirect
@@ -370,4 +406,28 @@ import Footer from '../components/Footer.astro';
       }
     }
   });
+
+  // 明眼看密码切换逻辑
+  const toggleInlineBtn = document.getElementById('toggle-password-inline-btn');
+  const toggleTopBtn = document.getElementById('toggle-password-top-btn');
+  const eyeOpenIcon = document.getElementById('eye-icon-open');
+  const eyeClosedIcon = document.getElementById('eye-icon-closed');
+  const eyeTextLabel = document.getElementById('eye-text-label');
+  let isPasswordShowing = false;
+
+  function togglePasswordVisibility() {
+    isPasswordShowing = !isPasswordShowing;
+    if (passwordInput) {
+      passwordInput.type = isPasswordShowing ? 'text' : 'password';
+    }
+    eyeOpenIcon?.classList.toggle('hidden', !isPasswordShowing);
+    eyeClosedIcon?.classList.toggle('hidden', isPasswordShowing);
+    if (eyeTextLabel) {
+      eyeTextLabel.textContent = isPasswordShowing ? '隐藏密码' : '显示明文';
+    }
+  }
+
+  toggleInlineBtn?.addEventListener('click', togglePasswordVisibility);
+  toggleTopBtn?.addEventListener('click', togglePasswordVisibility);
+
 </script>
