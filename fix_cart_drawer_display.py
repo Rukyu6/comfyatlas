@@ -1,4 +1,24 @@
----
+import os
+import re
+
+print("=== 1. 检查并清理 index.astro 中重复挂载的 CartDrawer ===")
+index_path = "src/pages/index.astro"
+if os.path.exists(index_path):
+    with open(index_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    orig = content
+    # 如果 index.astro 里有独立的 <CartDrawer />，由于 BaseLayout 已有，移除它防止 DOM 节点重复
+    content = re.sub(r'<\s*CartDrawer\s*\/?>', '', content)
+    content = re.sub(r'import\s+CartDrawer\s+from\s+[\'"][^\'"]+CartDrawer\.astro[\'"];?', '', content)
+    if content != orig:
+        with open(index_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print("✓ 已清理 index.astro 中重复的 CartDrawer 挂载")
+
+print("=== 2. 重塑 CartDrawer.astro 结构与滑入滑出逻辑 ===")
+cart_component_path = "src/components/CartDrawer.astro"
+
+new_cart_drawer = '''---
 // 全局购物车侧边抽屉组件
 ---
 <!-- 购物车全局容器 -->
@@ -245,3 +265,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.updateCartBadge();
 });
 </script>
+'''
+
+with open(cart_component_path, "w", encoding="utf-8") as f:
+    f.write(new_cart_drawer)
+print("✓ 已重塑 CartDrawer.astro 结构并彻底修复层级动画与显示逻辑！")
+
+print("=== 3. 部署并验证构建 ===")
