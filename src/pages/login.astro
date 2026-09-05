@@ -287,7 +287,12 @@ import Footer from '../components/Footer.astro';
         }
       }
       // Successful Auth redirect
-      window.location.href = redirectPath;
+      const adminEmail = (import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com').toLowerCase();
+      if (email.trim().toLowerCase() === adminEmail && redirectPath === '/') {
+        window.location.href = '/admin/dashboard';
+      } else {
+        window.location.href = redirectPath;
+      }
     } catch (err: any) {
       console.error(err);
       let errorMsg = err.message || "身份验证失败。";
