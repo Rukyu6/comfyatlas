@@ -77,87 +77,135 @@ import Footer from '../components/Footer.astro';
           </h2>
           
           <!-- Balance Summary Card -->
-          <div class="glass-card p-6 bg-[#0B0F1A]/90 border border-[#38BDF8]/20 rounded-3xl space-y-4 shadow-xl">
+          <div class="glass-card p-6 bg-[#0B0F1A]/90 border border-[#38BDF8]/30 rounded-3xl space-y-5 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-[#0284C7]/15 rounded-full filter blur-2xl pointer-events-none"></div>
+
             <div class="flex items-center justify-between border-b border-white/5 pb-3">
-              <span class="text-xs font-bold text-slate-400">可用账户余额</span>
-              <span class="text-[10px] text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded-full font-mono">
-                ACTIVE
+              <span class="text-xs font-bold text-slate-300 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>可用钱包余额</span>
+              </span>
+              <span class="text-[10px] text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-mono font-bold tracking-wider">
+                ACTIVE 正常
               </span>
             </div>
             
-            <div class="space-y-1">
-              <div class="flex items-baseline gap-1">
-                <span class="text-xs text-[#38BDF8] font-bold font-mono">$</span>
+            <div class="space-y-1.5 text-left">
+              <div class="flex items-baseline gap-2">
                 <span class="text-3xl font-black text-white tracking-tight font-mono" id="wallet-balance-usd">0.00</span>
-                <span class="text-xs text-slate-400 font-mono ml-1">USDT</span>
+                <span class="text-xs font-bold text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 px-2 py-0.5 rounded-lg font-mono">USDT</span>
               </div>
-              <p class="text-[11px] text-slate-500 font-mono">
-                折合: <span id="wallet-balance-usdt">0</span> USDT
+              <p class="text-xs text-slate-400 font-mono flex items-center gap-1">
+                <span>≈ ¥</span>
+                <span id="wallet-balance-cny" class="text-slate-200 font-bold">0.00</span>
+                <span>CNY</span>
+                <span class="text-[10px] text-slate-500 ml-1">(参考汇率 1:7.1)</span>
               </p>
             </div>
 
             <button 
               type="button" 
               id="wallet-recharge-btn"
-              class="w-full py-2.5 rounded-xl bg-[#0284C7]/25 hover:bg-[#0284C7]/40 border border-[#38BDF8]/40 text-[#38BDF8] hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
+              class="w-full py-3 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] hover:brightness-110 text-[#06080F] font-black text-xs uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-[0_0_20px_rgba(56,189,248,0.35)] cursor-pointer flex items-center justify-center gap-2"
             >
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              <span>在线充值余额</span>
+              <span>+ 在线充值 USDT 余额</span>
             </button>
           </div>
 
-          <!-- Recharge Form Card (Hidden by default) -->
-          <div id="wallet-recharge-form-card" class="hidden glass-card p-6 bg-[#0B0F1A]/95 border border-[#38BDF8]/40 rounded-3xl space-y-4 shadow-2xl animate-fadeIn">
+          <!-- Recharge Form Card (Enhanced Cyberpunk Web3 Style) -->
+          <div id="wallet-recharge-form-card" class="hidden glass-card p-6 bg-[#0B0F1A]/95 border border-[#38BDF8]/40 rounded-3xl space-y-5 shadow-2xl animate-fadeIn">
             <div class="flex items-center justify-between border-b border-white/10 pb-3">
-              <h3 class="text-xs font-bold text-white uppercase tracking-wider">
-                提交转账凭证
-              </h3>
-              <button type="button" id="close-recharge-btn" class="text-slate-400 hover:text-white text-xs">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#38BDF8] animate-ping"></span>
+                <h3 class="text-xs font-black text-white uppercase tracking-wider">
+                  USDT 官方收款通道
+                </h3>
+                <span class="text-[9px] bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40 px-2 py-0.5 rounded-full font-mono font-bold">TRC-20</span>
+              </div>
+              <button type="button" id="close-recharge-btn" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white flex items-center justify-center text-xs transition cursor-pointer">
                 ✕
               </button>
             </div>
 
-            <div class="p-3 bg-[#06080F] border border-white/10 rounded-xl space-y-1 text-left text-[11px]">
-              <span class="text-slate-400 block font-mono text-[10px]">USDT (TRC-20) 官方收款地址:</span>
-              <p class="font-mono text-[#38BDF8] select-all break-all text-[10px]">
-                TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA
-              </p>
+            <!-- QR Code & Address Box -->
+            <div class="p-4 bg-[#06080F]/90 border border-[#38BDF8]/25 rounded-2xl flex flex-col items-center gap-3 text-center">
+              <div class="p-2 bg-white rounded-xl shadow-lg border border-white/20">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA" class="w-28 h-28 object-contain rounded" alt="USDT TRC-20 收款二维码" />
+              </div>
+              <div class="w-full space-y-2">
+                <div class="flex items-center justify-between text-[11px] text-slate-400">
+                  <span class="font-bold text-slate-300">TRC-20 收款地址</span>
+                  <span class="text-[10px] text-amber-400 font-mono">⚠️ 仅支持 TRC20 资产</span>
+                </div>
+                <div class="flex items-center gap-2 bg-[#0B0F1A] border border-white/15 rounded-xl px-3 py-2.5">
+                  <span id="recharge-address-text" class="text-[11px] font-mono text-[#38BDF8] select-all truncate flex-1 text-left">TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA</span>
+                  <button type="button" id="btn-copy-address" class="px-2.5 py-1 bg-[#0284C7]/30 hover:bg-[#0284C7]/60 border border-[#38BDF8]/50 text-[#38BDF8] hover:text-white rounded-lg text-[10px] font-bold transition shrink-0 cursor-pointer flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    <span id="btn-copy-address-text">复制地址</span>
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <form id="recharge-form" class="space-y-3">
-              <div>
-                <label class="block text-[10px] uppercase text-slate-400 font-bold mb-1">充值金额 (USD)</label>
-                <input 
-                  type="number" 
-                  step="any"
-                  id="recharge-amount" 
-                  placeholder="例如: 50.00"
-                  required
-                  class="w-full bg-[#06080F] border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8]"
-                />
+            <!-- Quick Amount Pills -->
+            <div class="space-y-1.5 text-left">
+              <label class="block text-[10px] uppercase text-slate-400 font-bold tracking-wider">常用充值金额 (USDT)</label>
+              <div class="grid grid-cols-4 gap-1.5">
+                <button type="button" class="quick-amt-btn py-1.5 text-xs font-mono font-bold rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/20 text-slate-200 transition active:scale-95 cursor-pointer" data-amt="20">20 U</button>
+                <button type="button" class="quick-amt-btn py-1.5 text-xs font-mono font-bold rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/20 text-slate-200 transition active:scale-95 cursor-pointer" data-amt="50">50 U</button>
+                <button type="button" class="quick-amt-btn py-1.5 text-xs font-mono font-bold rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/20 text-slate-200 transition active:scale-95 cursor-pointer" data-amt="100">100 U</button>
+                <button type="button" class="quick-amt-btn py-1.5 text-xs font-mono font-bold rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/20 text-slate-200 transition active:scale-95 cursor-pointer" data-amt="200">200 U</button>
+              </div>
+            </div>
+
+            <!-- Recharge Form -->
+            <form id="recharge-form" class="space-y-3.5">
+              <div class="text-left">
+                <label class="block text-[10px] uppercase text-slate-400 font-bold mb-1">充值金额 (USDT)</label>
+                <div class="relative">
+                  <input 
+                    type="number" 
+                    step="any"
+                    id="recharge-amount" 
+                    placeholder="输入转账的 USDT 金额"
+                    required
+                    class="w-full bg-[#06080F] border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 font-mono focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]"
+                  />
+                  <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono font-bold text-slate-400">USDT</span>
+                </div>
               </div>
 
-              <div>
-                <label class="block text-[10px] uppercase text-slate-400 font-bold mb-1">转账交易哈希 / TxID</label>
+              <div class="text-left">
+                <label class="block text-[10px] uppercase text-slate-400 font-bold mb-1 flex items-center justify-between">
+                  <span>转账交易哈希 / TxID</span>
+                  <span class="text-[10px] text-slate-500 font-normal">必填，链上唯一凭据</span>
+                </label>
                 <input 
                   type="text" 
                   id="recharge-txid" 
-                  placeholder="粘贴区块链转账哈希..."
+                  placeholder="粘贴区块链转账成功的 64 位 TxID..."
                   required
-                  class="w-full bg-[#06080F] border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 font-mono focus:outline-none focus:border-[#38BDF8]"
+                  class="w-full bg-[#06080F] border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 font-mono focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]"
                 />
               </div>
 
               <button 
                 type="submit" 
                 id="submit-recharge-btn"
-                class="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-bold text-xs shadow-md active:scale-95 transition flex items-center justify-center gap-1.5"
+                class="w-full py-3 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] hover:brightness-110 text-[#06080F] font-black text-xs uppercase tracking-wider transition-all duration-200 active:scale-95 shadow-lg flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>提交充值凭证</span>
+                <span>确认提交转账凭证</span>
               </button>
             </form>
+
+            <div class="p-3 rounded-xl bg-[#06080F]/60 border border-white/5 text-[10px] text-slate-400 space-y-1 text-left leading-relaxed">
+              <div class="text-[#38BDF8] font-bold">充值说明：</div>
+              <div>1. 向上述地址转账完成后，请务必填写实际转账金额与 TxID 提交凭据。</div>
+              <div>2. 系统及客服审核确认链上到账后，将在 1-3 分钟内自动为您入账。</div>
+            </div>
           </div>
 
           <!-- Deposit History Card -->
@@ -300,6 +348,29 @@ import Footer from '../components/Footer.astro';
     }).join('');
   }
 
+    // 一键复制收款地址与快捷选额
+  const btnCopyAddress = document.getElementById('btn-copy-address');
+  const btnCopyAddressText = document.getElementById('btn-copy-address-text');
+  btnCopyAddress?.addEventListener('click', () => {
+    navigator.clipboard.writeText('TPUxwhaa4szt1QswXvFVKtbYEHUwupRGZA');
+    if (btnCopyAddressText) btnCopyAddressText.textContent = '✓ 已复制';
+    setTimeout(() => {
+      if (btnCopyAddressText) btnCopyAddressText.textContent = '复制地址';
+    }, 2000);
+  });
+
+  const quickAmtBtns = document.querySelectorAll('.quick-amt-btn');
+  quickAmtBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const amt = btn.getAttribute('data-amt');
+      if (rechargeAmount && amt) {
+        rechargeAmount.value = amt;
+      }
+      quickAmtBtns.forEach(b => b.classList.remove('border-[#38BDF8]', 'text-[#38BDF8]', 'bg-[#0284C7]/20'));
+      btn.classList.add('border-[#38BDF8]', 'text-[#38BDF8]', 'bg-[#0284C7]/20');
+    });
+  });
+
   rechargeBtn?.addEventListener('click', () => rechargeFormCard?.classList.toggle('hidden'));
   closeRechargeBtn?.addEventListener('click', () => rechargeFormCard?.classList.add('hidden'));
 
@@ -390,7 +461,7 @@ import Footer from '../components/Footer.astro';
       const cartItems = (order.items || []).map(item => `
         <div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
           <div class="flex items-center gap-3">
-            <img src="${item.image || '/favicon.ico'}" class="w-9 h-9 rounded-xl object-cover bg-black/40 border border-white/10" />
+            <img src="${item.image || '/images/soul_society_logo.jpg'}" onerror="this.onerror=null;this.src='/images/soul_society_logo.jpg';" class="w-9 h-9 rounded-xl object-cover bg-black/40 border border-white/10" />
             <div class="text-left">
               <p class="text-xs font-bold text-white line-clamp-1">${item.name}</p>
               <div class="flex items-center gap-2 mt-0.5">
