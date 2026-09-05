@@ -65,6 +65,25 @@ import Footer from '../components/Footer.astro';
           <!-- Orders List Container -->
           <div id="orders-list" class="hidden space-y-6">
           </div>
+
+          <!-- SECTION 2: 充值记录明细 (放置在历史订单正下方，拥有宽屏精美展示) -->
+          <div class="pt-8 space-y-4 border-t border-white/10">
+            <div class="flex items-center justify-between">
+              <h2 class="text-lg font-bold text-white flex items-center gap-2.5">
+                <svg class="w-5 h-5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                <span>钱包充值申请明细</span>
+              </h2>
+              <span class="text-xs font-mono text-slate-400">实时链上对账存证</span>
+            </div>
+
+            <div class="glass-card p-6 bg-[#0B0F1A]/90 border border-[#38BDF8]/25 rounded-3xl shadow-xl">
+              <div id="deposit-logs-container" class="space-y-3">
+                <p class="text-xs text-slate-500 text-center py-6 font-mono">暂无充值申请记录</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Wallet Column (lg:col-span-1) -->
@@ -253,18 +272,7 @@ import Footer from '../components/Footer.astro';
             </div>
           </div>
 
-          <!-- Deposit History Card -->
-          <div class="glass-card p-6 bg-[#0B0F1A]/90 border border-[#38BDF8]/20 rounded-3xl space-y-4 shadow-xl">
-            <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-              </svg>
-              <span>充值记录明细</span>
-            </h3>
-            <div id="deposit-logs-container" class="space-y-2.5 max-h-[250px] overflow-y-auto pr-1">
-              <p class="text-[11px] text-slate-500 text-center py-4">暂无充值申请记录</p>
-            </div>
-          </div>
+
 
         </div>
       </div>
@@ -357,43 +365,55 @@ import Footer from '../components/Footer.astro';
   function renderDeposits(deposits: any[]) {
     if (!logsContainer) return;
     if (deposits.length === 0) {
-      logsContainer.innerHTML = `<p class="text-[11px] text-slate-500 text-center py-4">暂无充值记录</p>`;
+      logsContainer.innerHTML = `<p class="text-xs text-slate-500 text-center py-6 font-mono">暂无充值申请记录</p>`;
       return;
     }
 
     logsContainer.innerHTML = deposits.map(dep => {
       const date = new Date(dep.createdAt).toLocaleDateString('zh-CN', {
-        month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+        year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
       });
 
       let statusBadge = 'bg-amber-500/15 text-amber-400 border border-amber-500/30';
       let statusText = '审核中';
       if (dep.status === 'approved' || dep.status === 'completed') {
-        statusBadge = 'bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40';
-        statusText = '已入账';
+        statusBadge = 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shadow-[0_0_12px_rgba(52,211,153,0.2)]';
+        statusText = '已入账至余额';
       } else if (dep.status === 'rejected') {
         statusBadge = 'bg-rose-500/15 text-rose-400 border border-rose-500/30';
         statusText = '未通过';
       }
 
+      const networkTag = dep.network || 'USDT (TRC-20)';
+
       return `
-        <div class="p-3 bg-[#06080F] border border-white/5 rounded-xl text-left space-y-1">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-white font-mono">+ $${Number(dep.amount).toFixed(2)} USDT</span>
-            <span class="px-2 py-0.5 border rounded-full text-[9px] font-bold ${statusBadge}">
+        <div class="p-4 bg-[#06080F] border border-white/10 rounded-2xl text-left space-y-2.5 transition hover:border-[#38BDF8]/40">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-2.5">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-0.5 rounded-lg bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] text-[10px] font-mono font-bold">
+                ${networkTag}
+              </span>
+              <span class="text-sm font-black text-white font-mono">+ $${Number(dep.amount).toFixed(2)} USDT</span>
+            </div>
+            <span class="px-2.5 py-0.5 border rounded-full text-[10px] font-bold self-start sm:self-auto ${statusBadge}">
               ${statusText}
             </span>
           </div>
-          <div class="text-[10px] text-slate-500 font-mono flex flex-col gap-0.5">
-            <span class="truncate select-all">TxID: ${dep.txId}</span>
-            <span>时间: ${date}</span>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[11px] text-slate-400 font-mono">
+            <div class="flex items-center gap-1.5 truncate max-w-full sm:max-w-[70%]">
+              <span class="text-slate-500 shrink-0">TxID:</span>
+              <span class="truncate select-all text-slate-300 font-mono">${dep.txId}</span>
+              <button type="button" onclick="navigator.clipboard.writeText('${dep.txId}'); alert('TxID 已复制！');" class="text-[#38BDF8] hover:underline shrink-0 text-[10px] ml-1 cursor-pointer">[复制]</button>
+            </div>
+            <span class="text-slate-500 shrink-0 text-[10px]">提交时间: ${date}</span>
           </div>
         </div>
       `;
     }).join('');
   }
 
-      // 4 大多链切换与地址联动
+  // 4 大多链切换与地址联动
   let currentRechargeAddress = 'TXLUKiCFzMsSxyAy6uR5WduCsnYXqXMJ1C';
   let currentRechargeNetwork = 'USDT (TRC-20)';
 
