@@ -404,9 +404,9 @@ export const getDoc = async (docRef) => {
   };
 };
 
-export const setDoc = async (docRef, data) => {
+export const setDoc = async (docRef, data, options) => {
   if (isFirebaseConfigured && db) {
-    return fbSetDoc(docRef, data);
+    return fbSetDoc(docRef, data, options);
   }
   
   const id = docRef.id;

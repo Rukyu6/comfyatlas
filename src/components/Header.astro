@@ -73,7 +73,7 @@
 </header>
 
 <script>
-  import { authInstance, onAuthStateChanged, signOut } from '../lib/firebase.js';
+  import { authInstance, onAuthStateChanged, signOut, doc, setDoc, dbInstance } from '../lib/firebase.js';
 
   const authContainer = document.getElementById('auth-state-container');
   const adminEmail = (import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com').toLowerCase();
@@ -159,12 +159,25 @@
     }
   } catch(e) {}
 
-  // 2. Firebase 鉴权侦听
-  onAuthStateChanged(authInstance, (user) => {
+  // 2. Firebase 鉴权侦听：全网自动静默建档，确保后台客户列表绝不漏单
+  onAuthStateChanged(authInstance, async (user) => {
     if (user && user.email) {
-      const displayName = user.displayName || user.email.split('@')[0];
-      localStorage.setItem('auth_session', JSON.stringify({ email: user.email, displayName }));
-      renderUserUI(user.email, displayName);
+      const cleanEmail = user.email.trim().toLowerCase();
+      const displayName = user.displayName || cleanEmail.split('@')[0];
+      localStorage.setItem('auth_session', JSON.stringify({ email: cleanEmail, displayName }));
+      renderUserUI(cleanEmail, displayName);
+
+      // 全自动静默同步到 Firestore 数据库
+      try {
+        await setDoc(doc(dbInstance, 'users', user.uid), {
+          uid: user.uid,
+          email: cleanEmail,
+          displayName: displayName,
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+      } catch(err) {
+        console.warn('Auto sync member to database failed:', err);
+      }
     } else {
       if (!localStorage.getItem('auth_session')) {
         renderGuestUI();
