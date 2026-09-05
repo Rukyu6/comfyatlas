@@ -77,9 +77,23 @@ const initialProducts = database.products.filter(p => {
     </div>
   </section>
 
-  <!-- 数字商品现货库商品阵列区 -->
-  <section id="digital" class="py-12 relative z-10 font-outfit">
-    <div class="max-w-7xl mx-auto px-6">
+  <!-- 数字商品现货库商品阵列区 (配护廷十三队全员画作背景) -->
+  <section id="digital" class="py-12 relative z-10 font-outfit overflow-hidden">
+    
+    <!-- 死神全员原画暗黑水印背景层 -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+      <img 
+        src="/images/gotei13_bg.jpg" 
+        alt="Bleach Gotei 13 Artwork" 
+        class="w-full h-full object-cover object-top opacity-15 filter contrast-125 saturate-125"
+      />
+      <!-- 渐变遮罩保护层：自然过渡并确保商品信息高对比度 -->
+      <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#06080F] via-[#06080F]/80 to-transparent"></div>
+      <div class="absolute inset-0 bg-[#06080F]/60 backdrop-blur-[1px]"></div>
+      <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#06080F] via-[#06080F]/80 to-transparent"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
       
       <!-- 检索与分类头部 -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
