@@ -1,4 +1,23 @@
 ---
+
+function parseSkuDisplay(name) {
+  if (!name) return '';
+  if (name.includes('ACCSZONE') || name.includes('|slug=') || name.includes('-registered-')) {
+    let clean = name.replace(/^[A-Z0-9_\-]+(?:\|slug=|\:|\/|\|)/, '').replace(/^slug=/, '');
+    let tags = [];
+    let lower = clean.toLowerCase();
+    let yMatch = lower.match(/(?:registered-in-|year-)?(20\d{2})-(20\d{2})/);
+    if (yMatch) tags.push(yMatch[1] + '-' + yMatch[2] + '年老号');
+    if (lower.includes('channel-blank-or-contains-few-uploads')) tags.push('空白频道/含少量视频');
+    else if (lower.includes('channel-blank')) tags.push('空白全新频道');
+    if (lower.includes('ready-to-use') || lower.includes('mixed-ip')) tags.push('混合原生IP·即买即用');
+    if (lower.includes('tdata')) tags.push('Tdata电脑端直登');
+    if (lower.includes('cookie')) tags.push('含Cookie直登');
+    if (tags.length > 0) return tags.join(' | ');
+    return clean.replace(/-/g, ' ');
+  }
+  return name.replace(/^ACCSZONE-\d+\|?/, '');
+}
 ---
 <div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300 font-outfit">
  <div 
@@ -132,7 +151,7 @@
  class="w-11 h-11 rounded-xl object-cover bg-black/50 border border-white/10 shrink-0" 
  />
  <div class="min-w-0 flex-1 pr-2 text-left">
- <h4 class="font-bold text-white truncate text-xs leading-snug">${item.name}</h4>
+ <h4 class="font-bold text-white truncate text-xs leading-snug">${parseSkuDisplay(item.name)}</h4>
  <span class="text-[10px] text-slate-400 block mt-0.5">${item.size ? `规格: ${item.size}` : '标准规格'}</span>
  </div>
  <button type="button" onclick="window.removeCartItem(${index})" class="text-[11px] text-rose-400 hover:text-rose-300 p-1 cursor-pointer shrink-0">
