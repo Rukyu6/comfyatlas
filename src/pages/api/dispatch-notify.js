@@ -51,7 +51,8 @@ export async function POST({ request }) {
                     `-----------------------------\n` +
                     `*商品名称:* ${itemNamesText}\n` +
                     `*订单号:* \`${orderId}\`\n` +
-                    `*下单时间:* ${formattedOrderDate}\n` +
+                    `*🔗 <b>拿货网址:</b> ${item.sourceUrl || item.supplierUrl || "详见上游货源库"}
+下单时间:* ${formattedOrderDate}\n` +
                     `*商品金额:* $${totalCostUsd.toFixed(2)} USD\n` +
                     `*商品数量:* ${totalQuantity}\n` +
                     `*通知时间:* ${currentTimestamp}\n` +
