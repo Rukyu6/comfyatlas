@@ -335,8 +335,34 @@ import Footer from '../components/Footer.astro';
     hideError();
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(authInstance, provider);
-      window.location.href = redirectPath;
+      const activeAuth = (typeof getAuthInstance === 'function' ? getAuthInstance() : authInstance);
+      const cred = await signInWithPopup(activeAuth, provider);
+      if (cred && cred.user) {
+        const u = cred.user;
+        const email = (u.email || '').trim().toLowerCase();
+        const displayName = u.displayName || email.split('@')[0];
+        localStorage.setItem('auth_session', JSON.stringify({ email: email, displayName: displayName }));
+
+        try {
+          await setDoc(doc(dbInstance, 'users', u.uid), {
+            uid: u.uid,
+            email: email,
+            displayName: displayName,
+            photoURL: u.photoURL || '',
+            balance_usd: 0,
+            updatedAt: new Date().toISOString()
+          }, { merge: true });
+        } catch(e) {
+          console.warn('写入用户集合异常:', e);
+        }
+
+        const adminEmail = (import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com').toLowerCase();
+        if (email === adminEmail && redirectPath === '/') {
+          window.location.href = '/admin/dashboard';
+        } else {
+          window.location.href = redirectPath;
+        }
+      }
     } catch (err: any) {
       console.error(err);
       if (err.message && !err.message.includes('auth/popup-closed-by-user')) {

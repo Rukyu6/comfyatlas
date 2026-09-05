@@ -510,7 +510,7 @@ import Footer from '../components/Footer.astro';
 
   async function loadOrders() {
     try {
-      const q = query(collection(dbInstance, 'orders'), where('email', '==', currentUserEmail), orderBy('createdAt', 'desc'));
+      const q = query(collection(dbInstance, 'orders'), where('email', '==', currentUserEmail));
       const querySnapshot = await getDocs(q);
       const orders: any[] = [];
       const hiddenList = JSON.parse(localStorage.getItem('hidden_orders_' + currentUserEmail) || '[]');
@@ -521,6 +521,8 @@ import Footer from '../components/Footer.astro';
         }
       });
 
+      orders.sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
+
       if (orders.length === 0) {
         loadingSec?.classList.add('hidden');
         emptySec?.classList.remove('hidden');
@@ -528,26 +530,11 @@ import Footer from '../components/Footer.astro';
         return;
       }
       renderOrders(orders);
-    } catch {
-      try {
-        const qFall = query(collection(dbInstance, 'orders'));
-        const querySnapshot = await getDocs(qFall);
-        const allOrders: any[] = [];
-        const hiddenList = JSON.parse(localStorage.getItem('hidden_orders_' + currentUserEmail) || '[]');
-        querySnapshot.docs.forEach((doc) => allOrders.push({ id: doc.id, ...doc.data() }));
-        const filtered = allOrders
-          .filter(o => o.email === currentUserEmail && !o.deletedByUser && !hiddenList.includes(o.id))
-          .sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-
-        if (filtered.length === 0) {
-          loadingSec?.classList.add('hidden');
-          emptySec?.classList.remove('hidden');
-          return;
-        }
-        renderOrders(filtered);
-      } catch {
-        if (loadingSec) loadingSec.innerHTML = `<p class="text-rose-400 text-xs">加载订单记录失败</p>`;
-      }
+    } catch (err) {
+      console.warn('loadOrders fallback to empty state:', err);
+      loadingSec?.classList.add('hidden');
+      emptySec?.classList.remove('hidden');
+      listSec?.classList.add('hidden');
     }
   }
 
@@ -655,45 +642,3 @@ import Footer from '../components/Footer.astro';
     listSec?.classList.remove('hidden');
   }
 </script>
-
-  // 历史订单删除动效与持久化
-  document.addEventListener('click', async (e) => {
-    const target = e.target as HTMLElement;
-    const btn = target.closest('.btn-delete-order') as HTMLElement;
-    if (!btn) return;
-
-    const orderId = btn.getAttribute('data-order-id');
-    if (!orderId) return;
-
-    if (!confirm('确定要删除该历史订单吗？删除后此订单记录及卡密凭证将不再显示。')) {
-      return;
-    }
-
-    const card = document.getElementById(`order-card-${orderId}`);
-    if (card) {
-      card.style.transition = 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)';
-      card.style.opacity = '0';
-      card.style.transform = 'scale(0.95) translateY(-12px)';
-      setTimeout(() => {
-        card.remove();
-        if (listSec && listSec.children.length === 0) {
-          listSec.classList.add('hidden');
-          emptySec?.classList.remove('hidden');
-        }
-      }, 350);
-    }
-
-    // 本地存储即时隐藏
-    try {
-      const hiddenList = JSON.parse(localStorage.getItem('hidden_orders_' + currentUserEmail) || '[]');
-      if (!hiddenList.includes(orderId)) {
-        hiddenList.push(orderId);
-        localStorage.setItem('hidden_orders_' + currentUserEmail, JSON.stringify(hiddenList));
-      }
-    } catch(err) {}
-
-    // 云端数据库同步标记
-    try {
-      await updateDoc(doc(dbInstance, 'orders', orderId), { deletedByUser: true });
-    } catch(err) {}
-  });
