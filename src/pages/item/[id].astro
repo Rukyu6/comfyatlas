@@ -305,7 +305,7 @@ let cleanIntroduce = rawIntroduce
  data-sku-index="${index}"
  >
  <div>
- <span class="text-xs font-bold ${isSelected ? 'text-[#38BDF8]' : 'text-white'} block">${window.formatSkuDisplay(sku.name || sku.sku_code || sku.skuCode)}</span>
+ <span class="text-xs font-bold ${window.formatSkuDisplay ? window.formatSkuDisplay(isSelected ? 'text-[#38BDF8]' : 'text-white') : isSelected ? 'text-[#38BDF8]' : 'text-white'} block">${window.formatSkuDisplay(sku.name || sku.sku_code || sku.skuCode)}</span>
  <span class="text-[10px] text-slate-500 font-mono">库存: ${sku.stock} 件</span>
  </div>
  <div class="text-right">
