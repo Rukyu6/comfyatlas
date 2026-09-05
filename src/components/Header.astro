@@ -68,65 +68,91 @@
   const authContainer = document.getElementById('auth-state-container');
   const adminEmail = (import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com').toLowerCase();
 
-  onAuthStateChanged(authInstance, (user) => {
+  function renderUserUI(email, displayName) {
     if (!authContainer) return;
+    const cleanEmail = (email || '').toLowerCase();
+    const isAdmin = (cleanEmail === adminEmail);
+    const cleanName = displayName || cleanEmail.split('@')[0] || '会员';
 
-    if (user && user.email) {
-      const email = user.email.toLowerCase();
-      const isAdmin = (email === adminEmail);
-      const displayName = user.displayName || email.split('@')[0];
-
-      authContainer.innerHTML = `
-        <div class="flex items-center gap-2">
-          ${isAdmin ? `
-            <a href="/admin/dashboard" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-[#06080F] font-black text-xs shadow-[0_0_15px_rgba(56,189,248,0.4)] transition hover:brightness-110 active:scale-95">
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-              <span>管理后台</span>
-            </a>
-          ` : ''}
-
-          <a href="/orders" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all">
-            <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-            <span class="hidden sm:inline">我的订单</span>
+    authContainer.innerHTML = `
+      <div class="flex items-center gap-2">
+        ${isAdmin ? `
+          <a href="/admin/dashboard" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-[#06080F] font-black text-xs shadow-[0_0_15px_rgba(56,189,248,0.4)] transition hover:brightness-110 active:scale-95">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span>管理后台</span>
           </a>
+        ` : ''}
 
-          <div class="relative group">
-            <button id="user-menu-btn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/25 text-slate-300 hover:text-white text-xs transition cursor-pointer">
-              <div class="w-5 h-5 rounded-full bg-[#0284C7]/30 border border-[#38BDF8]/40 text-[#38BDF8] flex items-center justify-center text-[10px] font-bold">
-                ${displayName.charAt(0).toUpperCase()}
-              </div>
-              <span class="max-w-[70px] truncate text-slate-300 font-medium">${displayName}</span>
-              <svg class="w-2.5 h-2.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </button>
+        <a href="/orders" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all">
+          <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+          <span class="hidden sm:inline">我的订单</span>
+        </a>
 
-            <div class="hidden group-hover:block absolute right-0 mt-1 w-44 rounded-2xl bg-[#0B0F1A] border border-[#38BDF8]/30 shadow-2xl p-2 z-50 backdrop-blur-xl">
-              <div class="px-2.5 py-2 border-b border-white/10 mb-1.5">
-                <div class="text-[10px] text-slate-400 truncate">${email}</div>
-                <div class="text-[9px] font-bold mt-0.5 ${isAdmin ? 'text-[#38BDF8]' : 'text-emerald-400'}">
-                  ${isAdmin ? '👑 最高管理员席位' : '✦ 正式注册会员'}
-                </div>
-              </div>
-              <a href="/orders" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-slate-300 hover:text-white hover:bg-white/5 transition">
-                <span>📦 历史订单与资产</span>
-              </a>
-              <button id="nav-logout-btn" type="button" class="w-full text-left flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-rose-400 hover:bg-rose-500/10 transition mt-1 cursor-pointer">
-                <span>🚪 退出安全登录</span>
-              </button>
+        <div class="relative group">
+          <button id="user-menu-btn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/25 text-slate-300 hover:text-white text-xs transition cursor-pointer">
+            <div class="w-5 h-5 rounded-full bg-[#0284C7]/30 border border-[#38BDF8]/40 text-[#38BDF8] flex items-center justify-center text-[10px] font-bold">
+              ${cleanName.charAt(0).toUpperCase()}
             </div>
+            <span class="max-w-[70px] truncate text-slate-300 font-medium">${cleanName}</span>
+            <svg class="w-2.5 h-2.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+
+          <div class="hidden group-hover:block absolute right-0 mt-1 w-44 rounded-2xl bg-[#0B0F1A] border border-[#38BDF8]/30 shadow-2xl p-2 z-50 backdrop-blur-xl">
+            <div class="px-2.5 py-2 border-b border-white/10 mb-1.5">
+              <div class="text-[10px] text-slate-400 truncate">${cleanEmail}</div>
+              <div class="text-[9px] font-bold mt-0.5 ${isAdmin ? 'text-[#38BDF8]' : 'text-emerald-400'}">
+                ${isAdmin ? '👑 最高管理员席位' : '✦ 正式注册会员'}
+              </div>
+            </div>
+            <a href="/orders" class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-slate-300 hover:text-white hover:bg-white/5 transition">
+              <span>📦 历史订单与资产</span>
+            </a>
+            <button id="nav-logout-btn" type="button" class="w-full text-left flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-rose-400 hover:bg-rose-500/10 transition mt-1 cursor-pointer">
+              <span>🚪 退出安全登录</span>
+            </button>
           </div>
         </div>
-      `;
+      </div>
+    `;
 
-      document.getElementById('nav-logout-btn')?.addEventListener('click', async () => {
-        await signOut(authInstance);
-        window.location.href = '/';
-      });
+    document.getElementById('nav-logout-btn')?.addEventListener('click', async () => {
+      localStorage.removeItem('auth_session');
+      try { await signOut(authInstance); } catch(e) {}
+      window.location.href = '/';
+    });
+  }
+
+  function renderGuestUI() {
+    if (!authContainer) return;
+    authContainer.innerHTML = `
+      <a id="nav-login-btn" href="/login" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/15 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all shadow-xs">
+        <span>登录 / 注册</span>
+      </a>
+    `;
+  }
+
+  // 1. 0ms 瞬间本地快照识别，拒绝闪烁
+  try {
+    const cachedSession = localStorage.getItem('auth_session');
+    if (cachedSession) {
+      const parsed = JSON.parse(cachedSession);
+      if (parsed && parsed.email) {
+        renderUserUI(parsed.email, parsed.displayName);
+      }
+    }
+  } catch(e) {}
+
+  // 2. Firebase 异步校验与更新
+  onAuthStateChanged(authInstance, (user) => {
+    if (user && user.email) {
+      const displayName = user.displayName || user.email.split('@')[0];
+      localStorage.setItem('auth_session', JSON.stringify({ email: user.email, displayName }));
+      renderUserUI(user.email, displayName);
     } else {
-      authContainer.innerHTML = `
-        <a id="nav-login-btn" href="/login" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/15 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all shadow-xs">
-          <span>登录 / 注册</span>
-        </a>
-      `;
+      // 仅在本地无缓存时才置为访客
+      if (!localStorage.getItem('auth_session')) {
+        renderGuestUI();
+      }
     }
   });
 </script>

@@ -286,6 +286,10 @@ import Footer from '../components/Footer.astro';
           await updateProfile(cred.user, { displayName: username });
         }
       }
+      // 立即写入 0ms 鉴权会话快照
+      const finalName = (currentTab === 'signin') ? email.split('@')[0] : (usernameInput.value.trim() || email.split('@')[0]);
+      localStorage.setItem('auth_session', JSON.stringify({ email: email.trim(), displayName: finalName }));
+
       // Successful Auth redirect
       const adminEmail = (import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com').toLowerCase();
       if (email.trim().toLowerCase() === adminEmail && redirectPath === '/') {
