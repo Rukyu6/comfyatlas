@@ -1,4 +1,10 @@
----
+import os
+
+print("=== 开始去除公告弹窗 Emoji，升级为全套高级矢量图标 ===")
+
+notice_path = 'src/components/NoticeModal.astro'
+
+new_notice_code = """---
 // NoticeModal.astro - 全站重要公告弹窗 (纯净高科技矢量微图版)
 ---
 <div 
@@ -222,3 +228,18 @@
     }
   })();
 </script>
+"""
+
+with open(notice_path, 'w', encoding='utf-8') as f:
+    f.write(new_notice_code)
+
+print("✓ src/components/NoticeModal.astro 矢量化升级完成")
+
+print("\n=== 开始编译验证 ===")
+res = os.system("npm run build")
+if res == 0:
+    print("\n🎉 构建 100% 成功！正在推送 Git...")
+    os.system('git add -A && git commit -m "style: replace all emojis in notice modal with clean high-tech SVG vector icons" && git push origin main')
+    print("🚀 升级已完成并推送到线上！")
+else:
+    print("\n❌ 编译未通过，请查看上方输出。")
