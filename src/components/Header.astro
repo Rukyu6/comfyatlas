@@ -3,457 +3,457 @@
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-[#06080F]/80 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-    
-    <!-- Logo & Brand -->
-    <a href="/" class="flex items-center gap-3 group shrink-0">
-      <div class="relative w-9 h-9 rounded-xl overflow-hidden border border-[#38BDF8]/30 group-hover:border-[#38BDF8] transition-all shadow-[0_0_15px_rgba(56,189,248,0.2)]">
-        <img 
-          src="/images/soul_society_logo.jpg" 
-          alt="Soul Society Logo" 
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
-      </div>
-      <div class="flex flex-col">
-        <span class="text-sm font-black tracking-wider text-white group-hover:text-[#38BDF8] transition-colors font-mono">SOUL SOCIETY</span>
-        <span class="text-[9px] text-slate-400 font-mono tracking-widest uppercase">CORP. DIGITAL VAULT</span>
-      </div>
-    </a>
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+ 
+ <!-- Logo & Brand -->
+ <a href="/" class="flex items-center gap-3 group shrink-0">
+ <div class="relative w-9 h-9 rounded-xl overflow-hidden border border-[#38BDF8]/30 group-hover:border-[#38BDF8] transition-all shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+ <img 
+ src="/images/soul_society_logo.jpg" 
+ alt="Soul Society Logo" 
+ class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+ />
+ </div>
+ <div class="flex flex-col">
+ <span class="text-sm font-black tracking-wider text-white group-hover:text-[#38BDF8] transition-colors font-mono">SOUL SOCIETY</span>
+ <span class="text-[9px] text-slate-400 font-mono tracking-widest uppercase">CORP. DIGITAL VAULT</span>
+ </div>
+ </a>
 
-    <!-- 网页置顶正中间：蓝染原声点击播放 Icon -->
-    <div class="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto">
-      <button 
-        id="aizen-sound-btn" 
-        type="button" 
-        class="relative flex items-center justify-center p-0.5 rounded-2xl bg-[#0B0F1A]/90 border-2 border-[#38BDF8]/40 hover:border-[#38BDF8] shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group select-none"
-        title="点击播放：蓝染惣右介原声"
-        aria-label="播放蓝染原声"
-      >
-        <img 
-          src="/images/aizen_audio_icon.jpg" 
-          alt="Aizen Voice" 
-          class="w-10 h-10 sm:w-11 sm:h-11 object-cover rounded-xl group-hover:brightness-110 transition-all"
-        />
-        <!-- 播放时动态声波光环 -->
-        <span id="aizen-sound-pulse" class="hidden absolute -inset-1 rounded-2xl border-2 border-[#38BDF8] animate-ping pointer-events-none opacity-60"></span>
-      </button>
+ <!-- 网页置顶正中间：蓝染原声点击播放 Icon -->
+ <div class="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto">
+ <button 
+ id="aizen-sound-btn" 
+ type="button" 
+ class="relative flex items-center justify-center p-0.5 rounded-2xl bg-[#0B0F1A]/90 border-2 border-[#38BDF8]/40 hover:border-[#38BDF8] shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group select-none"
+ title="点击播放：蓝染惣右介原声"
+ aria-label="播放蓝染原声"
+ >
+ <img 
+ src="/images/aizen_audio_icon.jpg" 
+ alt="Aizen Voice" 
+ class="w-10 h-10 sm:w-11 sm:h-11 object-cover rounded-xl group-hover:brightness-110 transition-all"
+ />
+ <!-- 播放时动态声波光环 -->
+ <span id="aizen-sound-pulse" class="hidden absolute -inset-1 rounded-2xl border-2 border-[#38BDF8] animate-ping pointer-events-none opacity-60"></span>
+ </button>
 
-      <!-- 原声音频播放源 -->
-      <audio id="aizen-voice-player" preload="auto" class="hidden">
-        <source src="/audio/welcome.mp3" type="audio/mpeg" />
-        <source src="/audio/welcome.mp4" type="audio/mp4" />
-      </audio>
-    </div>
+ <!-- 原声音频播放源 -->
+ <audio id="aizen-voice-player" preload="auto" class="hidden">
+ <source src="/audio/welcome.mp3" type="audio/mpeg" />
+ <source src="/audio/welcome.mp4" type="audio/mp4" />
+ </audio>
+ </div>
 
-    <!-- Right Controls: Language Switcher + Cart + Auth -->
-    <div class="flex items-center gap-2 sm:gap-3">
-      
-      <!-- 动态登录/用户状态容器 (0ms 无闪烁渲染) -->
-      <div id="auth-state-container" class="flex items-center gap-2">
-        <a id="nav-login-btn" href="/login" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/15 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all shadow-xs">
-          <span>登录 / 注册</span>
-        </a>
-      </div>
+ <!-- Right Controls: Language Switcher + Cart + Auth -->
+ <div class="flex items-center gap-2 sm:gap-3">
+ 
+ <!-- 动态登录/用户状态容器 (0ms 无闪烁渲染) -->
+ <div id="auth-state-container" class="flex items-center gap-2">
+ <a id="nav-login-btn" href="/login" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/15 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all shadow-xs">
+ <span>登录 / 注册</span>
+ </a>
+ </div>
 
-      <!-- 语言切换器 (多语言选择器) -->
-      <div class="relative" id="lang-menu-wrapper">
-        <button 
-          id="lang-menu-btn" 
-          type="button" 
-          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white text-xs transition cursor-pointer select-none"
-          aria-label="切换语言"
-        >
-          <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-          </svg>
-          <span id="current-lang-label" class="font-mono text-xs">简体中文</span>
-          <svg class="w-2.5 h-2.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
+ <!-- 语言切换器 (多语言选择器) -->
+ <div class="relative" id="lang-menu-wrapper">
+ <button 
+ id="lang-menu-btn" 
+ type="button" 
+ class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white text-xs transition cursor-pointer select-none"
+ aria-label="切换语言"
+ >
+ <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+ </svg>
+ <span id="current-lang-label" class="font-mono text-xs">简体中文</span>
+ <svg class="w-2.5 h-2.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+ <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+ </svg>
+ </button>
 
-        <div id="lang-menu-panel" class="hidden absolute right-0 mt-1 w-32 rounded-2xl bg-[#0B0F1A]/95 border border-white/10 shadow-2xl p-1.5 z-50 backdrop-blur-xl">
-          <button type="button" onclick="window.changeSiteLang('zh-CN')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
-            <span>简体中文</span>
-          </button>
-          <button type="button" onclick="window.changeSiteLang('en')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
-            <span>English</span>
-          </button>
-          <button type="button" onclick="window.changeSiteLang('ja')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
-            <span>日本語</span>
-          </button>
-          <button type="button" onclick="window.changeSiteLang('ko')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
-            <span>한국어</span>
-          </button>
-        </div>
-      </div>
+ <div id="lang-menu-panel" class="hidden absolute right-0 mt-1 w-32 rounded-2xl bg-[#0B0F1A]/95 border border-white/10 shadow-2xl p-1.5 z-50 backdrop-blur-xl">
+ <button type="button" onclick="window.changeSiteLang('zh-CN')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
+ <span>简体中文</span>
+ </button>
+ <button type="button" onclick="window.changeSiteLang('en')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
+ <span>English</span>
+ </button>
+ <button type="button" onclick="window.changeSiteLang('ja')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
+ <span>日本語</span>
+ </button>
+ <button type="button" onclick="window.changeSiteLang('ko')" class="w-full text-left px-3 py-1.5 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-[#0284C7]/20 transition">
+ <span>한국어</span>
+ </button>
+ </div>
+ </div>
 
-      <!-- 购物车抽屉按钮 -->
-      <button id="header-cart-btn" type="button" class="relative p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white transition-all cursor-pointer" aria-label="打开购物车">
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-        <span id="cart-count-badge" class="hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#0284C7] text-white text-[9px] font-black flex items-center justify-center border border-[#38BDF8] shadow-sm">0</span>
-      </button>
-    </div>
-  </div>
+ <!-- 购物车抽屉按钮 -->
+ <button id="header-cart-btn" type="button" class="relative p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white transition-all cursor-pointer" aria-label="打开购物车">
+ <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+ <span id="cart-count-badge" class="hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#0284C7] text-white text-[9px] font-black flex items-center justify-center border border-[#38BDF8] shadow-sm">0</span>
+ </button>
+ </div>
+ </div>
 </header>
 
 <script>
-  import { authInstance, onAuthStateChanged, signOut, doc, setDoc, dbInstance } from '../lib/firebase.js';
+ import { authInstance, onAuthStateChanged, signOut, doc, setDoc, dbInstance } from '../lib/firebase.js';
 
-  const authContainer = document.getElementById('auth-state-container');
-  const adminEmail = (import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com').toLowerCase();
+ const authContainer = document.getElementById('auth-state-container');
+ const adminEmail = (import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com').toLowerCase();
 
-  function renderUserUI(email, displayName) {
-    if (!authContainer) return;
-    const cleanEmail = (email || '').toLowerCase();
-    const isAdmin = (cleanEmail === adminEmail);
-    const cleanName = displayName || cleanEmail.split('@')[0] || '会员';
+ function renderUserUI(email, displayName) {
+ if (!authContainer) return;
+ const cleanEmail = (email || '').toLowerCase();
+ const isAdmin = (cleanEmail === adminEmail);
+ const cleanName = displayName || cleanEmail.split('@')[0] || '会员';
 
-    authContainer.innerHTML = `
-      <div class="flex items-center gap-2">
-        ${isAdmin ? `
-          <a href="/admin/dashboard" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-[#06080F] font-black text-xs shadow-[0_0_15px_rgba(56,189,248,0.4)] transition hover:brightness-110 active:scale-95">
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            <span>管理后台</span>
-          </a>
-        ` : ''}
+ authContainer.innerHTML = `
+ <div class="flex items-center gap-2">
+ ${isAdmin ? `
+ <a href="/admin/dashboard" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-[#06080F] font-black text-xs shadow-[0_0_15px_rgba(56,189,248,0.4)] transition hover:brightness-110 active:scale-95">
+ <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+ <span>管理后台</span>
+ </a>
+ ` : ''}
 
-        <a href="/orders" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all">
-          <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-          <span class="hidden sm:inline">我的订单</span>
-        </a>
+ <a href="/orders" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/40 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all">
+ <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+ <span class="hidden sm:inline">我的订单</span>
+ </a>
 
-        <!-- 用户头像与常驻面板容器 -->
-        <div class="relative" id="user-menu-wrapper">
-          <button 
-            id="user-menu-btn" 
-            type="button" 
-            class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/50 text-slate-300 hover:text-white text-xs transition cursor-pointer select-none"
-            title="点击展开/固定账号菜单"
-          >
-            <div class="w-5 h-5 rounded-full bg-[#0284C7]/30 border border-[#38BDF8]/40 text-[#38BDF8] flex items-center justify-center text-[10px] font-bold">
-              ${cleanName.charAt(0).toUpperCase()}
-            </div>
-            <span class="max-w-[70px] truncate text-slate-300 font-medium">${cleanName}</span>
-            <svg class="w-2.5 h-2.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </button>
+ <!-- 用户头像与常驻面板容器 -->
+ <div class="relative" id="user-menu-wrapper">
+ <button 
+ id="user-menu-btn" 
+ type="button" 
+ class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/50 text-slate-300 hover:text-white text-xs transition cursor-pointer select-none"
+ title="点击展开/固定账号菜单"
+ >
+ <div class="w-5 h-5 rounded-full bg-[#0284C7]/30 border border-[#38BDF8]/40 text-[#38BDF8] flex items-center justify-center text-[10px] font-bold">
+ ${cleanName.charAt(0).toUpperCase()}
+ </div>
+ <span class="max-w-[70px] truncate text-slate-300 font-medium">${cleanName}</span>
+ <svg class="w-2.5 h-2.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+ </button>
 
-          <!-- 彻底摒弃 group-hover，由 JS 绝对常驻掌控，鼠标移开绝不闪退！ -->
-          <div id="user-menu-panel" class="hidden absolute right-0 top-full pt-2 w-56 z-50 select-none">
-            <div class="rounded-2xl bg-[#0B0F1A]/95 border border-[#38BDF8]/40 shadow-[0_15px_40px_rgba(0,0,0,0.85)] p-2.5 backdrop-blur-2xl space-y-1.5">
-              <div class="px-3 py-2 border-b border-white/10 mb-1">
-                <div class="text-[11px] text-slate-300 font-medium truncate">${cleanEmail}</div>
-                <div class="text-[9px] font-bold mt-0.5 ${isAdmin ? 'text-[#38BDF8]' : 'text-emerald-400'}">
-                  ${isAdmin ? '👑 最高管理员席位' : '✦ 正式注册会员'}
-                </div>
-              </div>
-              <a href="/orders" class="flex items-center gap-2 px-3 py-2 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-white/10 transition">
-                <span>📦 历史订单与资产</span>
-              </a>
-              <button 
-                id="nav-logout-btn" 
-                type="button" 
-                class="w-full text-left flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs text-rose-400 hover:bg-rose-500/20 hover:text-rose-300 transition cursor-pointer active:scale-95 font-bold border border-rose-500/20"
-              >
-                <span>🚪 退出安全登录</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
+ <!-- 彻底摒弃 group-hover，由 JS 绝对常驻掌控，鼠标移开绝不闪退！ -->
+ <div id="user-menu-panel" class="hidden absolute right-0 top-full pt-2 w-56 z-50 select-none">
+ <div class="rounded-2xl bg-[#0B0F1A]/95 border border-[#38BDF8]/40 shadow-[0_15px_40px_rgba(0,0,0,0.85)] p-2.5 backdrop-blur-2xl space-y-1.5">
+ <div class="px-3 py-2 border-b border-white/10 mb-1">
+ <div class="text-[11px] text-slate-300 font-medium truncate">${cleanEmail}</div>
+ <div class="text-[9px] font-bold mt-0.5 ${isAdmin ? 'text-[#38BDF8]' : 'text-emerald-400'}">
+ ${isAdmin ? '👑 最高管理员席位' : '✦ 正式注册会员'}
+ </div>
+ </div>
+ <a href="/orders" class="flex items-center gap-2 px-3 py-2 rounded-xl text-xs text-slate-300 hover:text-white hover:bg-white/10 transition">
+ <span>📦 历史订单与资产</span>
+ </a>
+ <button 
+ id="nav-logout-btn" 
+ type="button" 
+ class="w-full text-left flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs text-rose-400 hover:bg-rose-500/20 hover:text-rose-300 transition cursor-pointer active:scale-95 font-bold border border-rose-500/20"
+ >
+ <span>🚪 退出安全登录</span>
+ </button>
+ </div>
+ </div>
+ </div>
+ </div>
+ `;
+ }
 
-  function renderGuestUI() {
-    if (!authContainer) return;
-    authContainer.innerHTML = `
-      <a id="nav-login-btn" href="/login" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/15 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all shadow-xs">
-        <span>登录 / 注册</span>
-      </a>
-    `;
-  }
+ function renderGuestUI() {
+ if (!authContainer) return;
+ authContainer.innerHTML = `
+ <a id="nav-login-btn" href="/login" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/15 hover:border-[#38BDF8]/60 hover:bg-[#0284C7]/15 text-slate-200 hover:text-white text-xs font-bold transition-all shadow-xs">
+ <span>登录 / 注册</span>
+ </a>
+ `;
+ }
 
-  // 1. 本地快照极速识别
-  try {
-    const cachedSession = localStorage.getItem('auth_session');
-    if (cachedSession) {
-      const parsed = JSON.parse(cachedSession);
-      if (parsed && parsed.email) {
-        renderUserUI(parsed.email, parsed.displayName);
-      }
-    }
-  } catch(e) {}
+ // 1. 本地快照极速识别
+ try {
+ const cachedSession = localStorage.getItem('auth_session');
+ if (cachedSession) {
+ const parsed = JSON.parse(cachedSession);
+ if (parsed && parsed.email) {
+ renderUserUI(parsed.email, parsed.displayName);
+ }
+ }
+ } catch(e) {}
 
-  // 2. Firebase 鉴权侦听：全网自动静默建档，确保后台客户列表绝不漏单
-  onAuthStateChanged(authInstance, async (user) => {
-    if (user && user.email) {
-      const cleanEmail = user.email.trim().toLowerCase();
-      const displayName = user.displayName || cleanEmail.split('@')[0];
-      localStorage.setItem('auth_session', JSON.stringify({ email: cleanEmail, displayName }));
-      renderUserUI(cleanEmail, displayName);
+ // 2. Firebase 鉴权侦听：全网自动静默建档，确保后台客户列表绝不漏单
+ onAuthStateChanged(authInstance, async (user) => {
+ if (user && user.email) {
+ const cleanEmail = user.email.trim().toLowerCase();
+ const displayName = user.displayName || cleanEmail.split('@')[0];
+ localStorage.setItem('auth_session', JSON.stringify({ email: cleanEmail, displayName }));
+ renderUserUI(cleanEmail, displayName);
 
-      // 全自动静默同步到 Firestore 数据库
-      try {
-        await setDoc(doc(dbInstance, 'users', user.uid), {
-          uid: user.uid,
-          email: cleanEmail,
-          displayName: displayName,
-          updatedAt: new Date().toISOString()
-        }, { merge: true });
-      } catch(err) {
-        console.warn('Auto sync member to database failed:', err);
-      }
-    } else {
-      if (!localStorage.getItem('auth_session')) {
-        renderGuestUI();
-      }
-    }
-  });
+ // 全自动静默同步到 Firestore 数据库
+ try {
+ await setDoc(doc(dbInstance, 'users', user.uid), {
+ uid: user.uid,
+ email: cleanEmail,
+ displayName: displayName,
+ updatedAt: new Date().toISOString()
+ }, { merge: true });
+ } catch(err) {
+ console.warn('Auto sync member to database failed:', err);
+ }
+ } else {
+ if (!localStorage.getItem('auth_session')) {
+ renderGuestUI();
+ }
+ }
+ });
 
-  // 3. 全局高稳事件代理：支持【点击永久常驻锁定】与【800ms 宽容滑出】
-  let isPinned = false;
-  let timer: any = null;
+ // 3. 全局高稳事件代理：支持【点击永久常驻锁定】与【800ms 宽容滑出】
+ let isPinned = false;
+ let timer: any = null;
 
-  document.addEventListener('click', async (e) => {
-    const target = e.target as HTMLElement;
-    if (!target) return;
+ document.addEventListener('click', async (e) => {
+ const target = e.target as HTMLElement;
+ if (!target) return;
 
-    const btn = target.closest('#user-menu-btn');
-    const panel = document.getElementById('user-menu-panel');
-    const logoutBtn = target.closest('#nav-logout-btn');
+ const btn = target.closest('#user-menu-btn');
+ const panel = document.getElementById('user-menu-panel');
+ const logoutBtn = target.closest('#nav-logout-btn');
 
-    // 点击退出安全登录
-    if (logoutBtn) {
-      e.preventDefault();
-      e.stopPropagation();
-      localStorage.removeItem('auth_session');
-      try { await signOut(authInstance); } catch(err) {}
-      window.location.href = '/';
-      return;
-    }
+ // 点击退出安全登录
+ if (logoutBtn) {
+ e.preventDefault();
+ e.stopPropagation();
+ localStorage.removeItem('auth_session');
+ try { await signOut(authInstance); } catch(err) {}
+ window.location.href = '/';
+ return;
+ }
 
-    // 点击用户按钮：切换展开并永久锁定常驻！鼠标移开绝不消失！
-    if (btn) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (panel) {
-        const isHidden = panel.classList.contains('hidden');
-        if (isHidden) {
-          panel.classList.remove('hidden');
-          isPinned = true;
-        } else {
-          panel.classList.add('hidden');
-          isPinned = false;
-        }
-      }
-      return;
-    }
+ // 点击用户按钮：切换展开并永久锁定常驻！鼠标移开绝不消失！
+ if (btn) {
+ e.preventDefault();
+ e.stopPropagation();
+ if (panel) {
+ const isHidden = panel.classList.contains('hidden');
+ if (isHidden) {
+ panel.classList.remove('hidden');
+ isPinned = true;
+ } else {
+ panel.classList.add('hidden');
+ isPinned = false;
+ }
+ }
+ return;
+ }
 
-    // 点击页面其它空白区域收起
-    if (panel && !panel.contains(target)) {
-      panel.classList.add('hidden');
-      isPinned = false;
-    }
-  });
+ // 点击页面其它空白区域收起
+ if (panel && !panel.contains(target)) {
+ panel.classList.add('hidden');
+ isPinned = false;
+ }
+ });
 
-  // 悬停自动展开
-  document.addEventListener('mouseover', (e) => {
-    const target = e.target as HTMLElement;
-    if (target?.closest('#user-menu-wrapper')) {
-      if (timer) clearTimeout(timer);
-      const panel = document.getElementById('user-menu-panel');
-      panel?.classList.remove('hidden');
-    }
-  });
+ // 悬停自动展开
+ document.addEventListener('mouseover', (e) => {
+ const target = e.target as HTMLElement;
+ if (target?.closest('#user-menu-wrapper')) {
+ if (timer) clearTimeout(timer);
+ const panel = document.getElementById('user-menu-panel');
+ panel?.classList.remove('hidden');
+ }
+ });
 
-  // 移出保护：若点击已锁定则永久保持；若纯悬停则留有 800ms 充足时间
-  document.addEventListener('mouseout', (e) => {
-    const target = e.target as HTMLElement;
-    const related = (e as MouseEvent).relatedTarget as HTMLElement;
-    const wrapper = document.getElementById('user-menu-wrapper');
-    if (wrapper && !wrapper.contains(related)) {
-      if (isPinned) return; // 锁定状态，鼠标怎么移都不会消失
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => {
-        if (!isPinned) {
-          const panel = document.getElementById('user-menu-panel');
-          panel?.classList.add('hidden');
-        }
-      }, 800);
-    }
-  });
+ // 移出保护：若点击已锁定则永久保持；若纯悬停则留有 800ms 充足时间
+ document.addEventListener('mouseout', (e) => {
+ const target = e.target as HTMLElement;
+ const related = (e as MouseEvent).relatedTarget as HTMLElement;
+ const wrapper = document.getElementById('user-menu-wrapper');
+ if (wrapper && !wrapper.contains(related)) {
+ if (isPinned) return; // 锁定状态，鼠标怎么移都不会消失
+ if (timer) clearTimeout(timer);
+ timer = setTimeout(() => {
+ if (!isPinned) {
+ const panel = document.getElementById('user-menu-panel');
+ panel?.classList.add('hidden');
+ }
+ }, 800);
+ }
+ });
 
-  // 购物车抽屉点击与角标联动
-  function syncHeaderCartBadge() {
-    try {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
-      const badge = document.getElementById('cart-count-badge');
-      if (badge) {
-        if (count > 0) {
-          badge.textContent = count > 99 ? '99+' : count.toString();
-          badge.classList.remove('hidden');
-        } else {
-          badge.classList.add('hidden');
-        }
-      }
-    } catch(e) {}
-  }
+ // 购物车抽屉点击与角标联动
+ function syncHeaderCartBadge() {
+ try {
+ const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+ const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+ const badge = document.getElementById('cart-count-badge');
+ if (badge) {
+ if (count > 0) {
+ badge.textContent = count > 99 ? '99+' : count.toString();
+ badge.classList.remove('hidden');
+ } else {
+ badge.classList.add('hidden');
+ }
+ }
+ } catch(e) {}
+ }
 
-  // 初始同步与侦听
-  syncHeaderCartBadge();
-  window.addEventListener('cart-updated', syncHeaderCartBadge);
-  window.addEventListener('storage', syncHeaderCartBadge);
+ // 初始同步与侦听
+ syncHeaderCartBadge();
+ window.addEventListener('cart-updated', syncHeaderCartBadge);
+ window.addEventListener('storage', syncHeaderCartBadge);
 
-  // 监听点击打开购物车抽屉
-  document.addEventListener('click', (e) => {
-    const target = e.target;
-    if (target && target.closest('#header-cart-btn')) {
-      e.preventDefault();
-      e.stopPropagation();
-      window.dispatchEvent(new CustomEvent('open-cart'));
-    }
-  });
+ // 监听点击打开购物车抽屉
+ document.addEventListener('click', (e) => {
+ const target = e.target;
+ if (target && target.closest('#header-cart-btn')) {
+ e.preventDefault();
+ e.stopPropagation();
+ window.dispatchEvent(new CustomEvent('open-cart'));
+ }
+ });
 
 
-  // 网页置顶正中：蓝染原声点击播放/暂停交互
-  const aizenBtn = document.getElementById('aizen-sound-btn');
-  const aizenAudio = document.getElementById('aizen-voice-player');
-  const aizenPulse = document.getElementById('aizen-sound-pulse');
+ // 网页置顶正中：蓝染原声点击播放/暂停交互
+ const aizenBtn = document.getElementById('aizen-sound-btn');
+ const aizenAudio = document.getElementById('aizen-voice-player');
+ const aizenPulse = document.getElementById('aizen-sound-pulse');
 
-  aizenBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!aizenAudio) return;
+ aizenBtn?.addEventListener('click', (e) => {
+ e.preventDefault();
+ e.stopPropagation();
+ if (!aizenAudio) return;
 
-    // 重复点击从头播放音频
-    aizenAudio.currentTime = 0;
-    aizenAudio.volume = 0.9;
-    aizenAudio.play().then(() => {
-      aizenPulse?.classList.remove('hidden');
-    }).catch((err) => {
-      console.warn('Playback blocked:', err);
-    });
+ // 重复点击从头播放音频
+ aizenAudio.currentTime = 0;
+ aizenAudio.volume = 0.9;
+ aizenAudio.play().then(() => {
+ aizenPulse?.classList.remove('hidden');
+ }).catch((err) => {
+ console.warn('Playback blocked:', err);
+ });
 
-    // 每次点击同时跳出公告窗口
-    if (typeof (window as any).openNoticeModal === 'function') {
-      (window as any).openNoticeModal();
-    }
-  });
+ // 每次点击同时跳出公告窗口
+ if (typeof (window as any).openNoticeModal === 'function') {
+ (window as any).openNoticeModal();
+ }
+ });
 
-  aizenAudio?.addEventListener('ended', () => {
-    aizenPulse?.classList.add('hidden');
-  });
+ aizenAudio?.addEventListener('ended', () => {
+ aizenPulse?.classList.add('hidden');
+ });
 
-  aizenAudio?.addEventListener('pause', () => {
-    aizenPulse?.classList.add('hidden');
-  });
+ aizenAudio?.addEventListener('pause', () => {
+ aizenPulse?.classList.add('hidden');
+ });
 
 </script>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('lang-menu-btn');
-    var panel = document.getElementById('lang-menu-panel');
-    if (btn && panel) {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        panel.classList.toggle('hidden');
-      });
-      document.addEventListener('click', function() {
-        panel.classList.add('hidden');
-      });
-    }
+ document.addEventListener('DOMContentLoaded', function() {
+ var btn = document.getElementById('lang-menu-btn');
+ var panel = document.getElementById('lang-menu-panel');
+ if (btn && panel) {
+ btn.addEventListener('click', function(e) {
+ e.stopPropagation();
+ panel.classList.toggle('hidden');
+ });
+ document.addEventListener('click', function() {
+ panel.classList.add('hidden');
+ });
+ }
 
-    var cur = localStorage.getItem('active_language') || 'zh-CN';
-    var label = document.getElementById('current-lang-label');
-    if (label) {
-      var nameMap = { 'zh-CN': '简体中文', 'en': 'English', 'ja': '日本語', 'ko': '한국어' };
-      if (nameMap[cur]) label.textContent = nameMap[cur];
-    }
-  });
+ var cur = localStorage.getItem('active_language') || 'zh-CN';
+ var label = document.getElementById('current-lang-label');
+ if (label) {
+ var nameMap = { 'zh-CN': '简体中文', 'en': 'English', 'ja': '日本語', 'ko': '한국어' };
+ if (nameMap[cur]) label.textContent = nameMap[cur];
+ }
+ });
 
-  window.changeSiteLang = function(lang) {
-    localStorage.setItem('active_language', lang);
-    var langMap = { 'zh-CN': 'chinese_simplified', 'en': 'english', 'ja': 'japanese', 'ko': 'korean' };
-    var target = langMap[lang] || 'chinese_simplified';
-    if (target === 'chinese_simplified') {
-      window.location.reload();
-    } else if (window.translate) {
-      try {
-        translate.changeLanguage(target);
-      } catch(e) {
-        window.location.reload();
-      }
-    } else {
-      window.location.reload();
-    }
-  };
+ window.changeSiteLang = function(lang) {
+ localStorage.setItem('active_language', lang);
+ var langMap = { 'zh-CN': 'chinese_simplified', 'en': 'english', 'ja': 'japanese', 'ko': 'korean' };
+ var target = langMap[lang] || 'chinese_simplified';
+ if (target === 'chinese_simplified') {
+ window.location.reload();
+ } else if (window.translate) {
+ try {
+ translate.changeLanguage(target);
+ } catch(e) {
+ window.location.reload();
+ }
+ } else {
+ window.location.reload();
+ }
+ };
 
-  // 购物车抽屉点击与角标联动
-  function syncHeaderCartBadge() {
-    try {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
-      const badge = document.getElementById('cart-count-badge');
-      if (badge) {
-        if (count > 0) {
-          badge.textContent = count > 99 ? '99+' : count.toString();
-          badge.classList.remove('hidden');
-        } else {
-          badge.classList.add('hidden');
-        }
-      }
-    } catch(e) {}
-  }
+ // 购物车抽屉点击与角标联动
+ function syncHeaderCartBadge() {
+ try {
+ const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+ const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+ const badge = document.getElementById('cart-count-badge');
+ if (badge) {
+ if (count > 0) {
+ badge.textContent = count > 99 ? '99+' : count.toString();
+ badge.classList.remove('hidden');
+ } else {
+ badge.classList.add('hidden');
+ }
+ }
+ } catch(e) {}
+ }
 
-  // 初始同步与侦听
-  syncHeaderCartBadge();
-  window.addEventListener('cart-updated', syncHeaderCartBadge);
-  window.addEventListener('storage', syncHeaderCartBadge);
+ // 初始同步与侦听
+ syncHeaderCartBadge();
+ window.addEventListener('cart-updated', syncHeaderCartBadge);
+ window.addEventListener('storage', syncHeaderCartBadge);
 
-  // 监听点击打开购物车抽屉
-  document.addEventListener('click', (e) => {
-    const target = e.target;
-    if (target && target.closest('#header-cart-btn')) {
-      e.preventDefault();
-      e.stopPropagation();
-      window.dispatchEvent(new CustomEvent('open-cart'));
-    }
-  });
+ // 监听点击打开购物车抽屉
+ document.addEventListener('click', (e) => {
+ const target = e.target;
+ if (target && target.closest('#header-cart-btn')) {
+ e.preventDefault();
+ e.stopPropagation();
+ window.dispatchEvent(new CustomEvent('open-cart'));
+ }
+ });
 
 
-  // 网页置顶正中：蓝染原声点击播放/暂停交互
-  const aizenBtn = document.getElementById('aizen-sound-btn');
-  const aizenAudio = document.getElementById('aizen-voice-player');
-  const aizenPulse = document.getElementById('aizen-sound-pulse');
+ // 网页置顶正中：蓝染原声点击播放/暂停交互
+ const aizenBtn = document.getElementById('aizen-sound-btn');
+ const aizenAudio = document.getElementById('aizen-voice-player');
+ const aizenPulse = document.getElementById('aizen-sound-pulse');
 
-  aizenBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!aizenAudio) return;
+ aizenBtn?.addEventListener('click', (e) => {
+ e.preventDefault();
+ e.stopPropagation();
+ if (!aizenAudio) return;
 
-    // 重复点击从头播放音频
-    aizenAudio.currentTime = 0;
-    aizenAudio.volume = 0.9;
-    aizenAudio.play().then(() => {
-      aizenPulse?.classList.remove('hidden');
-    }).catch((err) => {
-      console.warn('Playback blocked:', err);
-    });
+ // 重复点击从头播放音频
+ aizenAudio.currentTime = 0;
+ aizenAudio.volume = 0.9;
+ aizenAudio.play().then(() => {
+ aizenPulse?.classList.remove('hidden');
+ }).catch((err) => {
+ console.warn('Playback blocked:', err);
+ });
 
-    // 每次点击同时跳出公告窗口
-    if (typeof (window as any).openNoticeModal === 'function') {
-      (window as any).openNoticeModal();
-    }
-  });
+ // 每次点击同时跳出公告窗口
+ if (typeof (window as any).openNoticeModal === 'function') {
+ (window as any).openNoticeModal();
+ }
+ });
 
-  aizenAudio?.addEventListener('ended', () => {
-    aizenPulse?.classList.add('hidden');
-  });
+ aizenAudio?.addEventListener('ended', () => {
+ aizenPulse?.classList.add('hidden');
+ });
 
-  aizenAudio?.addEventListener('pause', () => {
-    aizenPulse?.classList.add('hidden');
-  });
+ aizenAudio?.addEventListener('pause', () => {
+ aizenPulse?.classList.add('hidden');
+ });
 
 </script>

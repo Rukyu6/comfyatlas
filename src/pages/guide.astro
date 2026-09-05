@@ -6,188 +6,188 @@ import tutorials from '../data/tutorials.json';
 import TutorialSidebar from '../components/TutorialSidebar.astro';
 import TutorialContent from '../components/TutorialContent.astro';
 
-const landingDocId = "soul-society-policy-2026";
+const landingDocId ="soul-society-policy-2026";
 
 const categoriesMap = new Map();
 tutorials.forEach((tut) => {
-  const parent = tut.parent_name || "ROOT";
-  if (!categoriesMap.has(parent)) {
-    categoriesMap.set(parent, []);
-  }
-  categoriesMap.get(parent).push(tut);
+ const parent = tut.parent_name ||"ROOT";
+ if (!categoriesMap.has(parent)) {
+ categoriesMap.set(parent, []);
+ }
+ categoriesMap.get(parent).push(tut);
 });
 
 // 纯净文本，彻底清除全部手机/小鸟/表情符号
 const orderedCategories = [
-  { name: "Soul Society 售后与质保条款", key: "Soul Society 售后服务与保障条款", items: categoriesMap.get("Soul Society 售后服务与保障条款") || [] },
-  { name: "Telegram / 电报登录配置", key: "telegram/电报 登录教程", items: categoriesMap.get("telegram/电报 登录教程") || [] },
-  { name: "Twitter / X 账户登录配置", key: "推特/ X 登录教程", items: categoriesMap.get("推特/ X 登录教程") || [] },
-  { name: "Google / 谷歌账号安全配置", key: "谷歌账号 - 登录方式", items: categoriesMap.get("谷歌账号 - 登录方式") || [] },
-  { name: "Instagram 账号登录教程", key: "instagram账号 登录教程", items: categoriesMap.get("instagram账号 登录教程") || [] },
-  { name: "Facebook 账户登录指南", key: "Facebook 脸书登录教程", items: categoriesMap.get("Facebook 脸书登录教程") || [] },
-  { name: "Discord 账户登录与改密", key: "Discord的登录以及修改密码", items: categoriesMap.get("Discord的登录以及修改密码") || [] },
-  { name: "Apple ID 换区与下载指南", key: "苹果id账号 登录教程", items: categoriesMap.get("苹果id账号 登录教程") || [] },
-  { name: "网络代理与节点环境设置", key: "网站代理设置教程", items: categoriesMap.get("网站代理设置教程") || [] },
-  { name: "原生住宅 IP 环境配置", key: "住宅ip 的使用教程", items: categoriesMap.get("住宅ip 的使用教程") || [] },
-  { name: "ChatGPT 与模型调用教程", key: "镜像GPT网站介绍+教程", items: categoriesMap.get("镜像GPT网站介绍+教程") || [] }
+ { name:"Soul Society 售后与质保条款", key:"Soul Society 售后服务与保障条款", items: categoriesMap.get("Soul Society 售后服务与保障条款") || [] },
+ { name:"Telegram / 电报登录配置", key:"telegram/电报 登录教程", items: categoriesMap.get("telegram/电报 登录教程") || [] },
+ { name:"Twitter / X 账户登录配置", key:"推特/ X 登录教程", items: categoriesMap.get("推特/ X 登录教程") || [] },
+ { name:"Google / 谷歌账号安全配置", key:"谷歌账号 - 登录方式", items: categoriesMap.get("谷歌账号 - 登录方式") || [] },
+ { name:"Instagram 账号登录教程", key:"instagram账号 登录教程", items: categoriesMap.get("instagram账号 登录教程") || [] },
+ { name:"Facebook 账户登录指南", key:"Facebook 脸书登录教程", items: categoriesMap.get("Facebook 脸书登录教程") || [] },
+ { name:"Discord 账户登录与改密", key:"Discord的登录以及修改密码", items: categoriesMap.get("Discord的登录以及修改密码") || [] },
+ { name:"Apple ID 换区与下载指南", key:"苹果id账号 登录教程", items: categoriesMap.get("苹果id账号 登录教程") || [] },
+ { name:"网络代理与节点环境设置", key:"网站代理设置教程", items: categoriesMap.get("网站代理设置教程") || [] },
+ { name:"原生住宅 IP 环境配置", key:"住宅ip 的使用教程", items: categoriesMap.get("住宅ip 的使用教程") || [] },
+ { name:"ChatGPT 与模型调用教程", key:"镜像GPT网站介绍+教程", items: categoriesMap.get("镜像GPT网站介绍+教程") || [] }
 ].filter(cat => cat.items.length > 0);
 ---
 
 <BaseLayout 
-  title="帮助中心与使用指南 — Soul Society" 
-  description="详细的账号登录配置、网络代理环境搭建与常见问题指引。"
+ title="帮助中心与使用指南 — Soul Society" 
+ description="详细的账号登录配置、网络代理环境搭建与常见问题指引。"
 >
-  <Header />
+ <Header />
 
-  <!-- 苍蓝灵压背景 -->
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[750px] h-[350px] bg-gradient-to-b from-[#0284C7]/20 via-[#38BDF8]/10 to-transparent rounded-full filter blur-[140px] pointer-events-none z-0"></div>
+ <!-- 苍蓝灵压背景 -->
+ <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[750px] h-[350px] bg-gradient-to-b from-[#0284C7]/20 via-[#38BDF8]/10 to-transparent rounded-full filter blur-[140px] pointer-events-none z-0"></div>
 
-  <div class="relative min-h-screen flex flex-col pt-24 md:pt-28 pb-16 bg-[#06080F] text-white overflow-hidden font-outfit">
-    <main class="flex-grow max-w-7xl w-full mx-auto px-6 flex flex-col relative z-10 select-none">
-      
-      <!-- 头部标题：苍蓝灵光，零Emoji -->
-      <div class="text-center mb-8 md:mb-12 mt-6">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] text-xs font-bold font-mono tracking-wider mb-3">
-          DOCUMENTATION & PROTOCOLS
-        </span>
-        <h1 class="text-3xl md:text-5xl font-black text-white mb-3 tracking-tight">
-          帮助中心与使用配置
-        </h1>
-        <p class="text-slate-400 max-w-2xl mx-auto text-xs md:text-sm leading-relaxed">
-          查看各类数字账户的标准化配置指南、网络环境要求与常见排错方法。
-        </p>
-      </div>
+ <div class="relative min-h-screen flex flex-col pt-24 md:pt-28 pb-16 bg-[#06080F] text-white overflow-hidden font-outfit">
+ <main class="flex-grow max-w-7xl w-full mx-auto px-6 flex flex-col relative z-10 select-none">
+ 
+ <!-- 头部标题：苍蓝灵光，零Emoji -->
+ <div class="text-center mb-8 md:mb-12 mt-6">
+ <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] text-xs font-bold font-mono tracking-wider mb-3">
+ DOCUMENTATION & PROTOCOLS
+ </span>
+ <h1 class="text-3xl md:text-5xl font-black text-white mb-3 tracking-tight">
+ 帮助中心与使用配置
+ </h1>
+ <p class="text-slate-400 max-w-2xl mx-auto text-xs md:text-sm leading-relaxed">
+ 查看各类数字账户的标准化配置指南、网络环境要求与常见排错方法。
+ </p>
+ </div>
 
-      
-      <!-- Soul Society 专属原生 2FA 双重认证动态验证器 -->
-      <div id="soul-2fa-tool" class="mb-10 p-6 md:p-8 rounded-3xl bg-[#0B0F1A]/90 border border-[#38BDF8]/40 shadow-[0_0_30px_rgba(56,189,248,0.15)] backdrop-blur-xl">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-5 mb-6">
-          <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/30 text-[#38BDF8] text-xs font-mono font-bold mb-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-ping"></span>
-              OFFLINE ENCRYPTED TOTP
-            </div>
-            <h2 class="text-xl md:text-2xl font-black text-white">Soul Society 专属 2FA 动态令牌生成器</h2>
-            <p class="text-xs text-slate-400 mt-1">本地安全计算，密钥绝不上云。支持推特、谷歌、Ins、脸书等各类账号 2FA 登录。</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-xs text-slate-400 font-mono">30s 倒计时:</span>
-            <div class="w-8 h-8 rounded-full border-2 border-[#38BDF8] flex items-center justify-center font-mono font-black text-xs text-[#38BDF8]" id="totp-timer">30</div>
-          </div>
-        </div>
+ 
+ <!-- Soul Society 专属原生 2FA 双重认证动态验证器 -->
+ <div id="soul-2fa-tool" class="mb-10 p-6 md:p-8 rounded-3xl bg-[#0B0F1A]/90 border border-[#38BDF8]/40 shadow-[0_0_30px_rgba(56,189,248,0.15)] backdrop-blur-xl">
+ <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-5 mb-6">
+ <div>
+ <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/30 text-[#38BDF8] text-xs font-mono font-bold mb-2">
+ <span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-ping"></span>
+ OFFLINE ENCRYPTED TOTP
+ </div>
+ <h2 class="text-xl md:text-2xl font-black text-white">Soul Society 专属 2FA 动态令牌生成器</h2>
+ <p class="text-xs text-slate-400 mt-1">本地安全计算，密钥绝不上云。支持推特、谷歌、Ins、脸书等各类账号 2FA 登录。</p>
+ </div>
+ <div class="flex items-center gap-3">
+ <span class="text-xs text-slate-400 font-mono">30s 倒计时:</span>
+ <div class="w-8 h-8 rounded-full border-2 border-[#38BDF8] flex items-center justify-center font-mono font-black text-xs text-[#38BDF8]" id="totp-timer">30</div>
+ </div>
+ </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-          <div class="md:col-span-8">
-            <input 
-              type="text" 
-              id="totp-secret-input" 
-              placeholder="请在此粘贴 2FA 密钥 (如：7NVHG2MOPJIQEE6F)" 
-              class="w-full bg-[#06080F] border border-[#38BDF8]/40 rounded-2xl px-4 py-3.5 text-white placeholder-slate-500 font-mono text-sm focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/30 transition uppercase"
-            />
-          </div>
-          <div class="md:col-span-4 flex items-center gap-2">
-            <div id="totp-display-code" class="flex-1 bg-[#06080F] border border-white/10 rounded-2xl py-3 text-center font-mono font-black text-2xl text-[#38BDF8] tracking-widest select-all">
-              ------
-            </div>
-            <button 
-              type="button" 
-              id="totp-copy-btn" 
-              class="px-4 py-3.5 bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-bold text-xs rounded-2xl shadow hover:brightness-110 active:scale-95 transition cursor-pointer"
-            >
-              复制
-            </button>
-          </div>
-        </div>
-      </div>
+ <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+ <div class="md:col-span-8">
+ <input 
+ type="text" 
+ id="totp-secret-input" 
+ placeholder="请在此粘贴 2FA 密钥 (如：7NVHG2MOPJIQEE6F)" 
+ class="w-full bg-[#06080F] border border-[#38BDF8]/40 rounded-2xl px-4 py-3.5 text-white placeholder-slate-500 font-mono text-sm focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/30 transition uppercase"
+ />
+ </div>
+ <div class="md:col-span-4 flex items-center gap-2">
+ <div id="totp-display-code" class="flex-1 bg-[#06080F] border border-white/10 rounded-2xl py-3 text-center font-mono font-black text-2xl text-[#38BDF8] tracking-widest select-all">
+ ------
+ </div>
+ <button 
+ type="button" 
+ id="totp-copy-btn" 
+ class="px-4 py-3.5 bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-bold text-xs rounded-2xl shadow hover:brightness-110 active:scale-95 transition cursor-pointer"
+ >
+ 复制
+ </button>
+ </div>
+ </div>
+ </div>
 
-      <script>
-        function base32tohex(base32) {
-          const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-          let bits = "";
-          let hex = "";
-          const cleaned = base32.replace(/=+$/, "").toUpperCase().replace(/\s+/g, "");
-          for (let i = 0; i < cleaned.length; i++) {
-            const val = chars.indexOf(cleaned.charAt(i));
-            if (val === -1) continue;
-            bits += val.toString(2).padStart(5, "0");
-          }
-          for (let i = 0; i + 4 <= bits.length; i += 4) {
-            hex += parseInt(bits.substr(i, 4), 2).toString(16);
-          }
-          return hex;
-        }
+ <script>
+ function base32tohex(base32) {
+ const chars ="ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+ let bits ="";
+ let hex ="";
+ const cleaned = base32.replace(/=+$/,"").toUpperCase().replace(/\s+/g,"");
+ for (let i = 0; i < cleaned.length; i++) {
+ const val = chars.indexOf(cleaned.charAt(i));
+ if (val === -1) continue;
+ bits += val.toString(2).padStart(5,"0");
+ }
+ for (let i = 0; i + 4 <= bits.length; i += 4) {
+ hex += parseInt(bits.substr(i, 4), 2).toString(16);
+ }
+ return hex;
+ }
 
-        async function calcTOTP(secret) {
-          try {
-            const hex = base32tohex(secret);
-            if (!hex || hex.length % 2 !== 0) return "------";
-            const epoch = Math.floor(Date.now() / 1000.0);
-            const time = Math.floor(epoch / 30);
-            const timeHex = time.toString(16).padStart(16, "0");
-            const keyBytes = new Uint8Array(hex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
-            const timeBytes = new Uint8Array(timeHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
-            const cryptoKey = await window.crypto.subtle.importKey("raw", keyBytes, { name: "HMAC", hash: "SHA-1" }, false, ["sign"]);
-            const sig = await window.crypto.subtle.sign("HMAC", cryptoKey, timeBytes);
-            const hash = new Uint8Array(sig);
-            const offset = hash[hash.length - 1] & 0xf;
-            const binary = ((hash[offset] & 0x7f) << 24) | ((hash[offset + 1] & 0xff) << 16) | ((hash[offset + 2] & 0xff) << 8) | (hash[offset + 3] & 0xff);
-            return (binary % 1000000).toString().padStart(6, "0");
-          } catch (e) {
-            return "------";
-          }
-        }
+ async function calcTOTP(secret) {
+ try {
+ const hex = base32tohex(secret);
+ if (!hex || hex.length % 2 !== 0) return"------";
+ const epoch = Math.floor(Date.now() / 1000.0);
+ const time = Math.floor(epoch / 30);
+ const timeHex = time.toString(16).padStart(16,"0");
+ const keyBytes = new Uint8Array(hex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+ const timeBytes = new Uint8Array(timeHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+ const cryptoKey = await window.crypto.subtle.importKey("raw", keyBytes, { name:"HMAC", hash:"SHA-1" }, false, ["sign"]);
+ const sig = await window.crypto.subtle.sign("HMAC", cryptoKey, timeBytes);
+ const hash = new Uint8Array(sig);
+ const offset = hash[hash.length - 1] & 0xf;
+ const binary = ((hash[offset] & 0x7f) << 24) | ((hash[offset + 1] & 0xff) << 16) | ((hash[offset + 2] & 0xff) << 8) | (hash[offset + 3] & 0xff);
+ return (binary % 1000000).toString().padStart(6,"0");
+ } catch (e) {
+ return"------";
+ }
+ }
 
-        const secInput = document.getElementById("totp-secret-input");
-        const codeDisplay = document.getElementById("totp-display-code");
-        const timerDisplay = document.getElementById("totp-timer");
-        const copyBtn = document.getElementById("totp-copy-btn");
+ const secInput = document.getElementById("totp-secret-input");
+ const codeDisplay = document.getElementById("totp-display-code");
+ const timerDisplay = document.getElementById("totp-timer");
+ const copyBtn = document.getElementById("totp-copy-btn");
 
-        async function updateCode() {
-          const secret = secInput ? secInput.value.trim() : "";
-          if (!secret) {
-            if (codeDisplay) codeDisplay.textContent = "------";
-            return;
-          }
-          const code = await calcTOTP(secret);
-          if (codeDisplay) codeDisplay.textContent = code;
-        }
+ async function updateCode() {
+ const secret = secInput ? secInput.value.trim() :"";
+ if (!secret) {
+ if (codeDisplay) codeDisplay.textContent ="------";
+ return;
+ }
+ const code = await calcTOTP(secret);
+ if (codeDisplay) codeDisplay.textContent = code;
+ }
 
-        if (secInput) {
-          secInput.addEventListener("input", updateCode);
-        }
+ if (secInput) {
+ secInput.addEventListener("input", updateCode);
+ }
 
-        setInterval(() => {
-          const epoch = Math.floor(Date.now() / 1000.0);
-          const remaining = 30 - (epoch % 30);
-          if (timerDisplay) timerDisplay.textContent = remaining.toString();
-          if (remaining === 30) updateCode();
-        }, 1000);
+ setInterval(() => {
+ const epoch = Math.floor(Date.now() / 1000.0);
+ const remaining = 30 - (epoch % 30);
+ if (timerDisplay) timerDisplay.textContent = remaining.toString();
+ if (remaining === 30) updateCode();
+ }, 1000);
 
-        if (copyBtn && codeDisplay) {
-          copyBtn.addEventListener("click", () => {
-            const txt = codeDisplay.textContent.trim();
-            if (txt && txt !== "------") {
-              navigator.clipboard.writeText(txt);
-              copyBtn.textContent = "已复制";
-              setTimeout(() => { copyBtn.textContent = "复制"; }, 1500);
-            }
-          });
-        }
-      </script>
-    
-      <!-- 主双栏文档布局 -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <aside class="lg:col-span-4 glass-card p-6 bg-[#0B0F1A]/90 border border-[#38BDF8]/20 rounded-3xl shadow-xl">
-          <TutorialSidebar categories={orderedCategories} activeId={landingDocId} />
-        </aside>
+ if (copyBtn && codeDisplay) {
+ copyBtn.addEventListener("click", () => {
+ const txt = codeDisplay.textContent.trim();
+ if (txt && txt !=="------") {
+ navigator.clipboard.writeText(txt);
+ copyBtn.textContent ="已复制";
+ setTimeout(() => { copyBtn.textContent ="复制"; }, 1500);
+ }
+ });
+ }
+ </script>
+ 
+ <!-- 主双栏文档布局 -->
+ <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+ <aside class="lg:col-span-4 glass-card p-6 bg-[#0B0F1A]/90 border border-[#38BDF8]/20 rounded-3xl shadow-xl">
+ <TutorialSidebar categories={orderedCategories} activeId={landingDocId} />
+ </aside>
 
-        <section class="lg:col-span-8 glass-card p-6 md:p-10 bg-[#0B0F1A]/90 border border-[#38BDF8]/20 rounded-3xl shadow-xl min-h-[500px]">
-          <TutorialContent tutorials={tutorials} activeId={landingDocId} />
-        </section>
-      </div>
+ <section class="lg:col-span-8 glass-card p-6 md:p-10 bg-[#0B0F1A]/90 border border-[#38BDF8]/20 rounded-3xl shadow-xl min-h-[500px]">
+ <TutorialContent tutorials={tutorials} activeId={landingDocId} />
+ </section>
+ </div>
 
-    </main>
-  </div>
+ </main>
+ </div>
 
-  <Footer />
+ <Footer />
 </BaseLayout>

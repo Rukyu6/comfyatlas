@@ -5,278 +5,278 @@ import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout title="订单凭证查询 — Soul Society">
-  <Header />
+ <Header />
 
-  <!-- 苍蓝灵压背景光晕 -->
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-[#0284C7]/20 via-[#38BDF8]/10 to-transparent rounded-full filter blur-[140px] pointer-events-none z-0"></div>
+ <!-- 苍蓝灵压背景光晕 -->
+ <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-[#0284C7]/20 via-[#38BDF8]/10 to-transparent rounded-full filter blur-[140px] pointer-events-none z-0"></div>
 
-  <main class="flex-grow pt-32 pb-24 px-6 max-w-4xl mx-auto w-full relative z-10 text-white font-outfit">
-    <div class="space-y-8">
-      
-      <!-- 页面标题区 (纯矢量SVG，零Emoji，高奢大气) -->
-      <div class="text-center space-y-3 mb-10">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] text-xs font-bold font-mono tracking-wider shadow-[0_0_12px_rgba(56,189,248,0.25)]">
-          <span class="w-2 h-2 rounded-full bg-[#38BDF8] animate-ping"></span>
-          <span>ORDER RETRIEVAL SYSTEM</span>
-        </span>
-        
-        <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-          订单凭证与卡密提取
-        </h1>
-        <p class="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto leading-relaxed">
-          输入下单时填写的联系邮箱或订单编号，系统将秒级检索并呈现您的专属卡密凭据与交付状态。
-        </p>
-      </div>
+ <main class="flex-grow pt-32 pb-24 px-6 max-w-4xl mx-auto w-full relative z-10 text-white font-outfit">
+ <div class="space-y-8">
+ 
+ <!-- 页面标题区 (纯矢量SVG，零Emoji，高奢大气) -->
+ <div class="text-center space-y-3 mb-10">
+ <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] text-xs font-bold font-mono tracking-wider shadow-[0_0_12px_rgba(56,189,248,0.25)]">
+ <span class="w-2 h-2 rounded-full bg-[#38BDF8] animate-ping"></span>
+ <span>ORDER RETRIEVAL SYSTEM</span>
+ </span>
+ 
+ <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+ 订单凭证与卡密提取
+ </h1>
+ <p class="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto leading-relaxed">
+ 输入下单时填写的联系邮箱或订单编号，系统将秒级检索并呈现您的专属卡密凭据与交付状态。
+ </p>
+ </div>
 
-      <!-- 搜索输入大卡片 (深曜石暗晶 + 冰蓝微光，零Emoji) -->
-      <div class="glass-card p-6 md:p-8 rounded-3xl border border-[#38BDF8]/30 bg-[#0B0F1A]/90 shadow-[0_20px_50px_rgba(0,0,0,0.85)] max-w-xl mx-auto space-y-5">
-        <div class="space-y-4">
-          <div>
-            <label for="query-input" class="block text-xs uppercase text-slate-400 font-bold tracking-wider mb-2 font-mono">
-              联系邮箱或订单编号 (Email / Order ID)
-            </label>
-            <div class="relative">
-              <input 
-                type="text" 
-                id="query-input" 
-                placeholder="输入您下单的邮箱或订单号..."
-                class="w-full bg-[#06080F]/90 border border-[#38BDF8]/30 rounded-2xl pl-4 pr-12 py-3.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/30 transition shadow-inner"
-              />
-              <div class="absolute right-4 top-4 text-[#38BDF8]">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          
-          <!-- 检索按钮：苍蓝灵压高光渐变，彻底告别旧版土黄与闪电符号 -->
-          <button 
-            type="button" 
-            id="query-submit-btn"
-            class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] hover:brightness-115 text-white font-extrabold text-sm shadow-[0_0_25px_rgba(56,189,248,0.45)] transition-all active:scale-98 cursor-pointer flex items-center justify-center gap-2"
-          >
-            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-            </svg>
-            <span>立即查询订单凭据</span>
-          </button>
-        </div>
-      </div>
+ <!-- 搜索输入大卡片 (深曜石暗晶 + 冰蓝微光，零Emoji) -->
+ <div class="glass-card p-6 md:p-8 rounded-3xl border border-[#38BDF8]/30 bg-[#0B0F1A]/90 shadow-[0_20px_50px_rgba(0,0,0,0.85)] max-w-xl mx-auto space-y-5">
+ <div class="space-y-4">
+ <div>
+ <label for="query-input" class="block text-xs uppercase text-slate-400 font-bold tracking-wider mb-2 font-mono">
+ 联系邮箱或订单编号 (Email / Order ID)
+ </label>
+ <div class="relative">
+ <input 
+ type="text" 
+ id="query-input" 
+ placeholder="输入您下单的邮箱或订单号..."
+ class="w-full bg-[#06080F]/90 border border-[#38BDF8]/30 rounded-2xl pl-4 pr-12 py-3.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8] focus:ring-2 focus:ring-[#38BDF8]/30 transition shadow-inner"
+ />
+ <div class="absolute right-4 top-4 text-[#38BDF8]">
+ <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+ </svg>
+ </div>
+ </div>
+ </div>
+ 
+ <!-- 检索按钮：苍蓝灵压高光渐变，彻底告别旧版土黄与闪电符号 -->
+ <button 
+ type="button" 
+ id="query-submit-btn"
+ class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] hover:brightness-115 text-white font-extrabold text-sm shadow-[0_0_25px_rgba(56,189,248,0.45)] transition-all active:scale-98 cursor-pointer flex items-center justify-center gap-2"
+ >
+ <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+ </svg>
+ <span>立即查询订单凭据</span>
+ </button>
+ </div>
+ </div>
 
-      <!-- 加载提示 -->
-      <div id="query-loading" class="hidden text-center py-12 text-slate-400 font-bold">
-        
-        <p class="text-xs tracking-wider font-mono text-slate-300">SEARCHING TRANSACTION LEDGER...</p>
-      </div>
+ <!-- 加载提示 -->
+ <div id="query-loading" class="hidden text-center py-12 text-slate-400 font-bold">
+ 
+ <p class="text-xs tracking-wider font-mono text-slate-300">SEARCHING TRANSACTION LEDGER...</p>
+ </div>
 
-      <!-- 未找到订单提示 -->
-      <div id="query-empty" class="hidden text-center py-12 glass-card p-8 max-w-md mx-auto border border-dashed border-[#38BDF8]/30 rounded-3xl bg-[#0B0F1A]/80">
-        <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 mx-auto mb-3">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <h3 class="text-white font-extrabold text-sm">未检索到匹配的订单记录</h3>
-        <p class="text-xs text-slate-400 mt-2">请核对邮箱地址或订单号是否输入正确。若刚完成支付，请稍候 1~2 分钟刷新重试，或联系在线客服协助查询。</p>
-      </div>
+ <!-- 未找到订单提示 -->
+ <div id="query-empty" class="hidden text-center py-12 glass-card p-8 max-w-md mx-auto border border-dashed border-[#38BDF8]/30 rounded-3xl bg-[#0B0F1A]/80">
+ <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 mx-auto mb-3">
+ <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+ </svg>
+ </div>
+ <h3 class="text-white font-extrabold text-sm">未检索到匹配的订单记录</h3>
+ <p class="text-xs text-slate-400 mt-2">请核对邮箱地址或订单号是否输入正确。若刚完成支付，请稍候 1~2 分钟刷新重试，或联系在线客服协助查询。</p>
+ </div>
 
-      <!-- 查询结果列表 -->
-      <div id="query-results" class="hidden space-y-6 max-w-2xl mx-auto">
-      </div>
+ <!-- 查询结果列表 -->
+ <div id="query-results" class="hidden space-y-6 max-w-2xl mx-auto">
+ </div>
 
-    </div>
-  </main>
+ </div>
+ </main>
 
-  <Footer />
+ <Footer />
 </BaseLayout>
 
 <script>
-  import { collection, dbInstance, getDocs, query, where, getDoc, doc } from '../lib/firebase.js';
+ import { collection, dbInstance, getDocs, query, where, getDoc, doc } from '../lib/firebase.js';
 
-  const queryInput = document.getElementById('query-input') as HTMLInputElement;
-  const searchBtn = document.getElementById('query-submit-btn');
-  const loadingSec = document.getElementById('query-loading');
-  const emptySec = document.getElementById('query-empty');
-  const resultsSec = document.getElementById('query-results');
+ const queryInput = document.getElementById('query-input') as HTMLInputElement;
+ const searchBtn = document.getElementById('query-submit-btn');
+ const loadingSec = document.getElementById('query-loading');
+ const emptySec = document.getElementById('query-empty');
+ const resultsSec = document.getElementById('query-results');
 
-  searchBtn?.addEventListener('click', executeQuery);
-  queryInput?.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') executeQuery();
-  });
+ searchBtn?.addEventListener('click', executeQuery);
+ queryInput?.addEventListener('keypress', (e) => {
+ if (e.key === 'Enter') executeQuery();
+ });
 
-  async function executeQuery() {
-    const rawVal = queryInput.value.trim();
-    if (!rawVal) return;
+ async function executeQuery() {
+ const rawVal = queryInput.value.trim();
+ if (!rawVal) return;
 
-    loadingSec?.classList.remove('hidden');
-    emptySec?.classList.add('hidden');
-    resultsSec?.classList.add('hidden');
-    if (resultsSec) resultsSec.innerHTML = '';
+ loadingSec?.classList.remove('hidden');
+ emptySec?.classList.add('hidden');
+ resultsSec?.classList.add('hidden');
+ if (resultsSec) resultsSec.innerHTML = '';
 
-    try {
-      let orders: any[] = [];
-      const isEmail = rawVal.includes('@');
-      
-      if (isEmail) {
-        const q = query(
-          collection(dbInstance, 'orders'),
-          where('email', '==', rawVal)
-        );
-        const snapshot = await getDocs(q);
-        snapshot.docs.forEach(docSnap => {
-          orders.push({ id: docSnap.id, ...docSnap.data() });
-        });
-      } else {
-        const docRef = doc(dbInstance, 'orders', rawVal);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          orders.push({ id: docSnap.id, ...docSnap.data() });
-        } else {
-          const qFallback = query(collection(dbInstance, 'orders'));
-          const snapFallback = await getDocs(qFallback);
-          snapFallback.docs.forEach(d => {
-            const data = d.data();
-            if (d.id === rawVal || data.txId === rawVal) {
-              orders.push({ id: d.id, ...data });
-            }
-          });
-        }
-      }
+ try {
+ let orders: any[] = [];
+ const isEmail = rawVal.includes('@');
+ 
+ if (isEmail) {
+ const q = query(
+ collection(dbInstance, 'orders'),
+ where('email', '==', rawVal)
+ );
+ const snapshot = await getDocs(q);
+ snapshot.docs.forEach(docSnap => {
+ orders.push({ id: docSnap.id, ...docSnap.data() });
+ });
+ } else {
+ const docRef = doc(dbInstance, 'orders', rawVal);
+ const docSnap = await getDoc(docRef);
+ if (docSnap.exists()) {
+ orders.push({ id: docSnap.id, ...docSnap.data() });
+ } else {
+ const qFallback = query(collection(dbInstance, 'orders'));
+ const snapFallback = await getDocs(qFallback);
+ snapFallback.docs.forEach(d => {
+ const data = d.data();
+ if (d.id === rawVal || data.txId === rawVal) {
+ orders.push({ id: d.id, ...data });
+ }
+ });
+ }
+ }
 
-      if (orders.length === 0) {
-        loadingSec?.classList.add('hidden');
-        emptySec?.classList.remove('hidden');
-        return;
-      }
+ if (orders.length === 0) {
+ loadingSec?.classList.add('hidden');
+ emptySec?.classList.remove('hidden');
+ return;
+ }
 
-      orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-      renderQueryResults(orders);
-    } catch (err) {
-      console.error("Query failed:", err);
-      loadingSec?.classList.add('hidden');
-      if (emptySec) {
-        emptySec.classList.remove('hidden');
-        const h3 = emptySec.querySelector('h3');
-        const p = emptySec.querySelector('p');
-        if (h3) h3.textContent = "查询异常";
-        if (p) p.textContent = "连接数据库超时，请稍后刷新重试。";
-      }
-    }
-  }
+ orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+ renderQueryResults(orders);
+ } catch (err) {
+ console.error("Query failed:", err);
+ loadingSec?.classList.add('hidden');
+ if (emptySec) {
+ emptySec.classList.remove('hidden');
+ const h3 = emptySec.querySelector('h3');
+ const p = emptySec.querySelector('p');
+ if (h3) h3.textContent ="查询异常";
+ if (p) p.textContent ="连接数据库超时，请稍后刷新重试。";
+ }
+ }
+ }
 
-  function renderQueryResults(orders: any[]) {
-    if (!resultsSec || !loadingSec) return;
+ function renderQueryResults(orders: any[]) {
+ if (!resultsSec || !loadingSec) return;
 
-    resultsSec.innerHTML = orders.map(order => {
-      const date = new Date(order.createdAt).toLocaleDateString('zh-CN', {
-        year: 'numeric', month: '2-digit', day: '2-digit',
-        hour: '2-digit', minute: '2-digit'
-      });
+ resultsSec.innerHTML = orders.map(order => {
+ const date = new Date(order.createdAt).toLocaleDateString('zh-CN', {
+ year: 'numeric', month: '2-digit', day: '2-digit',
+ hour: '2-digit', minute: '2-digit'
+ });
 
-      let statusColor = 'text-amber-400 bg-amber-500/15 border border-amber-500/30';
-      let statusLabel = '配货审核中 (Processing)';
-      
-      if (order.status === 'completed' || order.status === 'paid') {
-        statusColor = 'text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 shadow-[0_0_12px_rgba(56,189,248,0.25)]';
-        statusLabel = '已交付完成 (Completed)';
-      } else if (order.status === 'cancelled') {
-        statusColor = 'text-slate-400 bg-white/5 border border-white/10';
-        statusLabel = '已取消 (Cancelled)';
-      }
+ let statusColor = 'text-amber-400 bg-amber-500/15 border border-amber-500/30';
+ let statusLabel = '配货审核中 (Processing)';
+ 
+ if (order.status === 'completed' || order.status === 'paid') {
+ statusColor = 'text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 shadow-[0_0_12px_rgba(56,189,248,0.25)]';
+ statusLabel = '已交付完成 (Completed)';
+ } else if (order.status === 'cancelled') {
+ statusColor = 'text-slate-400 bg-white/5 border border-white/10';
+ statusLabel = '已取消 (Cancelled)';
+ }
 
-      const itemsListHtml = (order.items || []).map(item => `
-        <div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
-          <div class="flex items-center gap-3">
-            <img src="${item.image || '/favicon.ico'}" class="w-10 h-10 rounded-xl object-cover border border-white/10 bg-black/40" />
-            <div class="text-left">
-              <p class="text-xs font-bold text-white line-clamp-1">${item.name}</p>
-              <p class="text-[11px] text-slate-400 mt-0.5">${item.size ? `规格: ${item.size} | ` : ''}数量: ${item.quantity || 1}</p>
-            </div>
-          </div>
-          <span class="text-xs font-black text-[#38BDF8] font-mono">$${Math.ceil(Number(item.price * (item.quantity || 1)))}</span>
-        </div>
-      `).join('');
+ const itemsListHtml = (order.items || []).map(item => `
+ <div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
+ <div class="flex items-center gap-3">
+ <img src="${item.image || '/favicon.ico'}" class="w-10 h-10 rounded-xl object-cover border border-white/10 bg-black/40" />
+ <div class="text-left">
+ <p class="text-xs font-bold text-white">${item.name}</p>
+ <p class="text-[11px] text-slate-400 mt-0.5">${item.size ? `规格: ${item.size} | ` : ''}数量: ${item.quantity || 1}</p>
+ </div>
+ </div>
+ <span class="text-xs font-black text-[#38BDF8] font-mono">$${Math.ceil(Number(item.price * (item.quantity || 1)))}</span>
+ </div>
+ `).join('');
 
-      let credentialsBlock = '';
-      const hasDigital = (order.items || []).some(item => item.type === 'digital' || !item.type);
-      if (hasDigital) {
-        if (order.status === 'completed' || order.status === 'paid') {
-          const keyContent = order.dispatchContent || order.id;
-          const keyText = order.dispatchContent 
-            ? `<div class="p-3.5 bg-[#06080F] border border-[#38BDF8]/40 rounded-xl font-mono text-xs text-[#38BDF8] break-all select-all mt-2 shadow-inner leading-relaxed">${order.dispatchContent}</div>` 
-            : `<p class="text-[11px] text-slate-400">凭证已自动核销派发。若未在此处正常显示，可联系右下角客服协助提取。</p>`;
+ let credentialsBlock = '';
+ const hasDigital = (order.items || []).some(item => item.type === 'digital' || !item.type);
+ if (hasDigital) {
+ if (order.status === 'completed' || order.status === 'paid') {
+ const keyContent = order.dispatchContent || order.id;
+ const keyText = order.dispatchContent 
+ ? `<div class="p-3.5 bg-[#06080F] border border-[#38BDF8]/40 rounded-xl font-mono text-xs text-[#38BDF8] break-all select-all mt-2 shadow-inner leading-relaxed">${order.dispatchContent}</div>` 
+ : `<p class="text-[11px] text-slate-400">凭证已自动核销派发。若未在此处正常显示，可联系右下角客服协助提取。</p>`;
 
-          credentialsBlock = `
-            <div class="p-4 bg-[#0284C7]/10 border border-[#38BDF8]/30 text-left space-y-2 rounded-2xl mt-3">
-              <div class="flex items-center justify-between">
-                <h4 class="text-xs font-extrabold text-[#38BDF8] uppercase tracking-wider flex items-center gap-2 font-mono">
-                  <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-                  </svg>
-                  <span>卡密凭据 (CREDENTIALS)</span>
-                </h4>
-                <span class="text-[10px] font-extrabold text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 px-2 py-0.5 rounded-full">
-                  已核销交付
-                </span>
-              </div>
-              <p class="text-[11px] text-slate-300">
-                您的专属账号卡密如下，建议立即复制并妥善保管：
-              </p>
-              ${keyText}
-              <button 
-                type="button" 
-                onclick="navigator.clipboard.writeText('${keyContent}'); alert('卡密已成功复制到剪贴板！');"
-                class="mt-2 px-4 py-2 bg-[#0284C7]/30 hover:bg-[#0284C7]/50 border border-[#38BDF8]/50 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 active:scale-95 cursor-pointer"
-              >
-                <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-                <span>一键复制卡密</span>
-              </button>
-            </div>
-          `;
-        } else {
-          credentialsBlock = `
-            <div class="p-4 bg-amber-500/10 border border-amber-500/30 text-left space-y-2 rounded-2xl mt-3">
-              <h4 class="text-xs font-bold text-amber-400 tracking-wider">配货处理中 (Fulfilling)</h4>
-              <p class="text-[11px] text-slate-400 leading-relaxed">
-                系统或客服正在为您核对支付账单，通常在数分钟内自动完成发货。发货后此处卡密将直接激活显示，建议过几分钟后刷新查看。
-              </p>
-            </div>
-          `;
-        }
-      }
+ credentialsBlock = `
+ <div class="p-4 bg-[#0284C7]/10 border border-[#38BDF8]/30 text-left space-y-2 rounded-2xl mt-3">
+ <div class="flex items-center justify-between">
+ <h4 class="text-xs font-extrabold text-[#38BDF8] uppercase tracking-wider flex items-center gap-2 font-mono">
+ <svg class="w-4 h-4 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+ </svg>
+ <span>卡密凭据 (CREDENTIALS)</span>
+ </h4>
+ <span class="text-[10px] font-extrabold text-[#38BDF8] bg-[#0284C7]/20 border border-[#38BDF8]/40 px-2 py-0.5 rounded-full">
+ 已核销交付
+ </span>
+ </div>
+ <p class="text-[11px] text-slate-300">
+ 您的专属账号卡密如下，建议立即复制并妥善保管：
+ </p>
+ ${keyText}
+ <button 
+ type="button" 
+ onclick="navigator.clipboard.writeText('${keyContent}'); alert('卡密已成功复制到剪贴板！');"
+ class="mt-2 px-4 py-2 bg-[#0284C7]/30 hover:bg-[#0284C7]/50 border border-[#38BDF8]/50 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 active:scale-95 cursor-pointer"
+ >
+ <svg class="w-3.5 h-3.5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+ </svg>
+ <span>一键复制卡密</span>
+ </button>
+ </div>
+ `;
+ } else {
+ credentialsBlock = `
+ <div class="p-4 bg-amber-500/10 border border-amber-500/30 text-left space-y-2 rounded-2xl mt-3">
+ <h4 class="text-xs font-bold text-amber-400 tracking-wider">配货处理中 (Fulfilling)</h4>
+ <p class="text-[11px] text-slate-400 leading-relaxed">
+ 系统或客服正在为您核对支付账单，通常在数分钟内自动完成发货。发货后此处卡密将直接激活显示，建议过几分钟后刷新查看。
+ </p>
+ </div>
+ `;
+ }
+ }
 
-      return `
-        <div class="glass-card p-6 rounded-3xl border border-[#38BDF8]/30 bg-[#0B0F1A]/90 shadow-lg space-y-4 text-left">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-white/5">
-            <div>
-              <span class="text-xs font-mono text-slate-400">单号: ${order.id}</span>
-              <span class="text-xs text-slate-500 ml-3 font-mono">${date}</span>
-            </div>
-            <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full ${statusColor} w-fit">
-              ${statusLabel}
-            </span>
-          </div>
+ return `
+ <div class="glass-card p-6 rounded-3xl border border-[#38BDF8]/30 bg-[#0B0F1A]/90 shadow-lg space-y-4 text-left">
+ <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-white/5">
+ <div>
+ <span class="text-xs font-mono text-slate-400">单号: ${order.id}</span>
+ <span class="text-xs text-slate-500 ml-3 font-mono">${date}</span>
+ </div>
+ <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full ${statusColor} w-fit">
+ ${statusLabel}
+ </span>
+ </div>
 
-          <div class="space-y-1">
-            ${itemsListHtml}
-          </div>
+ <div class="space-y-1">
+ ${itemsListHtml}
+ </div>
 
-          <div class="flex justify-between items-center pt-2.5 border-t border-white/5">
-            <span class="text-xs font-bold text-slate-400">合计总额</span>
-            <span class="text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">
-              $${order.totalPrice ? Number(order.totalPrice).toFixed(2) : '0.00'}
-            </span>
-          </div>
+ <div class="flex justify-between items-center pt-2.5 border-t border-white/5">
+ <span class="text-xs font-bold text-slate-400">合计总额</span>
+ <span class="text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">
+ $${order.totalPrice ? Number(order.totalPrice).toFixed(2) : '0.00'}
+ </span>
+ </div>
 
-          ${credentialsBlock}
-        </div>
-      `;
-    }).join('');
+ ${credentialsBlock}
+ </div>
+ `;
+ }).join('');
 
-    loadingSec?.classList.add('hidden');
-    resultsSec?.classList.remove('hidden');
-  }
+ loadingSec?.classList.add('hidden');
+ resultsSec?.classList.remove('hidden');
+ }
 </script>

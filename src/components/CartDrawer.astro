@@ -1,176 +1,176 @@
 ---
 ---
 <div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300 font-outfit">
-  <div 
-    id="cart-drawer" 
-    class="absolute right-0 top-0 h-full w-full max-w-md bg-[#0B0F1A]/95 border-l border-[#38BDF8]/20 shadow-2xl p-6 sm:p-8 flex flex-col translate-x-full transition-transform duration-300 ease-out backdrop-blur-xl"
-  >
-    <!-- Header -->
-    <div class="flex items-center justify-between pb-5 border-b border-white/10 mb-6">
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-        </svg>
-        <h3 class="font-outfit text-xl font-extrabold text-white">已选商品清单</h3>
-      </div>
-      <button 
-        id="cart-close" 
-        type="button" 
-        class="p-1.5 rounded-full border border-white/10 hover:border-[#38BDF8]/40 text-slate-400 hover:text-white transition-colors cursor-pointer"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
+ <div 
+ id="cart-drawer" 
+ class="absolute right-0 top-0 h-full w-full max-w-md bg-[#0B0F1A]/95 border-l border-[#38BDF8]/20 shadow-2xl p-6 sm:p-8 flex flex-col translate-x-full transition-transform duration-300 ease-out backdrop-blur-xl"
+ >
+ <!-- Header -->
+ <div class="flex items-center justify-between pb-5 border-b border-white/10 mb-6">
+ <div class="flex items-center gap-2">
+ <svg class="w-5 h-5 text-[#38BDF8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+ </svg>
+ <h3 class="font-outfit text-xl font-extrabold text-white">已选商品清单</h3>
+ </div>
+ <button 
+ id="cart-close" 
+ type="button" 
+ class="p-1.5 rounded-full border border-white/10 hover:border-[#38BDF8]/40 text-slate-400 hover:text-white transition-colors cursor-pointer"
+ >
+ <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+ </svg>
+ </button>
+ </div>
 
-    <!-- 商品列表 -->
-    <div id="cart-items-container" class="flex-grow overflow-y-auto space-y-4 pr-1">
-      <p class="text-slate-500 text-center py-16 text-xs">清单目前为空，请在商品库中选购。</p>
-    </div>
+ <!-- 商品列表 -->
+ <div id="cart-items-container" class="flex-grow overflow-y-auto space-y-4 pr-1">
+ <p class="text-slate-500 text-center py-16 text-xs">清单目前为空，请在商品库中选购。</p>
+ </div>
 
-    <!-- 结算区 -->
-    <div class="pt-5 border-t border-white/10 mt-6">
-      <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
-        <span>交付方式</span>
-        <span class="text-[#38BDF8] font-bold font-mono tracking-wider">自动秒发 / 零运费</span>
-      </div>
-      <div class="flex items-center justify-between text-white text-base font-bold mb-6">
-        <span>合计估算</span>
-        <span id="cart-total" class="font-mono text-xl text-[#38BDF8] font-black drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">$0.00</span>
-      </div>
-      
-      <button 
-        id="checkout-btn" 
-        type="button" 
-        disabled
-        class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-xs tracking-wider uppercase transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none hover:brightness-110 active:scale-98 shadow-[0_0_20px_rgba(56,189,248,0.35)] flex items-center justify-center gap-2 cursor-pointer"
-      >
-        <span>前往收银台安全结算</span>
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </button>
-    </div>
-  </div>
+ <!-- 结算区 -->
+ <div class="pt-5 border-t border-white/10 mt-6">
+ <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
+ <span>交付方式</span>
+ <span class="text-[#38BDF8] font-bold font-mono tracking-wider">自动秒发 / 零运费</span>
+ </div>
+ <div class="flex items-center justify-between text-white text-base font-bold mb-6">
+ <span>合计估算</span>
+ <span id="cart-total" class="font-mono text-xl text-[#38BDF8] font-black drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">$0.00</span>
+ </div>
+ 
+ <button 
+ id="checkout-btn" 
+ type="button" 
+ disabled
+ class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-xs tracking-wider uppercase transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none hover:brightness-110 active:scale-98 shadow-[0_0_20px_rgba(56,189,248,0.35)] flex items-center justify-center gap-2 cursor-pointer"
+ >
+ <span>前往收银台安全结算</span>
+ <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+ <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+ </svg>
+ </button>
+ </div>
+ </div>
 </div>
 
 <script>
-  let cart: any[] = [];
+ let cart: any[] = [];
 
-  function getCurrencyMode(): 'cny' | 'usd' {
-    const lang = localStorage.getItem('active_language') || 'en';
-    return ['zh-CN', 'zh-TW', 'ja', 'ko'].includes(lang) ? 'cny' : 'usd';
-  }
+ function getCurrencyMode(): 'cny' | 'usd' {
+ const lang = localStorage.getItem('active_language') || 'en';
+ return ['zh-CN', 'zh-TW', 'ja', 'ko'].includes(lang) ? 'cny' : 'usd';
+ }
 
-  const overlay = document.getElementById('cart-overlay');
-  const drawer = document.getElementById('cart-drawer');
-  const closeBtn = document.getElementById('cart-close');
-  const itemsContainer = document.getElementById('cart-items-container');
-  const totalEl = document.getElementById('cart-total');
-  const checkoutBtn = document.getElementById('checkout-btn') as HTMLButtonElement;
+ const overlay = document.getElementById('cart-overlay');
+ const drawer = document.getElementById('cart-drawer');
+ const closeBtn = document.getElementById('cart-close');
+ const itemsContainer = document.getElementById('cart-items-container');
+ const totalEl = document.getElementById('cart-total');
+ const checkoutBtn = document.getElementById('checkout-btn') as HTMLButtonElement;
 
-  window.addEventListener('open-cart', () => openCart());
-  window.addEventListener('cart-updated', () => loadCart());
+ window.addEventListener('open-cart', () => openCart());
+ window.addEventListener('cart-updated', () => loadCart());
 
-  overlay?.addEventListener('click', (e) => {
-    if (e.target === overlay) closeCart();
-  });
+ overlay?.addEventListener('click', (e) => {
+ if (e.target === overlay) closeCart();
+ });
 
-  closeBtn?.addEventListener('click', closeCart);
+ closeBtn?.addEventListener('click', closeCart);
 
-  checkoutBtn?.addEventListener('click', () => {
-    window.location.href = '/checkout';
-  });
+ checkoutBtn?.addEventListener('click', () => {
+ window.location.href = '/checkout';
+ });
 
-  function openCart() {
-    loadCart();
-    overlay?.classList.remove('opacity-0', 'pointer-events-none');
-    drawer?.classList.remove('translate-x-full');
-  }
+ function openCart() {
+ loadCart();
+ overlay?.classList.remove('opacity-0', 'pointer-events-none');
+ drawer?.classList.remove('translate-x-full');
+ }
 
-  function closeCart() {
-    overlay?.classList.add('opacity-0', 'pointer-events-none');
-    drawer?.classList.add('translate-x-full');
-  }
+ function closeCart() {
+ overlay?.classList.add('opacity-0', 'pointer-events-none');
+ drawer?.classList.add('translate-x-full');
+ }
 
-  function loadCart() {
-    try {
-      cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    } catch {
-      cart = [];
-    }
-    renderCart();
-  }
+ function loadCart() {
+ try {
+ cart = JSON.parse(localStorage.getItem('cart') || '[]');
+ } catch {
+ cart = [];
+ }
+ renderCart();
+ }
 
-  function renderCart() {
-    if (!itemsContainer || !totalEl || !checkoutBtn) return;
-    const currency = getCurrencyMode();
+ function renderCart() {
+ if (!itemsContainer || !totalEl || !checkoutBtn) return;
+ const currency = getCurrencyMode();
 
-    if (cart.length === 0) {
-      itemsContainer.innerHTML = `<p class="text-slate-500 text-center py-16 text-xs">清单目前为空，请在商品库中选购。</p>`;
-      totalEl.textContent = '¥0';
-      checkoutBtn.disabled = true;
-      return;
-    }
+ if (cart.length === 0) {
+ itemsContainer.innerHTML = `<p class="text-slate-500 text-center py-16 text-xs">清单目前为空，请在商品库中选购。</p>`;
+ totalEl.textContent = '¥0';
+ checkoutBtn.disabled = true;
+ return;
+ }
 
-    checkoutBtn.disabled = false;
-    let total = 0;
+ checkoutBtn.disabled = false;
+ let total = 0;
 
-    itemsContainer.innerHTML = cart.map((item, index) => {
-      const cny = Math.round(item.priceCny || (item.price ? item.price * 7.2 : 0));
-      const itemSubtotal = cny * (item.quantity || 1);
-      total += itemSubtotal;
-      const formattedPrice = `¥${itemSubtotal}`;
+ itemsContainer.innerHTML = cart.map((item, index) => {
+ const cny = Math.round(item.priceCny || (item.price ? item.price * 7.2 : 0));
+ const itemSubtotal = cny * (item.quantity || 1);
+ total += itemSubtotal;
+ const formattedPrice = `¥${itemSubtotal}`;
 
-      return `
-        <div class="p-3.5 rounded-2xl bg-[#06080F]/90 border border-[#38BDF8]/20 space-y-3 text-xs">
-          <div class="flex items-center gap-3 min-w-0">
-            <img 
-              src="${item.image || '/images/default_product.jpg'}" 
-              onerror="this.src='/images/default_product.jpg'" 
-              class="w-11 h-11 rounded-xl object-cover bg-black/50 border border-white/10 shrink-0" 
-            />
-            <div class="min-w-0 flex-1 pr-2 text-left">
-              <h4 class="font-bold text-white truncate text-xs leading-snug">${item.name}</h4>
-              <span class="text-[10px] text-slate-400 block mt-0.5">${item.size ? `规格: ${item.size}` : '标准规格'}</span>
-            </div>
-            <button type="button" onclick="window.removeCartItem(${index})" class="text-[11px] text-rose-400 hover:text-rose-300 p-1 cursor-pointer shrink-0">
-              移除
-            </button>
-          </div>
+ return `
+ <div class="p-3.5 rounded-2xl bg-[#06080F]/90 border border-[#38BDF8]/20 space-y-3 text-xs">
+ <div class="flex items-center gap-3 min-w-0">
+ <img 
+ src="${item.image || '/images/default_product.jpg'}" 
+ onerror="this.src='/images/default_product.jpg'" 
+ class="w-11 h-11 rounded-xl object-cover bg-black/50 border border-white/10 shrink-0" 
+ />
+ <div class="min-w-0 flex-1 pr-2 text-left">
+ <h4 class="font-bold text-white truncate text-xs leading-snug">${item.name}</h4>
+ <span class="text-[10px] text-slate-400 block mt-0.5">${item.size ? `规格: ${item.size}` : '标准规格'}</span>
+ </div>
+ <button type="button" onclick="window.removeCartItem(${index})" class="text-[11px] text-rose-400 hover:text-rose-300 p-1 cursor-pointer shrink-0">
+ 移除
+ </button>
+ </div>
 
-          <div class="flex items-center justify-between pt-2 border-t border-white/5">
-            <div class="flex items-center border border-white/15 rounded-lg overflow-hidden bg-[#0B0F1A] text-xs font-bold">
-              <button type="button" onclick="window.updateCartQty(${index}, -1)" class="px-2.5 py-1 hover:bg-white/10 text-white font-bold select-none cursor-pointer">-</button>
-              <span class="px-3 py-1 text-center text-white font-mono min-w-[28px]">${item.quantity}</span>
-              <button type="button" onclick="window.updateCartQty(${index}, 1)" class="px-2.5 py-1 hover:bg-white/10 text-white font-bold select-none cursor-pointer">+</button>
-            </div>
-            <div class="text-right">
-              <span class="font-bold font-mono text-[#38BDF8] text-sm">${formattedPrice}</span>
-              
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
+ <div class="flex items-center justify-between pt-2 border-t border-white/5">
+ <div class="flex items-center border border-white/15 rounded-lg overflow-hidden bg-[#0B0F1A] text-xs font-bold">
+ <button type="button" onclick="window.updateCartQty(${index}, -1)" class="px-2.5 py-1 hover:bg-white/10 text-white font-bold select-none cursor-pointer">-</button>
+ <span class="px-3 py-1 text-center text-white font-mono min-w-[28px]">${item.quantity}</span>
+ <button type="button" onclick="window.updateCartQty(${index}, 1)" class="px-2.5 py-1 hover:bg-white/10 text-white font-bold select-none cursor-pointer">+</button>
+ </div>
+ <div class="text-right">
+ <span class="font-bold font-mono text-[#38BDF8] text-sm">${formattedPrice}</span>
+ 
+ </div>
+ </div>
+ </div>
+ `;
+ }).join('');
 
-    totalEl.textContent = `¥${total}`;
-  }
+ totalEl.textContent = `¥${total}`;
+ }
 
-  (window as any).updateCartQty = function(index: number, delta: number) {
-    if (!cart[index]) return;
-    cart[index].quantity += delta;
-    if (cart[index].quantity <= 0) {
-      cart.splice(index, 1);
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
-  };
+ (window as any).updateCartQty = function(index: number, delta: number) {
+ if (!cart[index]) return;
+ cart[index].quantity += delta;
+ if (cart[index].quantity <= 0) {
+ cart.splice(index, 1);
+ }
+ localStorage.setItem('cart', JSON.stringify(cart));
+ renderCart();
+ };
 
-  (window as any).removeCartItem = function(index: number) {
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
-  };
+ (window as any).removeCartItem = function(index: number) {
+ cart.splice(index, 1);
+ localStorage.setItem('cart', JSON.stringify(cart));
+ renderCart();
+ };
 </script>

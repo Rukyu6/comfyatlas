@@ -1,73 +1,73 @@
 ---
 interface Item {
-  id: string;
-  name: string;
-  emoji: string;
+ id: string;
+ name: string;
+ emoji: string;
 }
 
 interface Category {
-  name: string;
-  key: string;
-  items: Item[];
+ name: string;
+ key: string;
+ items: Item[];
 }
 
 interface Props {
-  categories: Category[];
-  activeId: string;
+ categories: Category[];
+ activeId: string;
 }
 
 const { categories, activeId } = Astro.props;
 ---
 
 <aside class="w-full lg:w-80 shrink-0 space-y-4 lg:sticky lg:top-24 max-h-[85vh] overflow-y-auto select-none pr-1 scrollbar-thin">
-  {categories.map((cat) => (
-    <div class="glass-sidebar-section rounded-2xl p-4 transition-all duration-300 border border-[#292929] bg-[#1C1917]/50 backdrop-blur-md shadow-md hover:border-[#44403C] hover:bg-[#1C1917]/75">
-      <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-455 font-sora border-b border-[#292929] pb-2 mb-3 flex items-center justify-between">
-        <span>{cat.name}</span>
-        <span class="text-[10px] bg-[#090909] text-zinc-500 px-2 py-0.5 rounded-full font-mono">
-          {cat.items.length}
-        </span>
-      </h3>
-      <div class="space-y-1">
-        {cat.items.map((tut) => {
-          const isActive = tut.id === activeId;
-          return (
-            <button
-              type="button"
-              data-doc-id={tut.id}
-              class={`nav-item-btn w-full text-left py-2.5 px-4 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer transform active:scale-[0.98] font-sora ${
-                isActive
-                  ? "bg-[#E7AC08] text-[#080808] font-bold border border-[#FAC514] shadow-md translate-x-1"
-                  : "text-zinc-400 hover:bg-white/5 hover:text-white hover:translate-x-1 border border-transparent"
-              }`}
-            >
-              {tut.emoji ? (
-                <span class="text-sm scale-110 select-none">{tut.emoji}</span>
-              ) : (
-                <span class="text-sm select-none opacity-50">📄</span>
-              )}
-              <span class="truncate">{tut.name}</span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  ))}
+ {categories.map((cat) => (
+ <div class="glass-sidebar-section rounded-2xl p-4 transition-all duration-300 border border-[#292929] bg-[#1C1917]/50 backdrop-blur-md shadow-md hover:border-[#44403C] hover:bg-[#1C1917]/75">
+ <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-455 font-sora border-b border-[#292929] pb-2 mb-3 flex items-center justify-between">
+ <span>{cat.name}</span>
+ <span class="text-[10px] bg-[#090909] text-zinc-500 px-2 py-0.5 rounded-full font-mono">
+ {cat.items.length}
+ </span>
+ </h3>
+ <div class="space-y-1">
+ {cat.items.map((tut) => {
+ const isActive = tut.id === activeId;
+ return (
+ <button
+ type="button"
+ data-doc-id={tut.id}
+ class={`nav-item-btn w-full text-left py-2.5 px-4 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-2 cursor-pointer transform active:scale-[0.98] font-sora ${
+ isActive
+ ?"bg-[#E7AC08] text-[#080808] font-bold border border-[#FAC514] shadow-md translate-x-1"
+ :"text-zinc-400 hover:bg-white/5 hover:text-white hover:translate-x-1 border border-transparent"
+ }`}
+ >
+ {tut.emoji ? (
+ <span class="text-sm scale-110 select-none">{tut.emoji}</span>
+ ) : (
+ <span class="text-sm select-none opacity-50">📄</span>
+ )}
+ <span class="truncate">{tut.name}</span>
+ </button>
+ );
+ })}
+ </div>
+ </div>
+ ))}
 </aside>
 
 <style>
-  /* Custom scrollbar behavior for the sidebar */
-  aside::-webkit-scrollbar {
-    width: 4px;
-  }
-  aside::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  aside::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-  }
-  aside:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+ /* Custom scrollbar behavior for the sidebar */
+ aside::-webkit-scrollbar {
+ width: 4px;
+ }
+ aside::-webkit-scrollbar-track {
+ background: transparent;
+ }
+ aside::-webkit-scrollbar-thumb {
+ background-color: rgba(255, 255, 255, 0.05);
+ border-radius: 10px;
+ }
+ aside:hover::-webkit-scrollbar-thumb {
+ background-color: rgba(255, 255, 255, 0.1);
+ }
 </style>

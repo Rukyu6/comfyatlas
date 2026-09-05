@@ -5,249 +5,249 @@ import CartDrawer from '../components/CartDrawer.astro';
 import NoticeModal from '../components/NoticeModal.astro';
 
 export interface Props {
-  title: string;
-  description?: string;
-  ogImage?: string;
+ title: string;
+ description?: string;
+ ogImage?: string;
 }
 
 const {
-  title,
-  description = "Soul Society — 全球顶级 AI 订阅与高权数字特权专供平台，秒级自动发卡。",
-  ogImage = "/images/aizen_welcome.jpg",
+ title,
+ description ="Soul Society — 全球顶级 AI 订阅与高权数字特权专供平台，秒级自动发卡。",
+ ogImage ="/images/aizen_welcome.jpg",
 } = Astro.props;
 
-const siteName = "Soul Society";
+const siteName ="Soul Society";
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 ---
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#06080F" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="shortcut icon" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta name="generator" content={Astro.generator} />
-    
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+ <head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta name="theme-color" content="#06080F" />
+ <link rel="icon" type="image/png" href="/favicon.png" />
+ <link rel="shortcut icon" href="/favicon.png" />
+ <link rel="apple-touch-icon" href="/favicon.png" />
+ <meta name="generator" content={Astro.generator} />
+ 
+ <title>{fullTitle}</title>
+ <meta name="description" content={description} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:site_name" content={siteName} />
-    <meta property="og:image" content={ogImage} />
-  
-  
-  <script>
-    (function() {
-      if (!window.translate) return;
-      translate.selectLanguageTag.show = false;
-      translate.service.use('client.edge');
+ <meta property="og:type" content="website" />
+ <meta property="og:title" content={fullTitle} />
+ <meta property="og:description" content={description} />
+ <meta property="og:site_name" content={siteName} />
+ <meta property="og:image" content={ogImage} />
+ 
+ 
+ <script>
+ (function() {
+ if (!window.translate) return;
+ translate.selectLanguageTag.show = false;
+ translate.service.use('client.edge');
 
-      var langMap = {
-        'zh-CN': 'chinese_simplified',
-        'zh': 'chinese_simplified',
-        'en': 'english',
-        'ja': 'japanese',
-        'ko': 'korean'
-      };
+ var langMap = {
+ 'zh-CN': 'chinese_simplified',
+ 'zh': 'chinese_simplified',
+ 'en': 'english',
+ 'ja': 'japanese',
+ 'ko': 'korean'
+ };
 
-      window.applySiteLanguage = function(lang) {
-        if (!lang) lang = localStorage.getItem('active_language') || 'zh-CN';
-        localStorage.setItem('active_language', lang);
-        var target = langMap[lang] || 'chinese_simplified';
-        if (target === 'chinese_simplified') {
-          if (translate.to && translate.to !== 'chinese_simplified') {
-            window.location.reload();
-          }
-        } else {
-          translate.to = target;
-          // translate.listener disabled for stability
-          translate.execute();
-        }
-      };
+ window.applySiteLanguage = function(lang) {
+ if (!lang) lang = localStorage.getItem('active_language') || 'zh-CN';
+ localStorage.setItem('active_language', lang);
+ var target = langMap[lang] || 'chinese_simplified';
+ if (target === 'chinese_simplified') {
+ if (translate.to && translate.to !== 'chinese_simplified') {
+ window.location.reload();
+ }
+ } else {
+ translate.to = target;
+ // translate.listener disabled for stability
+ translate.execute();
+ }
+ };
 
-      // 监听语言选择切换事件
-      document.addEventListener('change', function(e) {
-        if (e.target && (e.target.id === 'language-select' || e.target.classList.contains('lang-select') || e.target.name === 'language')) {
-          window.applySiteLanguage(e.target.value);
-        }
-      });
-      document.addEventListener('click', function(e) {
-        var btn = e.target.closest('[data-lang]');
-        if (btn) {
-          window.applySiteLanguage(btn.getAttribute('data-lang'));
-        }
-      });
+ // 监听语言选择切换事件
+ document.addEventListener('change', function(e) {
+ if (e.target && (e.target.id === 'language-select' || e.target.classList.contains('lang-select') || e.target.name === 'language')) {
+ window.applySiteLanguage(e.target.value);
+ }
+ });
+ document.addEventListener('click', function(e) {
+ var btn = e.target.closest('[data-lang]');
+ if (btn) {
+ window.applySiteLanguage(btn.getAttribute('data-lang'));
+ }
+ });
 
-      // 初始化恢复语言状态
-      var saved = localStorage.getItem('active_language');
-      if (saved && saved !== 'zh-CN' && saved !== 'zh') {
-        window.addEventListener('DOMContentLoaded', function() {
-          setTimeout(function() {
-            window.applySiteLanguage(saved);
-          }, 150);
-        });
-      }
-    })();
-  </script>
+ // 初始化恢复语言状态
+ var saved = localStorage.getItem('active_language');
+ if (saved && saved !== 'zh-CN' && saved !== 'zh') {
+ window.addEventListener('DOMContentLoaded', function() {
+ setTimeout(function() {
+ window.applySiteLanguage(saved);
+ }, 150);
+ });
+ }
+ })();
+ </script>
 
 
-  <!-- 正统神经翻译引擎 (安全初始化，无 DOM 监听冲突) -->
-  <script src="https://cdn.staticfile.net/translate.js/3.18.66/translate.js"></script>
-  <script is:inline>
-    (function() {
-      function initTranslate() {
-        if (!window.translate) {
-          setTimeout(initTranslate, 100);
-          return;
-        }
-        translate.language.setLocal('chinese_simplified');
-        translate.service.use('client.edge');
-        var cur = localStorage.getItem('active_language') || 'zh-CN';
-        var langMap = { 'en': 'english', 'ja': 'japanese', 'ko': 'korean' };
-        if (langMap[cur]) {
-          translate.to = langMap[cur];
-        }
-        translate.execute();
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initTranslate);
-      } else {
-        initTranslate();
-      }
-    })();
-  </script>
+ <!-- 正统神经翻译引擎 (安全初始化，无 DOM 监听冲突) -->
+ <script src="https://cdn.staticfile.net/translate.js/3.18.66/translate.js"></script>
+ <script is:inline>
+ (function() {
+ function initTranslate() {
+ if (!window.translate) {
+ setTimeout(initTranslate, 100);
+ return;
+ }
+ translate.language.setLocal('chinese_simplified');
+ translate.service.use('client.edge');
+ var cur = localStorage.getItem('active_language') || 'zh-CN';
+ var langMap = { 'en': 'english', 'ja': 'japanese', 'ko': 'korean' };
+ if (langMap[cur]) {
+ translate.to = langMap[cur];
+ }
+ translate.execute();
+ }
+ if (document.readyState === 'loading') {
+ document.addEventListener('DOMContentLoaded', initTranslate);
+ } else {
+ initTranslate();
+ }
+ })();
+ </script>
 
 </head>
-  <body class="bg-[#06080F] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#0284C7]/30 selection:text-[#38BDF8]">
-    <slot />
-    <CartDrawer />
-    <NoticeModal />
-    <TelegramChat />
-    <!-- 全局多语言实时翻译与响应总线 -->
-    <script>
-      import { translations } from '../scripts/i18n.js';
+ <body class="bg-[#06080F] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#0284C7]/30 selection:text-[#38BDF8]">
+ <slot />
+ <CartDrawer />
+ <NoticeModal />
+ <TelegramChat />
+ <!-- 全局多语言实时翻译与响应总线 -->
+ <script>
+ import { translations } from '../scripts/i18n.js';
 
-      function applyTranslations() {
-        const lang = localStorage.getItem('active_language') || 'zh-CN';
-        if (lang === 'zh-CN') return; // 中文为原生默认，无需映射
+ function applyTranslations() {
+ const lang = localStorage.getItem('active_language') || 'zh-CN';
+ if (lang === 'zh-CN') return; // 中文为原生默认，无需映射
 
-        const dict = translations[lang];
-        if (!dict) return;
+ const dict = translations[lang];
+ if (!dict) return;
 
-        // 遍历所有文本节点并进行动态语义映射
-        const textMapping = [
-          ['商品分类', dict['nav_categories']],
-          ['订单查询', dict['nav_query']],
-          ['使用说明', dict['nav_guide']],
-          ['登录 / 注册', dict['nav_login']],
-          ['进入管理后台', dict['nav_dashboard']],
-          ['历史订单记录', dict['nav_orders']],
-          ['退出登录', dict['nav_logout']],
-          ['已选商品清单', dict['cart_title']],
-          ['清单目前为空，请在商品库中选购。', dict['cart_empty']],
-          ['交付方式', dict['cart_delivery']],
-          ['自动秒发 / 零运费', dict['cart_delivery_val']],
-          ['合计估算', dict['cart_total']],
-          ['前往收银台安全结算', dict['cart_checkout']],
-          ['移除', dict['remove']],
-          ['24/7自助下单发卡', dict['hero_tag']],
-          ['全球顶级 AI 订阅与海外特权凭证', dict['hero_title']],
-          ['提取已购卡密凭据', dict['hero_btn_query']],
-          ['选购数字现货 ↓', dict['hero_btn_shop']],
-          ['全自动秒级发卡', dict['feat_1_title']],
-          ['付款成功后系统秒级发放卡密凭据', dict['feat_1_desc']],
-          ['正规独享质保', dict['feat_2_title']],
-          ['一客一号独立删档，纯净风控保障', dict['feat_2_desc']],
-          ['全币种快捷结算', dict['feat_3_title']],
-          ['支持支付宝、微信与 USDT 直付', dict['feat_3_desc']],
-          ['专席在线客服', dict['feat_4_title']],
-          ['Telegram 官方专人答疑即时响应', dict['feat_4_desc']],
-          ['数字商品现货库', dict['catalog_title']],
-          ['严选海外纯净风控环境 • 自动秒级吐卡 • 独享质保包换', dict['catalog_subtitle']],
-          ['全部分类', dict['all_categories']],
-          ['自动发卡', dict['auto_dispatch']],
-          ['现货', dict['in_stock']],
-          ['暂时缺货', dict['out_of_stock']],
-          ['起售价', dict['from_price']],
-          ['三步极简购买，秒级自动到账', dict['step_title']],
-          ['挑选心仪商品', dict['step_1_title']],
-          ['安全快捷结算', dict['step_2_title']],
-          ['即刻提取凭据', dict['step_3_title']],
-          ['收银台', dict['checkout_title']],
-          ['01. 接收卡密邮箱', dict['delivery_email_title']],
-          ['接收电子邮箱地址', dict['delivery_email_label']],
-          ['02. 选择支付网络通道', dict['payment_network_title']],
-          ['零手续费 • 秒级到账', dict['payment_network_zero_fee']],
-          ['会员钱包余额支付', dict['wallet_pay']],
-          ['当前可用余额', dict['wallet_bal']],
-          ['立即抵扣', dict['pay_now']],
-          ['官方充值钱包地址 (点击可复制)', dict['wallet_address_label']],
-          ['节点在线', dict['node_online']],
-          ['其他网络与币种结算？', dict['other_chains_title']],
-          ['如需使用 Polygon、Arbitrum、USDC 或其他链付款，请联系专席客服处理。', dict['other_chains_desc']],
-          ['联系专席客服', dict['contact_support']],
-          ['转账交易哈希 (TxID)', dict['txid_label']],
-          ['链上核验并确认订单', dict['submit_order']],
-          ['已选商品订单汇总', dict['order_summary_title']],
-          ['商品金额小计', dict['subtotal']],
-          ['配送方式', dict['delivery_mode']],
-          ['应付总金额', dict['grand_total']],
-          ['支付成功 • 卡密已派发', dict['success_title']],
-          ['数字商品卡密授权凭证', dict['credentials_label']],
-          ['一键复制卡密凭据', dict['copy_key_btn']],
-          ['订单编号', dict['order_id']],
-          ['交付保障', dict['delivery_guarantee']],
-          ['前往订单库检索全部卡密', dict['view_orders_btn']],
-          ['返回商城首页', dict['back_home']],
-          ['返回数字商城', dict['back_home']],
-          ['订单凭证与卡密提取', dict['query_title']],
-          ['联系邮箱或订单编号', dict['query_input_label']],
-          ['立即提取卡密凭证', dict['query_btn']]
-        ];
+ // 遍历所有文本节点并进行动态语义映射
+ const textMapping = [
+ ['商品分类', dict['nav_categories']],
+ ['订单查询', dict['nav_query']],
+ ['使用说明', dict['nav_guide']],
+ ['登录 / 注册', dict['nav_login']],
+ ['进入管理后台', dict['nav_dashboard']],
+ ['历史订单记录', dict['nav_orders']],
+ ['退出登录', dict['nav_logout']],
+ ['已选商品清单', dict['cart_title']],
+ ['清单目前为空，请在商品库中选购。', dict['cart_empty']],
+ ['交付方式', dict['cart_delivery']],
+ ['自动秒发 / 零运费', dict['cart_delivery_val']],
+ ['合计估算', dict['cart_total']],
+ ['前往收银台安全结算', dict['cart_checkout']],
+ ['移除', dict['remove']],
+ ['24/7自助下单发卡', dict['hero_tag']],
+ ['全球顶级 AI 订阅与海外特权凭证', dict['hero_title']],
+ ['提取已购卡密凭据', dict['hero_btn_query']],
+ ['选购数字现货 ↓', dict['hero_btn_shop']],
+ ['全自动秒级发卡', dict['feat_1_title']],
+ ['付款成功后系统秒级发放卡密凭据', dict['feat_1_desc']],
+ ['正规独享质保', dict['feat_2_title']],
+ ['一客一号独立删档，纯净风控保障', dict['feat_2_desc']],
+ ['全币种快捷结算', dict['feat_3_title']],
+ ['支持支付宝、微信与 USDT 直付', dict['feat_3_desc']],
+ ['专席在线客服', dict['feat_4_title']],
+ ['Telegram 官方专人答疑即时响应', dict['feat_4_desc']],
+ ['数字商品现货库', dict['catalog_title']],
+ ['严选海外纯净风控环境 • 自动秒级吐卡 • 独享质保包换', dict['catalog_subtitle']],
+ ['全部分类', dict['all_categories']],
+ ['自动发卡', dict['auto_dispatch']],
+ ['现货', dict['in_stock']],
+ ['暂时缺货', dict['out_of_stock']],
+ ['起售价', dict['from_price']],
+ ['三步极简购买，秒级自动到账', dict['step_title']],
+ ['挑选心仪商品', dict['step_1_title']],
+ ['安全快捷结算', dict['step_2_title']],
+ ['即刻提取凭据', dict['step_3_title']],
+ ['收银台', dict['checkout_title']],
+ ['01. 接收卡密邮箱', dict['delivery_email_title']],
+ ['接收电子邮箱地址', dict['delivery_email_label']],
+ ['02. 选择支付网络通道', dict['payment_network_title']],
+ ['零手续费 • 秒级到账', dict['payment_network_zero_fee']],
+ ['会员钱包余额支付', dict['wallet_pay']],
+ ['当前可用余额', dict['wallet_bal']],
+ ['立即抵扣', dict['pay_now']],
+ ['官方充值钱包地址 (点击可复制)', dict['wallet_address_label']],
+ ['节点在线', dict['node_online']],
+ ['其他网络与币种结算？', dict['other_chains_title']],
+ ['如需使用 Polygon、Arbitrum、USDC 或其他链付款，请联系专席客服处理。', dict['other_chains_desc']],
+ ['联系专席客服', dict['contact_support']],
+ ['转账交易哈希 (TxID)', dict['txid_label']],
+ ['链上核验并确认订单', dict['submit_order']],
+ ['已选商品订单汇总', dict['order_summary_title']],
+ ['商品金额小计', dict['subtotal']],
+ ['配送方式', dict['delivery_mode']],
+ ['应付总金额', dict['grand_total']],
+ ['支付成功 • 卡密已派发', dict['success_title']],
+ ['数字商品卡密授权凭证', dict['credentials_label']],
+ ['一键复制卡密凭据', dict['copy_key_btn']],
+ ['订单编号', dict['order_id']],
+ ['交付保障', dict['delivery_guarantee']],
+ ['前往订单库检索全部卡密', dict['view_orders_btn']],
+ ['返回商城首页', dict['back_home']],
+ ['返回数字商城', dict['back_home']],
+ ['订单凭证与卡密提取', dict['query_title']],
+ ['联系邮箱或订单编号', dict['query_input_label']],
+ ['立即提取卡密凭证', dict['query_btn']]
+ ];
 
-        // 深度递归遍历替换页面文字
-        function walk(node) {
-          if (node.nodeType === 3) {
-            let val = node.nodeValue;
-            if (!val || !val.trim()) return;
-            for (const [zh, trans] of textMapping) {
-              if (val.includes(zh) && trans) {
-                val = val.replace(new RegExp(zh, 'g'), trans);
-              }
-            }
-            node.nodeValue = val;
-          } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
-            if (node.placeholder) {
-              if (node.placeholder.includes('输入关键字搜索')) node.placeholder = dict['search_placeholder'] || node.placeholder;
-              if (node.placeholder.includes('请输入转账成功')) node.placeholder = dict['txid_placeholder'] || node.placeholder;
-              if (node.placeholder.includes('输入您下单的邮箱')) node.placeholder = dict['query_input_placeholder'] || node.placeholder;
-            }
-            node.childNodes.forEach(walk);
-          }
-        }
+ // 深度递归遍历替换页面文字
+ function walk(node) {
+ if (node.nodeType === 3) {
+ let val = node.nodeValue;
+ if (!val || !val.trim()) return;
+ for (const [zh, trans] of textMapping) {
+ if (val.includes(zh) && trans) {
+ val = val.replace(new RegExp(zh, 'g'), trans);
+ }
+ }
+ node.nodeValue = val;
+ } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+ if (node.placeholder) {
+ if (node.placeholder.includes('输入关键字搜索')) node.placeholder = dict['search_placeholder'] || node.placeholder;
+ if (node.placeholder.includes('请输入转账成功')) node.placeholder = dict['txid_placeholder'] || node.placeholder;
+ if (node.placeholder.includes('输入您下单的邮箱')) node.placeholder = dict['query_input_placeholder'] || node.placeholder;
+ }
+ node.childNodes.forEach(walk);
+ }
+ }
 
-        walk(document.body);
-      }
+ walk(document.body);
+ }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', applyTranslations);
-      } else {
-        applyTranslations();
-      }
+ if (document.readyState === 'loading') {
+ document.addEventListener('DOMContentLoaded', applyTranslations);
+ } else {
+ applyTranslations();
+ }
 
-      // 监视后续动态渲染（如商品列表异步载入后二次自动翻译）
-      const observer = new MutationObserver(() => {
-        applyTranslations();
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-    </script>
-  </body>
+ // 监视后续动态渲染（如商品列表异步载入后二次自动翻译）
+ const observer = new MutationObserver(() => {
+ applyTranslations();
+ });
+ observer.observe(document.body, { childList: true, subtree: true });
+ </script>
+ </body>
 </html>
