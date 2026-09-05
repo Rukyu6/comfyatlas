@@ -1,6 +1,10 @@
 import { checkRateLimit, BLACKLIST_PATHS, MALICIOUS_BOTS } from './lib/security.js';
 
 export async function onRequest(context, next) {
+  // 静态构建期跳过请求头读取，消灭打包警告；线上请求保持完整安全防护
+  if (context.isPrerendered) {
+    return next();
+  }
   const { request, url } = context;
   const clientIp = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || '127.0.0.1';
   const userAgent = request.headers.get('user-agent') || '';
