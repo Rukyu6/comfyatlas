@@ -292,6 +292,16 @@ import Footer from '../components/Footer.astro';
       // 立即写入 0ms 鉴权会话快照
       const finalName = (currentTab === 'signin') ? email.split('@')[0] : (usernameInput.value.trim() || email.split('@')[0]);
       localStorage.setItem('auth_session', JSON.stringify({ email: email.trim(), displayName: finalName }));
+      try {
+        const curUid = (typeof authInstance !== 'undefined' && authInstance.currentUser) ? authInstance.currentUser.uid : ('usr_' + Math.random().toString(36).substr(2, 9));
+        setDoc(doc(dbInstance, 'users', curUid), {
+          uid: curUid,
+          email: email.trim().toLowerCase(),
+          displayName: finalName,
+          balance_usd: 0,
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+      } catch(e) {}
 
       // Successful Auth redirect
       const adminEmail = (import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com').toLowerCase();

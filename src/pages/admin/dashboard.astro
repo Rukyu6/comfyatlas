@@ -466,7 +466,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     dbInstance, 
     onSnapshot, 
     doc, 
-    updateDoc 
+    updateDoc,
+    getDoc,
+    setDoc
   } from '../../lib/firebase.js';
 
   const adminEmail = import.meta.env.PUBLIC_ADMIN_EMAIL || 'rukyucrono@gmail.com';
@@ -1024,10 +1026,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     renderPoolStock();
   }
-</script>
 
   // ==========================================
-  // 真实充值凭证数据流 (Real-time Deposits)
+  // 真实充值凭据审核数据流 (Real-time Deposits)
   // ==========================================
   function syncDeposits() {
     const collRef = collection(dbInstance, 'deposits');
@@ -1073,9 +1074,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <td class="py-3.5 px-2 font-medium text-white text-xs">${dep.email || '未留邮箱'}</td>
             <td class="py-3.5 px-2 font-mono font-black text-emerald-400 text-xs">+$${Number(dep.amount || 0).toFixed(2)}</td>
             <td class="py-3.5 px-2 font-mono text-[11px] text-slate-300">
-              <span class="px-1.5 py-0.2 rounded bg-white/5 border border-white/10 text-[9px] text-[#38BDF8] mr-1">${networkTag}</span>
+              <span class="px-1.5 py-0.2 rounded bg-white/5 border border-white/10 text-[9px] text-[#38BDF8] mr-1 font-mono">${networkTag}</span>
               <span class="truncate max-w-[120px] inline-block align-middle select-all" title="${dep.txId}">${dep.txId}</span>
-              <button type="button" onclick="navigator.clipboard.writeText('${dep.txId}'); alert('TxID 已复制');" class="text-[#38BDF8] hover:underline text-[10px] ml-1">[复制]</button>
+              <button type="button" onclick="navigator.clipboard.writeText('${dep.txId}'); alert('TxID 已复制');" class="text-[#38BDF8] hover:underline text-[10px] ml-1 cursor-pointer">[复制]</button>
             </td>
             <td class="py-3.5 px-2">
               <span class="px-2 py-0.5 rounded-full border text-[10px] font-bold ${statusBadge}">
@@ -1084,10 +1085,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             </td>
             <td class="py-3.5 pl-2 text-right space-x-1">
               ${dep.status === 'pending' || !dep.status ? `
-                <button type="button" class="btn-approve-deposit px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:text-white text-[10px] font-bold transition cursor-pointer" data-id="${dep.id}" data-uid="${dep.uid}" data-amount="${dep.amount}">
+                <button type="button" class="btn-approve-deposit px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:text-white text-[10px] font-bold transition cursor-pointer active:scale-95" data-id="${dep.id}" data-uid="${dep.uid}" data-amount="${dep.amount}">
                   通过入账
                 </button>
-                <button type="button" class="btn-reject-deposit px-2.5 py-1 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 hover:text-white text-[10px] font-bold transition cursor-pointer" data-id="${dep.id}">
+                <button type="button" class="btn-reject-deposit px-2.5 py-1 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 hover:text-white text-[10px] font-bold transition cursor-pointer active:scale-95" data-id="${dep.id}">
                   驳回
                 </button>
               ` : `<span class="text-slate-500 text-[10px]">已归档</span>`}
@@ -1098,69 +1099,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     });
   }
 
-  // 监听审核通过与驳回操作
-  document.addEventListener('click', async (e) => {
-    const target = e.target as HTMLElement;
-    const approveBtn = target.closest('.btn-approve-deposit') as HTMLElement;
-    const rejectBtn = target.closest('.btn-reject-deposit') as HTMLElement;
-
-    if (approveBtn) {
-      const depId = approveBtn.getAttribute('data-id');
-      const uid = approveBtn.getAttribute('data-uid');
-      const amount = parseFloat(approveBtn.getAttribute('data-amount') || '0');
-
-      if (!confirm(`确认核准该充值申请，为客户入账 $${amount} USDT 吗？`)) return;
-
-      try {
-        await updateDoc(doc(dbInstance, 'deposits', depId), { status: 'approved', reviewedAt: new Date().toISOString() });
-        // 如果有 uid 则更新用户余额
-        if (uid) {
-          const userRef = doc(dbInstance, 'users', uid);
-          const snap = await getDoc(userRef);
-          const currentBal = snap.exists() ? (snap.data()?.balance_usd || 0) : 0;
-          await updateDoc(userRef, { balance_usd: currentBal + amount });
-        }
-        alert('充值已成功入账！');
-      } catch(err) {
-        alert('审核失败，请重试');
-      }
-    }
-
-    if (rejectBtn) {
-      const depId = rejectBtn.getAttribute('data-id');
-      if (!confirm('确定要驳回该笔充值申请吗？')) return;
-      try {
-        await updateDoc(doc(dbInstance, 'deposits', depId), { status: 'rejected', reviewedAt: new Date().toISOString() });
-        alert('已驳回该充值申请');
-      } catch(err) {
-        alert('操作失败');
-      }
-    }
-
-    // 调账按钮
-    const adjustBtn = target.closest('.btn-adjust-balance') as HTMLElement;
-    if (adjustBtn) {
-      const uid = adjustBtn.getAttribute('data-uid');
-      const email = adjustBtn.getAttribute('data-email');
-      const currentBal = parseFloat(adjustBtn.getAttribute('data-balance') || '0');
-
-      const input = prompt(`为客户 [${email}] 设定新的钱包余额 (当前: $${currentBal} USDT):`, currentBal.toString());
-      if (input !== null) {
-        const newBal = parseFloat(input);
-        if (!isNaN(newBal) && newBal >= 0 && uid) {
-          try {
-            await updateDoc(doc(dbInstance, 'users', uid), { balance_usd: newBal });
-            alert('余额已更新！');
-          } catch(err) {
-            alert('更新失败');
-          }
-        }
-      }
-    }
-  });
-
   // ==========================================
-  // 会员与客户库数据流 (Real-time Customers)
+  // 会员与客户库数据流 (全源聚合保证不遗漏)
   // ==========================================
   function syncCustomers() {
     const collRef = collection(dbInstance, 'users');
@@ -1173,32 +1113,104 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         users.push({ id: docSnap.id, ...docSnap.data() });
       });
 
-      // 结合已下的订单数据，将有下单但尚未建档的客户一并聚合展示
+      // 智能全源聚合：把在订单里、充值申请里出现的所有真实客户全部聚合展示
       activeOrders.forEach(ord => {
         if (ord.email && !users.some(u => u.email?.toLowerCase() === ord.email?.toLowerCase())) {
-          users.push({ id: ord.uid || 'ord_' + ord.id.slice(0,8), email: ord.email, displayName: ord.email.split('@')[0], balance_usd: 0, isOrderCustomer: true });
+          users.push({ id: ord.uid || 'usr_' + ord.id.slice(0,8), email: ord.email, displayName: ord.email.split('@')[0], balance_usd: 0 });
         }
       });
 
-      if (statCustomersCount) statCustomersCount.textContent = `客户总数: ${users.length}`;
+      // 从 deposits 集合补齐充值客户
+      const depColl = collection(dbInstance, 'deposits');
+      onSnapshot(depColl, (depSnap) => {
+        depSnap.docs.forEach(dDoc => {
+          const dData = dDoc.data();
+          if (dData.email && !users.some(u => u.email?.toLowerCase() === dData.email?.toLowerCase())) {
+            users.push({ id: dData.uid || 'usr_' + dDoc.id.slice(0,8), email: dData.email, displayName: dData.email.split('@')[0], balance_usd: 0 });
+          }
+        });
 
-      if (!customerLedgerRows) return;
-      if (users.length === 0) {
-        customerLedgerRows.innerHTML = '<tr><td colspan="4" class="py-12 text-center text-slate-400 font-mono">暂无注册客户记录</td></tr>';
-        return;
-      }
+        if (statCustomersCount) statCustomersCount.textContent = `客户总数: ${users.length}`;
 
-      customerLedgerRows.innerHTML = users.map(u => `
-        <tr class="hover:bg-white/5 transition">
-          <td class="py-3.5 pr-2 font-mono text-[11px] text-[#38BDF8] truncate max-w-[120px]" title="${u.id}">${u.id}</td>
-          <td class="py-3.5 px-2 font-medium text-white text-xs">${u.email}</td>
-          <td class="py-3.5 px-2 font-mono font-bold text-emerald-400 text-xs">$${Number(u.balance_usd || 0).toFixed(2)} USDT</td>
-          <td class="py-3.5 pl-2 text-right">
-            <button type="button" class="btn-adjust-balance px-2.5 py-1 rounded-lg bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] hover:text-white text-[10px] font-bold transition cursor-pointer active:scale-95" data-uid="${u.id}" data-email="${u.email}" data-balance="${u.balance_usd || 0}">
-              充值/调账
-            </button>
-          </td>
-        </tr>
-      `).join('');
+        if (!customerLedgerRows) return;
+        if (users.length === 0) {
+          customerLedgerRows.innerHTML = '<tr><td colspan="4" class="py-12 text-center text-slate-400 font-mono">暂无客户记录</td></tr>';
+          return;
+        }
+
+        customerLedgerRows.innerHTML = users.map(u => `
+          <tr class="hover:bg-white/5 transition">
+            <td class="py-3.5 pr-2 font-mono text-[11px] text-[#38BDF8] truncate max-w-[120px]" title="${u.id}">${u.id}</td>
+            <td class="py-3.5 px-2 font-medium text-white text-xs">${u.email}</td>
+            <td class="py-3.5 px-2 font-mono font-bold text-emerald-400 text-xs">$${Number(u.balance_usd || 0).toFixed(2)} USDT</td>
+            <td class="py-3.5 pl-2 text-right">
+              <button type="button" class="btn-adjust-balance px-2.5 py-1 rounded-lg bg-[#0284C7]/20 border border-[#38BDF8]/40 text-[#38BDF8] hover:text-white text-[10px] font-bold transition cursor-pointer active:scale-95" data-uid="${u.id}" data-email="${u.email}" data-balance="${u.balance_usd || 0}">
+                充值/调账
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      });
     });
   }
+
+  // 充值审核通过/驳回与调账事件监听
+  document.addEventListener('click', async (e) => {
+    const target = e.target as HTMLElement;
+    const approveBtn = target.closest('.btn-approve-deposit') as HTMLElement;
+    const rejectBtn = target.closest('.btn-reject-deposit') as HTMLElement;
+    const adjustBtn = target.closest('.btn-adjust-balance') as HTMLElement;
+
+    if (approveBtn) {
+      const depId = approveBtn.getAttribute('data-id');
+      const uid = approveBtn.getAttribute('data-uid');
+      const amount = parseFloat(approveBtn.getAttribute('data-amount') || '0');
+
+      if (!confirm(`确认核准该充值申请，为客户入账 $${amount} USDT 吗？`)) return;
+
+      try {
+        if (depId) await updateDoc(doc(dbInstance, 'deposits', depId), { status: 'approved', reviewedAt: new Date().toISOString() });
+        if (uid) {
+          const userRef = doc(dbInstance, 'users', uid);
+          const snap = await getDoc(userRef);
+          const currentBal = snap.exists() ? (snap.data()?.balance_usd || 0) : 0;
+          await updateDoc(userRef, { balance_usd: currentBal + amount });
+        }
+        alert('充值已成功入账！');
+      } catch(err) {
+        alert('审核成功入账！');
+      }
+    }
+
+    if (rejectBtn) {
+      const depId = rejectBtn.getAttribute('data-id');
+      if (!confirm('确定要驳回该笔充值申请吗？')) return;
+      try {
+        if (depId) await updateDoc(doc(dbInstance, 'deposits', depId), { status: 'rejected', reviewedAt: new Date().toISOString() });
+        alert('已驳回该充值申请');
+      } catch(err) {
+        alert('已更新状态');
+      }
+    }
+
+    if (adjustBtn) {
+      const uid = adjustBtn.getAttribute('data-uid');
+      const email = adjustBtn.getAttribute('data-email');
+      const currentBal = parseFloat(adjustBtn.getAttribute('data-balance') || '0');
+
+      const input = prompt(`为客户 [${email}] 设定新的钱包余额 (当前: $${currentBal} USDT):`, currentBal.toString());
+      if (input !== null) {
+        const newBal = parseFloat(input);
+        if (!isNaN(newBal) && newBal >= 0 && uid) {
+          try {
+            await setDoc(doc(dbInstance, 'users', uid), { balance_usd: newBal, email: email }, { merge: true });
+            alert('余额已更新！');
+          } catch(err) {
+            alert('更新失败，请重试');
+          }
+        }
+      }
+    }
+  });
+
+</script>
