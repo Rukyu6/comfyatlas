@@ -115,7 +115,23 @@
       </div>
     `;
 
-    document.getElementById('nav-logout-btn')?.addEventListener('click', async () => {
+    const menuWrapper = document.getElementById('user-menu-wrapper');
+    const menuBtn = document.getElementById('user-menu-btn');
+    const menuPanel = document.getElementById('user-menu-panel');
+
+    menuBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menuPanel?.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menuWrapper?.contains(e.target as Node)) {
+        menuPanel?.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('nav-logout-btn')?.addEventListener('click', async (e) => {
+      e.preventDefault();
       localStorage.removeItem('auth_session');
       try { await signOut(authInstance); } catch(e) {}
       window.location.href = '/';
