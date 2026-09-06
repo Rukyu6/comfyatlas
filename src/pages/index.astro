@@ -208,62 +208,112 @@ const initialProducts = database.products.filter(p => {
  <div class="md:col-span-3">
  <div id="digital-products-grid" class="flex flex-col gap-3.5">
  {initialProducts.map(p => {
- let displayPriceCny = p.price_cny;
- if (p.skus && p.skus.length > 0) {
- const pricesCny = p.skus.map((s) => s.price_cny);
- displayPriceCny = Math.min(...pricesCny);
- }
- const cleanStock = p.stock === '0' || p.stock === '缺货' ? '暂时缺货' : `现货 ${p.stock} 件`;
- const isMultiOption = p.skus && p.skus.length > 1;
- const cleanId = p.id.replace('pid_', '');
- const primaryPrice = `¥${Math.round(displayPriceCny)}`;
+  let displayPriceCny = p.price_cny;
+  if (p.skus && p.skus.length > 0) {
+    const pricesCny = p.skus.map((s) => s.price_cny);
+    displayPriceCny = Math.min(...pricesCny);
+  }
+  const isOutOfStock = p.stock === '0' || p.stock === '缺货' || parseInt(p.stock) === 0;
+  const cleanStock = isOutOfStock ? '暂时缺货' : `现货 ${p.stock} 件`;
+  const isMultiOption = p.skus && p.skus.length > 1;
+  const cleanId = p.id.replace('pid_', '');
+  const primaryPrice = `¥${Math.round(displayPriceCny)}`;
 
- return (
- <a 
- href={`/item/${cleanId}/`}
- class="glass-card rounded-2xl p-4 sm:p-5 flex flex-row items-center justify-between border cursor-pointer block text-left gap-4 group transition-all duration-300 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]"
- >
- <div class="flex items-center gap-4 min-w-0 flex-1">
- <img 
- src={p.image || '/images/default_product.jpg'} 
- class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md" 
- alt={p.name}
- onerror="this.src='/images/default_product.jpg'"
- />
- <div class="min-w-0 flex-1">
- <div class="flex items-center gap-2 mb-1.5 flex-wrap">
- <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40 select-none">
- 自动发卡
- </span>
- <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/10 text-white border border-white/20 select-none">
- {p.category.split(' ')[0]}
- </span>
- <span class="px-2.5 py-0.5 text-[10px] font-medium rounded-full bg-white/5 text-slate-300 select-none font-mono">
- {cleanStock}
- </span>
- </div>
- <h4 class="text-xs md:text-sm font-bold text-white leading-snug group-hover:text-[#38BDF8] transition-colors line-clamp-2 pr-2">
- {p.name}
- </h4>
- </div>
- </div>
+  // 缺货商品：彻底禁止点击，置灰禁用样式
+  if (isOutOfStock) {
+    return (
+      <div 
+        class="glass-card rounded-2xl p-4 sm:p-5 flex flex-row items-center justify-between border border-white/5 opacity-50 bg-black/40 text-left gap-4 select-none cursor-not-allowed transition-all duration-300"
+      >
+        <div class="flex items-center gap-4 min-w-0 flex-1">
+          <img 
+            src={p.image || '/images/default_product.jpg'} 
+            class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md grayscale opacity-60" 
+            alt={p.name}
+            onerror="this.src='/images/default_product.jpg'"
+          />
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/5 text-slate-500 border border-white/10 select-none">
+                自动发卡
+              </span>
+              <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/10 text-slate-500 border border-white/10 select-none">
+                {p.category.split(' ')[0]}
+              </span>
+              <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-rose-500/15 text-rose-400 border border-rose-500/30 select-none font-mono">
+                暂时缺货
+              </span>
+            </div>
+            <h4 class="text-xs md:text-sm font-bold text-slate-400 leading-snug line-clamp-2 pr-2">
+              {p.name}
+            </h4>
+          </div>
+        </div>
 
- <div class="flex items-center gap-3 md:gap-5 shrink-0">
- <div class="flex flex-col items-end text-right min-w-[75px]">
- <span class="text-base md:text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
- {primaryPrice}
- </span>
- </div>
+        <div class="flex items-center gap-3 md:gap-5 shrink-0">
+          <div class="flex flex-col items-end text-right min-w-[75px]">
+            <span class="text-base md:text-lg font-black text-slate-500 font-mono">
+              {primaryPrice}
+            </span>
+          </div>
 
- <span 
- class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-[11px] md:text-xs inline-block text-center shadow-[0_0_15px_rgba(56,189,248,0.3)] group-hover:brightness-115 active:scale-95 shrink-0"
- >
- {isMultiOption ? '选择规格' : '立即购买'}
- </span>
- </div>
- </a>
- );
- })}
+          <span 
+            class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-500 font-bold text-[11px] md:text-xs inline-block text-center cursor-not-allowed shrink-0"
+          >
+            暂时缺货
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  // 现货商品：正常可点击进入
+  return (
+    <a 
+      href={`/item/${cleanId}/`}
+      class="glass-card rounded-2xl p-4 sm:p-5 flex flex-row items-center justify-between border cursor-pointer block text-left gap-4 group transition-all duration-300 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]"
+    >
+      <div class="flex items-center gap-4 min-w-0 flex-1">
+        <img 
+          src={p.image || '/images/default_product.jpg'} 
+          class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md" 
+          alt={p.name}
+          onerror="this.src='/images/default_product.jpg'"
+        />
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+            <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40 select-none">
+              自动发卡
+            </span>
+            <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/10 text-white border border-white/20 select-none">
+              {p.category.split(' ')[0]}
+            </span>
+            <span class="px-2.5 py-0.5 text-[10px] font-medium rounded-full bg-white/5 text-slate-300 select-none font-mono">
+              {cleanStock}
+            </span>
+          </div>
+          <h4 class="text-xs md:text-sm font-bold text-white leading-snug group-hover:text-[#38BDF8] transition-colors line-clamp-2 pr-2">
+            {p.name}
+          </h4>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 md:gap-5 shrink-0">
+        <div class="flex flex-col items-end text-right min-w-[75px]">
+          <span class="text-base md:text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
+            {primaryPrice}
+          </span>
+        </div>
+
+        <span 
+          class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-[11px] md:text-xs inline-block text-center shadow-[0_0_15px_rgba(56,189,248,0.3)] group-hover:brightness-115 active:scale-95 shrink-0"
+        >
+          {isMultiOption ? '选择规格' : '立即购买'}
+        </span>
+      </div>
+    </a>
+  );
+})}
  </div>
  </div>
  </div>
@@ -365,64 +415,111 @@ const initialProducts = database.products.filter(p => {
  }
 
  productsGrid.innerHTML = filtered.map(p => {
- let displayPriceCny = p.price_cny;
- if (p.skus && p.skus.length > 0) {
- const pricesCny = p.skus.map((s: any) => s.price_cny);
- displayPriceCny = Math.min(...pricesCny);
- }
+      let displayPriceCny = p.price_cny;
+      if (p.skus && p.skus.length > 0) {
+        const pricesCny = p.skus.map((s: any) => s.price_cny);
+        displayPriceCny = Math.min(...pricesCny);
+      }
 
- const isOutOfStock = p.stock === '0' || p.stock === '缺货';
- const cleanStock = isOutOfStock ? '暂时缺货' : `现货 ${p.stock} 件`;
- const isMultiOption = p.skus && p.skus.length > 1;
- const cleanId = p.id.replace('pid_', '');
- const primaryPrice = `¥${Math.round(displayPriceCny)}`;
+      const isOutOfStock = p.stock === '0' || p.stock === '缺货' || parseInt(p.stock) === 0;
+      const cleanStock = isOutOfStock ? '暂时缺货' : `现货 ${p.stock} 件`;
+      const isMultiOption = p.skus && p.skus.length > 1;
+      const cleanId = p.id.replace('pid_', '');
+      const primaryPrice = `¥${Math.round(displayPriceCny)}`;
 
- return `
- <a 
- href="/item/${cleanId}/"
- class="glass-card rounded-2xl p-4 sm:p-5 flex flex-row items-center justify-between border cursor-pointer block text-left gap-4 group transition-all duration-300 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]"
- >
- <div class="flex items-center gap-4 min-w-0 flex-1">
- <img 
- src="${p.image || '/images/default_product.jpg'}" 
- class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md" 
- alt="${p.name}"
- onerror="this.src='/images/default_product.jpg'"
- />
- <div class="min-w-0 flex-1">
- <div class="flex items-center gap-2 mb-1.5 flex-wrap">
- <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40 select-none">
- 自动发卡
- </span>
- <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/10 text-white border border-white/20 select-none">
- ${p.category.split(' ')[0]}
- </span>
- <span class="px-2.5 py-0.5 text-[10px] font-medium rounded-full bg-white/5 text-slate-300 select-none font-mono">
- ${cleanStock}
- </span>
- </div>
- <h4 class="text-xs md:text-sm font-bold text-white leading-snug group-hover:text-[#38BDF8] transition-colors line-clamp-2 pr-2">
- ${p.name}
- </h4>
- </div>
- </div>
+      if (isOutOfStock) {
+        return `
+        <div 
+          class="glass-card rounded-2xl p-4 sm:p-5 flex flex-row items-center justify-between border border-white/5 opacity-50 bg-black/40 text-left gap-4 select-none cursor-not-allowed transition-all duration-300"
+        >
+          <div class="flex items-center gap-4 min-w-0 flex-1">
+            <img 
+              src="${p.image || '/images/default_product.jpg'}" 
+              class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md grayscale opacity-60" 
+              alt="${p.name}"
+              onerror="this.src='/images/default_product.jpg'"
+            />
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/5 text-slate-500 border border-white/10 select-none">
+                  自动发卡
+                </span>
+                <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/5 text-slate-500 border border-white/10 select-none">
+                  ${p.category.split(' ')[0]}
+                </span>
+                <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-rose-500/15 text-rose-400 border border-rose-500/30 select-none font-mono">
+                  暂时缺货
+                </span>
+              </div>
+              <h4 class="text-xs md:text-sm font-bold text-slate-400 leading-snug line-clamp-2 pr-2">
+                ${p.name}
+              </h4>
+            </div>
+          </div>
 
- <div class="flex items-center gap-3 md:gap-5 shrink-0">
- <div class="flex flex-col items-end text-right min-w-[75px]">
- <span class="text-base md:text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
- ${primaryPrice}
- </span>
- </div>
+          <div class="flex items-center gap-3 md:gap-5 shrink-0">
+            <div class="flex flex-col items-end text-right min-w-[75px]">
+              <span class="text-base md:text-lg font-black text-slate-500 font-mono">
+                ${primaryPrice}
+              </span>
+            </div>
 
- <span 
- class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-[11px] md:text-xs inline-block text-center shadow-[0_0_15px_rgba(56,189,248,0.3)] group-hover:brightness-115 active:scale-95 shrink-0"
- >
- ${isMultiOption ? '选择规格' : '立即购买'}
- </span>
- </div>
- </a>
- `;
- }).join('');
+            <span 
+              class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-500 font-bold text-[11px] md:text-xs inline-block text-center cursor-not-allowed shrink-0"
+            >
+              暂时缺货
+            </span>
+          </div>
+        </div>
+        `;
+      }
+
+      return `
+      <a 
+        href="/item/${cleanId}/"
+        class="glass-card rounded-2xl p-4 sm:p-5 flex flex-row items-center justify-between border cursor-pointer block text-left gap-4 group transition-all duration-300 hover:border-[#38BDF8]/60 hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]"
+      >
+        <div class="flex items-center gap-4 min-w-0 flex-1">
+          <img 
+            src="${p.image || '/images/default_product.jpg'}" 
+            class="w-11 h-11 md:w-12 md:h-12 rounded-2xl border border-white/10 shrink-0 object-cover bg-black/40 shadow-md" 
+            alt="${p.name}"
+            onerror="this.src='/images/default_product.jpg'"
+          />
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-[#0284C7]/20 text-[#38BDF8] border border-[#38BDF8]/40 select-none">
+                自动发卡
+              </span>
+              <span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-white/10 text-white border border-white/20 select-none">
+                ${p.category.split(' ')[0]}
+              </span>
+              <span class="px-2.5 py-0.5 text-[10px] font-medium rounded-full bg-white/5 text-slate-300 select-none font-mono">
+                ${cleanStock}
+              </span>
+            </div>
+            <h4 class="text-xs md:text-sm font-bold text-white leading-snug group-hover:text-[#38BDF8] transition-colors line-clamp-2 pr-2">
+              ${p.name}
+            </h4>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 md:gap-5 shrink-0">
+          <div class="flex flex-col items-end text-right min-w-[75px]">
+            <span class="text-base md:text-lg font-black text-[#38BDF8] font-mono drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
+              ${primaryPrice}
+            </span>
+          </div>
+
+          <span 
+            class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-white font-extrabold text-[11px] md:text-xs inline-block text-center shadow-[0_0_15px_rgba(56,189,248,0.3)] group-hover:brightness-115 active:scale-95 shrink-0"
+          >
+            ${isMultiOption ? '选择规格' : '立即购买'}
+          </span>
+        </div>
+      </a>
+      `;
+    }).join('');
  }
 
  searchInput?.addEventListener('input', (e) => {
